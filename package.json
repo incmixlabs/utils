@@ -22,8 +22,8 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo",
-    "build": "tsup",
-    "build:publish": "pnpm publish dist --access public",
+    "build": "tsup --minify",
+    "build:publish": "pnpm build && pnpm publish --access public",
     "postinstall": "lefthook install",
     "lint": "biome check .",
     "lint:fix": "biome check --fix --unsafe"
