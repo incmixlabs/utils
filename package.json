@@ -1,7 +1,7 @@
 {
   "name": "@incmix/shared",
+  "description": "Shared utilities for the turbomix backend and frontend",
   "version": "0.1.0",
-  "private": false,
   "sideEffects": false,
   "type": "module",
   "exports": {
@@ -25,7 +25,8 @@
     "build": "tsup",
     "postinstall": "lefthook install",
     "lint": "biome check .",
-    "lint:fix": "biome check --fix --unsafe"
+    "lint:fix": "biome check --fix --unsafe",
+    "publish": "pnpm publish dist --access public"
   },
   "dependencies": {
     "@casl/ability": "^6.7.2",
