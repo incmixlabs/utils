@@ -9,6 +9,7 @@ export default defineConfig((opts) => ({
   sourcemap: true,
   minify: !opts.watch,
   clean: !opts.watch,
+  treeshake: true,
   dts: true,
   outDir: "dist",
 }))

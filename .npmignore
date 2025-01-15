@@ -57,3 +57,4 @@ tsconfig.json
 tsup.config.ts
 vite-env.d.ts
 .editorconfig
+.vscode

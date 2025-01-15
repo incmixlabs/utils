@@ -1,7 +1,7 @@
 {
-  "name": "@savyflow/shared",
+  "name": "@incmix/shared",
   "description": "Shared utilities for the turbomix backend and frontend",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "sideEffects": false,
   "type": "module",
   "exports": {
