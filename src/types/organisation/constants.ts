@@ -1,0 +1,8 @@
+export const ROLE_ADMIN = "admin"
+export const ROLE_OWNER = "owner"
+export const ROLE_VIEWER = "viewer"
+export const ROLE_EDITOR = "editor"
+export const ROLE_COMMENTER = "commenter"
+export const ROLE_SUPER_ADMIN = "super_admin"
+export const ROLE_MEMBER = "member"
+export const ROLE_USER = "user"

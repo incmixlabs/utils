@@ -1,0 +1,54 @@
+{
+  "name": "@incmix/shared",
+  "version": "0.1.0",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    "./casl": "./src/casl/index.ts",
+    "./dats": "./src/data/index.ts",
+    "./data-table": "./src/data-table/index.ts",
+    "./env": "./src/env/index.ts",
+    "./date": "./src/date/index.ts",
+    "./objects": "./src/objects/index.ts",
+    "./strings": "./src/strings/index.ts",
+    "./types/ability": "./src/types/ability/index.ts",
+    "./types/organisation": "./src/types/organisation/index.ts",
+    "./types/task": "./src/types/task/index.ts",
+    "./types/data-table": "./src/types/data-table/index.ts",
+    "./types/user": "./src/types/user/index.ts",
+    "./types/sql": "./src/types/user/index.ts",
+    "./types": "./src/types/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo",
+    "build": "tsup",
+    "postinstall": "lefthook install",
+    "lint": "biome check .",
+    "lint:fix": "biome check --fix --unsafe"
+  },
+  "dependencies": {
+    "@casl/ability": "^6.7.2",
+    "@hono/zod-openapi": "^0.18.3"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "packageManager": "pnpm@9.15.4",
+  "peerDependencies": {
+    "luxon": ">=3.0",
+    "@types/luxon": ">=3.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@commitlint/cli": "19.6.1",
+    "@commitlint/config-conventional": "19.6.0",
+    "@types/luxon": "^3.4.2",
+    "@types/node": "22.10.1",
+    "lefthook": "1.10.4",
+    "luxon": "^3.5.0",
+    "pkg-types": "1.1.0",
+    "tsup": "8.0.2",
+    "typescript": "5.7.3"
+  }
+}
