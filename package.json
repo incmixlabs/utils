@@ -1,5 +1,5 @@
 {
-  "name": "@incmix/shared",
+  "name": "@savyflow/shared",
   "description": "Shared utilities for the turbomix backend and frontend",
   "version": "0.1.0",
   "sideEffects": false,
