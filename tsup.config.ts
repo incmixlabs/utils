@@ -1,5 +1,5 @@
-import { defineConfig } from "tsup"
 import * as glob from "glob"
+import { defineConfig } from "tsup"
 
 const entries = glob.sync("./src/**/*.ts")
 export default defineConfig((opts) => ({

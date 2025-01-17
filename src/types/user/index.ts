@@ -1,5 +1,5 @@
-import { z } from "@hono/zod-openapi"
 import { PaginationMeta } from "@data-table"
+import { z } from "@hono/zod-openapi"
 import { UserProfileSchema } from ".."
 
 export const UserSchema = z.object({
