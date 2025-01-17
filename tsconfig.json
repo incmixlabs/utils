@@ -21,6 +21,8 @@
     "module": "Preserve",
     "tsBuildInfoFile": ".tsbuildinfo",
     "paths": {
+      "@i18n": ["./src/i18n/index.ts"],
+      "@i18n/*": ["./src/i18n/*"],
       "@objects": ["./src/objects/index.ts"],
       "@strings": ["./src/strings/index.ts"],
       "@data-table": ["./src/data-table/index.ts"],

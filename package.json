@@ -1,24 +1,77 @@
 {
-  "name": "@incmix/shared",
+  "name": "@incmix/utils",
   "description": "Shared utilities for the turbomix backend and frontend",
-  "version": "0.1.1",
-  "sideEffects": false,
+  "version": "0.0.1",
   "type": "module",
   "exports": {
-    "./casl": "./src/casl/index.ts",
-    "./dats": "./src/data/index.ts",
-    "./data-table": "./src/data-table/index.ts",
-    "./env": "./src/env/index.ts",
-    "./date": "./src/date/index.ts",
-    "./objects": "./src/objects/index.ts",
-    "./strings": "./src/strings/index.ts",
-    "./types/ability": "./src/types/ability/index.ts",
-    "./types/organisation": "./src/types/organisation/index.ts",
-    "./types/task": "./src/types/task/index.ts",
-    "./types/data-table": "./src/types/data-table/index.ts",
-    "./types/user": "./src/types/user/index.ts",
-    "./types/sql": "./src/types/user/index.ts",
-    "./types": "./src/types/index.ts"
+    "./i18n": {
+      "import": "./dist/i18n/index.js",
+      "types": "./dist/i18n/index.d.ts"
+    },
+    "./i18n/auth": {
+      "import": "./dist/i18n/auth/index.js",
+      "types": "./dist/i18n/auth/index.d.ts"
+    },
+    "./i18n/common": {
+      "import": "./dist/i18n/common/index.js",
+      "types": "./dist/i18n/common/index.d.ts"
+    },
+    "./i18n/core": {
+      "import": "./dist/i18n/core/index.js",
+      "types": "./dist/i18n/core/index.d.ts"
+    },
+    "./i18n/dashboard": {
+      "import": "./dist/i18n/dashboard/index.js",
+      "types": "./dist/i18n/dashboard/index.d.ts"
+    },
+    "./i18n/layouts": {
+      "import": "./dist/i18n/layouts/index.js",
+      "types": "./dist/i18n/layouts/index.d.ts"
+    },
+    "./i18n/orgs": {
+      "import": "./dist/i18n/orgs/index.js",
+      "types": "./dist/i18n/orgs/index.d.ts"
+    },
+    "./i18n/tasks": {
+      "import": "./dist/i18n/tasks/index.js",
+      "types": "./dist/i18n/tasks/index.d.ts"
+    },
+    "./i18n/users": {
+      "import": "./dist/i18n/users/index.js",
+      "types": "./dist/i18n/users/index.d.ts"
+    },
+    "./casl": {
+      "import": "./dist/casl/index.js",
+      "types": "./dist/casl/index.d.ts"
+    },
+    "./data": {
+      "import": "./dist/data/index.js",
+      "types": "./dist/data/index.d.ts"
+    },
+    "./data-table": {
+      "import": "./dist/data-table/index.js",
+      "types": "./dist/data-table/index.d.s"
+    },
+    "./env": {
+      "import": "./dist/env/index.js",
+      "types": "./dist/env/index.d.ts"
+    },
+    "./date": {
+      "import": "./dist/date/index.js",
+      "types": "./dist/date/index.d.ts"
+    },
+    "./objects": {
+      "import": "./dist/objects/index.js",
+      "types": "./dist/objects/index.d.ts"
+    },
+    "./strings": {
+      "import": "./dist/strings/index.js",
+      "types": "./dist/strings/index.d.ts"
+    },
+    "./types": {
+      "import": "./dist/types/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
   },
   "scripts": {
     "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo",

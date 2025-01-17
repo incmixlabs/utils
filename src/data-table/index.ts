@@ -1,5 +1,7 @@
 import { z } from "@hono/zod-openapi"
-import { filterSchema, sortingItemSchema } from "../types/data-table"
+import { filterSchema, sortingItemSchema } from "./types"
+
+export * from "./types"
 
 export function sortParser<T>(value: string, validKeys: Set<string> | null) {
   try {
