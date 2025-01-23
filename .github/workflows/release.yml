@@ -14,7 +14,7 @@ jobs:
         uses: TriPSs/conventional-changelog-action@v3.7.1
         with:
           github-token: ${{ secrets.PA_TOKEN }}
-          version-file: './package.json,./package-lock.json'
+          version-file: './package.json'
       - name: create release
         uses: softprops/action-gh-release@v2
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
@@ -22,3 +22,4 @@ jobs:
           tag_name: ${{ steps.changelog.outputs.tag }}
           name: ${{ steps.changelog.outputs.tag }}
           body: ${{ steps.changelog.outputs.clean_changelog }}
+          token: ${{ secrets.PA_TOKEN }}
