@@ -1,7 +1,7 @@
 import { z } from "@hono/zod-openapi"
 
 import { config } from "../env"
-import { type UserType, UserTypes } from "./organisation"
+import { type UserType, UserTypes } from "./organization"
 
 export enum Presence {
   online = "online",
@@ -135,7 +135,7 @@ export const UserProfileSchema = z
     id: z.string().openapi({
       example: "93jpbulpkkavxnz",
     }),
-    fullName: z.string().openapi({ example: "John Doe" }),
+    name: z.string().openapi({ example: "John Doe" }),
     email: z.string().email().openapi({ example: "john.doe@example.com" }),
     profileImage: z
       .string()
@@ -240,7 +240,7 @@ export const membershipsCountSchema = z.object({
   }),
 })
 
-export const imageUrlSchema = z
+export const srcSchema = z
   .string()
   .url()
   .refine((url) => new URL(url).search === "", "Search params not allowed")
@@ -316,7 +316,7 @@ export type WsMessage = {
   sessionId?: string
 }
 
-export * from "./organisation"
+export * from "./organization"
 export * from "./user"
 export * from "./abilitiy"
 export * from "./sql"

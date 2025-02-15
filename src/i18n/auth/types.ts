@@ -47,7 +47,7 @@ export type EmailVerificationTranslations = {
 
 export type SignupTranslations = {
   title: string
-  fullNameValidation: string
+  nameValidation: string
   emailValidation: string
   passwordValidation: string
   submit: string
@@ -86,7 +86,7 @@ export const keys = {
   emailVerification: ["title", "verifying", "verified"],
   signup: [
     "title",
-    "fullNameValidation",
+    "nameValidation",
     "emailValidation",
     "passwordValidation",
     "submit",
@@ -145,7 +145,7 @@ export const defaults: I18nTranslations = {
   },
   signup: {
     title: "Sign Up",
-    fullNameValidation: "Please enter your full name",
+    nameValidation: "Please enter your full name",
     emailValidation: "Please enter a valid email address",
     passwordValidation: "Please enter a password",
     submit: "Sign Up",

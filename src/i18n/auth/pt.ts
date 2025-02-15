@@ -43,7 +43,7 @@ export const ptTranslations: I18nTranslations = {
   },
   signup: {
     title: "Cadastro",
-    fullNameValidation: "Por favor, insira seu nome",
+    nameValidation: "Por favor, insira seu nome",
     emailValidation: "Por favor, insira um email válido",
     passwordValidation: "Por favor, insira sua senha",
     submit: "Cadastrar",

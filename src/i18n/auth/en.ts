@@ -46,7 +46,7 @@ export const enTranslations: I18nTranslations = {
   },
   signup: {
     title: "Sign-Up",
-    fullNameValidation: "Please enter your Name",
+    nameValidation: "Please enter your Name",
     emailValidation: "Please provide a valid email",
     passwordValidation: "Password must be at least 6 characters long",
     submit: "Sign Up",

@@ -1,7 +1,7 @@
 import type { I18nTranslations } from "@i18n/common"
 export const ptTranslations: I18nTranslations = {
   common: {
-    fullName: "Nome Completo",
+    name: "Nome Completo",
     email: "Email",
     name: "Nome",
     value: "Valor",

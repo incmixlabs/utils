@@ -2,6 +2,30 @@ import { PaginationMeta } from "@data-table"
 import { z } from "@hono/zod-openapi"
 import { UserProfileSchema } from ".."
 
+export enum UserRoles {
+  ROLE_ADMIN = "admin",
+  ROLE_OWNER = "owner",
+  ROLE_VIEWER = "viewer",
+  ROLE_EDITOR = "editor",
+  ROLE_COMMENTER = "commenter",
+  ROLE_SUPER_ADMIN = "super_admin",
+  ROLE_MEMBER = "member",
+  ROLE_USER = "user",
+  ROLE_GUEST = "guest",
+  ROLE_ANONYMOUS = "anonymous",
+}
+export const USER_ROLES = [
+  UserRoles.ROLE_ADMIN,
+  UserRoles.ROLE_OWNER,
+  UserRoles.ROLE_VIEWER,
+  UserRoles.ROLE_EDITOR,
+  UserRoles.ROLE_COMMENTER,
+  UserRoles.ROLE_SUPER_ADMIN,
+  UserRoles.ROLE_MEMBER,
+  UserRoles.ROLE_USER,
+  UserRoles.ROLE_GUEST,
+  UserRoles.ROLE_ANONYMOUS,
+]
 export const UserSchema = z.object({
   id: z.string().openapi({ example: "93jpbulpkkavxnz" }),
   oauth: z.string().nullable().openapi({ example: "google" }),

@@ -1,51 +1,38 @@
 import { z } from "@hono/zod-openapi"
 import { PermissionSchema } from "../abilitiy/schemas"
-import {
-  ROLE_ADMIN,
-  ROLE_COMMENTER,
-  ROLE_EDITOR,
-  ROLE_MEMBER,
-  ROLE_OWNER,
-  ROLE_SUPER_ADMIN,
-  ROLE_USER,
-  ROLE_VIEWER,
-} from "./constants"
-export * from "./constants"
-export const MemberRoles = [
-  ROLE_ADMIN,
-  ROLE_OWNER,
-  ROLE_VIEWER,
-  ROLE_COMMENTER,
-  ROLE_EDITOR,
-] as const
+import { type Zone } from "../zones"
 
-export const UserTypes = [ROLE_MEMBER, ROLE_SUPER_ADMIN, ROLE_USER] as const
-
-export type MemberRole = (typeof MemberRoles)[number]
-export type UserType = (typeof UserTypes)[number]
-
-export type Organization = {
-  id: string
-  name: string
-  handle: string
-  members: Member[]
+import  {type MemberRole, MemberRoles } from "../organization"
+export enum Neighborhood {
+  public = "public",
+  private = "private",
+  semi = "semi", // for partners
 }
+export const NEIGHBORHOODS = [
+  Neighborhood.public,
+  Neighborhood.private,
+  Neighborhood.semi,
+]
 
 export type Member = {
   userId: string
-  orgId: string
   role: MemberRole
 }
 
-export type Role = {
-  id: number
+export type Workspace = {
+  id: string
+  organizationId: string
   name: string
+  handle: string // unique within org
+  members: Member[]
+  neighborhood: Neighborhood
+  zone?: Zone
 }
 
-export type CreateOrganizationInput = {
+export type CreateWorkspaceInput = {
   name: string
   handle: string
-  members: Omit<Member, "orgId">[]
+  members: Member[]
 }
 
 export type UpdateOrganizationInput = {
@@ -69,7 +56,7 @@ export type RemoveMembersInput = {
 export const MemberDetailsSchema = z
   .object({
     userId: z.string(),
-    fullName: z.string(),
+    name: z.string(),
     email: z.string().email(),
     profileImage: z.string().nullable(),
     avatar: z.string().nullable(),
