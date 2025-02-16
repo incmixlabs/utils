@@ -1,7 +1,7 @@
 import { z } from "@hono/zod-openapi"
 
 import { config } from "../env"
-import { type UserType, UserTypes } from "./organization"
+import { type UserType, UserTypes } from "./user"
 
 export enum Presence {
   online = "online",

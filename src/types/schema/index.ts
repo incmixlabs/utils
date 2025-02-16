@@ -10,6 +10,10 @@ export enum RelationType {
   linked_from = "lf",
   linked_to_template = "ltt",
   linked_from_template = "lft",
+  references = "r",
+  referenced_by = "rb",
+  references_template = "rt",
+  referenced_by_template = "rbt",
 }
 export type Api = {
   id: string

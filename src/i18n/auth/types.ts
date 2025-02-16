@@ -86,7 +86,7 @@ export const keys = {
   emailVerification: ["title", "verifying", "verified"],
   signup: [
     "title",
-    "nameValidation",
+    "fullNameValidation",
     "emailValidation",
     "passwordValidation",
     "submit",
@@ -145,7 +145,7 @@ export const defaults: I18nTranslations = {
   },
   signup: {
     title: "Sign Up",
-    nameValidation: "Please enter your full name",
+    fullNameValidation: "Please enter your full name",
     emailValidation: "Please enter a valid email address",
     passwordValidation: "Please enter a password",
     submit: "Sign Up",
