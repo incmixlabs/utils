@@ -1,8 +1,8 @@
 import { z } from "@hono/zod-openapi"
 import { PermissionSchema } from "../abilitiy/schemas"
-import { type Zone } from "../zones"
+import type { Zone } from "../zones"
 
-import  {type MemberRole, MemberRoles } from "../organization"
+import { type MemberRole, MemberRoles } from "../organization"
 export enum Neighborhood {
   public = "public",
   private = "private",
