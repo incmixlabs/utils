@@ -21,7 +21,6 @@
   },
   "formatter": {
     "enabled": true,
-    "formatWithErrors": true,
     "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
