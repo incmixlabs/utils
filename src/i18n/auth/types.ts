@@ -47,7 +47,7 @@ export type EmailVerificationTranslations = {
 
 export type SignupTranslations = {
   title: string
-  nameValidation: string
+  fullNameValidation: string
   emailValidation: string
   passwordValidation: string
   submit: string

@@ -1,4 +1,4 @@
-import { camelToCapitalized } from "../strings"
+import { camelToCapitalized } from "@strings"
 export type AffixObj = {
   parent?: object
   child?: object | string
