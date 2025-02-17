@@ -24,7 +24,7 @@ export type Api = {
   params: string
   streaming?: boolean
   frequency?: number
-  transform: (data: any) => void
+  transform: <T = unknown, R = unknown>(data: T) => R
 } & Transaction
 
 export type CompositeApi = {
@@ -32,7 +32,7 @@ export type CompositeApi = {
   name: string
   owner?: Owner
   apis: Api[]
-  transform: (data: any) => void
+  transform: <T = unknown, R = unknown>(data: T) => R
 } & Transaction
 
 export const RELATION_TYPES = [
@@ -54,14 +54,12 @@ export type CAudit = {
   created_at: number
   created_by: string
 }
-
 export enum Owner {
   org = "o",
   workspace = "w",
   project = "p",
   spreadsheet = "s",
 }
-
 export const OWNER = [
   Owner.org,
   Owner.workspace,
@@ -74,30 +72,25 @@ export type Audit = CAudit & {
   deleted_at?: number
   deleted_by?: string
 }
-
-export type Comments = {
+export type Comment = {
   id: string
   content: string
-} & CAudit
-
+} 
 export type Tag = {
   id: string
   name: string
 } & Audit
-
 export type Transaction = {
   id: string
   comments?: Comment[]
   tags?: Tag[]
   owner?: Owner
-} & CAudit
-
+} & Audit
 export type Relation = Transaction & {
   UUID1: string
   UUID2: string
   relation: RelationType
 }
-
 export type LOV = {
   id: string
   name: string
@@ -108,7 +101,6 @@ export type LOV = {
   allow_null?: boolean
   allow_add_new?: boolean
 } & Transaction
-
 export type LOV_VALUES = {
   id: string
   value: string
@@ -116,7 +108,6 @@ export type LOV_VALUES = {
   renderer?: object
   css?: string
 } & Transaction
-
 export type ForeignKey = {
   table_id: string
   columns: [

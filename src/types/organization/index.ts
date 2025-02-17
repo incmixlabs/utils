@@ -4,9 +4,9 @@ import type { GroupMembers } from "../groups"
 import type { UserRole } from "../user"
 import type { Zone } from "../zones"
 export enum AccessType {
-  public = "public",
-  private = "private",
-  private_and_public = "private_and_public",
+  public = "pb",
+  private = "pr",
+  private_and_public = "pr_pb",
 }
 export const ACCESS_TYPES = [
   AccessType.public,
@@ -49,7 +49,7 @@ export type RemoveMembersInput = {
 export const MemberDetailsSchema = z
   .object({
     userId: z.string(),
-    name: z.string(),
+    fullName: z.string(),
     email: z.string().email(),
     profileImage: z.string().nullable(),
     avatar: z.string().nullable(),
