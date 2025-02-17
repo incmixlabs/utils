@@ -37,7 +37,7 @@ describe("capitalizedToCamel", () => {
   it("should handle strings with leading and trailing spaces", () => {
     const input = " Hello World "
     const expectedOutput = "helloWorld"
-    console.log("output",capitalizedToCamel(input))
+    console.log("output", capitalizedToCamel(input))
     expect(capitalizedToCamel(input)).to.equal(expectedOutput)
   })
 

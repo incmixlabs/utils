@@ -31,9 +31,13 @@ export type User = {
   userId: string
   orgId: string[]
 }
-export const UserTypes = [UserRoles.ROLE_MEMBER, UserRoles.ROLE_SUPER_ADMIN, UserRoles.ROLE_USER] as const
-export type UserType = typeof UserTypes[number]
-export type UserRole = typeof USER_ROLES[number]
+export const UserTypes = [
+  UserRoles.ROLE_MEMBER,
+  UserRoles.ROLE_SUPER_ADMIN,
+  UserRoles.ROLE_USER,
+] as const
+export type UserType = (typeof UserTypes)[number]
+export type UserRole = (typeof USER_ROLES)[number]
 export const UserSchema = z.object({
   id: z.string().openapi({ example: "93jpbulpkkavxnz" }),
   oauth: z.string().nullable().openapi({ example: "google" }),

@@ -59,7 +59,8 @@
       },
       "suspicious": {
         "useAwait": "warn",
-        "noExplicitAny": "off"
+        "noExplicitAny": "off",
+        "noControlCharactersInRegex": "off"
       }
     },
     "include": [
