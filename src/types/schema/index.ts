@@ -75,7 +75,7 @@ export type Audit = CAudit & {
 export type Comment = {
   id: string
   content: string
-} 
+}
 export type Tag = {
   id: string
   name: string
