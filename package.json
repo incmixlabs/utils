@@ -65,8 +65,8 @@
       "types": "./dist/objects/objects.d.ts"
     },
     "./strings": {
-      "import": "./dist/strings/springs.js",
-      "types": "./dist/strings/springs.d.ts"
+      "import": "./dist/strings/strings.js",
+      "types": "./dist/strings/strings.d.ts"
     },
     "./validate": {
       "import": "./dist/strings/validate.js",

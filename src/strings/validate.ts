@@ -12,11 +12,18 @@ export function validHandle(handle: string): boolean {
 }
 export function validURL(url: string): boolean {
   const re =
-    /http|https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,255}\.[a-z]{2,9}\y([-a-zA-Z0-9@:%_\+.,~#?!&>//=]*)$/
+    /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/
   return re.test(url)
 }
 export function validPassword(password: string): boolean {
-  return password.length > 7
+  const minLength = password.length > 7
+  const hasUpperCase = /[A-Z]/.test(password)
+  const hasLowerCase = /[a-z]/.test(password)
+  const hasNumber = /\d/.test(password)
+  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password)
+  return (
+    minLength && hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar
+  )
 }
 export function validPhone(phone: string): boolean {
   const re = /^\d{10}$/

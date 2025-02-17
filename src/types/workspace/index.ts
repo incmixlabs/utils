@@ -1,7 +1,7 @@
 import { z } from "@hono/zod-openapi"
 import { PermissionSchema } from "../abilitiy/schemas"
 import type { GroupMembers } from "../groups"
-import { USER_ROLES, type UserRole, UserRoles } from "../user"
+import type { UserRole } from "../user"
 import type { Zone } from "../zones"
 export enum Neighborhood {
   public = "public",
@@ -13,12 +13,10 @@ export const NEIGHBORHOODS = [
   Neighborhood.private,
   Neighborhood.semi,
 ]
-
 export type Member = {
   userId: string
   role: UserRole
 }
-
 export type Workspace = {
   id: string
   organizationId: string
@@ -28,33 +26,27 @@ export type Workspace = {
   neighborhood: Neighborhood
   zone?: Zone
 }
-
 export type CreateWorkspaceInput = {
   name: string
   handle: string
   members: Member[] | GroupMembers[]
 }
-
 export type UpdateOrganizationInput = {
   name: string
   handle: string
   members: Member[] | GroupMembers[]
 }
-
 export type AddMemberInput = {
   userId: string
   role: UserRole
 }
-
 export type UpdateMemberRoleInput = {
   userId: string
   role: UserRole
 }
-
 export type RemoveMembersInput = {
   userIds: string[]
 }
-
 export const MemberDetailsSchema = z
   .object({
     userId: z.string(),
@@ -65,16 +57,12 @@ export const MemberDetailsSchema = z
     role: z.string(),
   })
   .openapi("MemberDetails")
-
 export const MembersResponseSchema = z
   .array(MemberDetailsSchema)
   .openapi("MembersResponse")
-
 export type MemberDetails = z.infer<typeof MemberDetailsSchema>
 export type GetMembersResponse = z.infer<typeof MembersResponseSchema>
-
 export const PermissionsResponseSchema = z
   .array(PermissionSchema)
   .openapi("PermissionsResponse")
-
 export type PermissionsResponse = z.infer<typeof PermissionsResponseSchema>

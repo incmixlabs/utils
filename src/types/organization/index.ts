@@ -13,7 +13,6 @@ export const ACCESS_TYPES = [
   AccessType.private,
   AccessType.private_and_public,
 ]
-
 export type Organization = {
   id: string
   name: string
@@ -22,33 +21,27 @@ export type Organization = {
   zone?: Zone[]
   accessType?: AccessType
 }
-
 export type Member = {
   userId: string
   role: UserRole
 }
-
 export type CreateOrganizationInput = {
   name: string
   handle: string
   members: Member[] | GroupMembers[]
   zone?: Zone[]
 }
-
 export type UpdateOrganizationInput = {
   name: string
 }
-
 export type AddMemberInput = {
   userId: string
   role: UserRole
 }
-
 export type UpdateMemberRoleInput = {
   userId: string
   role: UserRole
 }
-
 export type RemoveMembersInput = {
   userIds: string[]
 }

@@ -43,6 +43,12 @@ export const RELATION_TYPES = [
   RelationType.cloned_to,
   RelationType.linked_to,
   RelationType.linked_from,
+  RelationType.cloned_from_template,
+  RelationType.cloned_to_template,
+  RelationType.linked_to_template,
+  RelationType.linked_from_template,
+  RelationType.references,
+  RelationType.referenced_by,
 ]
 export type CAudit = {
   created_at: number
