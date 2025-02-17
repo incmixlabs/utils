@@ -2,7 +2,7 @@ import { arrayToCapitalObject } from "@objects/objects"
 
 const commonTranslationKeys = [
   "loading",
-  "name",
+  "fullName",
   "email",
   "name",
   "value",

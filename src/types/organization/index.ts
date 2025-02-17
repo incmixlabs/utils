@@ -1,7 +1,7 @@
 import { z } from "@hono/zod-openapi"
 import { PermissionSchema } from "../abilitiy/schemas"
 import type { GroupMembers } from "../groups"
-import type { UserRole } from "../user"
+import { USER_ROLES, type UserRole } from "../user"
 import type { Zone } from "../zones"
 export enum AccessType {
   public = "pb",
@@ -53,7 +53,7 @@ export const MemberDetailsSchema = z
     email: z.string().email(),
     profileImage: z.string().nullable(),
     avatar: z.string().nullable(),
-    role: z.string(),
+    role: z.enum(USER_ROLES),
   })
   .openapi("MemberDetails")
 

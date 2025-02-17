@@ -14,7 +14,7 @@ export enum UserRoles {
   ROLE_GUEST = "guest",
   ROLE_ANONYMOUS = "anonymous",
 }
-export const USER_ROLES = [
+export const USER_ROLES: UserRoles[] = [
   UserRoles.ROLE_ADMIN,
   UserRoles.ROLE_OWNER,
   UserRoles.ROLE_VIEWER,
@@ -25,7 +25,7 @@ export const USER_ROLES = [
   UserRoles.ROLE_USER,
   UserRoles.ROLE_GUEST,
   UserRoles.ROLE_ANONYMOUS,
-]
+] as const
 
 export type User = {
   userId: string
