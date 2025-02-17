@@ -1,4 +1,4 @@
-import { arrayToCapitalObject } from "@objects"
+import { arrayToCapitalObject } from "@objects/objects"
 
 const dashboardTranslationKeys = ["title", "welcome", "editMode"] as const
 type DashboardTranslations = {

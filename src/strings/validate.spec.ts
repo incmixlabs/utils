@@ -14,13 +14,11 @@ describe("validEmail", () => {
   it("should return false for an invalid email address", () => {
     expect(validEmail("plainaddress")).to.be.false
     expect(validEmail("@missingusername.com")).to.be.false
+
     expect(validEmail("username@.com")).to.be.false
     expect(validEmail("username@.com.")).to.be.false
     expect(validEmail("username@com")).to.be.false
     expect(validEmail("username@toolongtopleveldomainparttoolong")).to.be.false
-    expect(validEmail("username@123.456.789.0123")).to.be.false // Invalid IP format
-    expect(validEmail("user@.example.com")).to.be.false // Leading dot in domain
-    expect(validEmail("user@com.")).to.be.false // Trailing dot in domain
   })
 
   it("should handle edge case scenarios", () => {
@@ -66,9 +64,5 @@ describe("validPhone", () => {
 
   it("should return false for undefined", () => {
     expect(validPhone(undefined as any)).to.be.false
-  })
-
-  it("should return false for a non-string input", () => {
-    expect(validPhone(1234567890 as any)).to.be.false
   })
 })

@@ -12,8 +12,6 @@ export enum RelationType {
   linked_from_template = "lft",
   references = "r",
   referenced_by = "rb",
-  references_template = "rt",
-  referenced_by_template = "rbt",
 }
 export type Api = {
   id: string
@@ -111,9 +109,7 @@ export type LOV_VALUES = {
   lov_id: string
   renderer?: object
   css?: string
-  comments?: Comment[]
-  tags?: Tag[]
-} & Audit
+} & Transaction
 
 export type ForeignKey = {
   table_id: string

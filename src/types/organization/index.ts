@@ -1,6 +1,8 @@
 import { z } from "@hono/zod-openapi"
 import { PermissionSchema } from "../abilitiy/schemas"
 import type { Zone } from "../zones"
+import { UserRole} from "../user"
+import { GroupMembers } from "../groups"
 export enum AccessType {
   public = "public",
   private = "private",
@@ -16,26 +18,21 @@ export type Organization = {
   id: string
   name: string
   handle: string
-  members: Member[]
+  members: Member[] | GroupMembers[]
   zone?: Zone[]
   accessType?: AccessType
 }
 
 export type Member = {
   userId: string
-  orgId: string
-  role: MemberRole
-}
-
-export type Role = {
-  id: number
-  name: string
+  role: UserRole
 }
 
 export type CreateOrganizationInput = {
   name: string
   handle: string
-  members: Omit<Member, "orgId">[]
+  members: Member[] | GroupMembers[]
+  zone?: Zone[]
 }
 
 export type UpdateOrganizationInput = {
@@ -44,12 +41,12 @@ export type UpdateOrganizationInput = {
 
 export type AddMemberInput = {
   userId: string
-  role: MemberRole
+  role: UserRole
 }
 
 export type UpdateMemberRoleInput = {
   userId: string
-  role: MemberRole
+  role: UserRole
 }
 
 export type RemoveMembersInput = {
@@ -63,7 +60,7 @@ export const MemberDetailsSchema = z
     email: z.string().email(),
     profileImage: z.string().nullable(),
     avatar: z.string().nullable(),
-    role: z.enum(MemberRoles),
+    role: z.string(),
   })
   .openapi("MemberDetails")
 

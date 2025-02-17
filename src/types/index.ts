@@ -1,7 +1,7 @@
 import { z } from "@hono/zod-openapi"
 
 import { config } from "../env"
-import { type UserType, UserTypes } from "./user"
+import { UserRoles, type UserType, UserTypes } from "./user"
 
 export enum Presence {
   online = "online",
@@ -111,7 +111,7 @@ export type Service = {
 export const AuthUserSchema = z
   .object({
     email: z.string().email().openapi({ example: "john.doe@example.com" }),
-    userType: z.enum(UserTypes).default("user").openapi({ example: "user" }),
+    userType: z.enum(UserTypes).default(UserRoles.ROLE_USER),
     emailVerified: z.boolean().openapi({
       example: true,
     }),
