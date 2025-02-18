@@ -23,8 +23,10 @@
     "paths": {
       "@i18n": ["./src/i18n/index.ts"],
       "@i18n/*": ["./src/i18n/*"],
-      "@objects": ["./src/objects/index.ts"],
-      "@strings": ["./src/strings/index.ts"],
+      "@objects": ["./src/objects"],
+      "@objects/*": ["./src/objects/*"],
+      "@strings": ["./src/strings"],
+      "@strings/*": ["./src/strings/*"],
       "@data-table": ["./src/data-table/index.ts"],
       // Use @ts because @types is reserved
       "@ts/*": ["./src/types/*"],
@@ -32,5 +34,5 @@
     }
   },
   "include": ["**/*.ts", "**/*.mjs", "**/*.js", "**/*.cjs"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "**/*.spec.ts", "**/*.test.ts"]
 }

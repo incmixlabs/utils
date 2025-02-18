@@ -20,8 +20,8 @@
     ]
   },
   "formatter": {
-    "enabled": true,
     "formatWithErrors": false,
+    "enabled": true,
     "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
@@ -59,7 +59,8 @@
       },
       "suspicious": {
         "useAwait": "warn",
-        "noExplicitAny": "off"
+        "noExplicitAny": "off",
+        "noControlCharactersInRegex": "off"
       }
     },
     "include": [

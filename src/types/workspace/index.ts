@@ -1,91 +1,68 @@
 import { z } from "@hono/zod-openapi"
 import { PermissionSchema } from "../abilitiy/schemas"
-import {
-  ROLE_ADMIN,
-  ROLE_COMMENTER,
-  ROLE_EDITOR,
-  ROLE_MEMBER,
-  ROLE_OWNER,
-  ROLE_SUPER_ADMIN,
-  ROLE_USER,
-  ROLE_VIEWER,
-} from "./constants"
-export * from "./constants"
-export const MemberRoles = [
-  ROLE_ADMIN,
-  ROLE_OWNER,
-  ROLE_VIEWER,
-  ROLE_COMMENTER,
-  ROLE_EDITOR,
-] as const
-
-export const UserTypes = [ROLE_MEMBER, ROLE_SUPER_ADMIN, ROLE_USER] as const
-
-export type MemberRole = (typeof MemberRoles)[number]
-export type UserType = (typeof UserTypes)[number]
-
-export type Organization = {
-  id: string
-  name: string
-  handle: string
-  members: Member[]
+import type { GroupMembers } from "../groups"
+import type { UserRole } from "../user"
+import type { Zone } from "../zones"
+export enum Neighborhood {
+  public = "public",
+  private = "private",
+  semi = "semi", // for partners
 }
-
+export const NEIGHBORHOODS = [
+  Neighborhood.public,
+  Neighborhood.private,
+  Neighborhood.semi,
+]
 export type Member = {
   userId: string
-  orgId: string
-  role: MemberRole
+  role: UserRole
 }
-
-export type Role = {
-  id: number
+export type Workspace = {
+  id: string
+  organizationId: string
   name: string
+  handle: string // unique within org
+  members: Member[] | GroupMembers[]
+  neighborhood: Neighborhood
+  zone?: Zone
 }
-
-export type CreateOrganizationInput = {
+export type CreateWorkspaceInput = {
   name: string
   handle: string
-  members: Omit<Member, "orgId">[]
+  members: Member[] | GroupMembers[]
 }
-
 export type UpdateOrganizationInput = {
   name: string
+  handle: string
+  members: Member[] | GroupMembers[]
 }
-
 export type AddMemberInput = {
   userId: string
-  role: MemberRole
+  role: UserRole
 }
-
 export type UpdateMemberRoleInput = {
   userId: string
-  role: MemberRole
+  role: UserRole
 }
-
 export type RemoveMembersInput = {
   userIds: string[]
 }
-
 export const MemberDetailsSchema = z
   .object({
     userId: z.string(),
-    fullName: z.string(),
+    name: z.string(),
     email: z.string().email(),
     profileImage: z.string().nullable(),
     avatar: z.string().nullable(),
-    role: z.enum(MemberRoles),
+    role: z.string(),
   })
   .openapi("MemberDetails")
-
 export const MembersResponseSchema = z
   .array(MemberDetailsSchema)
   .openapi("MembersResponse")
-
 export type MemberDetails = z.infer<typeof MemberDetailsSchema>
 export type GetMembersResponse = z.infer<typeof MembersResponseSchema>
-
 export const PermissionsResponseSchema = z
   .array(PermissionSchema)
   .openapi("PermissionsResponse")
-
 export type PermissionsResponse = z.infer<typeof PermissionsResponseSchema>
