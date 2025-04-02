@@ -204,7 +204,7 @@ export type TableColumn = {
   is_unique: boolean
   foreign_key_table_id: string
   foreign_key_column_id: string
-  comments?: Comments[]
+  comments?: Comment[]
   tags?: Tag[]
 } & Transaction
 
