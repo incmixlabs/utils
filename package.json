@@ -1,7 +1,7 @@
 {
   "name": "@incmix/utils",
   "description": "Shared utilities for the turbomix backend and frontend",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "exports": {
     "./i18n": {
@@ -61,12 +61,16 @@
       "types": "./dist/date/index.d.ts"
     },
     "./objects": {
-      "import": "./dist/objects/index.js",
-      "types": "./dist/objects/index.d.ts"
+      "import": "./dist/objects/objects.js",
+      "types": "./dist/objects/objects.d.ts"
     },
     "./strings": {
-      "import": "./dist/strings/index.js",
-      "types": "./dist/strings/index.d.ts"
+      "import": "./dist/strings/strings.js",
+      "types": "./dist/strings/strings.d.ts"
+    },
+    "./validate": {
+      "import": "./dist/strings/validate.js",
+      "types": "./dist/string/validate.d.ts"
     },
     "./types": {
       "import": "./dist/types/index.js",
@@ -79,7 +83,8 @@
     "build:publish": "pnpm build && pnpm publish --access public",
     "postinstall": "lefthook install",
     "lint": "biome check .",
-    "lint:fix": "biome check --fix --unsafe"
+    "lint:fix": "biome check --fix --unsafe",
+    "test": "vitest --run"
   },
   "dependencies": {
     "@casl/ability": "^6.7.2",
@@ -90,8 +95,8 @@
   },
   "packageManager": "pnpm@9.15.4",
   "peerDependencies": {
-    "luxon": ">=3.0",
-    "@types/luxon": ">=3.0"
+    "@types/luxon": ">=3.0",
+    "luxon": ">=3.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
@@ -103,6 +108,7 @@
     "luxon": "^3.5.0",
     "pkg-types": "1.1.0",
     "tsup": "8.0.2",
-    "typescript": "5.7.3"
+    "typescript": "5.7.3",
+    "vitest": "^3.0.3"
   }
 }
