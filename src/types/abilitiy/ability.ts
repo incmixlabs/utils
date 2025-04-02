@@ -7,7 +7,19 @@ import type {
 } from "@casl/ability"
 
 export const actions = ["manage", "create", "read", "update", "delete"] as const
-export const subjects = ["Organisation", "User", "Member", "all"] as const
+export const subjects = [
+  "all",
+  "Organisation",
+  "Member",
+  "Role",
+  "User",
+  "Project",
+  "Task",
+  "Comment",
+  "Document",
+  "Folder",
+  "File",
+] as const
 
 type OrganisationSubject = CaslSubject & {
   id: string
