@@ -1,3 +1,12 @@
+## [0.3.1](https://github.com/incmixlabs/utils/compare/v0.3.0...v0.3.1) (2025-04-02)
+
+
+### Bug Fixes
+
+* update type definitions for comments and user roles ([5cfb13b](https://github.com/incmixlabs/utils/commit/5cfb13bf2ab34368e38b8e76208fd9266554fa98))
+
+
+
 # [0.3.0](https://github.com/incmixlabs/utils/compare/v0.2.0...v0.3.0) (2025-04-02)
 
 
