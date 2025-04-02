@@ -1,6 +1,6 @@
 import type { I18nTranslations } from "./types"
 
-import { mergeDeep } from "@objects"
+import { mergeDeep } from "@objects/objects"
 import { type OrganizationDetailsTranslations, defaults } from "./types"
 
 const organizationDetails: OrganizationDetailsTranslations = mergeDeep(
