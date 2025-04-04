@@ -111,7 +111,16 @@ export type Service = {
 export const AuthUserSchema = z
   .object({
     email: z.string().email().openapi({ example: "john.doe@example.com" }),
-    userType: z.enum(UserTypes).default(UserRoles.ROLE_USER),
+    userType: z
+      .enum([
+        UserRoles.ROLE_USER,
+        UserRoles.ROLE_MEMBER,
+        UserRoles.ROLE_SUPER_ADMIN,
+      ])
+      .default(UserRoles.ROLE_MEMBER)
+      .openapi({
+        example: UserRoles.ROLE_MEMBER,
+      }),
     emailVerified: z.boolean().openapi({
       example: true,
     }),
