@@ -19,7 +19,10 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies and build 🔧
         run: pnpm install
+      - name: Extract tag name
+        id: extract_tag
+        run: echo "tag_name=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
       - name: Publish package on NPM 📦
-        run: pnpm build:publish --publish-branch ${{ github.ref }}
+        run: pnpm build:publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
