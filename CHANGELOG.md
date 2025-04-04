@@ -1,3 +1,12 @@
+## [0.3.2](https://github.com/incmixlabs/utils/compare/v0.3.1...v0.3.2) (2025-04-04)
+
+
+### Bug Fixes
+
+* fix user role in schemas ([929297f](https://github.com/incmixlabs/utils/commit/929297fa0aa823d1df8f7a671d5fec0810940101))
+
+
+
 ## [0.3.1](https://github.com/incmixlabs/utils/compare/v0.3.0...v0.3.1) (2025-04-02)
 
 
