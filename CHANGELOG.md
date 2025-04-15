@@ -1,3 +1,12 @@
+## [0.3.4](https://github.com/incmixlabs/utils/compare/v0.3.2...v0.3.4) (2025-04-15)
+
+
+### Bug Fixes
+
+* openapi function error ([5f9af11](https://github.com/incmixlabs/utils/commit/5f9af11061ef12a9d9b83107c5743802d93a1763))
+
+
+
 ## [0.3.2](https://github.com/incmixlabs/utils/compare/v0.3.1...v0.3.2) (2025-04-04)
 
 
