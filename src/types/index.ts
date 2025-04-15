@@ -1,4 +1,4 @@
-import { z } from "@hono/zod-openapi"
+import { z } from "zod"
 
 import { config } from "../env"
 import { UserRoles, type UserType, UserTypes } from "./user"
@@ -108,27 +108,18 @@ export type Service = {
   remoteRoute?: string // if remote route, then the service is remote and the fetching is pushed to remote
 }
 
-export const AuthUserSchema = z
-  .object({
-    email: z.string().email().openapi({ example: "john.doe@example.com" }),
-    userType: z
-      .enum([
-        UserRoles.ROLE_USER,
-        UserRoles.ROLE_MEMBER,
-        UserRoles.ROLE_SUPER_ADMIN,
-      ])
-      .default(UserRoles.ROLE_MEMBER)
-      .openapi({
-        example: UserRoles.ROLE_MEMBER,
-      }),
-    emailVerified: z.boolean().openapi({
-      example: true,
-    }),
-    id: z.string().openapi({
-      example: "93jpbulpkkavxnz",
-    }),
-  })
-  .openapi("User")
+export const AuthUserSchema = z.object({
+  email: z.string().email(),
+  userType: z
+    .enum([
+      UserRoles.ROLE_USER,
+      UserRoles.ROLE_MEMBER,
+      UserRoles.ROLE_SUPER_ADMIN,
+    ])
+    .default(UserRoles.ROLE_MEMBER),
+  emailVerified: z.boolean(),
+  id: z.string(),
+})
 
 export const AuthUserSessionSchema = AuthUserSchema.extend({
   session: z.object({
@@ -137,28 +128,16 @@ export const AuthUserSessionSchema = AuthUserSchema.extend({
     fresh: z.boolean(),
     userId: z.string(),
   }),
-}).openapi("User")
+})
 
-export const UserProfileSchema = z
-  .object({
-    id: z.string().openapi({
-      example: "93jpbulpkkavxnz",
-    }),
-    name: z.string().openapi({ example: "John Doe" }),
-    email: z.string().email().openapi({ example: "john.doe@example.com" }),
-    profileImage: z
-      .string()
-      .nullish()
-      .default(null)
-      .openapi({ example: "profile_image.jpg" }),
-    avatar: z
-      .string()
-      .nullish()
-      .default(null)
-      .openapi({ example: "avatar.jpg" }),
-    localeId: z.number({ coerce: true }).int().gt(0).openapi({ example: 1 }),
-  })
-  .openapi("User Profile Schema")
+export const UserProfileSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  email: z.string().email(),
+  profileImage: z.string().nullish().default(null),
+  avatar: z.string().nullish().default(null),
+  localeId: z.number({ coerce: true }).int().gt(0),
+})
 
 export type UserProfile = z.infer<typeof UserProfileSchema>
 export type AuthUser = z.output<typeof AuthUserSchema>
@@ -279,17 +258,13 @@ export const validUrlSchema = z
     "URL must start with https://"
   )
 
-export const presignedUrlSchema = z
-  .object({
-    url: z.string().openapi({ example: "https://example.com" }),
-  })
-  .openapi("Presigned URL")
+export const presignedUrlSchema = z.object({
+  url: z.string(),
+})
 
-export const optionalPresignedUrlSchema = z
-  .object({
-    url: z.string().nullable().openapi({ example: "https://example.com" }),
-  })
-  .openapi("Optional Presigned URL")
+export const optionalPresignedUrlSchema = z.object({
+  url: z.string().nullable(),
+})
 
 export type OptionalPresignedUrl = z.infer<typeof optionalPresignedUrlSchema>
 

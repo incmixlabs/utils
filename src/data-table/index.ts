@@ -1,4 +1,4 @@
-import { z } from "@hono/zod-openapi"
+import { z } from "zod"
 import { filterSchema, sortingItemSchema } from "./types"
 
 export * from "./types"

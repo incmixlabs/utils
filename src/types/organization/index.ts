@@ -1,7 +1,7 @@
-import { z } from "@hono/zod-openapi"
+import { z } from "zod"
 import { PermissionSchema } from "../abilitiy/schemas"
 import type { GroupMembers } from "../groups"
-import { USER_ROLES, UserRoles, type UserRole } from "../user"
+import { USER_ROLES, type UserRole, UserRoles } from "../user"
 import type { Zone } from "../zones"
 export enum AccessType {
   public = "pb",
@@ -46,37 +46,28 @@ export type RemoveMembersInput = {
   userIds: string[]
 }
 
-export const MemberDetailsSchema = z
-  .object({
-    userId: z.string(),
-    fullName: z.string(),
-    email: z.string().email(),
-    profileImage: z.string().nullable(),
-    avatar: z.string().nullable(),
-    role: z
-      .enum([
-        UserRoles.ROLE_ADMIN,
-        UserRoles.ROLE_OWNER,
-        UserRoles.ROLE_VIEWER,
-        UserRoles.ROLE_EDITOR,
-        UserRoles.ROLE_COMMENTER,
-      ])
-      .default(UserRoles.ROLE_OWNER)
-      .openapi({
-        example: UserRoles.ROLE_OWNER,
-      }),
-  })
-  .openapi("MemberDetails")
+export const MemberDetailsSchema = z.object({
+  userId: z.string(),
+  fullName: z.string(),
+  email: z.string().email(),
+  profileImage: z.string().nullable(),
+  avatar: z.string().nullable(),
+  role: z
+    .enum([
+      UserRoles.ROLE_ADMIN,
+      UserRoles.ROLE_OWNER,
+      UserRoles.ROLE_VIEWER,
+      UserRoles.ROLE_EDITOR,
+      UserRoles.ROLE_COMMENTER,
+    ])
+    .default(UserRoles.ROLE_OWNER),
+})
 
-export const MembersResponseSchema = z
-  .array(MemberDetailsSchema)
-  .openapi("MembersResponse")
+export const MembersResponseSchema = z.array(MemberDetailsSchema)
 
 export type MemberDetails = z.infer<typeof MemberDetailsSchema>
 export type GetMembersResponse = z.infer<typeof MembersResponseSchema>
 
-export const PermissionsResponseSchema = z
-  .array(PermissionSchema)
-  .openapi("PermissionsResponse")
+export const PermissionsResponseSchema = z.array(PermissionSchema)
 
 export type PermissionsResponse = z.infer<typeof PermissionsResponseSchema>

@@ -1,4 +1,4 @@
-import { z } from "@hono/zod-openapi"
+import { z } from "zod"
 
 export const operators = [
   "iLike",
@@ -111,10 +111,10 @@ export const searchParamsSchema = z.object({
 })
 
 export const PaginationMeta = z.object({
-  total: z.number().openapi({ example: 100 }),
-  page: z.number().openapi({ example: 1 }),
-  pageSize: z.number().openapi({ example: 10 }),
-  hasNextPage: z.boolean().openapi({ example: true }),
-  hasPrevPage: z.boolean().openapi({ example: true }),
-  pageCount: z.number().openapi({ example: 5 }),
+  total: z.number(),
+  page: z.number(),
+  pageSize: z.number(),
+  hasNextPage: z.boolean(),
+  hasPrevPage: z.boolean(),
+  pageCount: z.number(),
 })
