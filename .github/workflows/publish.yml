@@ -23,6 +23,6 @@ jobs:
         id: extract_tag
         run: echo "tag_name=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
       - name: Publish package on NPM 📦
-        run: pnpm build:publish
+        run: pnpm build:publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
