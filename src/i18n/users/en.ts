@@ -1,4 +1,4 @@
-import { mergeDeep } from "@objects/objects"
+import { mergeDeep } from "@objects"
 import type { I18nTranslations } from "./types"
 import { type ProfileTranslations, defaults } from "./types"
 

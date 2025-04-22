@@ -1,4 +1,4 @@
-import { arrayToCapitalObject } from "@objects/objects"
+import { arrayToCapitalObject } from "@objects"
 
 type ProfileImageTranslationMessage = {
   uploadProfilePicture: string

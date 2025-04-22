@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { capitalizedToCamel } from "./strings"
+import { capitalizedToCamel } from "./index"
 // adjust the path as needed
 
 describe("capitalizedToCamel", () => {
