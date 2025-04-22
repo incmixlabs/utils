@@ -26,6 +26,17 @@ export function camelToCapitalized(str: string) {
     .replace(/^./, (char) => char.toUpperCase())
 }
 
+export const getInitials = (name: string) => {
+  if (!name) return ""
+  return (
+    name
+      .match(/(\b\S)?/g)
+      ?.join("")
+      .match(/(^\S|\S$)?/g)
+      ?.join("")
+      .toUpperCase() || ""
+  )
+}
 // console.log(capitalizedToCamel("This Is A Capitalized Sentence"); // Output: thisIsACapitalizedSentence
 export function capitalizedToCamel(str: string): string {
   const words = str.trim().split(" ")
@@ -38,4 +49,13 @@ export function capitalizedToCamel(str: string): string {
     })
     .join("")
   return camelCase
+}
+
+export function encodeHTML(str: string) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;")
 }
