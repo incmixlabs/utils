@@ -7,7 +7,11 @@ describe("omit", () => {
   })
 })
 it("should handle omitting keys that don't exist", () => {
-  expect(omit(["d"])({ a: "a", b: "b", c: "c" })).toEqual({ a: "a", b: "b", c: "c" })
+  expect(omit(["d"])({ a: "a", b: "b", c: "c" })).toEqual({
+    a: "a",
+    b: "b",
+    c: "c",
+  })
 })
 
 it("should handle empty keys array", () => {
