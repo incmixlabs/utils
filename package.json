@@ -78,9 +78,7 @@
     }
   },
   "publishConfig": {
-    "branches": [
-      "release"
-    ]
+    "branches": ["release"]
   },
   "scripts": {
     "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo",
