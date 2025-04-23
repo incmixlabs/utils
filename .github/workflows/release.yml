@@ -17,6 +17,7 @@ jobs:
         with:
           github-token: ${{ secrets.PA_TOKEN }}
           version-file: './package.json'
+          skip-on-empty: false
       - name: create release
         uses: softprops/action-gh-release@v2
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
