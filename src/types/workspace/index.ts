@@ -1,4 +1,4 @@
-import { z } from "@hono/zod-openapi"
+import { z } from "zod"
 import { PermissionSchema } from "../abilitiy/schemas"
 import type { GroupMembers } from "../groups"
 import type { UserRole } from "../user"
@@ -47,22 +47,19 @@ export type UpdateMemberRoleInput = {
 export type RemoveMembersInput = {
   userIds: string[]
 }
-export const MemberDetailsSchema = z
-  .object({
-    userId: z.string(),
-    name: z.string(),
-    email: z.string().email(),
-    profileImage: z.string().nullable(),
-    avatar: z.string().nullable(),
-    role: z.string(),
-  })
-  .openapi("MemberDetails")
-export const MembersResponseSchema = z
-  .array(MemberDetailsSchema)
-  .openapi("MembersResponse")
+export const MemberDetailsSchema = z.object({
+  userId: z.string(),
+  name: z.string(),
+  email: z.string().email(),
+  profileImage: z.string().nullable(),
+  avatar: z.string().nullable(),
+  role: z.string(),
+})
+
+export const MembersResponseSchema = z.array(MemberDetailsSchema)
+
 export type MemberDetails = z.infer<typeof MemberDetailsSchema>
 export type GetMembersResponse = z.infer<typeof MembersResponseSchema>
-export const PermissionsResponseSchema = z
-  .array(PermissionSchema)
-  .openapi("PermissionsResponse")
+export const PermissionsResponseSchema = z.array(PermissionSchema)
+
 export type PermissionsResponse = z.infer<typeof PermissionsResponseSchema>

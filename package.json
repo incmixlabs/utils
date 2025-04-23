@@ -1,7 +1,7 @@
 {
   "name": "@incmix/utils",
   "description": "Shared utilities for the turbomix backend and frontend",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "type": "module",
   "exports": {
     "./i18n": {
@@ -77,6 +77,11 @@
       "types": "./dist/types/index.d.ts"
     }
   },
+  "publishConfig": {
+    "branches": [
+      "release"
+    ]
+  },
   "scripts": {
     "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo",
     "build": "tsup --minify",
@@ -88,7 +93,7 @@
   },
   "dependencies": {
     "@casl/ability": "^6.7.2",
-    "@hono/zod-openapi": "^0.18.3"
+    "zod": "3.24.2"
   },
   "engines": {
     "node": ">=22.13.0"

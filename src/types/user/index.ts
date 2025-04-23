@@ -1,5 +1,5 @@
 import { PaginationMeta } from "@data-table"
-import { z } from "@hono/zod-openapi"
+import { z } from "zod"
 import { UserProfileSchema } from ".."
 
 export enum UserRoles {
@@ -39,10 +39,10 @@ export const UserTypes = [
 export type UserType = (typeof UserTypes)[number]
 export type UserRole = (typeof USER_ROLES)[number]
 export const UserSchema = z.object({
-  id: z.string().openapi({ example: "93jpbulpkkavxnz" }),
-  oauth: z.string().nullable().openapi({ example: "google" }),
-  verified: z.boolean().openapi({ example: true }),
-  enabled: z.boolean().nullable().default(true).openapi({ example: true }),
+  id: z.string(),
+  oauth: z.string().nullable(),
+  verified: z.boolean(),
+  enabled: z.boolean().nullable().default(true),
 })
 
 export const PaginatedUserSchema = z.object({
@@ -55,11 +55,9 @@ export type PaginatedUser = z.infer<typeof PaginatedUserSchema>
 export const UserAndProfileSchema = UserSchema.and(UserProfileSchema)
 export type UserAndProfile = z.infer<typeof UserAndProfileSchema>
 
-export const UserProfilePaginatedSchema = z
-  .object({
-    results: UserAndProfileSchema.array(),
-    metadata: PaginationMeta,
-  })
-  .openapi("UserProfilePaginatedSchema")
+export const UserProfilePaginatedSchema = z.object({
+  results: UserAndProfileSchema.array(),
+  metadata: PaginationMeta,
+})
 
 export type UserProfilePaginated = z.infer<typeof UserProfilePaginatedSchema>

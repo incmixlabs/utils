@@ -1,5 +1,5 @@
 import type { MongoQuery } from "@casl/ability"
-import { z } from "@hono/zod-openapi"
+import { z } from "zod"
 import { actions, subjects } from "./ability"
 
 const ActionSchema = z.enum(actions)
