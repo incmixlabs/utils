@@ -1,7 +1,7 @@
 {
   "name": "@incmix/utils",
   "description": "Shared utilities for the turbomix backend and frontend",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "type": "module",
   "exports": {
     "./i18n": {
