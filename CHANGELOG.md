@@ -1,3 +1,12 @@
+# [0.4.0](https://github.com/incmixlabs/utils/compare/v0.3.4...v0.4.0) (2025-04-23)
+
+
+### Features
+
+* added more utils ([c651385](https://github.com/incmixlabs/utils/commit/c651385bc0a727de0fb5911fb00629066cdd1f68))
+
+
+
 ## [0.3.4](https://github.com/incmixlabs/utils/compare/v0.3.2...v0.3.4) (2025-04-15)
 
 
@@ -38,20 +47,6 @@
 * add tests and types ([7f55237](https://github.com/incmixlabs/utils/commit/7f552378453c207cb74bc86d5ecf2905c8ab5db2))
 * expand permission subjects in ability types ([44e999e](https://github.com/incmixlabs/utils/commit/44e999e23ba28b434ab5d53d6bca34a627d7c5d0))
 * fix build ([b94f0ee](https://github.com/incmixlabs/utils/commit/b94f0eef2d5273c969bdf9495d8936690c59694e))
-
-
-
-# [0.2.0](https://github.com/incmixlabs/utils/compare/2d555e05fe6378252eb27d773bc9045b00c47d28...v0.2.0) (2025-01-23)
-
-
-### Bug Fixes
-
-* lind and format ([3fec2bc](https://github.com/incmixlabs/utils/commit/3fec2bc490ad7b002b5b20bda0a3cf4cc769cdf3))
-
-
-### Features
-
-* added i18n ([2d555e0](https://github.com/incmixlabs/utils/commit/2d555e05fe6378252eb27d773bc9045b00c47d28))
 
 
 
