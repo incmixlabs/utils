@@ -1,6 +1,5 @@
 import { DateTime } from "luxon"
 
-
 export const getDate = (timezone = "America/New_York") => {
   const date = DateTime.now().setZone(timezone).toISO()?.split("T")
 
