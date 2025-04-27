@@ -1,5 +1,10 @@
 import { DateTime } from "luxon"
 
+export const dateFNSLocale: Record<Language, string> = {
+  en: "en",
+  pt: "pt-BR",
+}
+
 export const getDate = (timezone = "America/New_York") => {
   const date = DateTime.now().setZone(timezone).toISO()?.split("T")
 

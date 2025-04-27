@@ -1,5 +1,10 @@
 import { arrayToCapitalObject } from "@objects"
 
+export type Language = "en" | "pt"
+export const Locale: Record<Language, string> = {
+  en: "en",
+  pt: "pt-BR",
+}
 type ProfileImageTranslationMessage = {
   uploadProfilePicture: string
   addProfilePicture: string
