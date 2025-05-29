@@ -46,14 +46,14 @@ export type DefaultPasswordOptions = typeof defaultPasswordOptions
 
 export const isValidEmail = (value: string): boolean => isEmail(value)
 export const isValidPassword = (value: string): boolean =>
-  /^(?=.*[A-Z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/.test(value)
+   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/.test(value);
 
 // @ts-ignore
 export const isValidStrongPassword = (
   value: string,
   options: DefaultPasswordOptions = defaultPasswordOptions
   // @ts-ignore
-): number => isStrongPassword(value, options)
+): boolean => isStrongPassword(value, options)
 
 export const isValidColumnName = (value: string): boolean =>
   /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(value)
@@ -185,10 +185,7 @@ export const isValidTimeZone = (value: string): boolean => {
     return false
   }
 }
-export const isValidSocialSecurityNumber = (value: string): boolean => {
-  const regex = /^(?!666|000|9\d{2})\d{3}-(?!00)\d{2}-(?!0{4})\d{4}$/
-  return regex.test(value)
-}
+
 export const isValidIBAN = (value: string): boolean => {
   const regex = /^[A-Z]{2}\d{2}[A-Z0-9]{1,30}$/ // Basic IBAN format
   if (!regex.test(value)) return false
@@ -316,11 +313,16 @@ export const ensureFileObject = async (
     try {
       // If we have base64 data
       if ("data" in fileData && typeof fileData.data === "string") {
+        const dataUrlPattern = /^data:([a-zA-Z][a-zA-Z0-9]*[\/][a-zA-Z0-9][a-zA-Z0-9\-\+]*);base64,([A-Za-z0-9+/=]+)$/
+        if (dataUrlPattern.test(fileData.data)) {
+          const [, mimeType, base64Data] = fileData.data.match(dataUrlPattern) || []
+          // Validate MIME type matches expected type
+          if (fileData.type && mimeType !== fileData.type) {
+            console.warn("MIME type mismatch between data URL and declared type")
+            return null
+          }
+        // Check if the data is a valid Base64 string
         // Explicitly validate the data URL format
-        if (
-          fileData.data.startsWith("data:") &&
-          /^data:[a-z]+\/[a-z0-9-+.]+;base64,/i.test(fileData.data)
-        ) {
           try {
             const res = await fetch(fileData.data)
             const blob = await res.blob()
