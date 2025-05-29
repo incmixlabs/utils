@@ -74,7 +74,7 @@
     },
     "./convert": {
       "import": "./dist/schema/convert.js",
-      "types": "./dist/convert/convert.d.ts"
+      "types": "./dist/schema/convert.d.ts"
     },
     "./validate": {
       "import": "./dist/schema/validate.js",

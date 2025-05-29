@@ -39,11 +39,11 @@ export const taskSchemaLiteral = {
       type: "string",
     },
     createdAt: {
-      type: "string",
+      type: "number",
       // format: "date-time",
     },
     updatedAt: {
-      type: "string",
+      type: "number",
       // format: "date-time",
     },
     createdBy: {
@@ -96,12 +96,10 @@ export const columnSchemaLiteral = {
       type: "integer",
     },
     createdAt: {
-      type: "string",
-      // format: "date-time",
+      type: "number"
     },
     updatedAt: {
-      type: "string",
-      // format: "date-time",
+      type: "number"
     },
     createdBy: {
       type: "string",
@@ -250,10 +248,10 @@ export const dashboardSchemaLiteral = {
       type: "string",
     },
     createdAt: {
-      type: "string",
+      type: "number",
     },
     updatedAt: {
-      type: "string",
+      type: "number",
     },
     createdBy: {
       type: "string",
@@ -283,10 +281,10 @@ export const projectSchemaLiteral = {
       type: "string",
     },
     createdAt: {
-      type: "string",
+      type: "number",
     },
     updatedAt: {
-      type: "string",
+      type: "number",
     },
     createdBy: {
       type: "string",
@@ -371,10 +369,10 @@ export const formProjectSchemaLiteral = {
       },
     },
     createdAt: {
-      type: "integer", // Using integer for timestamp
+      type: "number", // Using integer for timestamp
     },
     updatedAt: {
-      type: "integer", // Using integer for timestamp
+      type: "number", // Using integer for timestamp
     },
   },
   required: [
