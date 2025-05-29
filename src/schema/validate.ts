@@ -160,7 +160,12 @@ export const isValidCsv = (value: string): boolean => {
 }
 export const isValidBase64 = (value: string): boolean => {
   try {
-    return btoa(atob(value)) === value // Check if encoding and decoding match
+   // Handle both standard and URL-safe Base64
+    const base64Regex = /^[A-Za-z0-9+/]*={0,2}$|^[A-Za-z0-9_-]*$/
+    if (!base64Regex.test(value)) return false 
+    // Test decoding
+    atob(value.replace(/-/g, '+').replace(/_/g, '/'))
+    return true
   } catch {
     return false
   }
