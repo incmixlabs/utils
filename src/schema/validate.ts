@@ -108,8 +108,17 @@ export const isValidLatitude = (value: string): boolean =>
   /^-?(90(\.0+)?|([1-8]?\d(\.\d+)?))$/.test(value)
 export const isValidLongitude = (value: string): boolean =>
   /^-?(180(\.0+)?|((1[0-7]\d|[1-9]?\d)(\.\d+)?))$/.test(value)
-export const isValidPostalCode = (value: string): boolean =>
+export const isValidUSPostalCode = (value: string): boolean =>
   /^[0-9]{5}(?:-[0-9]{4})?$/.test(value) // US ZIP code format
+export const isValidPostalCode = (value: string, country = 'US'): boolean => {
+  // Add country-specific validation logic
+  switch (country.toUpperCase()) {
+    case 'US': return isValidUSPostalCode(value)
+    case 'CA': return /^[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d$/.test(value) // Canada
+    case 'UK': return /^[A-Za-z]{1,2}\d[A-Za-z\d]? ?\d[A-Za-z]{2}$/.test(value) // UK
+    default: return /^[\w\s-]{3,10}$/.test(value) // Generic fallback
+  }
+}
 export const isValidCountryCode = (value: string): boolean =>
   /^[A-Z]{2}$/.test(value) // ISO 3166-1 alpha-2 format
 export const isValidCurrencyCode = (value: string): boolean =>
