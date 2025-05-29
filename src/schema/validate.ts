@@ -231,9 +231,6 @@ export const validateProjectData = (
     )
     validStatus = "started"
   }
-  if (VALID_STATUSES.includes(data.status as ProjectStatus)) {
-    validStatus = data.status as ProjectStatus
-  }
 
   // Validate timeType
   let validTimeType: TimeType
