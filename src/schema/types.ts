@@ -1,3 +1,19 @@
+export type ProjectStatus = "all" | "started" | "on-hold" | "completed"
+export type TimeType = "day" | "days" | "week" | "month" | "year"
+
+export const VALID_STATUSES: ProjectStatus[] = [
+  "all",
+  "started",
+  "on-hold",
+  "completed",
+]
+export const VALID_TIME_TYPES: TimeType[] = [
+  "day",
+  "days",
+  "week",
+  "month",
+  "year",
+]
 
 export const taskSchemaLiteral = {
   title: "tasks schema",
@@ -375,10 +391,6 @@ export const formProjectSchemaLiteral = {
   },
 } as const
 
-export type ProjectStatus = "all" | "started" | "on-hold" | "completed"
-export type TimeType = "day" | "days" | "week" | "month" | "year"
-
-
 /**
  * Validates and sanitizes project data to match the RxDB schema
  */
@@ -397,9 +409,21 @@ export interface ValidatedProjectData {
   endDate: number
   budget: number
 }
-
-
+export type FileLikeObject = {
+  name: string
+  type: string
+  size: number
+  data?: string
+  arrayBuffer?: ArrayBuffer
+  buffer?: ArrayBuffer
+}
+interface FileInput {
+  data: File | Blob | ArrayBuffer | string
+  name: string
+  type: string
+  size: number
+}
 // Update the type to match the actual form data structure with optional fields
-export type ProjectFormData = ValidatedProjectData & {  
-  fileData?: File | Blob | any // Accept various possible file input formats
+export type ProjectFormData = ValidatedProjectData & {
+  fileData?: FileInput // Accept various possible file input formats
 }

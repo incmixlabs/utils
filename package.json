@@ -73,8 +73,8 @@
       "types": "./dist/schema/types.d.ts"
     },
     "./convert": {
-      "import": "./dist/schema/index.js",
-      "types": "./dist/convert/index.d.ts"
+      "import": "./dist/schema/convert.js",
+      "types": "./dist/convert/convert.d.ts"
     },
     "./validate": {
       "import": "./dist/schema/validate.js",
@@ -86,9 +86,7 @@
     }
   },
   "publishConfig": {
-    "branches": [
-      "release"
-    ]
+    "branches": ["release"]
   },
   "scripts": {
     "typecheck": "tsc --noEmit --tsBuildInfoFile .tsbuildinfo",

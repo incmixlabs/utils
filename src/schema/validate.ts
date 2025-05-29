@@ -1,11 +1,18 @@
-import isEmail from 'validator/lib/isEmail';
-import isCreditCard from 'validator/lib/isCreditCard';
-import isURL from 'validator/lib/isURL';
-import isStrongPassword from 'validator/lib/isStrongPassword';
-import type { ProjectFormData, ValidatedProjectData, ProjectStatus } from './types';
+import isCreditCard from "validator/lib/isCreditCard"
+import isEmail from "validator/lib/isEmail"
+import isStrongPassword from "validator/lib/isStrongPassword"
+import isURL from "validator/lib/isURL"
+import type {
+  FileLikeObject,
+  ProjectFormData,
+  ProjectStatus,
+  TimeType,
+  ValidatedProjectData,
+} from "./types"
+import { VALID_STATUSES, VALID_TIME_TYPES } from "./types"
 
 export const defaultURLOptions = {
-  protocols: ['http', 'https', 'ftp'],
+  protocols: ["http", "https", "ftp"],
   require_tld: true,
   require_protocol: false,
   require_host: true,
@@ -18,10 +25,10 @@ export const defaultURLOptions = {
   allow_query_components: true,
   validate_length: true,
   max_allowed_length: 2084,
-};
-export type DefaultURLOptions = typeof defaultURLOptions;
+}
+export type DefaultURLOptions = typeof defaultURLOptions
 
-export const  defaultPasswordOptions = {
+export const defaultPasswordOptions = {
   minLength: 8,
   minLowercase: 1,
   minUppercase: 1,
@@ -34,161 +41,180 @@ export const  defaultPasswordOptions = {
   pointsForContainingUpper: 10,
   pointsForContainingNumber: 10,
   pointsForContainingSymbol: 10,
-};
-export type DefaultPasswordOptions = typeof defaultPasswordOptions;
+}
+export type DefaultPasswordOptions = typeof defaultPasswordOptions
 
-export const isValidEmail = (value: string): boolean => isEmail(value);
-export const isValidPassword = (value: string): boolean =>  /^(?=.*[A-Z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/.test(value);
+export const isValidEmail = (value: string): boolean => isEmail(value)
+export const isValidPassword = (value: string): boolean =>
+  /^(?=.*[A-Z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/.test(value)
 
 // @ts-ignore
-export const isValidStrongPassword = (value: string, options: DefaultPasswordOptions = defaultPasswordOptions): number => isStrongPassword(value, options);
+export const isValidStrongPassword = (
+  value: string,
+  options: DefaultPasswordOptions = defaultPasswordOptions
+): number => isStrongPassword(value, options)
 
-export const isValidColumnName = (value: string): boolean => /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(value);
-export const isValidTableName = (value: string): boolean => /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(value);
-export const isValidUrl = (value: string, options: DefaultURLOptions = defaultURLOptions): boolean => isURL(value, options);
-export const isValidPhoneNumber = (value: string): boolean => /^\+?[1-9]\d{1,14}$/.test(value); // E.164 format
-export const isValidDate = (value: string): boolean => !Number.isNaN(Date.parse(value));   // Check if the date can be parsed
+export const isValidColumnName = (value: string): boolean =>
+  /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(value)
+export const isValidTableName = (value: string): boolean =>
+  /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(value)
+export const isValidUrl = (
+  value: string,
+  options: DefaultURLOptions = defaultURLOptions
+): boolean => isURL(value, options)
+export const isValidPhoneNumber = (value: string): boolean =>
+  /^\+?[1-9]\d{1,14}$/.test(value) // E.164 format
+export const isValidDate = (value: string): boolean =>
+  !Number.isNaN(Date.parse(value)) // Check if the date can be parsed
 export const isValidJson = (value: string): boolean => {
   try {
-    JSON.parse(value);
-    return true;
+    JSON.parse(value)
+    return true
   } catch {
-    return false;
+    return false
   }
-};
-export const isValidHexColor = (value: string): boolean => /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(value);
+}
+export const isValidHexColor = (value: string): boolean =>
+  /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(value)
 export function isValidIPAddress(ip: string): boolean {
-  const parts = ip.split('.');
+  const parts = ip.split(".")
 
   if (parts.length !== 4) {
-    return false;
+    return false
   }
 
   for (const part of parts) {
     if (!/^\d+$/.test(part)) {
-      return false;
+      return false
     }
 
-    const num = Number.parseInt(part, 10);
+    const num = Number.parseInt(part, 10)
     if (Number.isNaN(num) || num < 0 || num > 255) {
-      return false;
+      return false
     }
 
-    if (part.length > 1 && part.startsWith('0')) {
-        return false;
+    if (part.length > 1 && part.startsWith("0")) {
+      return false
     }
   }
-  return true;
+  return true
 }
-export const isValidMacAddress = (value: string): boolean => /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/.test(value);
-export const isValidTime = (value: string): boolean => /^([01]\d|2[0-3]):([0-5]\d)$/.test(value); // HH:mm format
-export const isValidLatitude = (value: string): boolean => /^-?(90(\.0+)?|([1-8]?\d(\.\d+)?))$/.test(value);
-export const isValidLongitude = (value: string): boolean => /^-?(180(\.0+)?|((1[0-7]\d|[1-9]?\d)(\.\d+)?))$/.test(value);
-export const isValidPostalCode = (value: string): boolean => /^[0-9]{5}(?:-[0-9]{4})?$/.test(value); // US ZIP code format
-export const isValidCountryCode = (value: string): boolean => /^[A-Z]{2}$/.test(value); // ISO 3166-1 alpha-2 format
-export const isValidCurrencyCode = (value: string): boolean => /^[A-Z]{3}$/.test(value); // ISO 4217 format
-export const isValidEnumValue = (value: string, enumValues: string[]): boolean => enumValues.includes(value);
-export const isValidFileName = (value: string): boolean => /^[^<>:"/\\|?*]+$/.test(value); // Basic validation for file names
+export const isValidMacAddress = (value: string): boolean =>
+  /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/.test(value)
+export const isValidTime = (value: string): boolean =>
+  /^([01]\d|2[0-3]):([0-5]\d)$/.test(value) // HH:mm format
+export const isValidLatitude = (value: string): boolean =>
+  /^-?(90(\.0+)?|([1-8]?\d(\.\d+)?))$/.test(value)
+export const isValidLongitude = (value: string): boolean =>
+  /^-?(180(\.0+)?|((1[0-7]\d|[1-9]?\d)(\.\d+)?))$/.test(value)
+export const isValidPostalCode = (value: string): boolean =>
+  /^[0-9]{5}(?:-[0-9]{4})?$/.test(value) // US ZIP code format
+export const isValidCountryCode = (value: string): boolean =>
+  /^[A-Z]{2}$/.test(value) // ISO 3166-1 alpha-2 format
+export const isValidCurrencyCode = (value: string): boolean =>
+  /^[A-Z]{3}$/.test(value) // ISO 4217 format
+export const isValidEnumValue = (
+  value: string,
+  enumValues: string[]
+): boolean => enumValues.includes(value)
+export const isValidFileName = (value: string): boolean =>
+  /^[^<>:"/\\|?*]+$/.test(value) // Basic validation for file names
 export const isValidJsonSchema = (value: string): boolean => {
   try {
-    const schema = JSON.parse(value);
+    const schema = JSON.parse(value)
     // Basic validation for JSON Schema structure
-    return typeof schema === 'object' && schema !== null && 'type' in schema;
+    return typeof schema === "object" && schema !== null && "type" in schema
   } catch {
-    return false;
+    return false
   }
 }
 export const isValidXml = (value: string): boolean => {
   try {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(value, 'application/xml');
-    return xmlDoc.getElementsByTagName('parsererror').length === 0;
+    const parser = new DOMParser()
+    const xmlDoc = parser.parseFromString(value, "application/xml")
+    return xmlDoc.getElementsByTagName("parsererror").length === 0
   } catch {
-    return false;
-  }
-}
-export const isValidYaml = (value: string): boolean => {
-  try {
-    const yaml = require('js-yaml');
-    yaml.load(value);
-    return true;
-  } catch {
-    return false;
+    return false
   }
 }
 export const isValidMarkdown = (value: string): boolean => {
   // A simple regex to check for basic Markdown syntax
-  const markdownRegex = /^(#{1,6} |[-*+] |\d+\.)|(\[.*?\]\(.*?\))|(```[\s\S]*?```)|(`[^`]+`)|(\*\*.*?\*\*)|(_.*?_)/;
-  return markdownRegex.test(value);
+  const markdownRegex =
+    /^(#{1,6} |[-*+] |\d+\.)|(\[.*?\]\(.*?\))|(```[\s\S]*?```)|(`[^`]+`)|(\*\*.*?\*\*)|(_.*?_)/
+  return markdownRegex.test(value)
 }
 export const isValidCsv = (value: string): boolean => {
-  const lines = value.split('\n');
-  const regex = /^([^,]*,)*[^,]*$/; // Basic CSV line validation
-  return lines.every(line => regex.test(line));
+  const lines = value.split("\n")
+  const regex = /^([^,]*,)*[^,]*$/ // Basic CSV line validation
+  return lines.every((line) => regex.test(line))
 }
 export const isValidBase64 = (value: string): boolean => {
   try {
-    return btoa(atob(value)) === value; // Check if encoding and decoding match
+    return btoa(atob(value)) === value // Check if encoding and decoding match
   } catch {
-    return false;
+    return false
   }
 }
 export const isValidHtml = (value: string): boolean => {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(value, 'text/html');
-  return !doc.querySelector('parsererror'); // Check if there are any parsing errors
+  const parser = new DOMParser()
+  const doc = parser.parseFromString(value, "text/html")
+  return !doc.querySelector("parsererror") // Check if there are any parsing errors
 }
-export const isValidSlug = (value: string): boolean => /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value); // Slug format: lowercase letters, numbers, and hyphens
+export const isValidSlug = (value: string): boolean =>
+  /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) // Slug format: lowercase letters, numbers, and hyphens
 export const isValidTimeZone = (value: string): boolean => {
   try {
-    Intl.DateTimeFormat(undefined, { timeZone: value });
-    return true;
+    Intl.DateTimeFormat(undefined, { timeZone: value })
+    return true
   } catch {
-    return false;
+    return false
   }
 }
 export const isValidSocialSecurityNumber = (value: string): boolean => {
-  const regex = /^(?!666|000|9\d{2})\d{3}-(?!00)\d{2}-(?!0{4})\d{4}$/;
-  return regex.test(value);
+  const regex = /^(?!666|000|9\d{2})\d{3}-(?!00)\d{2}-(?!0{4})\d{4}$/
+  return regex.test(value)
 }
 export const isValidIBAN = (value: string): boolean => {
-  const regex = /^[A-Z]{2}\d{2}[A-Z0-9]{1,30}$/; // Basic IBAN format
-  if (!regex.test(value)) return false;
+  const regex = /^[A-Z]{2}\d{2}[A-Z0-9]{1,30}$/ // Basic IBAN format
+  if (!regex.test(value)) return false
 
   // Rearrange the IBAN for validation
-  const rearranged = value.slice(4) + value.slice(0, 4);
-  const numericIBAN = rearranged.replace(/[A-Z]/g, char => (char.charCodeAt(0) - 55).toString()); // Convert letters to numbers
+  const rearranged = value.slice(4) + value.slice(0, 4)
+  const numericIBAN = rearranged.replace(/[A-Z]/g, (char) =>
+    (char.charCodeAt(0) - 55).toString()
+  ) // Convert letters to numbers
 
   // Check if the numeric IBAN is divisible by 97
-  return BigInt(numericIBAN) % BigInt(97) === BigInt(1);
+  return BigInt(numericIBAN) % BigInt(97) === BigInt(1)
 }
 export const isValidSwiftCode = (value: string): boolean => {
-  const regex = /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/; // Basic SWIFT/BIC format
-  return regex.test(value);
+  const regex = /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/ // Basic SWIFT/BIC format
+  return regex.test(value)
 }
 export const isValidGitHubUsername = (value: string): boolean => {
-  const regex = /^(?!-)[a-zA-Z0-9-]{1,39}(?<!-)$/; // GitHub username rules
-  return regex.test(value);
+  const regex = /^(?!-)[a-zA-Z0-9-]{1,39}(?<!-)$/ // GitHub username rules
+  return regex.test(value)
 }
 export const isValidTwitterHandle = (value: string): boolean => {
-  const regex = /^@?([A-Za-z0-9_]{1,15})$/; // Twitter handle rules
-  return regex.test(value);
+  const regex = /^@?([A-Za-z0-9_]{1,15})$/ // Twitter handle rules
+  return regex.test(value)
 }
 export const isValidInstagramHandle = (value: string): boolean => {
-  const regex = /^@?([A-Za-z0-9._]{1,30})$/; // Instagram handle rules
-  return regex.test(value);
+  const regex = /^@?([A-Za-z0-9._]{1,30})$/ // Instagram handle rules
+  return regex.test(value)
 }
 export const isValidLinkedInProfile = (value: string): boolean => {
-  const regex = /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[A-Za-z0-9_-]+\/?$/; // LinkedIn profile URL format
-  return regex.test(value);
+  const regex = /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[A-Za-z0-9_-]+\/?$/ // LinkedIn profile URL format
+  return regex.test(value)
 }
 export const isValidYouTubeChannel = (value: string): boolean => {
-  const regex = /^(https?:\/\/)?(www\.)?youtube\.com\/(channel|user)\/[A-Za-z0-9_-]+\/?$/; // YouTube channel URL format
-  return regex.test(value);
+  const regex =
+    /^(https?:\/\/)?(www\.)?youtube\.com\/(channel|user)\/[A-Za-z0-9_-]+\/?$/ // YouTube channel URL format
+  return regex.test(value)
 }
 export const isValidFacebookProfile = (value: string): boolean => {
-  const regex = /^(https?:\/\/)?(www\.)?facebook\.com\/[A-Za-z0-9._-]+\/?$/; // Facebook profile URL format
-  return regex.test(value);
+  const regex = /^(https?:\/\/)?(www\.)?facebook\.com\/[A-Za-z0-9._-]+\/?$/ // Facebook profile URL format
+  return regex.test(value)
 }
 
 export const validateProjectData = (
@@ -196,12 +222,7 @@ export const validateProjectData = (
 ): ValidatedProjectData => {
   // Validate status
   let validStatus: ProjectStatus
-  if (
-    data.status === "all" ||
-    data.status === "started" ||
-    data.status === "on-hold" ||
-    data.status === "completed"
-  ) {
+  if (VALID_STATUSES.includes(data.status as ProjectStatus)) {
     validStatus = data.status as ProjectStatus
   } else {
     console.warn(
@@ -209,16 +230,13 @@ export const validateProjectData = (
     )
     validStatus = "started"
   }
+  if (VALID_STATUSES.includes(data.status as ProjectStatus)) {
+    validStatus = data.status as ProjectStatus
+  }
 
   // Validate timeType
   let validTimeType: TimeType
-  if (
-    data.timeType === "day" ||
-    data.timeType === "days" ||
-    data.timeType === "week" ||
-    data.timeType === "month" ||
-    data.timeType === "year"
-  ) {
+  if (VALID_TIME_TYPES.includes(data.timeType as TimeType)) {
     // Map "days" to "day" if needed
     validTimeType =
       data.timeType === "days"
@@ -260,7 +278,10 @@ export const validateProjectData = (
  * @param fileData The file data from the form submission
  * @returns A proper File object or null if invalid
  */
-export const ensureFileObject = async (fileData: any): Promise<File | null> => {
+
+export const ensureFileObject = async (
+  fileData: File | Blob | FileLikeObject | null | undefined
+): Promise<File | null> => {
   // Case 1: Already a File object
   if (fileData instanceof File) {
     return fileData
@@ -305,7 +326,11 @@ export const ensureFileObject = async (fileData: any): Promise<File | null> => {
       // If we have ArrayBuffer or similar
       if ("arrayBuffer" in fileData || "buffer" in fileData) {
         const buffer = fileData.arrayBuffer || fileData.buffer
-        return new File([buffer], fileData.name, { type: fileData.type })
+        if (buffer !== undefined) {
+          return new File([buffer], fileData.name, { type: fileData.type })
+        }
+        console.warn("File-like object provided but buffer is undefined")
+        return null
       }
 
       console.warn("File-like object provided but missing data content")
@@ -315,7 +340,6 @@ export const ensureFileObject = async (fileData: any): Promise<File | null> => {
       return null
     }
   }
-
   console.warn("Unable to process file data:", fileData)
   return null
 }
