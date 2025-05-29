@@ -52,6 +52,7 @@ export const isValidPassword = (value: string): boolean =>
 export const isValidStrongPassword = (
   value: string,
   options: DefaultPasswordOptions = defaultPasswordOptions
+  // @ts-ignore
 ): number => isStrongPassword(value, options)
 
 export const isValidColumnName = (value: string): boolean =>
