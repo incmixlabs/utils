@@ -96,10 +96,10 @@ export const columnSchemaLiteral = {
       type: "integer",
     },
     createdAt: {
-      type: "number"
+      type: "number",
     },
     updatedAt: {
-      type: "number"
+      type: "number",
     },
     createdBy: {
       type: "string",
