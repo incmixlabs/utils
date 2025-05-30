@@ -329,8 +329,7 @@ export const ensureFileObject = async (
         const dataUrlPattern =
           /^data:([a-zA-Z][a-zA-Z0-9]*[\/][a-zA-Z0-9][a-zA-Z0-9\-\+]*);base64,([A-Za-z0-9+/=]+)$/
         if (dataUrlPattern.test(fileData.data)) {
-          const [, mimeType] =
-            fileData.data.match(dataUrlPattern) || []
+          const [, mimeType] = fileData.data.match(dataUrlPattern) || []
           // Validate MIME type matches expected type
           if (fileData.type && mimeType !== fileData.type) {
             console.warn(
