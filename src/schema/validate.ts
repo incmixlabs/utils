@@ -1,5 +1,6 @@
 import isCreditCard from "validator/lib/isCreditCard"
 import isEmail from "validator/lib/isEmail"
+import isMobilePhone from "validator/lib/isMobilePhone"
 import isStrongPassword from "validator/lib/isStrongPassword"
 import isURL from "validator/lib/isURL"
 import type {
@@ -63,8 +64,13 @@ export const isValidUrl = (
   value: string,
   options: DefaultURLOptions = defaultURLOptions
 ): boolean => isURL(value, options)
-export const isValidPhoneNumber = (value: string): boolean =>
-  /^\+?[1-9]\d{1,14}$/.test(value) // E.164 format
+export const isValidPhoneNumber = (value: string): boolean => {
+  let phoneValue = value
+  if (!phoneValue.startsWith("+")) {
+    phoneValue = `+${phoneValue}` // Ensure E.164 format
+  }
+  return isMobilePhone(phoneValue)
+}
 export const isValidDate = (value: string): boolean =>
   !Number.isNaN(Date.parse(value)) // Check if the date can be parsed
 export const isValidJson = (value: string): boolean => {
@@ -372,4 +378,15 @@ export const ensureFileObject = async (
   }
   console.warn("Unable to process file data:", fileData)
   return null
+}
+
+export async function getFileSizeFromUrl(url: string): Promise<number | null> {
+  try {
+    const response = await fetch(url, { method: "HEAD" })
+    const contentLength = response.headers.get("content-length")
+    return contentLength ? Number.parseInt(contentLength, 10) : null
+  } catch (error) {
+    console.error("Error fetching file size:", error)
+    return null
+  }
 }
