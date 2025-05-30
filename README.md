@@ -2,6 +2,8 @@
 
 shared utils for frontend and back-end
 
+## To Publish
+commit message must be feat or fix
 
 ## Development
 
