@@ -289,10 +289,19 @@ export const validateProjectData = (
  */
 
 export const ensureFileObject = async (
-  fileData: File | Blob | FileLikeObject | null | undefined
+  fileData: File | Blob | FileLikeObject | null
 ): Promise<File | null> => {
-  // Case 1: Already a File object
-  if (fileData instanceof File) {
+   // Early return for null/undefined
+  if (!fileData) {
+    return null
+  }
+   // Case 1: Already a File object
+   if (fileData instanceof File) {
+    // Validate file size and type
+    if (fileData.size === 0) {
+      console.warn("File is empty")
+      return null
+    }
     return fileData
   }
 
