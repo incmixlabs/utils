@@ -46,7 +46,7 @@ export type DefaultPasswordOptions = typeof defaultPasswordOptions
 
 export const isValidEmail = (value: string): boolean => isEmail(value)
 export const isValidPassword = (value: string): boolean =>
-   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/.test(value);
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/.test(value)
 
 // @ts-ignore
 export const isValidStrongPassword = (
@@ -110,13 +110,17 @@ export const isValidLongitude = (value: string): boolean =>
   /^-?(180(\.0+)?|((1[0-7]\d|[1-9]?\d)(\.\d+)?))$/.test(value)
 export const isValidUSPostalCode = (value: string): boolean =>
   /^[0-9]{5}(?:-[0-9]{4})?$/.test(value) // US ZIP code format
-export const isValidPostalCode = (value: string, country = 'US'): boolean => {
+export const isValidPostalCode = (value: string, country = "US"): boolean => {
   // Add country-specific validation logic
   switch (country.toUpperCase()) {
-    case 'US': return isValidUSPostalCode(value)
-    case 'CA': return /^[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d$/.test(value) // Canada
-    case 'UK': return /^[A-Za-z]{1,2}\d[A-Za-z\d]? ?\d[A-Za-z]{2}$/.test(value) // UK
-    default: return /^[\w\s-]{3,10}$/.test(value) // Generic fallback
+    case "US":
+      return isValidUSPostalCode(value)
+    case "CA":
+      return /^[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d$/.test(value) // Canada
+    case "UK":
+      return /^[A-Za-z]{1,2}\d[A-Za-z\d]? ?\d[A-Za-z]{2}$/.test(value) // UK
+    default:
+      return /^[\w\s-]{3,10}$/.test(value) // Generic fallback
   }
 }
 export const isValidCountryCode = (value: string): boolean =>
@@ -160,11 +164,11 @@ export const isValidCsv = (value: string): boolean => {
 }
 export const isValidBase64 = (value: string): boolean => {
   try {
-   // Handle both standard and URL-safe Base64
+    // Handle both standard and URL-safe Base64
     const base64Regex = /^[A-Za-z0-9+/]*={0,2}$|^[A-Za-z0-9_-]*$/
-    if (!base64Regex.test(value)) return false 
+    if (!base64Regex.test(value)) return false
     // Test decoding
-    atob(value.replace(/-/g, '+').replace(/_/g, '/'))
+    atob(value.replace(/-/g, "+").replace(/_/g, "/"))
     return true
   } catch {
     return false
@@ -291,12 +295,12 @@ export const validateProjectData = (
 export const ensureFileObject = async (
   fileData: File | Blob | FileLikeObject | null
 ): Promise<File | null> => {
-   // Early return for null/undefined
+  // Early return for null/undefined
   if (!fileData) {
     return null
   }
-   // Case 1: Already a File object
-   if (fileData instanceof File) {
+  // Case 1: Already a File object
+  if (fileData instanceof File) {
     // Validate file size and type
     if (fileData.size === 0) {
       console.warn("File is empty")
@@ -322,16 +326,20 @@ export const ensureFileObject = async (
     try {
       // If we have base64 data
       if ("data" in fileData && typeof fileData.data === "string") {
-        const dataUrlPattern = /^data:([a-zA-Z][a-zA-Z0-9]*[\/][a-zA-Z0-9][a-zA-Z0-9\-\+]*);base64,([A-Za-z0-9+/=]+)$/
+        const dataUrlPattern =
+          /^data:([a-zA-Z][a-zA-Z0-9]*[\/][a-zA-Z0-9][a-zA-Z0-9\-\+]*);base64,([A-Za-z0-9+/=]+)$/
         if (dataUrlPattern.test(fileData.data)) {
-          const [, mimeType, base64Data] = fileData.data.match(dataUrlPattern) || []
+          const [, mimeType] =
+            fileData.data.match(dataUrlPattern) || []
           // Validate MIME type matches expected type
           if (fileData.type && mimeType !== fileData.type) {
-            console.warn("MIME type mismatch between data URL and declared type")
+            console.warn(
+              "MIME type mismatch between data URL and declared type"
+            )
             return null
           }
-        // Check if the data is a valid Base64 string
-        // Explicitly validate the data URL format
+          // Check if the data is a valid Base64 string
+          // Explicitly validate the data URL format
           try {
             const res = await fetch(fileData.data)
             const blob = await res.blob()
