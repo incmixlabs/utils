@@ -112,29 +112,16 @@ it("ensureFileObject should correctly convert valid file inputs", async () => {
 
 it("getFileSizeFromUrl should return file size for a valid URL", async () => {
   // Mock fetch to work in this test
-  global.fetch = vi.fn(() =>
+  const _originalFetch = global.fetch
+  const mockFetch = vi.fn(() =>
     Promise.resolve({
       headers: {
         get: () => "1024",
       },
       ok: true,
-      status: 200,
-      statusText: "OK",
-      redirected: false,
-      url: "http://example.com/file",
-      clone: () => this,
-      body: null,
-      bodyUsed: false,
-      arrayBuffer: async () => new ArrayBuffer(0),
-      blob: async () => new Blob(),
-      formData: async () => new FormData(),
-      json: async () => ({}),
-      text: async () => "",
-      type: "basic",
-      trailer: Promise.resolve(new Headers()),
     } as unknown as Response)
   )
-
+  global.fetch = mockFetch
   const size = await getFileSizeFromUrl("http://example.com/file")
   expect(size).toBe(1024)
 })
