@@ -52,6 +52,9 @@ it("isValidUrl should validate URLs with given options", () => {
 it("isValidPhoneNumber should validate E.164 formatted phone numbers", () => {
   expect(isValidPhoneNumber("+12345678901")).toBe(true)
   expect(isValidPhoneNumber("123456")).toBe(false)
+  expect(isValidPhoneNumber("12345678901")).toBe(true) // Should pass due to auto-prefix  expect(isValidPhoneNumber("123456")).toBe(false) // Too short
+  expect(isValidPhoneNumber("+")).toBe(false) // Just plus sign
+  expect(isValidPhoneNumber("")).toBe(false) // Empty string
 })
 
 it("isValidJson should correctly validate JSON", () => {
