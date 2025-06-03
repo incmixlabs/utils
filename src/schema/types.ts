@@ -432,7 +432,7 @@ export const projectStatusSchema = z.union([
   z.literal("all"),
   z.literal("started"),
   z.literal("on-hold"),
-  z.literal("completed")
+  z.literal("completed"),
 ])
 
 export const timeTypeSchema = z.union([
@@ -440,7 +440,7 @@ export const timeTypeSchema = z.union([
   z.literal("days"),
   z.literal("week"),
   z.literal("month"),
-  z.literal("year")
+  z.literal("year"),
 ])
 
 export const validatedProjectDataSchema = z.object({
@@ -455,11 +455,11 @@ export const validatedProjectDataSchema = z.object({
   members: z.array(
     z.object({
       name: z.string(),
-      value: z.string()
+      value: z.string(),
     })
   ),
   status: projectStatusSchema,
   startDate: z.number(),
   endDate: z.number(),
-  budget: z.number()
+  budget: z.number(),
 })
