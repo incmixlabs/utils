@@ -1,7 +1,8 @@
 import { z } from "zod"
-
+import { validatedProjectDataSchema } from "../../schema/types"
 export const taskStatus = ["todo", "in_progress", "done", "backlog"] as const
 export type TaskStatus = (typeof taskStatus)[number]
+
 export const TaskSchema = z.object({
   id: z.string(),
   status: z.enum(taskStatus),
@@ -16,17 +17,7 @@ export const TaskSchema = z.object({
   projectId: z.string(),
 })
 
-export const ProjectSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  orgId: z.string(),
-  createdBy: z.string(),
-  updatedBy: z.string(),
-  updatedAt: z.date({ coerce: true }),
-  createdAt: z.date({ coerce: true }),
-})
-
-export type Project = z.infer<typeof ProjectSchema>
+export type Project = z.infer<typeof validatedProjectDataSchema>
 
 export const ColumnSchema = z.object({
   id: z.string(),
@@ -60,7 +51,7 @@ export const NestedColumnSchema: z.ZodType<ColumnWithChildren> =
 export type NestedColumns = z.infer<typeof NestedColumnSchema>
 
 export const BoardSchema = z.object({
-  project: ProjectSchema,
+  project: validatedProjectDataSchema,
   columns: NestedColumnSchema.array(),
   tasks: TaskSchema.array(),
 })
