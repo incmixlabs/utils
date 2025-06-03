@@ -1,6 +1,9 @@
 export type ProjectStatus = "all" | "started" | "on-hold" | "completed"
 export type TimeType = "day" | "days" | "week" | "month" | "year"
 import { z } from "zod"
+
+export type ProjectStatus = "all" | "started" | "on-hold" | "completed"
+export type TimeType = "day" | "days" | "week" | "month" | "year"
 export const VALID_STATUSES: ProjectStatus[] = [
   "all",
   "started",
