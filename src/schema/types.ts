@@ -404,7 +404,7 @@ export interface ValidatedProjectData {
   progress: number
   timeLeft: string
   timeType: TimeType
-  members: Array<{ name: string; value: string }>
+   members: [{ name:  "John Doe", value: "john.doe" }],
   status: ProjectStatus
   startDate: number
   endDate: number
