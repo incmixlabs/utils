@@ -17,7 +17,6 @@ export const TaskSchema = z.object({
   projectId: z.string(),
 })
 
-
 export type Project = z.infer<typeof validatedProjectDataSchema>
 
 export const ColumnSchema = z.object({
