@@ -1,3 +1,12 @@
+## [0.7.1](https://github.com/incmixlabs/utils/compare/v0.7.0...v0.7.1) (2025-06-04)
+
+
+### Bug Fixes
+
+* types ([bb0f826](https://github.com/incmixlabs/utils/commit/bb0f8263ea85d00b40d0c8a97884835e8c40bfc2))
+
+
+
 # [0.7.0](https://github.com/incmixlabs/utils/compare/v0.6.0...v0.7.0) (2025-06-04)
 
 
@@ -34,15 +43,6 @@
 ### Bug Fixes
 
 * openapi function error ([5f9af11](https://github.com/incmixlabs/utils/commit/5f9af11061ef12a9d9b83107c5743802d93a1763))
-
-
-
-## [0.3.2](https://github.com/incmixlabs/utils/compare/v0.3.1...v0.3.2) (2025-04-04)
-
-
-### Bug Fixes
-
-* fix user role in schemas ([929297f](https://github.com/incmixlabs/utils/commit/929297fa0aa823d1df8f7a671d5fec0810940101))
 
 
 
