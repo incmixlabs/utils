@@ -1,3 +1,15 @@
+# [0.7.0](https://github.com/incmixlabs/utils/compare/v0.6.0...v0.7.0) (2025-06-04)
+
+
+### Features
+
+* fix types ([ea51d40](https://github.com/incmixlabs/utils/commit/ea51d403d2c5d0524058ffdebe577488942133c3))
+* package.json ([7b1e432](https://github.com/incmixlabs/utils/commit/7b1e4327f418c3d09bae5e93daa2816f3e589b9c))
+* update  readme.md ([3858b4a](https://github.com/incmixlabs/utils/commit/3858b4a04f24f3ab4dd378534f28674dadd08a21))
+* Update src/schema/types.ts ([9f004e8](https://github.com/incmixlabs/utils/commit/9f004e83023256eca2e2f2b9e607a17451e486f1))
+
+
+
 # [0.6.0](https://github.com/incmixlabs/utils/compare/v0.4.0...v0.6.0) (2025-05-30)
 
 
@@ -31,15 +43,6 @@
 ### Bug Fixes
 
 * fix user role in schemas ([929297f](https://github.com/incmixlabs/utils/commit/929297fa0aa823d1df8f7a671d5fec0810940101))
-
-
-
-## [0.3.1](https://github.com/incmixlabs/utils/compare/v0.3.0...v0.3.1) (2025-04-02)
-
-
-### Bug Fixes
-
-* update type definitions for comments and user roles ([5cfb13b](https://github.com/incmixlabs/utils/commit/5cfb13bf2ab34368e38b8e76208fd9266554fa98))
 
 
 
