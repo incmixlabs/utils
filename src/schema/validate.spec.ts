@@ -85,14 +85,14 @@ it("isValidEnumValue should validate against enumerated values", () => {
 it("validateProjectData should appropriately validate and sanitize data", () => {
   const validData: ValidatedProjectData = {
     id: "proj_01",
-    title: "Project Title",
+    name: "Project Name",
     company: "Company Name",
     logo: "http://example.com/logo.png",
     description: "Project description",
     progress: 50,
     timeLeft: "2 weeks",
     timeType: "week" as TimeType, // Use a valid TimeType value here
-    members: [{ label: "John Doe", value: "john.doe" }],
+    members: [{ name: "John Doe", value: "john.doe" }],
     status: "completed",
     startDate: Date.now(),
     endDate: Date.now() + 100000,
