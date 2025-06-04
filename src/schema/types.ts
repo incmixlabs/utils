@@ -1,5 +1,6 @@
 export type ProjectStatus = "all" | "started" | "on-hold" | "completed"
 export type TimeType = "day" | "days" | "week" | "month" | "year"
+import { z } from "zod"
 
 export const VALID_STATUSES: ProjectStatus[] = [
   "all",
@@ -394,14 +395,14 @@ export const formProjectSchemaLiteral = {
  */
 export interface ValidatedProjectData {
   id: string
-  title: string
+  name: string
   company: string
   logo: string
   description: string
   progress: number
   timeLeft: string
   timeType: TimeType
-  members: Array<{ label: string; value: string }>
+  members: [{ name: "John Doe"; value: "john.doe" }]
   status: ProjectStatus
   startDate: number
   endDate: number
@@ -425,3 +426,38 @@ interface FileInput {
 export type ProjectFormData = ValidatedProjectData & {
   fileData?: FileInput // Accept various possible file input formats
 }
+export const projectStatusSchema = z.union([
+  z.literal("all"),
+  z.literal("started"),
+  z.literal("on-hold"),
+  z.literal("completed"),
+])
+
+export const timeTypeSchema = z.union([
+  z.literal("day"),
+  z.literal("days"),
+  z.literal("week"),
+  z.literal("month"),
+  z.literal("year"),
+])
+
+export const validatedProjectDataSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  company: z.string(),
+  logo: z.string(),
+  description: z.string(),
+  progress: z.number(),
+  timeLeft: z.string(),
+  timeType: timeTypeSchema,
+  members: z.array(
+    z.object({
+      name: z.string(),
+      value: z.string(),
+    })
+  ),
+  status: projectStatusSchema,
+  startDate: z.number(),
+  endDate: z.number(),
+  budget: z.number(),
+})

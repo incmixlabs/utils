@@ -1,7 +1,7 @@
 # Incmix Shared Utils
 
 shared utils for frontend and back-end
-
+and types
 ## To Publish
 commit message must be feat or fix
 
