@@ -1,3 +1,14 @@
+## [0.7.2](https://github.com/incmixlabs/utils/compare/v0.7.1...v0.7.2) (2025-06-05)
+
+
+### Bug Fixes
+
+* types ([cad8983](https://github.com/incmixlabs/utils/commit/cad8983c7cf6fbe76db6e98ad665b2ba3ada04a2))
+* types ([dd7b531](https://github.com/incmixlabs/utils/commit/dd7b531b34bffa4d5dff0aa543b5f143bec4a037))
+* types ([013cbc8](https://github.com/incmixlabs/utils/commit/013cbc85fa94871a407a299871af56b884174e4b))
+
+
+
 ## [0.7.1](https://github.com/incmixlabs/utils/compare/v0.7.0...v0.7.1) (2025-06-04)
 
 
@@ -34,15 +45,6 @@
 ### Features
 
 * added more utils ([c651385](https://github.com/incmixlabs/utils/commit/c651385bc0a727de0fb5911fb00629066cdd1f68))
-
-
-
-## [0.3.4](https://github.com/incmixlabs/utils/compare/v0.3.2...v0.3.4) (2025-04-15)
-
-
-### Bug Fixes
-
-* openapi function error ([5f9af11](https://github.com/incmixlabs/utils/commit/5f9af11061ef12a9d9b83107c5743802d93a1763))
 
 
 
