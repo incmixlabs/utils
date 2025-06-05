@@ -79,6 +79,7 @@ export const getDefaultUser = () => ({
   name: "System",
   image: "/placeholder-avatar.png",
 })
+
 export const getCurrentUser = () => ({
   id: "user-id", // Replace with actual user ID logic
   name: "Current User", // Replace with actual user name logic

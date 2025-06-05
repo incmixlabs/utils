@@ -85,7 +85,6 @@ describe("generateNameBasedId", () => {
     const name = "Unlucky Name"
     const checkExists = vi.fn().mockResolvedValue(true)
     const id = await generateNameBasedId(name, checkExists, 2)
-    console.log(`id = ${id.length} =`, id)
     expect(id.startsWith("unlucky-name-")).toBe(true)
     expect(id).toHaveLength(23)
   })
