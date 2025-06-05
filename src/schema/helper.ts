@@ -63,9 +63,9 @@ export async function generateNameBasedId(
   return newId
 }
 
-// **
-//  * Gets current timestamp as number
-//  */
+/**
+ * Gets current timestamp as number
+ */
 export function getCurrentTimestamp(): number {
   return Date.now()
 }
