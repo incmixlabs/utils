@@ -1,4 +1,3 @@
-import isCreditCard from "validator/lib/isCreditCard"
 import isEmail from "validator/lib/isEmail"
 import isMobilePhone from "validator/lib/isMobilePhone"
 import isStrongPassword from "validator/lib/isStrongPassword"

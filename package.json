@@ -68,6 +68,10 @@
       "import": "./dist/strings/strings.js",
       "types": "./dist/strings/strings.d.ts"
     },
+    "./helper": {
+      "import": "./dist/schema/helper.js",
+      "types": "./dist/schema/helper.d.ts"
+    },
     "./schema": {
       "import": "./dist/schema/types.js",
       "types": "./dist/schema/types.d.ts"
