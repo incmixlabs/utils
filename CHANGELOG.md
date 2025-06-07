@@ -1,3 +1,12 @@
+## [0.8.1](https://github.com/incmixlabs/utils/compare/v0.8.0...v0.8.1) (2025-06-07)
+
+
+### Bug Fixes
+
+* fix-imports ([9bb5aa0](https://github.com/incmixlabs/utils/commit/9bb5aa099ac03e921e15ff7da9ac5cefc90ff58d))
+
+
+
 # [0.8.0](https://github.com/incmixlabs/utils/compare/v0.7.2...v0.8.0) (2025-06-07)
 
 
@@ -37,15 +46,6 @@
 * package.json ([7b1e432](https://github.com/incmixlabs/utils/commit/7b1e4327f418c3d09bae5e93daa2816f3e589b9c))
 * update  readme.md ([3858b4a](https://github.com/incmixlabs/utils/commit/3858b4a04f24f3ab4dd378534f28674dadd08a21))
 * Update src/schema/types.ts ([9f004e8](https://github.com/incmixlabs/utils/commit/9f004e83023256eca2e2f2b9e607a17451e486f1))
-
-
-
-# [0.6.0](https://github.com/incmixlabs/utils/compare/v0.4.0...v0.6.0) (2025-05-30)
-
-
-### Features
-
-* publish ([9a6f245](https://github.com/incmixlabs/utils/commit/9a6f2459bdb6025ca1538a0175ca9d40d3d5483b))
 
 
 
