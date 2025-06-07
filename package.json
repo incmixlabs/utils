@@ -61,12 +61,12 @@
       "types": "./dist/date/index.d.ts"
     },
     "./objects": {
-      "import": "./dist/objects/objects.js",
-      "types": "./dist/objects/objects.d.ts"
+      "import": "./dist/objects/index.js",
+      "types": "./dist/objects/index.d.ts"
     },
     "./strings": {
-      "import": "./dist/strings/strings.js",
-      "types": "./dist/strings/strings.d.ts"
+      "import": "./dist/strings/index.js",
+      "types": "./dist/strings/index.d.ts"
     },
     "./helper": {
       "import": "./dist/schema/helper.js",
