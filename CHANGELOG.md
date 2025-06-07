@@ -1,3 +1,12 @@
+## [0.8.2](https://github.com/incmixlabs/utils/compare/v0.8.1...v0.8.2) (2025-06-07)
+
+
+### Bug Fixes
+
+* color imports ([f179edd](https://github.com/incmixlabs/utils/commit/f179edd10438944bcb881948bda32b671d312b8f))
+
+
+
 ## [0.8.1](https://github.com/incmixlabs/utils/compare/v0.8.0...v0.8.1) (2025-06-07)
 
 
@@ -34,18 +43,6 @@
 ### Bug Fixes
 
 * types ([bb0f826](https://github.com/incmixlabs/utils/commit/bb0f8263ea85d00b40d0c8a97884835e8c40bfc2))
-
-
-
-# [0.7.0](https://github.com/incmixlabs/utils/compare/v0.6.0...v0.7.0) (2025-06-04)
-
-
-### Features
-
-* fix types ([ea51d40](https://github.com/incmixlabs/utils/commit/ea51d403d2c5d0524058ffdebe577488942133c3))
-* package.json ([7b1e432](https://github.com/incmixlabs/utils/commit/7b1e4327f418c3d09bae5e93daa2816f3e589b9c))
-* update  readme.md ([3858b4a](https://github.com/incmixlabs/utils/commit/3858b4a04f24f3ab4dd378534f28674dadd08a21))
-* Update src/schema/types.ts ([9f004e8](https://github.com/incmixlabs/utils/commit/9f004e83023256eca2e2f2b9e607a17451e486f1))
 
 
 
