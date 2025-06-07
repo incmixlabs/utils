@@ -14,18 +14,14 @@ export function isNumeric(str: string) {
   ) // ...and ensure strings of whitespace fail
 }
 export function isJSONString(str: any): boolean {
-  if (str === "true" || str === "false" || str === '"string"') {
-    return false
-  }
   if (typeof str !== "string") {
     return false
   }
-  if (isNumeric(str)) {
-    return false
-  }
+
   try {
-    JSON.parse(str)
-    return true
+    const parsed = JSON.parse(str)
+    // Only accept objects and arrays as "JSON strings"
+    return typeof parsed === "object" && parsed !== null
   } catch {
     return false
   }
