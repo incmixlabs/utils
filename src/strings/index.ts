@@ -7,6 +7,29 @@ export function camelize(str: string) {
     }
   )
 }
+export function isNumeric(str: string) {
+  return (
+    !Number.isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+    !Number.isNaN(Number.parseFloat(str))
+  ) // ...and ensure strings of whitespace fail
+}
+export function isJSONString(str: any): boolean {
+  if (str === "true" || str === "false" || str === '"string"') {
+    return false
+  }
+  if (typeof str !== "string") {
+    return false
+  }
+  if (isNumeric(str)) {
+    return false
+  }
+  try {
+    JSON.parse(str)
+    return true
+  } catch {
+    return false
+  }
+}
 
 export function capitalize(str: string) {
   return String(str).charAt(0).toUpperCase() + String(str).slice(1)

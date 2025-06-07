@@ -1,6 +1,48 @@
 import { describe, expect, it } from "vitest"
-import { capitalizedToCamel } from "./index"
+import { capitalizedToCamel, isJSONString as isJSON } from "./index"
 // adjust the path as needed
+
+describe("isJSON", () => {
+  it("should return true for valid JSON objects", () => {
+    expect(isJSON("{}")).toBe(true)
+    expect(isJSON('{"key": "value"}')).toBe(true)
+    expect(isJSON('{"key": 123}')).toBe(true)
+    expect(isJSON('{"key": true}')).toBe(true)
+    expect(isJSON('{"key": null}')).toBe(true)
+    expect(isJSON('{"key": [1, 2, 3]}')).toBe(true)
+    expect(isJSON('{"key": {"nestedKey": "nestedValue"}}')).toBe(true)
+  })
+
+  it("should return true for valid JSON arrays", () => {
+    expect(isJSON("[]")).toBe(true)
+    expect(isJSON("[1, 2, 3]")).toBe(true)
+    expect(isJSON('[{"key": "value"}, {"key2": "value2"}]')).toBe(true)
+    expect(isJSON('[null, false, true, 123, "string"]')).toBe(true)
+  })
+
+  it("should return false for invalid JSON strings", () => {
+    expect(isJSON("")).toBe(false)
+    expect(isJSON("{key: value}")).toBe(false)
+    expect(isJSON('{"key": value}')).toBe(false)
+    expect(isJSON('{"key": "value"')).toBe(false)
+    expect(isJSON('{"key": "value",}')).toBe(false)
+    expect(isJSON('"string"')).toBe(false) // Not wrapped in an array or object
+    expect(isJSON("123")).toBe(false) // Not wrapped in an array or object
+  })
+
+  it("should return false for non-JSON strings", () => {
+    expect(isJSON("Hello, World!")).toBe(false)
+    expect(isJSON("123, 456, 789")).toBe(false)
+    expect(isJSON("true")).toBe(false) // Not wrapped in an array or object
+    expect(isJSON("false")).toBe(false) // Not wrapped in an array or object
+  })
+
+  it("should return true for JSON strings with spaces and newlines", () => {
+    expect(isJSON(' { "key": "value" } ')).toBe(true)
+    expect(isJSON(' {\n"key": "value"\n} ')).toBe(true)
+    expect(isJSON('[\n  {"key": "value"}\n]')).toBe(true)
+  })
+})
 
 describe("capitalizedToCamel", () => {
   it("should convert capitalized words to camelCase", () => {
