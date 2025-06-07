@@ -56,6 +56,10 @@
       "import": "./dist/env/index.js",
       "types": "./dist/env/index.d.ts"
     },
+    "./colors": {
+      "import": "./dist/colors/index.js",
+      "types": "./dist/colors/index.d.ts"
+    },
     "./date": {
       "import": "./dist/date/index.js",
       "types": "./dist/date/index.d.ts"
