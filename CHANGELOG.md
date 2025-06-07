@@ -1,4 +1,16 @@
+<<<<<<< HEAD
 ## [0.29.2](https://github.com/incmixlabs/utils/compare/v0.29.1...v0.29.2) (2025-07-08)
+=======
+## [0.8.1](https://github.com/incmixlabs/utils/compare/v0.8.0...v0.8.1) (2025-06-07)
+
+
+### Bug Fixes
+
+* fix-imports ([9bb5aa0](https://github.com/incmixlabs/utils/commit/9bb5aa099ac03e921e15ff7da9ac5cefc90ff58d))
+
+
+
+>>>>>>> e530f82 (chore(release): v0.8.1)
 # [0.8.0](https://github.com/incmixlabs/utils/compare/v0.7.2...v0.8.0) (2025-06-07)
 
 
@@ -49,6 +61,7 @@
 
 
 
+<<<<<<< HEAD
 # [0.6.0](https://github.com/incmixlabs/utils/compare/v0.4.0...v0.6.0) (2025-05-30)
 
 ### Features
@@ -72,3 +85,5 @@
 
 ### Features
 
+=======
+>>>>>>> e530f82 (chore(release): v0.8.1)
