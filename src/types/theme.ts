@@ -32,6 +32,12 @@ export const RADIX_GRAY_COLORS = [
   "olive",
   "sand",
 ] as const
+export const RADIX_ANY_COLORS_OPTIONS = [
+  ...RADIX_ACCENT_COLORS,
+  ...RADIX_GRAY_COLORS
+] as const
+export type RadixGrayColor = (typeof RADIX_GRAY_COLORS)[number]
+export type RadixAnyColor = (typeof RADIX_ANY_COLORS_OPTIONS)[number]
 
 export const RADIX_RADIUS = [
   "none",
@@ -61,8 +67,8 @@ export const breakFontColor: BreakFontColor = {
 }
 export type ThemeConfig = {
   appearance: "light" | "dark"
-  accentColor: (typeof RADIX_ACCENT_COLORS)[number]
-  secondaryColor: string
+  accentColor: RadixColor
+  secondaryColor: RadixColor
   grayColor: (typeof RADIX_GRAY_COLORS)[number]
   radius: (typeof RADIX_RADIUS)[number]
   scaling: (typeof SCALING_OPTIONS)[number]
@@ -70,20 +76,20 @@ export type ThemeConfig = {
 
   /* brand-specific extensions */
   sidebarBg: string
-  lightFontColor?: string // for light mode
-  darkFontColor?: string // for dark mode
   pastel?: boolean
   pastelShade?: number
   brightShade?: number
   avatarRadius?: RadixRadius
   workspaceRadius?: RadixRadius
   orgRadius?: RadixRadius
-  info1: string
-  info2: string
-  info3: string
-  info4: string
-  danger: string
-  success: string
-  warning: string
-  info: string
-} & BreakFontColor
+  info1: RadixColor
+  info2: RadixColor
+  info3: RadixColor
+  info4: RadixColor
+  danger: RadixColor
+  success: RadixColor
+  warning: RadixColor
+  info: RadixColor
+  breakFontColor: BreakFontColor
+
+}
