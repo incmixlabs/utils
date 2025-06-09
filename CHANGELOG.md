@@ -1,3 +1,13 @@
+# [0.9.0](https://github.com/incmixlabs/utils/compare/v0.8.2...v0.9.0) (2025-06-09)
+
+
+### Features
+
+* fix types ([7d3a434](https://github.com/incmixlabs/utils/commit/7d3a43478b58fabf4741a88d1ea2fa3ed51c9630))
+* fix types ([f3d62a6](https://github.com/incmixlabs/utils/commit/f3d62a6414bf8fe5c369c927fd4c1c36241e57a2))
+
+
+
 ## [0.8.2](https://github.com/incmixlabs/utils/compare/v0.8.1...v0.8.2) (2025-06-07)
 
 
@@ -34,15 +44,6 @@
 * types ([cad8983](https://github.com/incmixlabs/utils/commit/cad8983c7cf6fbe76db6e98ad665b2ba3ada04a2))
 * types ([dd7b531](https://github.com/incmixlabs/utils/commit/dd7b531b34bffa4d5dff0aa543b5f143bec4a037))
 * types ([013cbc8](https://github.com/incmixlabs/utils/commit/013cbc85fa94871a407a299871af56b884174e4b))
-
-
-
-## [0.7.1](https://github.com/incmixlabs/utils/compare/v0.7.0...v0.7.1) (2025-06-04)
-
-
-### Bug Fixes
-
-* types ([bb0f826](https://github.com/incmixlabs/utils/commit/bb0f8263ea85d00b40d0c8a97884835e8c40bfc2))
 
 
 
