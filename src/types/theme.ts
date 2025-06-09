@@ -34,7 +34,7 @@ export const RADIX_GRAY_COLORS = [
 ] as const
 export const RADIX_ANY_COLORS_OPTIONS = [
   ...RADIX_ACCENT_COLORS,
-  ...RADIX_GRAY_COLORS
+  ...RADIX_GRAY_COLORS,
 ] as const
 export type RadixGrayColor = (typeof RADIX_GRAY_COLORS)[number]
 export type RadixAnyColor = (typeof RADIX_ANY_COLORS_OPTIONS)[number]
@@ -91,5 +91,4 @@ export type ThemeConfig = {
   warning: RadixColor
   info: RadixColor
   breakFontColor: BreakFontColor
-
 }
