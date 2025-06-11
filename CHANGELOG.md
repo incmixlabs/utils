@@ -1,3 +1,12 @@
+## [0.10.2](https://github.com/incmixlabs/utils/compare/v0.10.1...v0.10.2) (2025-06-11)
+
+
+### Bug Fixes
+
+* types ([724ef79](https://github.com/incmixlabs/utils/commit/724ef79c45a7292a7182dc7583892a388bf7dbbb))
+
+
+
 ## [0.10.1](https://github.com/incmixlabs/utils/compare/v0.10.0...v0.10.1) (2025-06-11)
 
 
@@ -32,15 +41,6 @@
 ### Bug Fixes
 
 * color imports ([f179edd](https://github.com/incmixlabs/utils/commit/f179edd10438944bcb881948bda32b671d312b8f))
-
-
-
-## [0.8.1](https://github.com/incmixlabs/utils/compare/v0.8.0...v0.8.1) (2025-06-07)
-
-
-### Bug Fixes
-
-* fix-imports ([9bb5aa0](https://github.com/incmixlabs/utils/commit/9bb5aa099ac03e921e15ff7da9ac5cefc90ff58d))
 
 
 
