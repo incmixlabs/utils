@@ -825,24 +825,23 @@ export const formProjectSchemaLiteral = {
     encrypted: false,
   },
 } as const
-
 /**
  * Validates and sanitizes project data to match the RxDB schema
  */
 export interface ValidatedProjectData {
   id: string
   name: string
-  company: string
-  logo: string
+  company?: string
+  logo?: string
   description: string
-  progress: number
-  timeLeft: string
-  timeType: TimeType
-  members: [{ name: "John Doe"; value: "john.doe" }]
-  status: ProjectStatus
-  startDate: number
-  endDate: number
-  budget: number
+  progress?: number
+  timeLeft?: string
+  timeType?: TimeType
+  members?: Array<{ name: string; value: string }>
+  status?: ProjectStatus
+  startDate?: number
+  endDate?: number
+  budget?: number
 }
 export type FileLikeObject = {
   name: string
@@ -901,42 +900,38 @@ export const validatedProjectDataSchema = z.object({
 export type TaskDataSchema = {
   id: string
   taskId: string
-  projectId: string // Made required
+  projectId: string
   name: string
   columnId: string
-  order: number // Renamed from taskOrder and made required
-  startDate?: string
-  endDate?: string
+  startDate: string
+  endDate: string
   description?: string
   completed: boolean
-  priority: "low" | "medium" | "high" | "urgent" // New field
-  labelsTags: ReadonlyArray<{
-    // Made non-optional, removed 'checked'
+  taskOrder: number
+  labelsTags: Array<{
     value: string
     label: string
     color: string
+    checked: boolean
   }>
-  attachments: ReadonlyArray<{
-    // Renamed from attachment, made non-optional, added id and type
-    id: string
+  attachment: Array<{
     name: string
     url: string
     size: string
-    type?: string
   }>
-  assignedTo: ReadonlyArray<{
-    // Made non-optional, value -> id, removed label, color, checked
-    id: string
+  assignedTo: Array<{
+    value: string
     name: string
+    label: string
     avatar: string
+    color: string
+    checked: boolean
   }>
-  subTasks: ReadonlyArray<{
-    // Made non-optional, added id, removed progress
-    id: string
+  subTasks: Array<{
     name: string
+    progress: number
     completed: boolean
   }>
-  comments?: number // New field
   createdAt: number
   updatedAt: number
   createdBy: {
@@ -950,6 +945,7 @@ export type TaskDataSchema = {
     image: string
   }
 }
+// Update the type to match the actual form data structure with optional fields
 
 export type TaskStatusSchema = {
   id: string
