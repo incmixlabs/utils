@@ -751,7 +751,7 @@ export const formProjectSchemaLiteral = {
       maxLength: 30,
       type: "string",
     },
-    title: {
+    name: {
       type: "string",
     },
     company: {
