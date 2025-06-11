@@ -851,7 +851,7 @@ export type FileLikeObject = {
   arrayBuffer?: ArrayBuffer
   buffer?: ArrayBuffer
 }
-interface FileInput {
+export interface FileInput {
   data: File | Blob | ArrayBuffer | string
   name: string
   type: string
