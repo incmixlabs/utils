@@ -3,6 +3,7 @@ import isMobilePhone from "validator/lib/isMobilePhone"
 import isStrongPassword from "validator/lib/isStrongPassword"
 import isURL from "validator/lib/isURL"
 import type {
+  FileInput,
   FileLikeObject,
   ProjectFormData,
   ProjectStatus,
@@ -298,7 +299,7 @@ export const validateProjectData = (
  */
 
 export const ensureFileObject = async (
-  fileData: File | Blob | FileLikeObject | null
+  fileData: File | Blob | FileLikeObject | FileInput | null | undefined
 ): Promise<File | null> => {
   // Early return for null/undefined
   if (!fileData) {
