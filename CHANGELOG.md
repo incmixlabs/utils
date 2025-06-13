@@ -1,3 +1,12 @@
+# [0.11.0](https://github.com/incmixlabs/utils/compare/v0.10.3...v0.11.0) (2025-06-13)
+
+
+### Features
+
+* update projects schema ([834bddf](https://github.com/incmixlabs/utils/commit/834bddfbc7282e605fda56fbcc3b1789c8caf0c4))
+
+
+
 ## [0.10.3](https://github.com/incmixlabs/utils/compare/v0.10.2...v0.10.3) (2025-06-11)
 
 
@@ -31,16 +40,6 @@
 ### Features
 
 * fix types ([cdde510](https://github.com/incmixlabs/utils/commit/cdde510f0e74bb2b05b74db24227b9a008bd509d))
-
-
-
-# [0.9.0](https://github.com/incmixlabs/utils/compare/v0.8.2...v0.9.0) (2025-06-09)
-
-
-### Features
-
-* fix types ([7d3a434](https://github.com/incmixlabs/utils/commit/7d3a43478b58fabf4741a88d1ea2fa3ed51c9630))
-* fix types ([f3d62a6](https://github.com/incmixlabs/utils/commit/f3d62a6414bf8fe5c369c927fd4c1c36241e57a2))
 
 
 
