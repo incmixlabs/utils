@@ -117,7 +117,16 @@ export const TaskSchema = z.object({
   updatedBy: z.string(),
 })
 
-export function addTimelineValidation<T extends z.ZodType<any>>(schema: T) {
+type TimelineFields = {
+  currentTimelineStartDate: Date
+  currentTimelineEndDate: Date
+  actualTimelineStartDate: Date
+  actualTimelineEndDate: Date
+}
+
+export function withTimelineValidation<T extends z.ZodType<TimelineFields>>(
+  schema: T
+) {
   return schema
     .refine(
       (data) => data.currentTimelineEndDate >= data.currentTimelineStartDate,
