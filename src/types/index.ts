@@ -300,9 +300,15 @@ export type WsMessage = {
   sessionId?: string
 }
 
+export const GenericResponseSchema = z.object({
+  message: z.string(),
+})
+
+export type GenericResponse = z.infer<typeof GenericResponseSchema>
+
 export * from "./organization"
 export * from "./user"
 export * from "./abilitiy"
 export * from "./sql"
-export * from "./task"
+export * from "./projects"
 export * from "./theme"
