@@ -50,102 +50,92 @@ export const ChecklistSchema = z.object({
   updatedAt: z.date({ coerce: true }),
 })
 
-export const ProjectSchema = z
-  .object({
-    id: z.string(),
-    orgId: z.string(),
-    name: z.string(),
-    company: z.string(),
-    logo: z.string().nullish(),
-    description: z.string(),
-    members: z.array(ProjectMemberSchema),
-    status: z.enum(projectStatusEnum),
-    currentTimelineStartDate: z.date({ coerce: true }),
-    currentTimelineEndDate: z.date({ coerce: true }),
-    actualTimelineStartDate: z.date({ coerce: true }),
-    actualTimelineEndDate: z.date({ coerce: true }),
-    budgetEstimate: z.number({ coerce: true }).nonnegative(),
-    budgetActual: z.number({ coerce: true }).nonnegative(),
-    checklists: z.array(
-      ChecklistSchema.pick({ id: true, title: true, status: true })
-    ),
-    comments: z.array(
-      CommentSchema.pick({
-        id: true,
-        content: true,
-        userId: true,
-        createdAt: true,
-        updatedAt: true,
-      })
-    ),
-    createdBy: z.string(),
-    updatedBy: z.string(),
-    createdAt: z.date({ coerce: true }),
-    updatedAt: z.date({ coerce: true }),
-  })
-  .refine(
-    (data) => data.currentTimelineEndDate >= data.currentTimelineStartDate,
-    {
-      message: "Current timeline end date must be after or equal to start date",
-      path: ["currentTimelineEndDate"],
-    }
-  )
-  .refine(
-    (data) => data.actualTimelineEndDate >= data.actualTimelineStartDate,
-    {
-      message: "Actual timeline end date must be after or equal to start date",
-      path: ["actualTimelineEndDate"],
-    }
-  )
+export const ProjectSchema = z.object({
+  id: z.string(),
+  orgId: z.string(),
+  name: z.string(),
+  company: z.string(),
+  logo: z.string().nullish(),
+  description: z.string(),
+  members: z.array(ProjectMemberSchema),
+  status: z.enum(projectStatusEnum),
+  currentTimelineStartDate: z.date({ coerce: true }),
+  currentTimelineEndDate: z.date({ coerce: true }),
+  actualTimelineStartDate: z.date({ coerce: true }),
+  actualTimelineEndDate: z.date({ coerce: true }),
+  budgetEstimate: z.number({ coerce: true }).nonnegative(),
+  budgetActual: z.number({ coerce: true }).nonnegative(),
+  checklists: z.array(
+    ChecklistSchema.pick({ id: true, title: true, status: true })
+  ),
+  comments: z.array(
+    CommentSchema.pick({
+      id: true,
+      content: true,
+      userId: true,
+      createdAt: true,
+      updatedAt: true,
+    })
+  ),
+  createdBy: z.string(),
+  updatedBy: z.string(),
+  createdAt: z.date({ coerce: true }),
+  updatedAt: z.date({ coerce: true }),
+})
 
-export const TaskSchema = z
-  .object({
-    id: z.string(),
-    title: z.string(),
-    content: z.string(),
-    taskOrder: z.number().int().nonnegative(),
-    figmaLink: z.string().url().nullish(),
-    codeSnippets: z.array(z.string()).nullish(),
-    status: z.enum(taskStatusEnum),
-    checklists: z.array(
-      ChecklistSchema.pick({ id: true, title: true, status: true })
-    ),
-    comments: z.array(
-      CommentSchema.pick({
-        id: true,
-        content: true,
-        userId: true,
-        createdAt: true,
-        updatedAt: true,
-      })
-    ),
-    parentId: z.string().nullish(),
-    projectId: z.string(),
-    columnId: z.string().nullish(),
-    assignedTo: z.string().nullish(),
-    currentTimelineStartDate: z.date({ coerce: true }),
-    currentTimelineEndDate: z.date({ coerce: true }),
-    actualTimelineStartDate: z.date({ coerce: true }),
-    actualTimelineEndDate: z.date({ coerce: true }),
-    createdAt: z.date({ coerce: true }),
-    updatedAt: z.date({ coerce: true }),
-    createdBy: z.string(),
-    updatedBy: z.string(),
-  })
-  .refine(
-    (data) => data.currentTimelineEndDate >= data.currentTimelineStartDate,
-    {
-      message: "Current timeline end date must be after or equal to start date",
-      path: ["currentTimelineEndDate"],
-    }
-  )
-  .refine(
-    (data) => data.actualTimelineEndDate >= data.actualTimelineStartDate,
-    {
-      message: "Actual timeline end date must be after or equal to start date",
-      path: ["actualTimelineEndDate"],
-    }
-  )
+export const TaskSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  content: z.string(),
+  taskOrder: z.number().int().nonnegative(),
+  figmaLink: z.string().url().nullish(),
+  codeSnippets: z.array(z.string()).nullish(),
+  status: z.enum(taskStatusEnum),
+  checklists: z.array(
+    ChecklistSchema.pick({ id: true, title: true, status: true })
+  ),
+  comments: z.array(
+    CommentSchema.pick({
+      id: true,
+      content: true,
+      userId: true,
+      createdAt: true,
+      updatedAt: true,
+    })
+  ),
+  parentId: z.string().nullish(),
+  projectId: z.string(),
+  columnId: z.string().nullish(),
+  assignedTo: z.string().nullish(),
+  currentTimelineStartDate: z.date({ coerce: true }),
+  currentTimelineEndDate: z.date({ coerce: true }),
+  actualTimelineStartDate: z.date({ coerce: true }),
+  actualTimelineEndDate: z.date({ coerce: true }),
+  createdAt: z.date({ coerce: true }),
+  updatedAt: z.date({ coerce: true }),
+  createdBy: z.string(),
+  updatedBy: z.string(),
+})
+
+export function addTimelineValidation<T extends z.ZodType<any>>(schema: T) {
+  return schema
+    .refine(
+      (data) => data.currentTimelineEndDate >= data.currentTimelineStartDate,
+      {
+        message:
+          "Current timeline end date must be after or equal to start date",
+        path: ["currentTimelineEndDate"],
+      }
+    )
+    .refine(
+      (data) => data.actualTimelineEndDate >= data.actualTimelineStartDate,
+      {
+        message:
+          "Actual timeline end date must be after or equal to start date",
+        path: ["actualTimelineEndDate"],
+      }
+    )
+}
 
 export const ColumnSchema = z.object({
   id: z.string(),
