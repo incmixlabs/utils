@@ -1,7 +1,7 @@
 {
   "name": "@incmix/utils",
   "description": "Shared utilities for the turbomix backend and frontend",
-  "version": "0.6.0",
+  "version": "0.11.1",
   "type": "module",
   "exports": {
     "./i18n": {
@@ -61,12 +61,16 @@
       "types": "./dist/date/index.d.ts"
     },
     "./objects": {
-      "import": "./dist/objects/objects.js",
-      "types": "./dist/objects/objects.d.ts"
+      "import": "./dist/objects/index.js",
+      "types": "./dist/objects/index.d.ts"
     },
     "./strings": {
-      "import": "./dist/strings/strings.js",
-      "types": "./dist/strings/strings.d.ts"
+      "import": "./dist/strings/index.js",
+      "types": "./dist/strings/index.d.ts"
+    },
+    "./helper": {
+      "import": "./dist/schema/helper.js",
+      "types": "./dist/schema/helper.d.ts"
     },
     "./schema": {
       "import": "./dist/schema/types.js",
