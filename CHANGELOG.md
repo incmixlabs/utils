@@ -1,3 +1,12 @@
+## [0.11.3](https://github.com/incmixlabs/utils/compare/v0.11.2...v0.11.3) (2025-06-17)
+
+
+### Bug Fixes
+
+* export omit ([3d245b8](https://github.com/incmixlabs/utils/commit/3d245b8441746cb24a889738b384eb123e2228ae))
+
+
+
 ## [0.11.2](https://github.com/incmixlabs/utils/compare/v0.11.1...v0.11.2) (2025-06-13)
 
 
@@ -32,15 +41,6 @@
 ### Bug Fixes
 
 * fix types ([f866e98](https://github.com/incmixlabs/utils/commit/f866e98b2175cdcbe64ed8df905dcb8f71387a6a))
-
-
-
-## [0.10.2](https://github.com/incmixlabs/utils/compare/v0.10.1...v0.10.2) (2025-06-11)
-
-
-### Bug Fixes
-
-* types ([724ef79](https://github.com/incmixlabs/utils/commit/724ef79c45a7292a7182dc7583892a388bf7dbbb))
 
 
 
