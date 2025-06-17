@@ -51,3 +51,4 @@ export function isShallowEqual(
   }
   return keys1.every((key1) => Object.is(obj1[key1], obj2[key1]))
 }
+export * from "./omit"
