@@ -1,3 +1,13 @@
+# [0.12.0](https://github.com/incmixlabs/utils/compare/v0.11.3...v0.12.0) (2025-06-19)
+
+
+### Features
+
+* dashboard colors ([033285b](https://github.com/incmixlabs/utils/commit/033285b96ab14469a6bcf03439a3f79c02c20467))
+* dashboard colors ([8a4084c](https://github.com/incmixlabs/utils/commit/8a4084c32242293c1ed0c8149d560d013d857f70))
+
+
+
 ## [0.11.3](https://github.com/incmixlabs/utils/compare/v0.11.2...v0.11.3) (2025-06-17)
 
 
@@ -32,15 +42,6 @@
 ### Features
 
 * update projects schema ([834bddf](https://github.com/incmixlabs/utils/commit/834bddfbc7282e605fda56fbcc3b1789c8caf0c4))
-
-
-
-## [0.10.3](https://github.com/incmixlabs/utils/compare/v0.10.2...v0.10.3) (2025-06-11)
-
-
-### Bug Fixes
-
-* fix types ([f866e98](https://github.com/incmixlabs/utils/commit/f866e98b2175cdcbe64ed8df905dcb8f71387a6a))
 
 
 
