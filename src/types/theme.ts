@@ -66,7 +66,6 @@ export const breakFontColor: BreakFontColor = {
   gray: 10,
 }
 export type ThemeConfig = {
-  appearance: "light" | "dark"
   accentColor: RadixColor
   secondaryColor: RadixColor
   grayColor: (typeof RADIX_GRAY_COLORS)[number]
@@ -82,14 +81,19 @@ export type ThemeConfig = {
   avatarRadius?: RadixRadius
   workspaceRadius?: RadixRadius
   orgRadius?: RadixRadius
-  info1: RadixColor
-  info2: RadixColor
-  info3: RadixColor
-  info4: RadixColor
-  danger: RadixColor
-  success: RadixColor
-  warning: RadixColor
-  info: RadixColor
+  dashboard: {
+    color1: RadixColor
+    color2: RadixColor
+    color3: RadixColor
+    color4: RadixColor
+  }
+  indicators: {
+    danger?: RadixColor
+    success?: RadixColor
+    warning?: RadixColor
+    info?: RadixColor
+    default?: RadixGrayColor
+  }
   breakFontColor: BreakFontColor
   direction?: "ltr" | "rtl"
   isSystemTheme?: boolean

@@ -80,6 +80,10 @@
       "import": "./dist/schema/convert.js",
       "types": "./dist/schema/convert.d.ts"
     },
+    "./time": {
+      "import": "./dist/time/index.js",
+      "types": "./dist/time/index.d.ts"
+    },
     "./validate": {
       "import": "./dist/schema/validate.js",
       "types": "./dist/schema/validate.d.ts"
