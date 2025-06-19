@@ -93,7 +93,7 @@ export type ThemeConfig = {
     warning?: RadixColor
     info?: RadixColor
     default?: RadixGrayColor
-  },
+  }
   breakFontColor: BreakFontColor
   direction?: "ltr" | "rtl"
   isSystemTheme?: boolean
