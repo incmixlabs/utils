@@ -76,6 +76,10 @@
       "import": "./dist/schema/types.js",
       "types": "./dist/schema/types.d.ts"
     },
+    "./settings": {
+      "import": "./dist/types/settings/index.js",
+      "types": "./dist/settings/index.d.ts"
+    },
     "./convert": {
       "import": "./dist/schema/convert.js",
       "types": "./dist/schema/convert.d.ts"
