@@ -92,42 +92,45 @@ export type Key = {
     status: KeyStatus
   }
 }
-
+export type UserPreference = {
+  appearance?: AppearanceOption
+  isSystemAppearance?: boolean
+  language?: LanguageOption
+  direction?: "ltr" | "rtl"
+}
+export type DashboardColor = {
+  color1: RadixColor
+  color2: RadixColor
+  color3: RadixColor
+  color4: RadixColor
+}
+export type IndicatorColor = {
+  danger?: RadixColor
+  success?: RadixColor
+  warning?: RadixColor
+  info?: RadixColor
+  default?: RadixGrayColor
+}
+export type ThemeConfig = {
+  accentColor: RadixColor
+  secondaryColor: RadixColor
+  grayColor: (typeof RADIX_GRAY_COLORS)[number]
+  radius: (typeof RADIX_RADIUS)[number]
+  scaling: (typeof SCALING_OPTIONS)[number]
+  sidebarBg: string
+  pastel?: boolean
+  pastelShade?: number
+  brightShade?: number
+  avatarRadius?: RadixRadius
+  workspaceRadius?: RadixRadius
+  orgRadius?: RadixRadius
+  dashboard: DashboardColor
+  indicators: IndicatorColor
+  breakFontColor: BreakFontColor
+}
 export type SettingsConfig = {
-  userPreference: {
-    appearance?: AppearanceOption
-    isSystemAppearance?: boolean
-    language?: LanguageOption
-    direction?: "ltr" | "rtl"
-  }
+  userPreference: UserPreference
   variables?: Variables
   keys?: Key
-  theme: {
-    accentColor: RadixColor
-    secondaryColor: RadixColor
-    grayColor: (typeof RADIX_GRAY_COLORS)[number]
-    radius: (typeof RADIX_RADIUS)[number]
-    scaling: (typeof SCALING_OPTIONS)[number]
-    sidebarBg: string
-    pastel?: boolean
-    pastelShade?: number
-    brightShade?: number
-    avatarRadius?: RadixRadius
-    workspaceRadius?: RadixRadius
-    orgRadius?: RadixRadius
-    dashboard: {
-      color1: RadixColor
-      color2: RadixColor
-      color3: RadixColor
-      color4: RadixColor
-    }
-    indicators: {
-      danger?: RadixColor
-      success?: RadixColor
-      warning?: RadixColor
-      info?: RadixColor
-      default?: RadixGrayColor
-    }
-    breakFontColor: BreakFontColor
-  }
+  theme: ThemeConfig
 }
