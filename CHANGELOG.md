@@ -1,3 +1,14 @@
+# [0.17.0](https://github.com/incmixlabs/utils/compare/v0.16.0...v0.17.0) (2025-06-23)
+
+
+### Features
+
+* settings config ([e5c556a](https://github.com/incmixlabs/utils/commit/e5c556a081176b4e97838ec76b344e53e28eac99))
+* settings fix ([9c5883c](https://github.com/incmixlabs/utils/commit/9c5883c8538fdab0c1fe6ff77729957ac5408ee9))
+* settings fix ([3bd4e58](https://github.com/incmixlabs/utils/commit/3bd4e582b4e6aa23142ddd895cca575fd4fe6ecc))
+
+
+
 # [0.16.0](https://github.com/incmixlabs/utils/compare/v0.15.0...v0.16.0) (2025-06-23)
 
 
@@ -33,16 +44,6 @@
 ### Features
 
 * scaling type ([ed1c572](https://github.com/incmixlabs/utils/commit/ed1c572b4c55a62dcc793ea817301cec37d2809b))
-
-
-
-# [0.12.0](https://github.com/incmixlabs/utils/compare/v0.11.3...v0.12.0) (2025-06-19)
-
-
-### Features
-
-* dashboard colors ([033285b](https://github.com/incmixlabs/utils/commit/033285b96ab14469a6bcf03439a3f79c02c20467))
-* dashboard colors ([8a4084c](https://github.com/incmixlabs/utils/commit/8a4084c32242293c1ed0c8149d560d013d857f70))
 
 
 
