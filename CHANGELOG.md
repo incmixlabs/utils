@@ -1,3 +1,12 @@
+# [0.13.0](https://github.com/incmixlabs/utils/compare/v0.12.0...v0.13.0) (2025-06-23)
+
+
+### Features
+
+* scaling type ([ed1c572](https://github.com/incmixlabs/utils/commit/ed1c572b4c55a62dcc793ea817301cec37d2809b))
+
+
+
 # [0.12.0](https://github.com/incmixlabs/utils/compare/v0.11.3...v0.12.0) (2025-06-19)
 
 
@@ -33,15 +42,6 @@
 
 * improve schema validation in projects ([62abd39](https://github.com/incmixlabs/utils/commit/62abd3936c27b5f742cb4cecc1e78aec63ff065e))
 * improve type safety ([7b69e30](https://github.com/incmixlabs/utils/commit/7b69e30422252c36f7387b94bc71196a9b4a7e14))
-
-
-
-# [0.11.0](https://github.com/incmixlabs/utils/compare/v0.10.3...v0.11.0) (2025-06-13)
-
-
-### Features
-
-* update projects schema ([834bddf](https://github.com/incmixlabs/utils/commit/834bddfbc7282e605fda56fbcc3b1789c8caf0c4))
 
 
 
