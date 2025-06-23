@@ -73,38 +73,56 @@ export const breakFontColor: BreakFontColor = {
 export type Variables = {
   [key: string]: string
 }
-export type ThemeConfig = {
-  appearance?: AppearanceOption
-  isSystemAppearance?: boolean
-  language?: LanguageOption
-  accentColor: RadixColor
-  secondaryColor: RadixColor
-  grayColor: (typeof RADIX_GRAY_COLORS)[number]
-  radius: (typeof RADIX_RADIUS)[number]
-  scaling: (typeof SCALING_OPTIONS)[number]
-  // panelBackground     : typeof PANEL_BACKGROUND_OPTIONS[number];
 
-  /* brand-specific extensions */
-  sidebarBg: string
-  pastel?: boolean
-  pastelShade?: number
-  brightShade?: number
-  avatarRadius?: RadixRadius
-  workspaceRadius?: RadixRadius
-  orgRadius?: RadixRadius
-  dashboard: {
-    color1: RadixColor
-    color2: RadixColor
-    color3: RadixColor
-    color4: RadixColor
+export const KEY_OPTIONS = ["google_maps", "google_drive", "gemini", "claude"] as const
+export type KeyOption = (typeof KEY_OPTIONS)[number]
+export const KEY_STATUS = ["active", "inactive", "expired"] as const
+export type KeyStatus = (typeof KEY_STATUS)[number]
+export type Key = {
+  [K in KeyOption]: {
+    clientID: string
+    secret: string
+    redirectURI: string
+    expiresIn: number
+    status: KeyStatus
   }
-  indicators: {
-    danger?: RadixColor
-    success?: RadixColor
-    warning?: RadixColor
-    info?: RadixColor
-    default?: RadixGrayColor
+}
+
+export type SettingsConfig = {
+  userPreference: {
+    appearance?: AppearanceOption
+    isSystemAppearance?: boolean
+    language?: LanguageOption
+    direction?: "ltr" | "rtl"
+  },
+  variables?: Variables
+  keys?: Key
+  theme: {
+    accentColor: RadixColor
+    secondaryColor: RadixColor
+    grayColor: (typeof RADIX_GRAY_COLORS)[number]
+    radius: (typeof RADIX_RADIUS)[number]
+    scaling: (typeof SCALING_OPTIONS)[number]
+    sidebarBg: string
+    pastel?: boolean
+    pastelShade?: number
+    brightShade?: number
+    avatarRadius?: RadixRadius
+    workspaceRadius?: RadixRadius
+    orgRadius?: RadixRadius
+    dashboard: {
+      color1: RadixColor
+      color2: RadixColor
+      color3: RadixColor
+      color4: RadixColor
+    }
+    indicators: {
+      danger?: RadixColor
+      success?: RadixColor
+      warning?: RadixColor
+      info?: RadixColor
+      default?: RadixGrayColor
+    }
+    breakFontColor: BreakFontColor
   }
-  breakFontColor: BreakFontColor
-  direction?: "ltr" | "rtl"
 }
