@@ -73,18 +73,50 @@ export const breakFontColor: BreakFontColor = {
 export type Variables = {
   [key: string]: string
 }
-export type ThemeConfig = {
+
+export const KEY_OPTIONS = [
+  "google_maps",
+  "google_drive",
+  "gemini",
+  "claude",
+] as const
+export type KeyOption = (typeof KEY_OPTIONS)[number]
+export const KEY_STATUS = ["active", "inactive", "expired"] as const
+export type KeyStatus = (typeof KEY_STATUS)[number]
+export type Key = {
+  [K in KeyOption]: {
+    clientID: string
+    secret: string
+    redirectURI: string
+    expiresIn: number
+    status: KeyStatus
+  }
+}
+export type UserPreference = {
   appearance?: AppearanceOption
   isSystemAppearance?: boolean
   language?: LanguageOption
+  direction?: "ltr" | "rtl"
+}
+export type DashboardColor = {
+  color1: RadixColor
+  color2: RadixColor
+  color3: RadixColor
+  color4: RadixColor
+}
+export type IndicatorColor = {
+  danger?: RadixColor
+  success?: RadixColor
+  warning?: RadixColor
+  info?: RadixColor
+  default?: RadixGrayColor
+}
+export type ThemeConfig = {
   accentColor: RadixColor
   secondaryColor: RadixColor
   grayColor: (typeof RADIX_GRAY_COLORS)[number]
   radius: (typeof RADIX_RADIUS)[number]
   scaling: (typeof SCALING_OPTIONS)[number]
-  // panelBackground     : typeof PANEL_BACKGROUND_OPTIONS[number];
-
-  /* brand-specific extensions */
   sidebarBg: string
   pastel?: boolean
   pastelShade?: number
@@ -92,19 +124,13 @@ export type ThemeConfig = {
   avatarRadius?: RadixRadius
   workspaceRadius?: RadixRadius
   orgRadius?: RadixRadius
-  dashboard: {
-    color1: RadixColor
-    color2: RadixColor
-    color3: RadixColor
-    color4: RadixColor
-  }
-  indicators: {
-    danger?: RadixColor
-    success?: RadixColor
-    warning?: RadixColor
-    info?: RadixColor
-    default?: RadixGrayColor
-  }
+  dashboard: DashboardColor
+  indicators: IndicatorColor
   breakFontColor: BreakFontColor
-  direction?: "ltr" | "rtl"
+}
+export type SettingsConfig = {
+  userPreference: UserPreference
+  variables?: Variables
+  keys?: Key
+  theme: ThemeConfig
 }
