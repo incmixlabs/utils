@@ -50,6 +50,10 @@ export type RadixRadius = (typeof RADIX_RADIUS)[number]
 // export const PANEL_BACKGROUND_OPTIONS = ['solid','translucent','none'] as const;
 export const SCALING_OPTIONS = ["90%", "95%", "100%", "105%", "110%"] as const
 export type RadixScaling = (typeof SCALING_OPTIONS)[number]
+export const APPEARANCE_OPTIONS = ["light", "dark"] as const
+export type AppearanceOption = (typeof APPEARANCE_OPTIONS)[number]
+export const LANGUAGE_OPTIONS = ["en", "pt"]
+export type LanguageOption = (typeof LANGUAGE_OPTIONS)[number]
 export const fontColor = {
   light: "var(--gray-12)",
   dark: "var(--gray-1)",
@@ -67,6 +71,9 @@ export const breakFontColor: BreakFontColor = {
   gray: 10,
 }
 export type ThemeConfig = {
+  appearance?: AppearanceOption
+  isSystemAppearance?: boolean
+  language?: LanguageOption
   accentColor: RadixColor
   secondaryColor: RadixColor
   grayColor: (typeof RADIX_GRAY_COLORS)[number]
@@ -97,5 +104,4 @@ export type ThemeConfig = {
   }
   breakFontColor: BreakFontColor
   direction?: "ltr" | "rtl"
-  isSystemTheme?: boolean
 }
