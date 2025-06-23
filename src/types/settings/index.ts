@@ -74,7 +74,12 @@ export type Variables = {
   [key: string]: string
 }
 
-export const KEY_OPTIONS = ["google_maps", "google_drive", "gemini", "claude"] as const
+export const KEY_OPTIONS = [
+  "google_maps",
+  "google_drive",
+  "gemini",
+  "claude",
+] as const
 export type KeyOption = (typeof KEY_OPTIONS)[number]
 export const KEY_STATUS = ["active", "inactive", "expired"] as const
 export type KeyStatus = (typeof KEY_STATUS)[number]
@@ -94,7 +99,7 @@ export type SettingsConfig = {
     isSystemAppearance?: boolean
     language?: LanguageOption
     direction?: "ltr" | "rtl"
-  },
+  }
   variables?: Variables
   keys?: Key
   theme: {
