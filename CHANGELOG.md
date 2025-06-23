@@ -1,3 +1,12 @@
+# [0.18.0](https://github.com/incmixlabs/utils/compare/v0.17.0...v0.18.0) (2025-06-23)
+
+
+### Features
+
+* config type ([0c6b5f9](https://github.com/incmixlabs/utils/commit/0c6b5f9352b73ee73f18739fa6f1fef17dd724cf))
+
+
+
 # [0.17.0](https://github.com/incmixlabs/utils/compare/v0.16.0...v0.17.0) (2025-06-23)
 
 
@@ -35,15 +44,6 @@
 * language ([51dd1a9](https://github.com/incmixlabs/utils/commit/51dd1a91c4f7772ec1057bf322149e476ac886a7))
 * language ([5ffe068](https://github.com/incmixlabs/utils/commit/5ffe068e6f4bc4b94bb48cf824cf855c7228a9b2))
 * language ([a20b9be](https://github.com/incmixlabs/utils/commit/a20b9bec155c48ddf344ae1bb062e803e2fb9d8f))
-
-
-
-# [0.13.0](https://github.com/incmixlabs/utils/compare/v0.12.0...v0.13.0) (2025-06-23)
-
-
-### Features
-
-* scaling type ([ed1c572](https://github.com/incmixlabs/utils/commit/ed1c572b4c55a62dcc793ea817301cec37d2809b))
 
 
 
