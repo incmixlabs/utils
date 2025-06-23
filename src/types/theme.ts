@@ -49,6 +49,7 @@ export const RADIX_RADIUS = [
 export type RadixRadius = (typeof RADIX_RADIUS)[number]
 // export const PANEL_BACKGROUND_OPTIONS = ['solid','translucent','none'] as const;
 export const SCALING_OPTIONS = ["90%", "95%", "100%", "105%", "110%"] as const
+export type RadixScaling = (typeof SCALING_OPTIONS)[number]
 export const fontColor = {
   light: "var(--gray-12)",
   dark: "var(--gray-1)",
