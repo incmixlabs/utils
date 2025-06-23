@@ -97,7 +97,7 @@ export const taskStatusSchemaLiteral = {
 
 export const taskSchemaLiteral = {
   title: "tasks schema",
-  version: 1,
+  version: 1, // Increment version due to schema changes
   primaryKey: "id",
   type: "object",
   properties: {
@@ -124,7 +124,6 @@ export const taskSchemaLiteral = {
     order: {
       type: "number",
       default: 0,
-      multipleOf: 1,
       minimum: 0,
       maximum: 1000000,
     },
@@ -140,6 +139,28 @@ export const taskSchemaLiteral = {
       type: "string",
       maxLength: 2000,
     },
+    checklist: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          id: {
+            type: "string",
+            maxLength: 100,
+          },
+          text: {
+            type: "string",
+            maxLength: 500,
+          },
+          checked: {
+            type: "boolean",
+            default: false,
+          },
+        },
+        required: ["id", "text", "checked"],
+      },
+      default: [],
+    },
     completed: {
       type: "boolean",
       default: false,
@@ -148,6 +169,37 @@ export const taskSchemaLiteral = {
       type: "string",
       enum: ["low", "medium", "high", "urgent"],
       default: "medium",
+    },
+    refUrls: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          id: {
+            type: "string",
+            maxLength: 100,
+          },
+          url: {
+            type: "string",
+            maxLength: 1000,
+          },
+          title: {
+            type: "string",
+            maxLength: 255,
+          },
+          type: {
+            type: "string",
+            enum: ["figma", "task", "external"],
+            // default removed to comply with RxDB requirements
+          },
+          taskId: {
+            type: "string",
+            maxLength: 100,
+          },
+        },
+        required: ["id", "url", "type"],
+      },
+      default: [],
     },
     labelsTags: {
       type: "array",
@@ -214,7 +266,8 @@ export const taskSchemaLiteral = {
             type: "string",
             maxLength: 200,
           },
-          avatar: {
+          image: {
+            // Changed from 'avatar' to 'image' for consistency
             type: "string",
             maxLength: 500,
           },
@@ -246,6 +299,28 @@ export const taskSchemaLiteral = {
       default: [],
     },
     comments: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          id: { type: "string", maxLength: 100 },
+          content: { type: "string", maxLength: 2000 },
+          createdAt: { type: "number" },
+          createdBy: {
+            type: "object",
+            properties: {
+              id: { type: "string", maxLength: 100 },
+              name: { type: "string", maxLength: 200 },
+              image: { type: "string", maxLength: 500 },
+            },
+            required: ["id", "name"],
+          },
+        },
+        required: ["id", "content", "createdAt", "createdBy"],
+      },
+      default: [],
+    },
+    commentsCount: {
       type: "number",
       default: 0,
     },
@@ -304,7 +379,6 @@ export const taskSchemaLiteral = {
     "createdBy",
     "updatedBy",
   ],
-  indexes: ["projectId", "columnId", ["columnId", "order"]],
 } as const
 
 export const taskDataSchemaLiteral = {
