@@ -77,19 +77,25 @@ export type Variables = {
 export const KEY_OPTIONS = [
   "google_maps",
   "google_drive",
+  "google_calendar",
   "gemini",
   "claude",
 ] as const
 export type KeyOption = (typeof KEY_OPTIONS)[number]
 export const KEY_STATUS = ["active", "inactive", "expired"] as const
 export type KeyStatus = (typeof KEY_STATUS)[number]
-export type Key = {
+export type APIKey = {
   [K in KeyOption]: {
-    clientID: string
-    secret: string
-    redirectURI: string
-    expiresIn: number
-    status: KeyStatus
+    key: string
+    secret?: string
+    redirectURI?: string
+    expiresIn?: number
+    status?: boolean
+    error?: string
+    rateLimit?: {
+      limit: number
+      remaining: number
+    }
   }
 }
 export type UserPreference = {
@@ -128,9 +134,12 @@ export type ThemeConfig = {
   indicators: IndicatorColor
   breakFontColor: BreakFontColor
 }
+export type IntegrationConfig = {
+  variables?: Variables
+  keys?: APIKey
+}
 export type SettingsConfig = {
   userPreference: UserPreference
-  variables?: Variables
-  keys?: Key
+  integration?: IntegrationConfig
   theme: ThemeConfig
 }
