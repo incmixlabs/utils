@@ -1,3 +1,12 @@
+# [0.15.0](https://github.com/incmixlabs/utils/compare/v0.14.0...v0.15.0) (2025-06-23)
+
+
+### Features
+
+* settings-task-types ([ad33440](https://github.com/incmixlabs/utils/commit/ad33440f599b0f4749f7d44de1c6b4727d0b945b))
+
+
+
 # [0.14.0](https://github.com/incmixlabs/utils/compare/v0.13.0...v0.14.0) (2025-06-23)
 
 
@@ -34,15 +43,6 @@
 ### Bug Fixes
 
 * export omit ([3d245b8](https://github.com/incmixlabs/utils/commit/3d245b8441746cb24a889738b384eb123e2228ae))
-
-
-
-## [0.11.2](https://github.com/incmixlabs/utils/compare/v0.11.1...v0.11.2) (2025-06-13)
-
-
-### Bug Fixes
-
-* updated api endpoints ([1aaa6ea](https://github.com/incmixlabs/utils/commit/1aaa6eadc003c34933e92696be3ecd6f971f23ef))
 
 
 
