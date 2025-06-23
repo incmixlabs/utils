@@ -69,7 +69,7 @@ export const breakFontColor: BreakFontColor = {
   gray: 10,
 }
 export type ThemeConfig = {
-  appearance?: "light" | "dark"
+  appearance?: LanguageOption
   isSystemAppearance?: boolean
   accentColor: RadixColor
   secondaryColor: RadixColor
