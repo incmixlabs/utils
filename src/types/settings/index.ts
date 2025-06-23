@@ -70,6 +70,9 @@ export const breakFontColor: BreakFontColor = {
   yellow: 10,
   gray: 10,
 }
+export type Variables = {
+  [key: string]: string
+}
 export type ThemeConfig = {
   appearance?: AppearanceOption
   isSystemAppearance?: boolean
