@@ -1,3 +1,12 @@
+# [0.24.0](https://github.com/incmixlabs/utils/compare/v0.23.0...v0.24.0) (2025-06-24)
+
+
+### Features
+
+* additonal types ([c83ff0b](https://github.com/incmixlabs/utils/commit/c83ff0b11344537f876c84ac525f564f6cd6daff))
+
+
+
 # [0.23.0](https://github.com/incmixlabs/utils/compare/v0.22.0...v0.23.0) (2025-06-24)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * wip ([d5ff632](https://github.com/incmixlabs/utils/commit/d5ff632fcaebb71ccef1e47a4573e20924d8ccd3))
-
-
-
-# [0.19.0](https://github.com/incmixlabs/utils/compare/v0.18.0...v0.19.0) (2025-06-24)
-
-
-### Features
-
-* isSystemAppearance ([01589ff](https://github.com/incmixlabs/utils/commit/01589ff9e66bdea9b72a6496c16617601b49ba4a))
 
 
 
