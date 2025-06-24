@@ -85,7 +85,7 @@ export type KeyOption = (typeof KEY_OPTIONS)[number]
 export const KEY_STATUS = ["active", "inactive", "expired"] as const
 export type KeyStatus = (typeof KEY_STATUS)[number]
 export type APIKey = {
-  [K in KeyOption]: {
+  [K in KeyOption]?: {
     key: string
     secret?: string
     redirectURI?: string
