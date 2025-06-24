@@ -1,3 +1,12 @@
+# [0.20.0](https://github.com/incmixlabs/utils/compare/v0.19.0...v0.20.0) (2025-06-24)
+
+
+### Features
+
+* wip ([d5ff632](https://github.com/incmixlabs/utils/commit/d5ff632fcaebb71ccef1e47a4573e20924d8ccd3))
+
+
+
 # [0.19.0](https://github.com/incmixlabs/utils/compare/v0.18.0...v0.19.0) (2025-06-24)
 
 
@@ -33,15 +42,6 @@
 ### Features
 
 * additional-types ([a8f2d31](https://github.com/incmixlabs/utils/commit/a8f2d313ab9140f80e9c18253e178e1d43ed6eb8))
-
-
-
-# [0.15.0](https://github.com/incmixlabs/utils/compare/v0.14.0...v0.15.0) (2025-06-23)
-
-
-### Features
-
-* settings-task-types ([ad33440](https://github.com/incmixlabs/utils/commit/ad33440f599b0f4749f7d44de1c6b4727d0b945b))
 
 
 
