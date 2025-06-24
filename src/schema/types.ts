@@ -1514,3 +1514,23 @@ export interface UseTableViewReturn {
     urgentTasks: number
   }
 }
+
+export const getCurrentUser = () => ({
+  id: "user-id",
+  name: "Current User",
+  image: "/placeholder.svg",
+})
+
+export const DEFAULT_TASK_STATUSES = [
+  {
+    name: "To Do",
+    color: "yellow",
+    description: "Tasks that need to be started",
+  },
+  {
+    name: "In Progress",
+    color: "blue",
+    description: "Tasks currently being worked on",
+  },
+  { name: "Done", color: "green", description: "Completed tasks" },
+]
