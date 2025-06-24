@@ -1224,29 +1224,70 @@ export interface TreeDataItem {
   type: "folder" | "file"
 }
 export type TaskStatusDocType = {
-    id: string;
-    projectId: string;
-    name: string;
-    order: number;
-    color: string;
-    createdAt: number;
-    createdBy: {
-        id: string;
-        name: string;
-        image?: string | undefined;
-    };
-    updatedAt: number;
-    updatedBy: {
-        id: string;
-        name: string;
-        image?: string | undefined;
-    };
-    description?: string | undefined;
-    isDefault?: boolean | undefined;
+  id: string
+  projectId: string
+  name: string
+  order: number
+  color: string
+  createdAt: number
+  createdBy: {
+    id: string
+    name: string
+    image?: string | undefined
+  }
+  updatedAt: number
+  updatedBy: {
+    id: string
+    name: string
+    image?: string | undefined
+  }
+  description?: string | undefined
+  isDefault?: boolean | undefined
 }
 export interface ProjectData {
   tasks: TaskDataSchema[]
   taskStatuses: TaskStatusDocType[]
   isLoading: boolean
   error: string | null
+}
+export interface UseProjectDataReturn extends ProjectData {
+  // Task operations
+  createTask: (
+    columnId: string,
+    taskData: Partial<TaskDataSchema>
+  ) => Promise<void>
+  updateTask: (
+    taskId: string,
+    updates: Partial<TaskDataSchema>
+  ) => Promise<void>
+  deleteTask: (taskId: string) => Promise<void>
+  moveTask: (
+    taskId: string,
+    targetColumnId: string,
+    targetIndex?: number
+  ) => Promise<void>
+
+  // Task status operations
+  createTaskStatus: (
+    name: string,
+    color?: string,
+    description?: string
+  ) => Promise<string>
+  updateTaskStatus: (
+    statusId: string,
+    updates: { name?: string; color?: string; description?: string }
+  ) => Promise<void>
+  deleteTaskStatus: (statusId: string) => Promise<void>
+  reorderTaskStatuses: (statusIds: string[]) => Promise<void>
+
+  // Utility
+  refetch: () => void
+  clearError: () => void
+}
+
+// Define a type for user information
+export interface CurrentUser {
+  id: string
+  name: string
+  image?: string
 }
