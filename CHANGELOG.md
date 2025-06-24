@@ -1,3 +1,12 @@
+# [0.26.0](https://github.com/incmixlabs/utils/compare/v0.25.0...v0.26.0) (2025-06-24)
+
+
+### Features
+
+* getcurrentuser ([7d9059d](https://github.com/incmixlabs/utils/commit/7d9059d3426c613667dec45be9088db0884b2fde))
+
+
+
 # [0.25.0](https://github.com/incmixlabs/utils/compare/v0.24.0...v0.25.0) (2025-06-24)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * add TaskStatusDocType ([6ea0a29](https://github.com/incmixlabs/utils/commit/6ea0a2943bf6988c47b3a9337b352f647e7075ce))
-
-
-
-# [0.21.0](https://github.com/incmixlabs/utils/compare/v0.20.0...v0.21.0) (2025-06-24)
-
-
-### Features
-
-* add TaskStatusDocType ([1507db2](https://github.com/incmixlabs/utils/commit/1507db23c3600ed1a7f49c9fe49a381906e2d98b))
 
 
 
