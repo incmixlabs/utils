@@ -1244,3 +1244,9 @@ export type TaskStatusDocType = {
     description?: string | undefined;
     isDefault?: boolean | undefined;
 }
+export interface ProjectData {
+  tasks: TaskDataSchema[]
+  taskStatuses: TaskStatusDocType[]
+  isLoading: boolean
+  error: string | null
+}
