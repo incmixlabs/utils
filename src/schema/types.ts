@@ -1291,3 +1291,172 @@ export interface CurrentUser {
   name: string
   image?: string
 }
+export interface KanbanColumn {
+  id: string
+  projectId: string
+  name: string
+  color: string
+  order: number
+  description?: string
+  isDefault?: boolean
+  createdAt: number
+  updatedAt: number
+  createdBy: {
+    id: string
+    name: string
+    image?: string
+  }
+  updatedBy: {
+    id: string
+    name: string
+    image?: string
+  }
+  tasks: KanbanTask[]
+  // Computed properties from useKanban hook
+  completedTasksCount: number
+  totalTasksCount: number
+  progressPercentage: number
+}
+
+// Making most properties optional for mock data compatibility
+export interface KanbanTask
+  extends Partial<
+    Omit<
+      TaskDataSchema,
+      | "attachments"
+      | "labelsTags"
+      | "createdBy"
+      | "assignedTo"
+      | "subTasks"
+      | "updatedBy"
+      | "completed"
+      | "priority"
+    >
+  > {
+  // Make completed optional
+  completed?: boolean
+
+  // Make priority optional
+  priority?: "low" | "medium" | "high" | "urgent"
+  // Make attachments mutable to match the UI component expectations
+  attachments?: {
+    id: string
+    name: string
+    url: string
+    size: string
+    type?: string
+  }[]
+
+  // For backward compatibility with existing code using 'attachment' instead of 'attachments'
+  attachment?: {
+    name: string
+    url?: string
+    size: string
+    type?: string
+  }[]
+
+  // Make labelsTags mutable
+  labelsTags?: {
+    value: string
+    label: string
+    color: string
+  }[]
+
+  // Make assignedTo mutable with optional avatar
+  assignedTo?: {
+    id: string
+    name: string
+    avatar?: string
+    label?: string
+    color?: string
+    value?: string
+    checked?: boolean
+  }[]
+
+  // Make subTasks mutable
+  subTasks?: {
+    id?: string
+    name: string
+    completed: boolean
+    progress?: number
+  }[]
+
+  // Make createdBy properties compatible with the data source
+  createdBy?: {
+    id: string
+    name: string
+    image?: string // Optional to match the data source
+  }
+
+  // Make updatedBy properties compatible with the data source
+  updatedBy?: {
+    id: string
+    name: string
+    image?: string // Optional to match the data source
+  }
+
+  // Any additional UI-specific properties can be added here
+}
+
+export interface TableTask extends KanbanTask {
+  // Additional computed properties for table display
+  statusLabel?: string
+  statusColor?: string
+  assignedToNames?: string
+  totalSubTasks?: number
+  completedSubTasks?: number
+  isOverdue?: boolean
+}
+
+export interface UseTableViewReturn {
+  tasks: TableTask[]
+  taskStatuses: Array<{
+    id: string
+    name: string
+    color: string
+    projectId: string
+    order: number
+    description?: string
+    isDefault?: boolean
+    createdAt: number
+    updatedAt: number
+    createdBy: { id: string; name: string; image?: string }
+    updatedBy: { id: string; name: string; image?: string }
+  }>
+  isLoading: boolean
+  error: string | null
+
+  // Task operations
+  createTask: (taskData: Partial<TaskDataSchema>) => Promise<void>
+  updateTask: (
+    taskId: string,
+    updates: Partial<TaskDataSchema>
+  ) => Promise<void>
+  deleteTask: (taskId: string) => Promise<void>
+  moveTaskToStatus: (taskId: string, statusId: string) => Promise<void>
+
+  // Status operations
+  createTaskStatus: (
+    name: string,
+    color?: string,
+    description?: string
+  ) => Promise<string>
+  updateTaskStatus: (
+    statusId: string,
+    updates: { name?: string; color?: string; description?: string }
+  ) => Promise<void>
+  deleteTaskStatus: (statusId: string) => Promise<void>
+
+  // Utility
+  refetch: () => void
+  clearError: () => void
+
+  // Statistics
+  projectStats: {
+    totalTasks: number
+    completedTasks: number
+    totalStatuses: number
+    overdueTasks: number
+    urgentTasks: number
+  }
+}
