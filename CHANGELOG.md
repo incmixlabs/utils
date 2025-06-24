@@ -1,3 +1,12 @@
+# [0.23.0](https://github.com/incmixlabs/utils/compare/v0.22.0...v0.23.0) (2025-06-24)
+
+
+### Features
+
+* wip ([6b79f59](https://github.com/incmixlabs/utils/commit/6b79f59542a3b91286d8075cdd786ae5baa90f74))
+
+
+
 # [0.22.0](https://github.com/incmixlabs/utils/compare/v0.21.0...v0.22.0) (2025-06-24)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * isSystemAppearance ([01589ff](https://github.com/incmixlabs/utils/commit/01589ff9e66bdea9b72a6496c16617601b49ba4a))
-
-
-
-# [0.18.0](https://github.com/incmixlabs/utils/compare/v0.17.0...v0.18.0) (2025-06-23)
-
-
-### Features
-
-* config type ([0c6b5f9](https://github.com/incmixlabs/utils/commit/0c6b5f9352b73ee73f18739fa6f1fef17dd724cf))
 
 
 
