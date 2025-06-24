@@ -100,7 +100,7 @@ export type APIKey = {
 }
 export type UserPreference = {
   appearance?: AppearanceOption
-  isSystemAppearance?: boolean
+  isSystemAppearance: boolean
   language?: LanguageOption
   direction?: "ltr" | "rtl"
 }
