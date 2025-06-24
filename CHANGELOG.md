@@ -1,3 +1,12 @@
+# [0.22.0](https://github.com/incmixlabs/utils/compare/v0.21.0...v0.22.0) (2025-06-24)
+
+
+### Features
+
+* add TaskStatusDocType ([6ea0a29](https://github.com/incmixlabs/utils/commit/6ea0a2943bf6988c47b3a9337b352f647e7075ce))
+
+
+
 # [0.21.0](https://github.com/incmixlabs/utils/compare/v0.20.0...v0.21.0) (2025-06-24)
 
 
@@ -31,17 +40,6 @@
 ### Features
 
 * config type ([0c6b5f9](https://github.com/incmixlabs/utils/commit/0c6b5f9352b73ee73f18739fa6f1fef17dd724cf))
-
-
-
-# [0.17.0](https://github.com/incmixlabs/utils/compare/v0.16.0...v0.17.0) (2025-06-23)
-
-
-### Features
-
-* settings config ([e5c556a](https://github.com/incmixlabs/utils/commit/e5c556a081176b4e97838ec76b344e53e28eac99))
-* settings fix ([9c5883c](https://github.com/incmixlabs/utils/commit/9c5883c8538fdab0c1fe6ff77729957ac5408ee9))
-* settings fix ([3bd4e58](https://github.com/incmixlabs/utils/commit/3bd4e582b4e6aa23142ddd895cca575fd4fe6ecc))
 
 
 
