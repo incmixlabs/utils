@@ -1397,7 +1397,61 @@ export interface KanbanTask
 
   // Any additional UI-specific properties can be added here
 }
+export interface UseKanbanReturn {
+  columns: KanbanColumn[]
+  isLoading: boolean
+  error: string | null
 
+  // Task operations
+  createTask: (
+    columnId: string,
+    taskData: Partial<TaskDataSchema>
+  ) => Promise<void>
+  updateTask: (
+    taskId: string,
+    updates: Partial<TaskDataSchema>
+  ) => Promise<void>
+  deleteTask: (taskId: string) => Promise<void>
+  moveTask: (
+    taskId: string,
+    targetColumnId: string,
+    targetIndex?: number
+  ) => Promise<void>
+
+  // Column operations
+  createColumn: (
+    name: string,
+    color?: string,
+    description?: string
+  ) => Promise<string>
+  updateColumn: (
+    columnId: string,
+    updates: { name?: string; color?: string; description?: string }
+  ) => Promise<void>
+  deleteColumn: (columnId: string) => Promise<void>
+  reorderColumns: (columnIds: string[]) => Promise<void>
+
+  // Bulk operations for future use
+  bulkUpdateTasks: (
+    taskIds: string[],
+    updates: Partial<TaskDataSchema>
+  ) => Promise<void>
+  bulkMoveTasks: (taskIds: string[], targetColumnId: string) => Promise<void>
+  bulkDeleteTasks: (taskIds: string[]) => Promise<void>
+
+  // Utility - FIXED: refetch is no longer async
+  refetch: () => void
+  clearError: () => void
+
+  // Statistics
+  projectStats: {
+    totalTasks: number
+    completedTasks: number
+    totalColumns: number
+    overdueTasks: number
+    urgentTasks: number
+  }
+}
 export interface TableTask extends KanbanTask {
   // Additional computed properties for table display
   statusLabel?: string
