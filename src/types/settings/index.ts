@@ -84,19 +84,20 @@ export const KEY_OPTIONS = [
 export type KeyOption = (typeof KEY_OPTIONS)[number]
 export const KEY_STATUS = ["active", "inactive", "expired"] as const
 export type KeyStatus = (typeof KEY_STATUS)[number]
-export type APIKey = {
-  [K in KeyOption]?: {
-    key: string
-    secret?: string
-    redirectURI?: string
-    expiresIn?: number
-    status?: boolean
-    error?: string
-    rateLimit?: {
-      limit: number
-      remaining: number
-    }
+export type APIKeyAttributes = {
+  key: string
+  secret?: string
+  redirectURI?: string
+  expiresIn?: number
+  status?: KeyStatus
+  error?: string
+  rateLimit?: {
+    limit: number
+    remaining: number
   }
+}
+export type APIKey = {
+  [K in KeyOption]?: APIKeyAttributes
 }
 export type UserPreference = {
   appearance?: AppearanceOption
