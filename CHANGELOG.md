@@ -1,3 +1,12 @@
+# [0.27.0](https://github.com/incmixlabs/utils/compare/v0.26.0...v0.27.0) (2025-06-26)
+
+
+### Features
+
+* api key ([eaf2232](https://github.com/incmixlabs/utils/commit/eaf2232dc359db53a02b47cd6ddf68570d74fcaf))
+
+
+
 # [0.26.0](https://github.com/incmixlabs/utils/compare/v0.25.0...v0.26.0) (2025-06-24)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * wip ([6b79f59](https://github.com/incmixlabs/utils/commit/6b79f59542a3b91286d8075cdd786ae5baa90f74))
-
-
-
-# [0.22.0](https://github.com/incmixlabs/utils/compare/v0.21.0...v0.22.0) (2025-06-24)
-
-
-### Features
-
-* add TaskStatusDocType ([6ea0a29](https://github.com/incmixlabs/utils/commit/6ea0a2943bf6988c47b3a9337b352f647e7075ce))
 
 
 
