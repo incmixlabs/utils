@@ -1,3 +1,12 @@
+## [0.27.1](https://github.com/incmixlabs/utils/compare/v0.27.0...v0.27.1) (2025-06-27)
+
+
+### Bug Fixes
+
+* add acceptence critria to schema for task details ([bf7ce80](https://github.com/incmixlabs/utils/commit/bf7ce807a08180e7cce4e489907d4d295d22dfd3))
+
+
+
 # [0.27.0](https://github.com/incmixlabs/utils/compare/v0.26.0...v0.27.0) (2025-06-26)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * additonal types ([c83ff0b](https://github.com/incmixlabs/utils/commit/c83ff0b11344537f876c84ac525f564f6cd6daff))
-
-
-
-# [0.23.0](https://github.com/incmixlabs/utils/compare/v0.22.0...v0.23.0) (2025-06-24)
-
-
-### Features
-
-* wip ([6b79f59](https://github.com/incmixlabs/utils/commit/6b79f59542a3b91286d8075cdd786ae5baa90f74))
 
 
 
