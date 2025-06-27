@@ -97,7 +97,7 @@ export const taskStatusSchemaLiteral = {
 
 export const taskSchemaLiteral = {
   title: "tasks schema",
-  version: 1, // Increment version due to schema changes
+  version: 1,
   primaryKey: "id",
   type: "object",
   properties: {
@@ -138,6 +138,24 @@ export const taskSchemaLiteral = {
     description: {
       type: "string",
       maxLength: 2000,
+    },
+    acceptanceCriteria: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          id: {
+            type: "string",
+            maxLength: 100,
+          },
+          text: {
+            type: "string",
+            maxLength: 500,
+          },
+        },
+        required: ["id", "text"],
+      },
+      default: [],
     },
     checklist: {
       type: "array",
@@ -981,6 +999,12 @@ export type TaskDataSchema = {
   startDate?: string
   endDate?: string
   description?: string
+
+  acceptanceCriteria?: {
+    id: string
+    text: string
+  }[]
+
   completed: boolean
   priority: "low" | "medium" | "high" | "urgent"
 
