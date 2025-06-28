@@ -152,11 +152,13 @@ export const taskSchemaLiteral = {
             type: "string",
             maxLength: 500,
           },
-          checked: { // Added for reordering and check/uncheck functionality
+          checked: {
+            // Added for reordering and check/uncheck functionality
             type: "boolean",
             default: false,
           },
-          order: { // Added for reordering
+          order: {
+            // Added for reordering
             type: "number",
             default: 0,
             minimum: 0,
@@ -183,7 +185,8 @@ export const taskSchemaLiteral = {
             type: "boolean",
             default: false,
           },
-          order: { // Added for reordering
+          order: {
+            // Added for reordering
             type: "number",
             default: 0,
             minimum: 0,
@@ -325,7 +328,8 @@ export const taskSchemaLiteral = {
             type: "boolean",
             default: false,
           },
-          order: { // Added for reordering
+          order: {
+            // Added for reordering
             type: "number",
             default: 0,
             minimum: 0,
@@ -416,7 +420,7 @@ export const taskSchemaLiteral = {
     "createdBy",
     "updatedBy",
   ],
-} as const; 
+} as const
 
 export const taskDataSchemaLiteral = {
   title: "tasks schema",
