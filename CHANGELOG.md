@@ -1,3 +1,13 @@
+## [0.27.2](https://github.com/incmixlabs/utils/compare/v0.27.1...v0.27.2) (2025-06-28)
+
+
+### Bug Fixes
+
+* lint ([9c240b7](https://github.com/incmixlabs/utils/commit/9c240b74905f8800661f876753615bcd72fe7b1f))
+* update schema for tasks ([80692bd](https://github.com/incmixlabs/utils/commit/80692bd1f3bacbca7185fd36f9ec2c8c601db16f))
+
+
+
 ## [0.27.1](https://github.com/incmixlabs/utils/compare/v0.27.0...v0.27.1) (2025-06-27)
 
 
@@ -31,15 +41,6 @@
 ### Features
 
 * more types ([b56e399](https://github.com/incmixlabs/utils/commit/b56e3996d3f86f880771d7c962f9ce0655e56ed1))
-
-
-
-# [0.24.0](https://github.com/incmixlabs/utils/compare/v0.23.0...v0.24.0) (2025-06-24)
-
-
-### Features
-
-* additonal types ([c83ff0b](https://github.com/incmixlabs/utils/commit/c83ff0b11344537f876c84ac525f564f6cd6daff))
 
 
 
