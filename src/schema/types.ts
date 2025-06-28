@@ -152,8 +152,17 @@ export const taskSchemaLiteral = {
             type: "string",
             maxLength: 500,
           },
+          checked: { // Added for reordering and check/uncheck functionality
+            type: "boolean",
+            default: false,
+          },
+          order: { // Added for reordering
+            type: "number",
+            default: 0,
+            minimum: 0,
+          },
         },
-        required: ["id", "text"],
+        required: ["id", "text", "checked", "order"], // Added 'checked' and 'order' to required
       },
       default: [],
     },
@@ -174,8 +183,13 @@ export const taskSchemaLiteral = {
             type: "boolean",
             default: false,
           },
+          order: { // Added for reordering
+            type: "number",
+            default: 0,
+            minimum: 0,
+          },
         },
-        required: ["id", "text", "checked"],
+        required: ["id", "text", "checked", "order"], // Added 'order' to required
       },
       default: [],
     },
@@ -311,8 +325,13 @@ export const taskSchemaLiteral = {
             type: "boolean",
             default: false,
           },
+          order: { // Added for reordering
+            type: "number",
+            default: 0,
+            minimum: 0,
+          },
         },
-        required: ["id", "name", "completed"],
+        required: ["id", "name", "completed", "order"], // Added 'order' to required
       },
       default: [],
     },
@@ -397,7 +416,7 @@ export const taskSchemaLiteral = {
     "createdBy",
     "updatedBy",
   ],
-} as const
+} as const; 
 
 export const taskDataSchemaLiteral = {
   title: "tasks schema",
@@ -995,7 +1014,7 @@ export type TaskDataSchema = {
   projectId: string
   name: string
   columnId: string
-  order: number
+  order: number // This 'order' is for the task itself within a column, not for array items
   startDate?: string
   endDate?: string
   description?: string
@@ -1003,6 +1022,8 @@ export type TaskDataSchema = {
   acceptanceCriteria?: {
     id: string
     text: string
+    checked: boolean // Added 'checked' property
+    order: number // Added 'order' property for reordering
   }[]
 
   completed: boolean
@@ -1041,12 +1062,14 @@ export type TaskDataSchema = {
     id: string
     name: string
     completed: boolean
+    order: number // Added 'order' property for reordering
   }[]
 
   checklist?: {
     id: string
     text: string
     checked: boolean
+    order: number // Added 'order' property for reordering
   }[]
 
   // Comments with proper structure
