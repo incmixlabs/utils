@@ -2,7 +2,7 @@ import _default, { type DeepPartial } from "./default"
 import development from "./development"
 import production from "./production"
 import tunnel from "./tunnel"
-// eslint-disable-line
+
 function isObject(item: object) {
   return item && typeof item === "object" && !Array.isArray(item)
 }
@@ -65,4 +65,7 @@ export const API = {
   FILES: "/api/files",
   LOCATION: "/api/location",
   RATELIMITS: "/api/rate-limits",
+  PROJECTS: "/api/projects",
+  GENAI: "/api/genai",
+  COMMENTS: "/api/comments",
 }
