@@ -58,8 +58,6 @@ export const API = {
   ORG: "/api/org",
   INTL: "/api/intl",
   TASKS: "/api/tasks",
-  PROJECTS: "/api/projects",
-  GENAI: "/api/genai",
   RXDB: "/api/rxdb",
   EMAIL: "/api/email",
   FILES: "/api/files",
