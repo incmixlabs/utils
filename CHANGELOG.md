@@ -1,3 +1,12 @@
+## [0.27.3](https://github.com/incmixlabs/utils/compare/v0.27.2...v0.27.3) (2025-06-30)
+
+
+### Bug Fixes
+
+* add comments api path ([eaee802](https://github.com/incmixlabs/utils/commit/eaee8027377933106f155f7c73eebe8f2d1d4304))
+
+
+
 ## [0.27.2](https://github.com/incmixlabs/utils/compare/v0.27.1...v0.27.2) (2025-06-28)
 
 
@@ -32,15 +41,6 @@
 ### Features
 
 * getcurrentuser ([7d9059d](https://github.com/incmixlabs/utils/commit/7d9059d3426c613667dec45be9088db0884b2fde))
-
-
-
-# [0.25.0](https://github.com/incmixlabs/utils/compare/v0.24.0...v0.25.0) (2025-06-24)
-
-
-### Features
-
-* more types ([b56e399](https://github.com/incmixlabs/utils/commit/b56e3996d3f86f880771d7c962f9ce0655e56ed1))
 
 
 
