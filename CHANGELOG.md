@@ -1,3 +1,14 @@
+## [0.27.4](https://github.com/incmixlabs/utils/compare/v0.27.3...v0.27.4) (2025-07-01)
+
+
+### Bug Fixes
+
+* code rabbit issue ([762bcb5](https://github.com/incmixlabs/utils/commit/762bcb5c4cf4e56f3c3501024e8dbc0273bc0299))
+* lint ([a3ac851](https://github.com/incmixlabs/utils/commit/a3ac8513a3d9e4337aec07740bbf2cd2907f391c))
+* update task schema and types ([6e9ad67](https://github.com/incmixlabs/utils/commit/6e9ad67ba158c06046565097d5f334dd536a95f7))
+
+
+
 ## [0.27.3](https://github.com/incmixlabs/utils/compare/v0.27.2...v0.27.3) (2025-06-30)
 
 
@@ -32,15 +43,6 @@
 ### Features
 
 * api key ([eaf2232](https://github.com/incmixlabs/utils/commit/eaf2232dc359db53a02b47cd6ddf68570d74fcaf))
-
-
-
-# [0.26.0](https://github.com/incmixlabs/utils/compare/v0.25.0...v0.26.0) (2025-06-24)
-
-
-### Features
-
-* getcurrentuser ([7d9059d](https://github.com/incmixlabs/utils/commit/7d9059d3426c613667dec45be9088db0884b2fde))
 
 
 
