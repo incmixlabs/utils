@@ -18,43 +18,48 @@ export const VALID_TIME_TYPES: TimeType[] = [
   "year",
 ]
 
-export const taskStatusSchemaLiteral = {
-  title: "task status schema", // Renamed for clarity, was "columns schema"
-  version: 0, // Consider incrementing version if this is a migration
+export const labelSchemaLiteral = {
+  title: "label",
+  version: 0,
   primaryKey: "id",
   type: "object",
   properties: {
     id: {
-      maxLength: 100,
       type: "string",
+      maxLength: 100,
     },
     projectId: {
       type: "string",
       maxLength: 100,
     },
+    // The core of the generic model: what kind of label is this?
+    // like status, priority, etc.
+    type: {
+      type: "string",
+      enum: ["status", "priority"], // Can be expanded later with "team", "sprint", etc.
+      maxLength: 50,
+    },
+    // The name of the label or title
     name: {
       type: "string",
       maxLength: 200,
     },
+    // store the theme color for that perticular lable like for done we can store green
+    // for high priority we can store red
     color: {
       type: "string",
       maxLength: 50,
-      default: "#6366f1",
     },
+    // order of the label
     order: {
       type: "number",
       default: 0,
-      multipleOf: 1,
       minimum: 0,
-      maximum: 100000,
     },
     description: {
       type: "string",
       maxLength: 500,
-    },
-    isDefault: {
-      type: "boolean",
-      default: false,
+      default: "",
     },
     createdAt: {
       type: "number",
@@ -81,266 +86,166 @@ export const taskStatusSchemaLiteral = {
       required: ["id", "name"],
     },
   },
-  required: [
-    "id",
-    "projectId",
-    "name",
-    "color",
-    "order",
-    "createdAt",
-    "updatedAt",
-    "createdBy",
-    "updatedBy",
-  ],
-  indexes: ["projectId", "order"],
-} as const
+  required: ["id", "projectId", "type", "name", "order", "createdAt", "updatedAt", "createdBy", "updatedBy"],
+  // A compound index on type and order is crucial for fetching sorted lists of statuses or priorities.
+  indexes: ["projectId", "type", ["projectId", "type", "order"]],
+} as const;
+
 
 export const taskSchemaLiteral = {
-  title: "tasks schema",
-  version: 1,
+  title: "task",
+  version: 3,
   primaryKey: "id",
   type: "object",
   properties: {
     id: {
-      maxLength: 100,
       type: "string",
+      maxLength: 100,
     },
     projectId: {
       type: "string",
       maxLength: 100,
     },
-    taskId: {
-      type: "string",
-      maxLength: 100,
-    },
+    // name of the task or title of the task
     name: {
       type: "string",
       maxLength: 500,
     },
-    columnId: {
+
+    // id of the status label : meaning to which status this task belong to like Todo, or In Progress, or Done etc.
+    statusId: {
       type: "string",
       maxLength: 100,
+      ref: "label",
     },
-    order: {
+    // id of the priority label : meaning to which priority this task belong to like Low, or Medium, or High etc.
+    priorityId: {
+      type: "string",
+      maxLength: 100,
+      ref: "label",
+    },
+    // order of the task in the project
+    taskOrder: {
       type: "number",
       default: 0,
       minimum: 0,
-      maximum: 1000000,
     },
     startDate: {
-      type: "string",
-      maxLength: 50,
+      type: "number",
     },
     endDate: {
-      type: "string",
-      maxLength: 50,
+      type: "number",
     },
     description: {
       type: "string",
       maxLength: 2000,
+      default: "",
     },
     acceptanceCriteria: {
       type: "array",
+      default: [],
       items: {
         type: "object",
         properties: {
-          id: {
-            type: "string",
-            maxLength: 100,
-          },
-          text: {
-            type: "string",
-            maxLength: 500,
-          },
-          checked: {
-            // Added for reordering and check/uncheck functionality
-            type: "boolean",
-            default: false,
-          },
-          order: {
-            // Added for reordering
-            type: "number",
-            default: 0,
-            minimum: 0,
-          },
+          id: { type: "string", maxLength: 100 },
+          text: { type: "string", maxLength: 500 },
+          checked: { type: "boolean", default: false },
+          order: { type: "number", default: 0, minimum: 0 },
         },
-        required: ["id", "text", "checked", "order"], // Added 'checked' and 'order' to required
+        required: ["id", "text", "checked", "order"],
       },
-      default: [],
     },
     checklist: {
       type: "array",
+      default: [],
       items: {
         type: "object",
         properties: {
-          id: {
-            type: "string",
-            maxLength: 100,
-          },
-          text: {
-            type: "string",
-            maxLength: 500,
-          },
-          checked: {
-            type: "boolean",
-            default: false,
-          },
-          order: {
-            // Added for reordering
-            type: "number",
-            default: 0,
-            minimum: 0,
-          },
+          id: { type: "string", maxLength: 100 },
+          text: { type: "string", maxLength: 500 },
+          checked: { type: "boolean", default: false },
+          order: { type: "number", default: 0, minimum: 0 },
         },
-        required: ["id", "text", "checked", "order"], // Added 'order' to required
+        required: ["id", "text", "checked", "order"],
       },
-      default: [],
     },
     completed: {
       type: "boolean",
       default: false,
     },
-    priority: {
-      type: "string",
-      enum: ["low", "medium", "high", "urgent"],
-      default: "medium",
-    },
     refUrls: {
       type: "array",
+      default: [],
       items: {
         type: "object",
         properties: {
-          id: {
-            type: "string",
-            maxLength: 100,
-          },
-          url: {
-            type: "string",
-            maxLength: 1000,
-          },
-          title: {
-            type: "string",
-            maxLength: 255,
-          },
-          type: {
-            type: "string",
-            enum: ["figma", "task", "external"],
-            // default removed to comply with RxDB requirements
-          },
-          taskId: {
-            type: "string",
-            maxLength: 100,
-          },
+          id: { type: "string", maxLength: 100 },
+          url: { type: "string", maxLength: 1000 },
+          title: { type: "string", maxLength: 255 },
+          type: { type: "string", enum: ["figma", "task", "external"] },
+          taskId: { type: "string", maxLength: 100 },
         },
         required: ["id", "url", "type"],
       },
-      default: [],
     },
     labelsTags: {
       type: "array",
+      default: [],
       items: {
         type: "object",
         properties: {
-          value: {
-            type: "string",
-            maxLength: 200,
-          },
-          label: {
-            type: "string",
-            maxLength: 200,
-          },
-          color: {
-            type: "string",
-            maxLength: 100,
-          },
+          value: { type: "string", maxLength: 200 },
+          label: { type: "string", maxLength: 200 },
+          color: { type: "string", maxLength: 100 },
         },
         required: ["value", "label", "color"],
       },
-      default: [],
     },
     attachments: {
       type: "array",
+      default: [],
       items: {
         type: "object",
         properties: {
-          id: {
-            type: "string",
-            maxLength: 100,
-          },
-          name: {
-            type: "string",
-            maxLength: 255,
-          },
-          url: {
-            type: "string",
-            maxLength: 1000,
-          },
-          size: {
-            type: "string",
-            maxLength: 50,
-          },
-          type: {
-            type: "string",
-            maxLength: 100,
-          },
+          id: { type: "string", maxLength: 100 },
+          name: { type: "string", maxLength: 255 },
+          url: { type: "string", maxLength: 1000 },
+          size: { type: "string", maxLength: 50 },
+          type: { type: "string", maxLength: 100 },
         },
         required: ["id", "name", "url", "size"],
       },
-      default: [],
     },
     assignedTo: {
       type: "array",
+      default: [],
       items: {
         type: "object",
         properties: {
-          id: {
-            type: "string",
-            maxLength: 100,
-          },
-          name: {
-            type: "string",
-            maxLength: 200,
-          },
-          image: {
-            // Changed from 'avatar' to 'image' for consistency
-            type: "string",
-            maxLength: 500,
-          },
+          id: { type: "string", maxLength: 100 },
+          name: { type: "string", maxLength: 200 },
+          image: { type: "string", maxLength: 500 },
         },
         required: ["id", "name"],
       },
-      default: [],
     },
     subTasks: {
       type: "array",
+      default: [],
       items: {
         type: "object",
         properties: {
-          id: {
-            type: "string",
-            maxLength: 100,
-          },
-          name: {
-            type: "string",
-            maxLength: 300,
-          },
-          completed: {
-            type: "boolean",
-            default: false,
-          },
-          order: {
-            // Added for reordering
-            type: "number",
-            default: 0,
-            minimum: 0,
-          },
+          id: { type: "string", maxLength: 100 },
+          name: { type: "string", maxLength: 300 },
+          completed: { type: "boolean", default: false },
+          order: { type: "number", default: 0, minimum: 0 },
         },
-        required: ["id", "name", "completed", "order"], // Added 'order' to required
+        required: ["id", "name", "completed", "order"],
       },
-      default: [],
     },
     comments: {
       type: "array",
+      default: [],
       items: {
         type: "object",
         properties: {
@@ -359,11 +264,6 @@ export const taskSchemaLiteral = {
         },
         required: ["id", "content", "createdAt", "createdBy"],
       },
-      default: [],
-    },
-    commentsCount: {
-      type: "number",
-      default: 0,
     },
     createdAt: {
       type: "number",
@@ -374,36 +274,18 @@ export const taskSchemaLiteral = {
     createdBy: {
       type: "object",
       properties: {
-        id: {
-          type: "string",
-          maxLength: 100,
-        },
-        name: {
-          type: "string",
-          maxLength: 200,
-        },
-        image: {
-          type: "string",
-          maxLength: 500,
-        },
+        id: { type: "string", maxLength: 100 },
+        name: { type: "string", maxLength: 200 },
+        image: { type: "string", maxLength: 500 },
       },
       required: ["id", "name"],
     },
     updatedBy: {
       type: "object",
       properties: {
-        id: {
-          type: "string",
-          maxLength: 100,
-        },
-        name: {
-          type: "string",
-          maxLength: 200,
-        },
-        image: {
-          type: "string",
-          maxLength: 500,
-        },
+        id: { type: "string", maxLength: 100 },
+        name: { type: "string", maxLength: 200 },
+        image: { type: "string", maxLength: 500 },
       },
       required: ["id", "name"],
     },
@@ -411,276 +293,291 @@ export const taskSchemaLiteral = {
   required: [
     "id",
     "projectId",
-    "taskId",
     "name",
-    "columnId",
-    "order",
+    "statusId",
+    "priorityId",
+    "taskOrder",
     "createdAt",
     "updatedAt",
     "createdBy",
     "updatedBy",
   ],
-} as const
-
-export const taskDataSchemaLiteral = {
-  title: "tasks schema",
-  version: 0,
-  primaryKey: "id",
-  type: "object",
-  properties: {
-    id: {
-      maxLength: 100,
-      type: "string",
-    },
-    projectId: {
-      type: "string",
-      maxLength: 100,
-    },
-    taskId: {
-      type: "string",
-      maxLength: 100,
-    },
-    name: {
-      type: "string",
-      maxLength: 500,
-    },
-    columnId: {
-      type: "string",
-      maxLength: 100,
-    },
-    startDate: {
-      type: "string",
-      maxLength: 50,
-    },
-    endDate: {
-      type: "string",
-      maxLength: 50,
-    },
-    description: {
-      type: "string",
-      maxLength: 2000,
-    },
-    completed: {
-      type: "boolean",
-      default: false,
-    },
-    taskOrder: {
-      type: "number",
-      default: 0,
-    },
-    labelsTags: {
-      type: "array",
-      items: {
-        type: "object",
-        properties: {
-          value: {
-            type: "string",
-            maxLength: 200,
-          },
-          label: {
-            type: "string",
-            maxLength: 200,
-          },
-          color: {
-            type: "string",
-            maxLength: 100,
-          },
-          checked: {
-            type: "boolean",
-          },
-        },
-        required: ["value", "label", "color", "checked"],
-      },
-      default: [],
-    },
-    attachment: {
-      type: "array",
-      items: {
-        type: "object",
-        properties: {
-          name: {
-            type: "string",
-            maxLength: 255,
-          },
-          url: {
-            type: "string",
-            maxLength: 1000,
-          },
-          size: {
-            type: "string",
-            maxLength: 50,
-          },
-        },
-        required: ["name", "url", "size"],
-      },
-      default: [],
-    },
-    assignedTo: {
-      type: "array",
-      items: {
-        type: "object",
-        properties: {
-          value: {
-            type: "string",
-            maxLength: 100,
-          },
-          name: {
-            type: "string",
-            maxLength: 200,
-          },
-          label: {
-            type: "string",
-            maxLength: 200,
-          },
-          avatar: {
-            type: "string",
-            maxLength: 500,
-          },
-          color: {
-            type: "string",
-            maxLength: 100,
-          },
-          checked: {
-            type: "boolean",
-          },
-        },
-        required: ["value", "name", "label", "avatar", "color", "checked"],
-      },
-      default: [],
-    },
-    subTasks: {
-      type: "array",
-      items: {
-        type: "object",
-        properties: {
-          name: {
-            type: "string",
-            maxLength: 300,
-          },
-          progress: {
-            type: "number",
-            minimum: 0,
-            maximum: 100,
-          },
-          completed: {
-            type: "boolean",
-            default: false,
-          },
-        },
-        required: ["name", "progress", "completed"],
-      },
-      default: [],
-    },
-    createdAt: {
-      type: "number",
-    },
-    updatedAt: {
-      type: "number",
-    },
-    createdBy: {
-      type: "object",
-      properties: {
-        id: {
-          type: "string",
-          maxLength: 100,
-        },
-        name: {
-          type: "string",
-          maxLength: 200,
-        },
-        image: {
-          type: "string",
-          maxLength: 500,
-        },
-      },
-      required: ["id", "name", "image"],
-    },
-    updatedBy: {
-      type: "object",
-      properties: {
-        id: {
-          type: "string",
-          maxLength: 100,
-        },
-        name: {
-          type: "string",
-          maxLength: 200,
-        },
-        image: {
-          type: "string",
-          maxLength: 500,
-        },
-      },
-      required: ["id", "name", "image"],
-    },
-  },
-  required: [
-    "id",
-    "taskId",
-    "name",
-    "columnId",
-    "startDate",
-    "endDate",
-    "completed",
-    "createdAt",
-    "updatedAt",
-    "createdBy",
-    "updatedBy",
-  ],
-} as const
-
-// Column Schema with required fields added
-export const columnSchemaLiteral = {
-  title: "columns schema",
-  version: 0,
-  primaryKey: "id",
-  type: "object",
-  properties: {
-    id: {
-      maxLength: 10,
-      type: "string",
-    },
-    label: {
-      type: "string",
-    },
-    projectId: {
-      type: "string",
-    },
-    columnOrder: {
-      type: "integer",
-    },
-    createdAt: {
-      type: "string",
-      // format: "date-time",
-    },
-    updatedAt: {
-      type: "string",
-      // format: "date-time",
-    },
-    createdBy: {
-      type: "string",
-    },
-    updatedBy: {
-      type: "string",
-    },
-    parentId: {
-      type: ["string", "null"],
-    },
-  },
-  required: [
-    "id",
-    "label",
+  // FINAL POLISH: The compound indexes are optimized for the most common queries.
+  indexes: [
     "projectId",
-    "columnOrder",
-    "createdAt",
-    "updatedAt",
-    "createdBy",
-    "updatedBy",
-    "parentId",
+    "statusId",
+    "priorityId",
+    "taskOrder",
+    ["projectId", "statusId", "taskOrder"], // For getting sorted tasks in a status column
+    ["projectId", "priorityId", "taskOrder"], // For getting sorted tasks in a priority group
   ],
-} as const
+} as const;
+
+
+
+// NOTE: these are not used hence to be removed
+
+
+// export const taskDataSchemaLiteral = {
+//   title: "tasks schema",
+//   version: 0,
+//   primaryKey: "id",
+//   type: "object",
+//   properties: {
+//     id: {
+//       maxLength: 100,
+//       type: "string",
+//     },
+//     projectId: {
+//       type: "string",
+//       maxLength: 100,
+//     },
+//     taskId: {
+//       type: "string",
+//       maxLength: 100,
+//     },
+//     name: {
+//       type: "string",
+//       maxLength: 500,
+//     },
+//     columnId: {
+//       type: "string",
+//       maxLength: 100,
+//     },
+//     startDate: {
+//       type: "string",
+//       maxLength: 50,
+//     },
+//     endDate: {
+//       type: "string",
+//       maxLength: 50,
+//     },
+//     description: {
+//       type: "string",
+//       maxLength: 2000,
+//     },
+//     completed: {
+//       type: "boolean",
+//       default: false,
+//     },
+//     taskOrder: {
+//       type: "number",
+//       default: 0,
+//     },
+//     labelsTags: {
+//       type: "array",
+//       items: {
+//         type: "object",
+//         properties: {
+//           value: {
+//             type: "string",
+//             maxLength: 200,
+//           },
+//           label: {
+//             type: "string",
+//             maxLength: 200,
+//           },
+//           color: {
+//             type: "string",
+//             maxLength: 100,
+//           },
+//           checked: {
+//             type: "boolean",
+//           },
+//         },
+//         required: ["value", "label", "color", "checked"],
+//       },
+//       default: [],
+//     },
+//     attachment: {
+//       type: "array",
+//       items: {
+//         type: "object",
+//         properties: {
+//           name: {
+//             type: "string",
+//             maxLength: 255,
+//           },
+//           url: {
+//             type: "string",
+//             maxLength: 1000,
+//           },
+//           size: {
+//             type: "string",
+//             maxLength: 50,
+//           },
+//         },
+//         required: ["name", "url", "size"],
+//       },
+//       default: [],
+//     },
+//     assignedTo: {
+//       type: "array",
+//       items: {
+//         type: "object",
+//         properties: {
+//           value: {
+//             type: "string",
+//             maxLength: 100,
+//           },
+//           name: {
+//             type: "string",
+//             maxLength: 200,
+//           },
+//           label: {
+//             type: "string",
+//             maxLength: 200,
+//           },
+//           avatar: {
+//             type: "string",
+//             maxLength: 500,
+//           },
+//           color: {
+//             type: "string",
+//             maxLength: 100,
+//           },
+//           checked: {
+//             type: "boolean",
+//           },
+//         },
+//         required: ["value", "name", "label", "avatar", "color", "checked"],
+//       },
+//       default: [],
+//     },
+//     subTasks: {
+//       type: "array",
+//       items: {
+//         type: "object",
+//         properties: {
+//           name: {
+//             type: "string",
+//             maxLength: 300,
+//           },
+//           progress: {
+//             type: "number",
+//             minimum: 0,
+//             maximum: 100,
+//           },
+//           completed: {
+//             type: "boolean",
+//             default: false,
+//           },
+//         },
+//         required: ["name", "progress", "completed"],
+//       },
+//       default: [],
+//     },
+//     createdAt: {
+//       type: "number",
+//     },
+//     updatedAt: {
+//       type: "number",
+//     },
+//     createdBy: {
+//       type: "object",
+//       properties: {
+//         id: {
+//           type: "string",
+//           maxLength: 100,
+//         },
+//         name: {
+//           type: "string",
+//           maxLength: 200,
+//         },
+//         image: {
+//           type: "string",
+//           maxLength: 500,
+//         },
+//       },
+//       required: ["id", "name", "image"],
+//     },
+//     updatedBy: {
+//       type: "object",
+//       properties: {
+//         id: {
+//           type: "string",
+//           maxLength: 100,
+//         },
+//         name: {
+//           type: "string",
+//           maxLength: 200,
+//         },
+//         image: {
+//           type: "string",
+//           maxLength: 500,
+//         },
+//       },
+//       required: ["id", "name", "image"],
+//     },
+//   },
+//   required: [
+//     "id",
+//     "taskId",
+//     "name",
+//     "columnId",
+//     "startDate",
+//     "endDate",
+//     "completed",
+//     "createdAt",
+//     "updatedAt",
+//     "createdBy",
+//     "updatedBy",
+//   ],
+// } as const
+
+// // Column Schema with required fields added
+// export const columnSchemaLiteral = {
+//   title: "columns schema",
+//   version: 0,
+//   primaryKey: "id",
+//   type: "object",
+//   properties: {
+//     id: {
+//       maxLength: 10,
+//       type: "string",
+//     },
+//     label: {
+//       type: "string",
+//     },
+//     projectId: {
+//       type: "string",
+//     },
+//     columnOrder: {
+//       type: "integer",
+//     },
+//     createdAt: {
+//       type: "string",
+//       // format: "date-time",
+//     },
+//     updatedAt: {
+//       type: "string",
+//       // format: "date-time",
+//     },
+//     createdBy: {
+//       type: "string",
+//     },
+//     updatedBy: {
+//       type: "string",
+//     },
+//     parentId: {
+//       type: ["string", "null"],
+//     },
+//   },
+//   required: [
+//     "id",
+//     "label",
+//     "projectId",
+//     "columnOrder",
+//     "createdAt",
+//     "updatedAt",
+//     "createdBy",
+//     "updatedBy",
+//     "parentId",
+//   ],
+// } as const
 
 // Define the schema for a layout item
+
 const layoutItemSchema = {
   type: "object",
   properties: {
@@ -976,6 +873,7 @@ export interface FileInput {
 export type ProjectFormData = ValidatedProjectData & {
   fileData?: FileInput // Accept various possible file input formats
 }
+
 export const projectStatusSchema = z.union([
   z.literal("all"),
   z.literal("started"),
@@ -1012,15 +910,38 @@ export const validatedProjectDataSchema = z.object({
   budget: z.number(),
 })
 
+
+export type LabelSchema = {
+  id: string
+  projectId: string
+  type: "status" | "priority" // New field
+  name: string
+  color: string
+  order: number
+  description?: string
+  createdAt: number
+  updatedAt: number
+  createdBy: {
+    id: string
+    name: string
+    image?: string
+  }
+  updatedBy: {
+    id: string
+    name: string
+    image?: string
+  }
+}
+
 export type TaskDataSchema = {
   id: string
-  taskId: string
   projectId: string
   name: string
-  columnId: string
-  order: number // This 'order' is for the task itself within a column, not for array items
-  startDate?: string
-  endDate?: string
+  statusId: string // Changed from columnId
+  priorityId: string // New field
+  taskOrder: number // Changed from order
+  startDate?: number // Changed from string
+  endDate?: number // Changed from string
   description?: string
 
   acceptanceCriteria?: {
@@ -1031,7 +952,6 @@ export type TaskDataSchema = {
   }[]
 
   completed: boolean
-  priority: "low" | "medium" | "high" | "urgent"
 
   // Arrays - MUTABLE for UI editing
   refUrls: {
@@ -1088,8 +1008,6 @@ export type TaskDataSchema = {
     }
   }[]
 
-  commentsCount: number
-
   // Audit fields
   createdAt: number
   updatedAt: number
@@ -1105,28 +1023,6 @@ export type TaskDataSchema = {
   }
 }
 
-// Update the type to match the actual form data structure with optional fields
-export type TaskStatusSchema = {
-  id: string
-  projectId: string
-  name: string
-  color: string
-  order: number
-  description?: string
-  isDefault?: boolean
-  createdAt: number
-  updatedAt: number
-  createdBy: {
-    id: string
-    name: string
-    image?: string
-  }
-  updatedBy: {
-    id: string
-    name: string
-    image?: string
-  }
-}
 
 // Helper types for form data
 export type CreateTaskData = Pick<TaskDataSchema, "name"> &
@@ -1134,7 +1030,6 @@ export type CreateTaskData = Pick<TaskDataSchema, "name"> &
     Omit<
       TaskDataSchema,
       | "id"
-      | "taskId"
       | "projectId"
       | "createdAt"
       | "updatedAt"
@@ -1146,19 +1041,18 @@ export type CreateTaskData = Pick<TaskDataSchema, "name"> &
 export type UpdateTaskData = Partial<
   Omit<
     TaskDataSchema,
-    "id" | "taskId" | "projectId" | "createdAt" | "createdBy"
+    "id" | "projectId" | "createdAt" | "createdBy"
   >
 >
 
-export type CreateTaskStatusData = Pick<TaskStatusSchema, "name"> &
-  Partial<Pick<TaskStatusSchema, "color" | "description">>
+export type CreateLabelData = Pick<LabelSchema, "name" | "type"> &
+  Partial<Pick<LabelSchema, "color" | "description" | "order">>
 
-export type UpdateTaskStatusData = Partial<
-  Pick<TaskStatusSchema, "name" | "color" | "description">
+export type UpdateLabelData = Partial<
+  Pick<LabelSchema, "name" | "color" | "description" | "type" | "order">
 >
 
 // UI-specific types
-export type TaskPriority = TaskDataSchema["priority"]
 export type TaskLabel = TaskDataSchema["labelsTags"][0]
 export type TaskAttachment = TaskDataSchema["attachments"][0]
 export type TaskAssignee = TaskDataSchema["assignedTo"][0]
@@ -1167,8 +1061,8 @@ export type TaskComment = TaskDataSchema["comments"][0]
 
 export interface DefaultDataOptions {
   projectId?: string
-  statusesOnly?: boolean
-  forceStatusCreation?: boolean
+  labelsOnly?: boolean
+  forceLabelCreation?: boolean
 }
 
 export const baseFieldType = {
@@ -1274,37 +1168,17 @@ export interface TreeDataItem {
   name: string
   type: "folder" | "file"
 }
-export type TaskStatusDocType = {
-  id: string
-  projectId: string
-  name: string
-  order: number
-  color: string
-  createdAt: number
-  createdBy: {
-    id: string
-    name: string
-    image?: string | undefined
-  }
-  updatedAt: number
-  updatedBy: {
-    id: string
-    name: string
-    image?: string | undefined
-  }
-  description?: string | undefined
-  isDefault?: boolean | undefined
-}
+
 export interface ProjectData {
   tasks: TaskDataSchema[]
-  taskStatuses: TaskStatusDocType[]
+  labels: LabelSchema[]
   isLoading: boolean
   error: string | null
 }
 export interface UseProjectDataReturn extends ProjectData {
   // Task operations
   createTask: (
-    columnId: string,
+    statusId: string,
     taskData: Partial<TaskDataSchema>
   ) => Promise<void>
   updateTask: (
@@ -1314,22 +1188,26 @@ export interface UseProjectDataReturn extends ProjectData {
   deleteTask: (taskId: string) => Promise<void>
   moveTask: (
     taskId: string,
-    targetColumnId: string,
+    targetStatusId: string,
     targetIndex?: number
   ) => Promise<void>
 
   // Task status operations
-  createTaskStatus: (
+  createLabel: (  // Change from createTaskStatus
+    type: "status" | "priority",  // Add new parameter
     name: string,
     color?: string,
     description?: string
   ) => Promise<string>
-  updateTaskStatus: (
-    statusId: string,
+  
+  updateLabel: (  // Change from updateTaskStatus
+    labelId: string,  // Change from statusId
     updates: { name?: string; color?: string; description?: string }
   ) => Promise<void>
-  deleteTaskStatus: (statusId: string) => Promise<void>
-  reorderTaskStatuses: (statusIds: string[]) => Promise<void>
+  
+  deleteLabel: (labelId: string) => Promise<void>  // Change from deleteTaskStatus
+  reorderLabels: (labelIds: string[]) => Promise<void>  // Change from reorderTaskStatuses
+
 
   // Utility
   refetch: () => void
@@ -1342,28 +1220,9 @@ export interface CurrentUser {
   name: string
   image?: string
 }
-export interface KanbanColumn {
-  id: string
-  projectId: string
-  name: string
-  color: string
-  order: number
-  description?: string
-  isDefault?: boolean
-  createdAt: number
-  updatedAt: number
-  createdBy: {
-    id: string
-    name: string
-    image?: string
-  }
-  updatedBy: {
-    id: string
-    name: string
-    image?: string
-  }
-  tasks: KanbanTask[]
-  // Computed properties from useKanban hook
+export interface KanbanColumn extends Omit<LabelSchema, 'type'> {
+  // KanbanColumn is based on LabelSchema but only for type="status"
+  tasks: KanbanTask[] // Computed properties remain the same
   completedTasksCount: number
   totalTasksCount: number
   progressPercentage: number
@@ -1386,9 +1245,11 @@ export interface KanbanTask
   > {
   // Make completed optional
   completed?: boolean
+  statusLabel?: string
+  statusColor?: string
+  priorityLabel?: string
+  priorityColor?: string
 
-  // Make priority optional
-  priority?: "low" | "medium" | "high" | "urgent"
   // Make attachments mutable to match the UI component expectations
   attachments?: {
     id: string
@@ -1455,7 +1316,7 @@ export interface UseKanbanReturn {
 
   // Task operations
   createTask: (
-    columnId: string,
+    statusId: string,  // Change from columnId
     taskData: Partial<TaskDataSchema>
   ) => Promise<void>
   updateTask: (
@@ -1465,32 +1326,32 @@ export interface UseKanbanReturn {
   deleteTask: (taskId: string) => Promise<void>
   moveTask: (
     taskId: string,
-    targetColumnId: string,
+    targetStatusId: string,  // Change from targetColumnId
     targetIndex?: number
   ) => Promise<void>
 
-  // Column operations
-  createColumn: (
+  // Status label operations  // Change from Column operations
+  createStatusLabel: (  // Change from createColumn
     name: string,
     color?: string,
     description?: string
   ) => Promise<string>
-  updateColumn: (
-    columnId: string,
+  updateStatusLabel: (  // Change from updateColumn
+    labelId: string,  // Change from columnId
     updates: { name?: string; color?: string; description?: string }
   ) => Promise<void>
-  deleteColumn: (columnId: string) => Promise<void>
-  reorderColumns: (columnIds: string[]) => Promise<void>
+  deleteStatusLabel: (labelId: string) => Promise<void>  // Change from deleteColumn
+  reorderStatusLabels: (labelIds: string[]) => Promise<void>  // Change from reorderColumns
 
-  // Bulk operations for future use
+  // Bulk operations
   bulkUpdateTasks: (
     taskIds: string[],
     updates: Partial<TaskDataSchema>
   ) => Promise<void>
-  bulkMoveTasks: (taskIds: string[], targetColumnId: string) => Promise<void>
+  bulkMoveTasks: (taskIds: string[], targetStatusId: string) => Promise<void>  // Change from targetColumnId
   bulkDeleteTasks: (taskIds: string[]) => Promise<void>
 
-  // Utility - FIXED: refetch is no longer async
+  // Utility
   refetch: () => void
   clearError: () => void
 
@@ -1498,11 +1359,13 @@ export interface UseKanbanReturn {
   projectStats: {
     totalTasks: number
     completedTasks: number
-    totalColumns: number
+    totalStatusLabels: number  // Change from totalColumns
     overdueTasks: number
     urgentTasks: number
   }
 }
+
+
 export interface TableTask extends KanbanTask {
   // Additional computed properties for table display
   statusLabel?: string
@@ -1515,19 +1378,7 @@ export interface TableTask extends KanbanTask {
 
 export interface UseTableViewReturn {
   tasks: TableTask[]
-  taskStatuses: Array<{
-    id: string
-    name: string
-    color: string
-    projectId: string
-    order: number
-    description?: string
-    isDefault?: boolean
-    createdAt: number
-    updatedAt: number
-    createdBy: { id: string; name: string; image?: string }
-    updatedBy: { id: string; name: string; image?: string }
-  }>
+  labels: LabelSchema[]  // Change from taskStatuses - use LabelSchema directly
   isLoading: boolean
   error: string | null
 
@@ -1538,19 +1389,20 @@ export interface UseTableViewReturn {
     updates: Partial<TaskDataSchema>
   ) => Promise<void>
   deleteTask: (taskId: string) => Promise<void>
-  moveTaskToStatus: (taskId: string, statusId: string) => Promise<void>
+  moveTaskToStatus: (taskId: string, statusId: string) => Promise<void>  // This can stay as is
 
-  // Status operations
-  createTaskStatus: (
+  // Label operations (change from Status operations)
+  createLabel: (  // Change from createTaskStatus
+    type: "status" | "priority",  // Add new parameter
     name: string,
     color?: string,
     description?: string
   ) => Promise<string>
-  updateTaskStatus: (
-    statusId: string,
+  updateLabel: (  // Change from updateTaskStatus
+    labelId: string,  // Change from statusId
     updates: { name?: string; color?: string; description?: string }
   ) => Promise<void>
-  deleteTaskStatus: (statusId: string) => Promise<void>
+  deleteLabel: (labelId: string) => Promise<void>  // Change from deleteTaskStatus
 
   // Utility
   refetch: () => void
@@ -1560,7 +1412,7 @@ export interface UseTableViewReturn {
   projectStats: {
     totalTasks: number
     completedTasks: number
-    totalStatuses: number
+    totalLabels: number  // Change from totalStatuses
     overdueTasks: number
     urgentTasks: number
   }
@@ -1572,16 +1424,49 @@ export const getCurrentUser = () => ({
   image: "/placeholder.svg",
 })
 
-export const DEFAULT_TASK_STATUSES = [
+export const DEFAULT_LABELS = [
+  // Status labels
   {
     name: "To Do",
     color: "yellow",
+    type: "status",
+    order: 0,
     description: "Tasks that need to be started",
   },
   {
     name: "In Progress",
     color: "blue",
+    type: "status",
+    order: 1,
     description: "Tasks currently being worked on",
   },
-  { name: "Done", color: "green", description: "Completed tasks" },
+  {
+    name: "Done", 
+    color: "green", 
+    type: "status",
+    order: 2,
+    description: "Completed tasks" 
+  },
+  // Priority labels
+  {
+    name: "Low",
+    color: "gray",
+    type: "priority",
+    order: 0,
+    description: "Low priority tasks",
+  },
+  {
+    name: "Medium",
+    color: "orange",
+    type: "priority",
+    order: 1,
+    description: "Medium priority tasks",
+  },
+  {
+    name: "High",
+    color: "red",
+    type: "priority",
+    order: 2,
+    description: "High priority tasks",
+  },
 ]
