@@ -86,11 +86,20 @@ export const labelSchemaLiteral = {
       required: ["id", "name"],
     },
   },
-  required: ["id", "projectId", "type", "name", "order", "createdAt", "updatedAt", "createdBy", "updatedBy"],
+  required: [
+    "id",
+    "projectId",
+    "type",
+    "name",
+    "order",
+    "createdAt",
+    "updatedAt",
+    "createdBy",
+    "updatedBy",
+  ],
   // A compound index on type and order is crucial for fetching sorted lists of statuses or priorities.
   indexes: ["projectId", "type", ["projectId", "type", "order"]],
-} as const;
-
+} as const
 
 export const taskSchemaLiteral = {
   title: "task",
@@ -311,12 +320,9 @@ export const taskSchemaLiteral = {
     ["projectId", "statusId", "taskOrder"], // For getting sorted tasks in a status column
     ["projectId", "priorityId", "taskOrder"], // For getting sorted tasks in a priority group
   ],
-} as const;
-
-
+} as const
 
 // NOTE: these are not used hence to be removed
-
 
 // export const taskDataSchemaLiteral = {
 //   title: "tasks schema",
@@ -910,7 +916,6 @@ export const validatedProjectDataSchema = z.object({
   budget: z.number(),
 })
 
-
 export type LabelSchema = {
   id: string
   projectId: string
@@ -1023,26 +1028,17 @@ export type TaskDataSchema = {
   }
 }
 
-
 // Helper types for form data
 export type CreateTaskData = Pick<TaskDataSchema, "name"> &
   Partial<
     Omit<
       TaskDataSchema,
-      | "id"
-      | "projectId"
-      | "createdAt"
-      | "updatedAt"
-      | "createdBy"
-      | "updatedBy"
+      "id" | "projectId" | "createdAt" | "updatedAt" | "createdBy" | "updatedBy"
     >
   >
 
 export type UpdateTaskData = Partial<
-  Omit<
-    TaskDataSchema,
-    "id" | "projectId" | "createdAt" | "createdBy"
-  >
+  Omit<TaskDataSchema, "id" | "projectId" | "createdAt" | "createdBy">
 >
 
 export type CreateLabelData = Pick<LabelSchema, "name" | "type"> &
@@ -1193,21 +1189,22 @@ export interface UseProjectDataReturn extends ProjectData {
   ) => Promise<void>
 
   // Task status operations
-  createLabel: (  // Change from createTaskStatus
-    type: "status" | "priority",  // Add new parameter
+  createLabel: (
+    // Change from createTaskStatus
+    type: "status" | "priority", // Add new parameter
     name: string,
     color?: string,
     description?: string
   ) => Promise<string>
-  
-  updateLabel: (  // Change from updateTaskStatus
-    labelId: string,  // Change from statusId
+
+  updateLabel: (
+    // Change from updateTaskStatus
+    labelId: string, // Change from statusId
     updates: { name?: string; color?: string; description?: string }
   ) => Promise<void>
-  
-  deleteLabel: (labelId: string) => Promise<void>  // Change from deleteTaskStatus
-  reorderLabels: (labelIds: string[]) => Promise<void>  // Change from reorderTaskStatuses
 
+  deleteLabel: (labelId: string) => Promise<void> // Change from deleteTaskStatus
+  reorderLabels: (labelIds: string[]) => Promise<void> // Change from reorderTaskStatuses
 
   // Utility
   refetch: () => void
@@ -1220,7 +1217,7 @@ export interface CurrentUser {
   name: string
   image?: string
 }
-export interface KanbanColumn extends Omit<LabelSchema, 'type'> {
+export interface KanbanColumn extends Omit<LabelSchema, "type"> {
   // KanbanColumn is based on LabelSchema but only for type="status"
   tasks: KanbanTask[] // Computed properties remain the same
   completedTasksCount: number
@@ -1316,7 +1313,7 @@ export interface UseKanbanReturn {
 
   // Task operations
   createTask: (
-    statusId: string,  // Change from columnId
+    statusId: string, // Change from columnId
     taskData: Partial<TaskDataSchema>
   ) => Promise<void>
   updateTask: (
@@ -1326,29 +1323,31 @@ export interface UseKanbanReturn {
   deleteTask: (taskId: string) => Promise<void>
   moveTask: (
     taskId: string,
-    targetStatusId: string,  // Change from targetColumnId
+    targetStatusId: string, // Change from targetColumnId
     targetIndex?: number
   ) => Promise<void>
 
   // Status label operations  // Change from Column operations
-  createStatusLabel: (  // Change from createColumn
+  createStatusLabel: (
+    // Change from createColumn
     name: string,
     color?: string,
     description?: string
   ) => Promise<string>
-  updateStatusLabel: (  // Change from updateColumn
-    labelId: string,  // Change from columnId
+  updateStatusLabel: (
+    // Change from updateColumn
+    labelId: string, // Change from columnId
     updates: { name?: string; color?: string; description?: string }
   ) => Promise<void>
-  deleteStatusLabel: (labelId: string) => Promise<void>  // Change from deleteColumn
-  reorderStatusLabels: (labelIds: string[]) => Promise<void>  // Change from reorderColumns
+  deleteStatusLabel: (labelId: string) => Promise<void> // Change from deleteColumn
+  reorderStatusLabels: (labelIds: string[]) => Promise<void> // Change from reorderColumns
 
   // Bulk operations
   bulkUpdateTasks: (
     taskIds: string[],
     updates: Partial<TaskDataSchema>
   ) => Promise<void>
-  bulkMoveTasks: (taskIds: string[], targetStatusId: string) => Promise<void>  // Change from targetColumnId
+  bulkMoveTasks: (taskIds: string[], targetStatusId: string) => Promise<void> // Change from targetColumnId
   bulkDeleteTasks: (taskIds: string[]) => Promise<void>
 
   // Utility
@@ -1359,12 +1358,11 @@ export interface UseKanbanReturn {
   projectStats: {
     totalTasks: number
     completedTasks: number
-    totalStatusLabels: number  // Change from totalColumns
+    totalStatusLabels: number // Change from totalColumns
     overdueTasks: number
     urgentTasks: number
   }
 }
-
 
 export interface TableTask extends KanbanTask {
   // Additional computed properties for table display
@@ -1378,7 +1376,7 @@ export interface TableTask extends KanbanTask {
 
 export interface UseTableViewReturn {
   tasks: TableTask[]
-  labels: LabelSchema[]  // Change from taskStatuses - use LabelSchema directly
+  labels: LabelSchema[] // Change from taskStatuses - use LabelSchema directly
   isLoading: boolean
   error: string | null
 
@@ -1389,20 +1387,22 @@ export interface UseTableViewReturn {
     updates: Partial<TaskDataSchema>
   ) => Promise<void>
   deleteTask: (taskId: string) => Promise<void>
-  moveTaskToStatus: (taskId: string, statusId: string) => Promise<void>  // This can stay as is
+  moveTaskToStatus: (taskId: string, statusId: string) => Promise<void> // This can stay as is
 
   // Label operations (change from Status operations)
-  createLabel: (  // Change from createTaskStatus
-    type: "status" | "priority",  // Add new parameter
+  createLabel: (
+    // Change from createTaskStatus
+    type: "status" | "priority", // Add new parameter
     name: string,
     color?: string,
     description?: string
   ) => Promise<string>
-  updateLabel: (  // Change from updateTaskStatus
-    labelId: string,  // Change from statusId
+  updateLabel: (
+    // Change from updateTaskStatus
+    labelId: string, // Change from statusId
     updates: { name?: string; color?: string; description?: string }
   ) => Promise<void>
-  deleteLabel: (labelId: string) => Promise<void>  // Change from deleteTaskStatus
+  deleteLabel: (labelId: string) => Promise<void> // Change from deleteTaskStatus
 
   // Utility
   refetch: () => void
@@ -1412,7 +1412,7 @@ export interface UseTableViewReturn {
   projectStats: {
     totalTasks: number
     completedTasks: number
-    totalLabels: number  // Change from totalStatuses
+    totalLabels: number // Change from totalStatuses
     overdueTasks: number
     urgentTasks: number
   }
@@ -1441,11 +1441,11 @@ export const DEFAULT_LABELS = [
     description: "Tasks currently being worked on",
   },
   {
-    name: "Done", 
-    color: "green", 
+    name: "Done",
+    color: "green",
     type: "status",
     order: 2,
-    description: "Completed tasks" 
+    description: "Completed tasks",
   },
   // Priority labels
   {
