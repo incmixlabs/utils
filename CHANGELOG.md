@@ -1,3 +1,13 @@
+## [0.27.5](https://github.com/incmixlabs/utils/compare/v0.27.4...v0.27.5) (2025-07-02)
+
+
+### Bug Fixes
+
+* lint ([0542e5f](https://github.com/incmixlabs/utils/commit/0542e5fe1e4788cb788bfa5d930ca41391926fae))
+* the schema for tasks ([3ab225c](https://github.com/incmixlabs/utils/commit/3ab225c2ed2fddf9a18cfc13d00becd85aaebc5d))
+
+
+
 ## [0.27.4](https://github.com/incmixlabs/utils/compare/v0.27.3...v0.27.4) (2025-07-01)
 
 
@@ -34,15 +44,6 @@
 ### Bug Fixes
 
 * add acceptence critria to schema for task details ([bf7ce80](https://github.com/incmixlabs/utils/commit/bf7ce807a08180e7cce4e489907d4d295d22dfd3))
-
-
-
-# [0.27.0](https://github.com/incmixlabs/utils/compare/v0.26.0...v0.27.0) (2025-06-26)
-
-
-### Features
-
-* api key ([eaf2232](https://github.com/incmixlabs/utils/commit/eaf2232dc359db53a02b47cd6ddf68570d74fcaf))
 
 
 
