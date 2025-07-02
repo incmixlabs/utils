@@ -97,7 +97,7 @@ export const labelSchemaLiteral = {
     "createdBy",
     "updatedBy",
   ],
-} as const;
+} as const
 
 export const taskSchemaLiteral = {
   title: "task",
@@ -310,7 +310,7 @@ export const taskSchemaLiteral = {
     "createdBy",
     "updatedBy",
   ],
-} as const;
+} as const
 
 // NOTE: these are not used hence to be removed
 
