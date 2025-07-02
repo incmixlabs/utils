@@ -17,7 +17,6 @@ export const VALID_TIME_TYPES: TimeType[] = [
   "month",
   "year",
 ]
-
 export const labelSchemaLiteral = {
   title: "label",
   version: 1,
@@ -55,6 +54,7 @@ export const labelSchemaLiteral = {
       type: "number",
       default: 0,
       minimum: 0,
+      multipleOf: 1,
     },
     description: {
       type: "string",
@@ -97,9 +97,7 @@ export const labelSchemaLiteral = {
     "createdBy",
     "updatedBy",
   ],
-  // A compound index on type and order is crucial for fetching sorted lists of statuses or priorities.
-  indexes: ["projectId", "type", ["projectId", "type", "order"]],
-} as const
+} as const;
 
 export const taskSchemaLiteral = {
   title: "task",
@@ -138,6 +136,7 @@ export const taskSchemaLiteral = {
       type: "number",
       default: 0,
       minimum: 0,
+      multipleOf: 1,
     },
     startDate: {
       type: "number",
@@ -311,16 +310,7 @@ export const taskSchemaLiteral = {
     "createdBy",
     "updatedBy",
   ],
-  // FINAL POLISH: The compound indexes are optimized for the most common queries.
-  indexes: [
-    "projectId",
-    "statusId",
-    "priorityId",
-    "taskOrder",
-    ["projectId", "statusId", "taskOrder"], // For getting sorted tasks in a status column
-    ["projectId", "priorityId", "taskOrder"], // For getting sorted tasks in a priority group
-  ],
-} as const
+} as const;
 
 // NOTE: these are not used hence to be removed
 
