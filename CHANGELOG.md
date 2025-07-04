@@ -1,3 +1,12 @@
+# [0.28.0](https://github.com/incmixlabs/utils/compare/v0.27.5...v0.28.0) (2025-07-04)
+
+
+### Features
+
+* udpated zod schema to match with rxdb schema ([60d0845](https://github.com/incmixlabs/utils/commit/60d0845456d75e8d4a31649999576c48123a78b4))
+
+
+
 ## [0.27.5](https://github.com/incmixlabs/utils/compare/v0.27.4...v0.27.5) (2025-07-02)
 
 
@@ -35,15 +44,6 @@
 
 * lint ([9c240b7](https://github.com/incmixlabs/utils/commit/9c240b74905f8800661f876753615bcd72fe7b1f))
 * update schema for tasks ([80692bd](https://github.com/incmixlabs/utils/commit/80692bd1f3bacbca7185fd36f9ec2c8c601db16f))
-
-
-
-## [0.27.1](https://github.com/incmixlabs/utils/compare/v0.27.0...v0.27.1) (2025-06-27)
-
-
-### Bug Fixes
-
-* add acceptence critria to schema for task details ([bf7ce80](https://github.com/incmixlabs/utils/commit/bf7ce807a08180e7cce4e489907d4d295d22dfd3))
 
 
 
