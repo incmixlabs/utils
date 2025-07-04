@@ -1,3 +1,12 @@
+## [0.28.1](https://github.com/incmixlabs/utils/compare/v0.28.0...v0.28.1) (2025-07-04)
+
+
+### Bug Fixes
+
+* build error ([5a07ee6](https://github.com/incmixlabs/utils/commit/5a07ee6557b0ff0afb280be5076f10db43178416))
+
+
+
 # [0.28.0](https://github.com/incmixlabs/utils/compare/v0.27.5...v0.28.0) (2025-07-04)
 
 
@@ -34,16 +43,6 @@
 ### Bug Fixes
 
 * add comments api path ([eaee802](https://github.com/incmixlabs/utils/commit/eaee8027377933106f155f7c73eebe8f2d1d4304))
-
-
-
-## [0.27.2](https://github.com/incmixlabs/utils/compare/v0.27.1...v0.27.2) (2025-06-28)
-
-
-### Bug Fixes
-
-* lint ([9c240b7](https://github.com/incmixlabs/utils/commit/9c240b74905f8800661f876753615bcd72fe7b1f))
-* update schema for tasks ([80692bd](https://github.com/incmixlabs/utils/commit/80692bd1f3bacbca7185fd36f9ec2c8c601db16f))
 
 
 
