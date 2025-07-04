@@ -65,4 +65,5 @@ export const API = {
   PROJECTS: "/api/projects",
   GENAI: "/api/genai",
   COMMENTS: "/api/comments",
+  RXDB_SYNC: "/api/rxdb-sync",
 }
