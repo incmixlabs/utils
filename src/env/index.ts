@@ -58,7 +58,6 @@ export const API = {
   ORG: "/api/org",
   INTL: "/api/intl",
   TASKS: "/api/tasks",
-  RXDB: "/api/rxdb",
   EMAIL: "/api/email",
   FILES: "/api/files",
   LOCATION: "/api/location",
