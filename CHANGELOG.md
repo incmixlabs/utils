@@ -1,3 +1,12 @@
+## [0.28.2](https://github.com/incmixlabs/utils/compare/v0.28.1...v0.28.2) (2025-07-06)
+
+
+### Bug Fixes
+
+* remove unused api ([9958930](https://github.com/incmixlabs/utils/commit/9958930aea322cc75bb8a7e572e3afe89017417f))
+
+
+
 ## [0.28.1](https://github.com/incmixlabs/utils/compare/v0.28.0...v0.28.1) (2025-07-04)
 
 
@@ -34,15 +43,6 @@
 * code rabbit issue ([762bcb5](https://github.com/incmixlabs/utils/commit/762bcb5c4cf4e56f3c3501024e8dbc0273bc0299))
 * lint ([a3ac851](https://github.com/incmixlabs/utils/commit/a3ac8513a3d9e4337aec07740bbf2cd2907f391c))
 * update task schema and types ([6e9ad67](https://github.com/incmixlabs/utils/commit/6e9ad67ba158c06046565097d5f334dd536a95f7))
-
-
-
-## [0.27.3](https://github.com/incmixlabs/utils/compare/v0.27.2...v0.27.3) (2025-06-30)
-
-
-### Bug Fixes
-
-* add comments api path ([eaee802](https://github.com/incmixlabs/utils/commit/eaee8027377933106f155f7c73eebe8f2d1d4304))
 
 
 
