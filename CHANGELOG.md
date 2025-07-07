@@ -1,3 +1,12 @@
+## [0.29.1](https://github.com/incmixlabs/utils/compare/v0.29.0...v0.29.1) (2025-07-07)
+
+
+### Bug Fixes
+
+* project schema ([a67cdd1](https://github.com/incmixlabs/utils/commit/a67cdd16ccda13572fbbf39c92c29c284b33b4f5))
+
+
+
 # [0.29.0](https://github.com/incmixlabs/utils/compare/v0.28.2...v0.29.0) (2025-07-07)
 
 
@@ -31,16 +40,6 @@
 ### Features
 
 * udpated zod schema to match with rxdb schema ([60d0845](https://github.com/incmixlabs/utils/commit/60d0845456d75e8d4a31649999576c48123a78b4))
-
-
-
-## [0.27.5](https://github.com/incmixlabs/utils/compare/v0.27.4...v0.27.5) (2025-07-02)
-
-
-### Bug Fixes
-
-* lint ([0542e5f](https://github.com/incmixlabs/utils/commit/0542e5fe1e4788cb788bfa5d930ca41391926fae))
-* the schema for tasks ([3ab225c](https://github.com/incmixlabs/utils/commit/3ab225c2ed2fddf9a18cfc13d00becd85aaebc5d))
 
 
 
