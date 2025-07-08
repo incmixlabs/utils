@@ -106,19 +106,8 @@ export const SubTaskSchema = z.object({
   order: z.number().int().min(0).default(0),
 })
 
-// Project schema matching projectSchemaLiteral
-export const ProjectSchema = z.object({
-  id: z.string().max(10),
-  name: z.string(),
-  orgId: z.string(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-  createdBy: z.string(),
-  updatedBy: z.string(),
-})
-
 // Form project schema matching formProjectSchemaLiteral
-export const FormProjectSchema = z.object({
+export const ProjectSchema = z.object({
   id: z.string().max(30),
   title: z.string(), // Changed from name to title to match JSON schema
   company: z.string(),
@@ -133,6 +122,9 @@ export const FormProjectSchema = z.object({
       value: z.string(),
     })
   ),
+  orgId: z.string(),
+  createdBy: z.string(),
+  updatedBy: z.string(),
   status: z.enum(projectStatusEnum),
   startDate: z.number(),
   endDate: z.number(),
@@ -187,7 +179,6 @@ export const ChecklistSchema = z.object({
 })
 
 export type Project = z.infer<typeof ProjectSchema>
-export type FormProject = z.infer<typeof FormProjectSchema>
 export type Comment = z.infer<typeof CommentSchema>
 export type ProjectMember = z.infer<typeof ProjectMemberSchema>
 export type Checklist = z.infer<typeof ChecklistSchema>
