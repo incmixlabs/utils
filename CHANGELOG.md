@@ -1,3 +1,12 @@
+# [0.33.0](https://github.com/incmixlabs/utils/compare/v0.32.0...v0.33.0) (2025-07-11)
+
+
+### Features
+
+* type fix ([ec7318f](https://github.com/incmixlabs/utils/commit/ec7318fc1f7bacf7c68950b97f8cb4c8a8a109d6))
+
+
+
 # [0.32.0](https://github.com/incmixlabs/utils/compare/v0.31.0...v0.32.0) (2025-07-11)
 
 
@@ -35,15 +44,6 @@
 ### Bug Fixes
 
 * update project zod schema ([45606c7](https://github.com/incmixlabs/utils/commit/45606c73ffd2ab656d9268b9fd7ce9c06d82ae55))
-
-
-
-## [0.29.1](https://github.com/incmixlabs/utils/compare/v0.29.0...v0.29.1) (2025-07-07)
-
-
-### Bug Fixes
-
-* project schema ([a67cdd1](https://github.com/incmixlabs/utils/commit/a67cdd16ccda13572fbbf39c92c29c284b33b4f5))
 
 
 
