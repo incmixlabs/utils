@@ -1,7 +1,7 @@
 {
   "name": "@incmix/utils",
   "description": "Shared utilities for the turbomix backend and frontend",
-  "version": "0.29.2",
+  "version": "0.8.2",
   "type": "module",
   "exports": {
     "./i18n": {
@@ -44,9 +44,9 @@
       "import": "./dist/casl/index.js",
       "types": "./dist/casl/index.d.ts"
     },
-    "./data": {
-      "import": "./dist/data/index.js",
-      "types": "./dist/data/index.d.ts"
+    "./countries": {
+      "import": "./dist/countries/index.js",
+      "types": "./dist/countries/index.d.ts"
     },
     "./data-table": {
       "import": "./dist/data-table/index.js",
