@@ -26,7 +26,6 @@ export const USER_ROLES = [
   UserRoles.ROLE_GUEST,
   UserRoles.ROLE_ANONYMOUS,
 ] as const
-
 export type User = {
   userId: string
   orgId: string[]

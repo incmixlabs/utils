@@ -27,7 +27,8 @@ export const timeTypeEnum = ["day", "days", "week", "month", "year"] as const
 export type TimeType = (typeof timeTypeEnum)[number]
 
 // User object schema for createdBy/updatedBy fields
-export const UserSchema = z.object({
+
+const UserSchema = z.object({
   id: z.string().max(100),
   name: z.string().max(200),
   image: z.string().max(500).optional(),

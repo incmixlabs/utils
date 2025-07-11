@@ -8,6 +8,7 @@ export enum Presence {
   away = "away",
   busy = "busy",
   offline = "offline",
+  deactivated = "deactivated",
 }
 export enum StorageType {
   MEM = "memory",
