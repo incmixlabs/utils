@@ -1,6 +1,7 @@
 // @ts-nocheck
 interface Country {
   name: string
+  short?: string
   code: string
 }
 
@@ -107,7 +108,7 @@ export const countriesWithoutMap: Country[] = [
   { name: "Iceland", code: "IS" },
   { name: "India", code: "IN" },
   { name: "Indonesia", code: "ID" },
-  { name: "Iran, Islamic Republic Of", code: "IR" },
+  { name: "Iran, Islamic Republic Of", short:"Iran", code: "IR" },
   { name: "Iraq", code: "IQ" },
   { name: "Ireland", code: "IE" },
   { name: "Isle of Man", code: "IM" },
@@ -233,8 +234,8 @@ export const countriesWithoutMap: Country[] = [
   { name: "Uganda", code: "UG" },
   { name: "Ukraine", code: "UA" },
   { name: "United Arab Emirates", code: "AE" },
-  { name: "United Kingdom", code: "GB" },
-  { name: "United States", code: "US" },
+  { name: "United Kingdom", short: "UK", code: "GB" },
+  { name: "United States", short:"US", code: "US" },
   { name: "United States Minor Outlying Islands", code: "UM" },
   { name: "Uruguay", code: "UY" },
   { name: "Uzbekistan", code: "UZ" },

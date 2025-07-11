@@ -25,6 +25,7 @@ describe("countries object", () => {
   it("should have correct structure and data for a country", () => {
     expect(countries["US"]).toEqual({
       name: "United States",
+      short: "US",
       flag: "🇺🇸",
       currency: {
         code: "USD",
