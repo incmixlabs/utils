@@ -15,7 +15,7 @@ export function getFlag(countryCode: string) {
 interface CountryData {
   name: string
   flag: string
-  code?: string
+  short?: string
   currency: {
     code: string
     symbol: string
