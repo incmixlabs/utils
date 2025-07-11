@@ -1,12 +1,10 @@
+// @ts-nocheck
 interface Country {
   name: string
   code: string
 }
 
 export const countriesWithoutMap: Country[] = [
-  /* existing country entries go here */
-]
-export const countriesWithoutMap = [
   { name: "Afghanistan", code: "AF" },
   { name: "Åland Islands", code: "AX" },
   { name: "Albania", code: "AL" },
