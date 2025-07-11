@@ -33,6 +33,12 @@ export const countries: Record<string, CountryData> =
           symbol: currencySymbol[code] ?? "$",
         },
       }
+      if (country.short) {
+        countriesObject[country.code] = {
+          ...countriesObject[country.code],
+          short: country.short
+        }
+      }
       return countriesObject
     },
     {}
