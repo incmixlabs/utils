@@ -1,4 +1,5 @@
-export default [
+// @ts-nocheck
+export const countriesWithoutMap = [
   { name: "Afghanistan", code: "AF" },
   { name: "Åland Islands", code: "AX" },
   { name: "Albania", code: "AL" },
@@ -243,3 +244,19 @@ export default [
   { name: "Zambia", code: "ZM" },
   { name: "Zimbabwe", code: "ZW" },
 ]
+
+export const countryToCodeLookup = countriesWithoutMap.reduce(
+  (codes, country) => {
+    codes[country.name] = country.code
+    return codes
+  },
+  {}
+)
+
+export const codeToCountryLookup = countriesWithoutMap.reduce(
+  (countries, country) => {
+    countries[country.code] = country.name
+    return countries
+  },
+  {}
+)
