@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { describe, expect, it } from "vitest"
 import { countriesWithoutMap } from "./countries"
 import { countryToCurrency, currencySymbol } from "./currencies"
