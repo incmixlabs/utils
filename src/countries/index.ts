@@ -21,21 +21,22 @@ interface CountryData {
   }
 }
 
-export const countries: Record<string, CountryData> = countriesWithoutMap.reduce(
-  (countriesObject: Record<string, CountryData>, country) => {
-    const code = countryToCurrency[country.code] ?? "USD"
-    countriesObject[country.code] = {
-      name: country.name,
-      flag: getFlag(country.code),
-      currency: {
-        code: code,
-        symbol: currencySymbol[code] ?? "$",
-      },
-    }
-    return countriesObject
-  },
-  {}
-)
+export const countries: Record<string, CountryData> =
+  countriesWithoutMap.reduce(
+    (countriesObject: Record<string, CountryData>, country) => {
+      const code = countryToCurrency[country.code] ?? "USD"
+      countriesObject[country.code] = {
+        name: country.name,
+        flag: getFlag(country.code),
+        currency: {
+          code: code,
+          symbol: currencySymbol[code] ?? "$",
+        },
+      }
+      return countriesObject
+    },
+    {}
+  )
 
 export type Countries = keyof typeof countries
 
