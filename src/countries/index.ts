@@ -15,6 +15,7 @@ export function getFlag(countryCode: string) {
 interface CountryData {
   name: string
   flag: string
+  code?: string
   currency: {
     code: string
     symbol: string
@@ -36,7 +37,7 @@ export const countries: Record<string, CountryData> =
       if (country.short) {
         countriesObject[country.code] = {
           ...countriesObject[country.code],
-          short: country.short
+          short: country.short,
         }
       }
       return countriesObject
