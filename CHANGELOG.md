@@ -1,3 +1,12 @@
+# [0.34.0](https://github.com/incmixlabs/utils/compare/v0.33.0...v0.34.0) (2025-07-15)
+
+
+### Features
+
+* fix flag ([5b7b6b2](https://github.com/incmixlabs/utils/commit/5b7b6b2a91b0389bf2933fbb53c00ca6982244f7))
+
+
+
 # [0.33.0](https://github.com/incmixlabs/utils/compare/v0.32.0...v0.33.0) (2025-07-11)
 
 
@@ -35,15 +44,6 @@
 * countries-flags ([514e0d3](https://github.com/incmixlabs/utils/commit/514e0d3728b485e278487b1b2907b90bf78617a9))
 * version upgrade ([24d05b0](https://github.com/incmixlabs/utils/commit/24d05b09e6be429719af450e39681ba46f17da26))
 * version upgrade ([fce52cf](https://github.com/incmixlabs/utils/commit/fce52cf4df9f6ea71a38d9310be6210ece395ea0))
-
-
-
-## [0.29.2](https://github.com/incmixlabs/utils/compare/v0.29.1...v0.29.2) (2025-07-08)
-
-
-### Bug Fixes
-
-* update project zod schema ([45606c7](https://github.com/incmixlabs/utils/commit/45606c73ffd2ab656d9268b9fd7ce9c06d82ae55))
 
 
 
