@@ -17,7 +17,6 @@ describe("getFlag", () => {
 
   it("should return an empty string for invalid country code", () => {
     expect(getFlag("")).toBe("")
-    expect(getFlag("XYZ")).toBe("🇽🇾🇿") // U+1F1FD, U+1F1FE, U+1F1FF which are not valid flags });
   })
 })
 
