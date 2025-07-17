@@ -19,11 +19,11 @@ export function getFlag(countryCode: string): string {
   if (!countryCode) {
     return ""
   }
-  countryCode = countryCode.trim()
-  if (!countryCode) {
+  const trimmedCode = countryCode.trim()
+  if (!trimmedCode) {
     return ""
   }
-  const upperCaseCode = countryCode.toUpperCase()
+  const upperCaseCode = trimmedCode.toUpperCase()
 
   // Check if the country code is exactly two letters long
   if (upperCaseCode.length !== 2) {
