@@ -131,6 +131,15 @@ export const taskSchemaLiteral = {
       maxLength: 100,
       ref: "label",
     },
+    parentTaskId: {
+      type: "string",
+      maxLength: 100,
+      default: null, // null means it's a top-level task
+    },
+    isSubtask: {
+      type: "boolean",
+      default: false,
+    },
     // order of the task in the project
     taskOrder: {
       type: "number",
@@ -672,6 +681,8 @@ export type TaskDataSchema = {
   name: string
   statusId: string // Changed from columnId
   priorityId: string // New field
+  parentTaskId?: string | null
+  isSubtask?: boolean
   taskOrder: number // Changed from order
   startDate?: number // Changed from string
   endDate?: number // Changed from string
