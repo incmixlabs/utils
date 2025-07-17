@@ -1,3 +1,12 @@
+## [0.34.2](https://github.com/incmixlabs/utils/compare/v0.34.1...v0.34.2) (2025-07-17)
+
+
+### Bug Fixes
+
+* update the version ([dd7af37](https://github.com/incmixlabs/utils/commit/dd7af37e6f778319313ade5bddc51e05245c0ba6))
+
+
+
 ## [0.34.1](https://github.com/incmixlabs/utils/compare/v0.34.0...v0.34.1) (2025-07-17)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * short country code ([49932ef](https://github.com/incmixlabs/utils/commit/49932ef24143ec267786d916401fd61110e50edb))
-
-
-
-# [0.31.0](https://github.com/incmixlabs/utils/compare/v0.30.0...v0.31.0) (2025-07-11)
-
-
-### Features
-
-* add country short code ([7f0112a](https://github.com/incmixlabs/utils/commit/7f0112aa47a164ad2f56f84b562ccff432141085))
 
 
 
