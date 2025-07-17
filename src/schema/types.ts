@@ -101,7 +101,7 @@ export const labelSchemaLiteral = {
 
 export const taskSchemaLiteral = {
   title: "task",
-  version: 1,
+  version: 2,
   primaryKey: "id",
   type: "object",
   properties: {
