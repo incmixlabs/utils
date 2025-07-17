@@ -19,7 +19,7 @@ export const VALID_TIME_TYPES: TimeType[] = [
 ]
 export const labelSchemaLiteral = {
   title: "label",
-  version: 1,
+  version: 0,
   primaryKey: "id",
   type: "object",
   properties: {
@@ -101,7 +101,7 @@ export const labelSchemaLiteral = {
 
 export const taskSchemaLiteral = {
   title: "task",
-  version: 2,
+  version: 0,
   primaryKey: "id",
   type: "object",
   properties: {
