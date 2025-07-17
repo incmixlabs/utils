@@ -1,3 +1,12 @@
+## [0.34.3](https://github.com/incmixlabs/utils/compare/v0.34.2...v0.34.3) (2025-07-17)
+
+
+### Bug Fixes
+
+* update task status schema ([c74f6cf](https://github.com/incmixlabs/utils/commit/c74f6cfc6c05bcb39e0a55528915df674d17997a))
+
+
+
 ## [0.34.2](https://github.com/incmixlabs/utils/compare/v0.34.1...v0.34.2) (2025-07-17)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * type fix ([ec7318f](https://github.com/incmixlabs/utils/commit/ec7318fc1f7bacf7c68950b97f8cb4c8a8a109d6))
-
-
-
-# [0.32.0](https://github.com/incmixlabs/utils/compare/v0.31.0...v0.32.0) (2025-07-11)
-
-
-### Features
-
-* short country code ([49932ef](https://github.com/incmixlabs/utils/commit/49932ef24143ec267786d916401fd61110e50edb))
 
 
 
