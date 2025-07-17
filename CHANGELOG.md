@@ -1,3 +1,12 @@
+## [0.34.1](https://github.com/incmixlabs/utils/compare/v0.34.0...v0.34.1) (2025-07-17)
+
+
+### Bug Fixes
+
+* update the schema for tasks ([b234e1b](https://github.com/incmixlabs/utils/commit/b234e1bd222c8d5ab3655817b0cb86be3f4f01a1))
+
+
+
 # [0.34.0](https://github.com/incmixlabs/utils/compare/v0.33.0...v0.34.0) (2025-07-15)
 
 
@@ -31,19 +40,6 @@
 ### Features
 
 * add country short code ([7f0112a](https://github.com/incmixlabs/utils/commit/7f0112aa47a164ad2f56f84b562ccff432141085))
-
-
-
-# [0.30.0](https://github.com/incmixlabs/utils/compare/v0.29.2...v0.30.0) (2025-07-11)
-
-
-### Features
-
-* countries with flags and currency ([2f973e8](https://github.com/incmixlabs/utils/commit/2f973e8b9d7d99e1cf89871a3cbdb9d3dea55241))
-* countries-flags ([c29de46](https://github.com/incmixlabs/utils/commit/c29de4637d13860fa6ca709951360aa9e7cabd2d))
-* countries-flags ([514e0d3](https://github.com/incmixlabs/utils/commit/514e0d3728b485e278487b1b2907b90bf78617a9))
-* version upgrade ([24d05b0](https://github.com/incmixlabs/utils/commit/24d05b09e6be429719af450e39681ba46f17da26))
-* version upgrade ([fce52cf](https://github.com/incmixlabs/utils/commit/fce52cf4df9f6ea71a38d9310be6210ece395ea0))
 
 
 
