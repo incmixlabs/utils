@@ -132,7 +132,7 @@ export const taskSchemaLiteral = {
       ref: "label",
     },
     parentTaskId: {
-      type: "string",
+      type: ["string", "null"],
       maxLength: 100,
       default: null, // null means it's a top-level task
     },
