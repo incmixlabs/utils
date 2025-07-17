@@ -19,27 +19,29 @@ export function getFlag(countryCode: string): string {
   if (!countryCode) {
     return ""
   }
-  countryCode = countryCode.trim();
-  if (!countryCode) {
+  const trimmedCode = countryCode.trim()
+  if (!trimmedCode) {
     return ""
   }
-  const upperCaseCode = countryCode.toUpperCase();
+  const upperCaseCode = trimmedCode.toUpperCase()
 
   // Check if the country code is exactly two letters long
   if (upperCaseCode.length !== 2) {
     // Return a default or handle invalid input as needed
-    return '🏳️'; // White flag emoji as a fallback
+    return "🏳️" // White flag emoji as a fallback
   }
 
   // Map each letter to its corresponding Regional Indicator Symbol Unicode point
   // The 'A' regional indicator symbol starts at U+1F1E6.
   // We add the character code of the letter (A=0, B=1, etc.) to this base.
   const regionalIndicatorSymbols = upperCaseCode
-    .split('')
-    .map(char => String.fromCodePoint(0x1f1e6 + (char.charCodeAt(0) - 'A'.charCodeAt(0))));
+    .split("")
+    .map((char) =>
+      String.fromCodePoint(0x1f1e6 + (char.charCodeAt(0) - "A".charCodeAt(0)))
+    )
 
   // Join the two regional indicator symbols to form the flag emoji
-  return regionalIndicatorSymbols.join('');
+  return regionalIndicatorSymbols.join("")
 }
 
 interface CountryData {
