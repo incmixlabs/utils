@@ -6,7 +6,7 @@ export function getFlag(countryCode: string) {
   if (!countryCode || countryCode.trim() === "") {
     return ""
   }
-  
+
   const codePoints = countryCode
     .toUpperCase()
     .split("")
@@ -28,7 +28,7 @@ export function getFlag(countryCode: string): string {
   // Check if the country code is exactly two letters long
   if (upperCaseCode.length !== 2) {
     // Return a default or handle invalid input as needed
-    return "🏳️" // White flag emoji as a fallback
+    return "🇺🇸" // White flag emoji as a fallback
   }
 
   // Map each letter to its corresponding Regional Indicator Symbol Unicode point
