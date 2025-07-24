@@ -276,6 +276,7 @@ export const validateProjectData = (
   // Return a sanitized object with all fields properly typed
   return {
     id: data.id,
+    orgId: data.orgId,
     name: data.name,
     company: data.company,
     logo: data.logo,
