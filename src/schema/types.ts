@@ -498,13 +498,17 @@ export const projectSchemaLiteral = {
 
 export const formProjectSchemaLiteral = {
   title: "form projects schema",
-  version: 0,
+  version: 1,
   primaryKey: "id",
   type: "object",
   properties: {
     id: {
       maxLength: 30,
       type: "string",
+    },
+    orgId: {
+      type: "string",
+      maxLength: 50,
     },
     name: {
       type: "string",
@@ -569,6 +573,7 @@ export const formProjectSchemaLiteral = {
   },
   required: [
     "id",
+    "orgId",
     "name",
     "company",
     "description",
@@ -585,6 +590,7 @@ export const formProjectSchemaLiteral = {
  */
 export interface ValidatedProjectData {
   id: string
+  orgId: string
   name: string
   company?: string
   logo?: string
@@ -634,6 +640,7 @@ export const timeTypeSchema = z.union([
 
 export const validatedProjectDataSchema = z.object({
   id: z.string(),
+  orgId: z.string(),
   name: z.string(),
   company: z.string(),
   logo: z.string(),
