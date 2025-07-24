@@ -573,6 +573,7 @@ export const formProjectSchemaLiteral = {
   },
   required: [
     "id",
+    "orgId",
     "name",
     "company",
     "description",
