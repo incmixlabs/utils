@@ -1,3 +1,17 @@
+# [0.35.0](https://github.com/incmixlabs/utils/compare/v0.34.4...v0.35.0) (2025-07-24)
+
+
+### Bug Fixes
+
+* add org id to the project schema ([79f166c](https://github.com/incmixlabs/utils/commit/79f166c471a86563b16c14327aebc2b37c5abd45))
+
+
+### Features
+
+* default flag ([d48cfc9](https://github.com/incmixlabs/utils/commit/d48cfc9101bcc6c5a9408ca1aaf817482546acf8))
+
+
+
 ## [0.34.4](https://github.com/incmixlabs/utils/compare/v0.34.3...v0.34.4) (2025-07-17)
 
 
@@ -31,15 +45,6 @@
 ### Bug Fixes
 
 * update the schema for tasks ([b234e1b](https://github.com/incmixlabs/utils/commit/b234e1bd222c8d5ab3655817b0cb86be3f4f01a1))
-
-
-
-# [0.34.0](https://github.com/incmixlabs/utils/compare/v0.33.0...v0.34.0) (2025-07-15)
-
-
-### Features
-
-* fix flag ([5b7b6b2](https://github.com/incmixlabs/utils/commit/5b7b6b2a91b0389bf2933fbb53c00ca6982244f7))
 
 
 
