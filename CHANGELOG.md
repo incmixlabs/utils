@@ -1,3 +1,13 @@
+# [0.36.0](https://github.com/incmixlabs/utils/compare/v0.35.2...v0.36.0) (2025-07-27)
+
+
+### Features
+
+* task-status-type ([947f5ab](https://github.com/incmixlabs/utils/commit/947f5ab28dc47f6747ebcb3516fa3d037d696a66))
+* task-status-type ([ad4c74c](https://github.com/incmixlabs/utils/commit/ad4c74ce8964036e91bb87ccf61895db55ca0ff5))
+
+
+
 ## [0.35.2](https://github.com/incmixlabs/utils/compare/v0.35.1...v0.35.2) (2025-07-24)
 
 
@@ -36,15 +46,6 @@
 ### Bug Fixes
 
 * revert versions ([a53eb99](https://github.com/incmixlabs/utils/commit/a53eb999c97b3dab16fe1c6a211e3de726dd5e16))
-
-
-
-## [0.34.3](https://github.com/incmixlabs/utils/compare/v0.34.2...v0.34.3) (2025-07-17)
-
-
-### Bug Fixes
-
-* update task status schema ([c74f6cf](https://github.com/incmixlabs/utils/commit/c74f6cfc6c05bcb39e0a55528915df674d17997a))
 
 
 
