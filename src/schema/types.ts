@@ -1216,3 +1216,7 @@ export const DEFAULT_LABELS = [
     description: "High priority tasks",
   },
 ]
+export type TaskStatusDocType = LabelSchema & {
+  type: "status"
+  isDefault?: boolean
+}
