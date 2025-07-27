@@ -1209,3 +1209,24 @@ export const DEFAULT_LABELS = [
     description: "High priority tasks",
   },
 ]
+export type TaskStatusDocType = {
+  id: string
+  projectId: string
+  name: string
+  order: number
+  color: string
+  createdAt: number
+  createdBy: {
+    id: string
+    name: string
+    image?: string | undefined
+  }
+  updatedAt: number
+  updatedBy: {
+    id: string
+    name: string
+    image?: string | undefined
+  }
+  description?: string | undefined
+  isDefault?: boolean | undefined
+}
