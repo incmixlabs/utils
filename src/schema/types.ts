@@ -19,7 +19,7 @@ export const VALID_TIME_TYPES: TimeType[] = [
 ]
 export const labelSchemaLiteral = {
   title: "label",
-  version: 1,
+  version: 0,
   primaryKey: "id",
   type: "object",
   properties: {
@@ -101,7 +101,7 @@ export const labelSchemaLiteral = {
 
 export const taskSchemaLiteral = {
   title: "task",
-  version: 1,
+  version: 0,
   primaryKey: "id",
   type: "object",
   properties: {
@@ -130,6 +130,15 @@ export const taskSchemaLiteral = {
       type: "string",
       maxLength: 100,
       ref: "label",
+    },
+    parentTaskId: {
+      type: ["string", "null"],
+      maxLength: 100,
+      default: null, // null means it's a top-level task
+    },
+    isSubtask: {
+      type: "boolean",
+      default: false,
     },
     // order of the task in the project
     taskOrder: {
@@ -489,13 +498,17 @@ export const projectSchemaLiteral = {
 
 export const formProjectSchemaLiteral = {
   title: "form projects schema",
-  version: 0,
+  version: 1,
   primaryKey: "id",
   type: "object",
   properties: {
     id: {
       maxLength: 30,
       type: "string",
+    },
+    orgId: {
+      type: "string",
+      maxLength: 50,
     },
     name: {
       type: "string",
@@ -560,6 +573,7 @@ export const formProjectSchemaLiteral = {
   },
   required: [
     "id",
+    "orgId",
     "name",
     "company",
     "description",
@@ -576,6 +590,7 @@ export const formProjectSchemaLiteral = {
  */
 export interface ValidatedProjectData {
   id: string
+  orgId: string
   name: string
   company?: string
   logo?: string
@@ -625,6 +640,7 @@ export const timeTypeSchema = z.union([
 
 export const validatedProjectDataSchema = z.object({
   id: z.string(),
+  orgId: z.string(),
   name: z.string(),
   company: z.string(),
   logo: z.string(),
@@ -672,6 +688,8 @@ export type TaskDataSchema = {
   name: string
   statusId: string // Changed from columnId
   priorityId: string // New field
+  parentTaskId?: string | null
+  isSubtask?: boolean
   taskOrder: number // Changed from order
   startDate?: number // Changed from string
   endDate?: number // Changed from string
@@ -1198,3 +1216,7 @@ export const DEFAULT_LABELS = [
     description: "High priority tasks",
   },
 ]
+export type TaskStatusDocType = LabelSchema & {
+  type: "status"
+  isDefault?: boolean
+}

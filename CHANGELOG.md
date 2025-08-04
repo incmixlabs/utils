@@ -1,45 +1,45 @@
-# [0.6.0](https://github.com/incmixlabs/utils/compare/v0.4.0...v0.6.0) (2025-05-30)
+## [0.29.2](https://github.com/incmixlabs/utils/compare/v0.29.1...v0.29.2) (2025-07-08)
+
+
+### Bug Fixes
+
+* update project zod schema ([45606c7](https://github.com/incmixlabs/utils/commit/45606c73ffd2ab656d9268b9fd7ce9c06d82ae55))
+
+
+
+## [0.29.1](https://github.com/incmixlabs/utils/compare/v0.29.0...v0.29.1) (2025-07-07)
+
+
+### Bug Fixes
+
+* project schema ([a67cdd1](https://github.com/incmixlabs/utils/commit/a67cdd16ccda13572fbbf39c92c29c284b33b4f5))
+
+
+
+# [0.29.0](https://github.com/incmixlabs/utils/compare/v0.28.2...v0.29.0) (2025-07-07)
 
 
 ### Features
 
-* publish ([9a6f245](https://github.com/incmixlabs/utils/commit/9a6f2459bdb6025ca1538a0175ca9d40d3d5483b))
+* upgrade zod ([edf3215](https://github.com/incmixlabs/utils/commit/edf3215a33cf77c2df13cef1449a349aa609de7c))
 
 
 
-# [0.4.0](https://github.com/incmixlabs/utils/compare/v0.3.4...v0.4.0) (2025-04-23)
-
-
-### Features
-
-* added more utils ([c651385](https://github.com/incmixlabs/utils/commit/c651385bc0a727de0fb5911fb00629066cdd1f68))
-
-
-
-## [0.3.4](https://github.com/incmixlabs/utils/compare/v0.3.2...v0.3.4) (2025-04-15)
+## [0.28.2](https://github.com/incmixlabs/utils/compare/v0.28.1...v0.28.2) (2025-07-06)
 
 
 ### Bug Fixes
 
-* openapi function error ([5f9af11](https://github.com/incmixlabs/utils/commit/5f9af11061ef12a9d9b83107c5743802d93a1763))
+* remove unused api ([9958930](https://github.com/incmixlabs/utils/commit/9958930aea322cc75bb8a7e572e3afe89017417f))
 
 
 
-## [0.3.2](https://github.com/incmixlabs/utils/compare/v0.3.1...v0.3.2) (2025-04-04)
-
-
-### Bug Fixes
-
-* fix user role in schemas ([929297f](https://github.com/incmixlabs/utils/commit/929297fa0aa823d1df8f7a671d5fec0810940101))
-
-
-
-## [0.3.1](https://github.com/incmixlabs/utils/compare/v0.3.0...v0.3.1) (2025-04-02)
+## [0.28.1](https://github.com/incmixlabs/utils/compare/v0.28.0...v0.28.1) (2025-07-04)
 
 
 ### Bug Fixes
 
-* update type definitions for comments and user roles ([5cfb13b](https://github.com/incmixlabs/utils/commit/5cfb13bf2ab34368e38b8e76208fd9266554fa98))
+* build error ([5a07ee6](https://github.com/incmixlabs/utils/commit/5a07ee6557b0ff0afb280be5076f10db43178416))
 
 
 

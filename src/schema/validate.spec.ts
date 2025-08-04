@@ -85,6 +85,7 @@ it("isValidEnumValue should validate against enumerated values", () => {
 it("validateProjectData should appropriately validate and sanitize data", () => {
   const validData: ValidatedProjectData = {
     id: "proj_01",
+    orgId: "org_01",
     name: "Project Name",
     company: "Company Name",
     logo: "http://example.com/logo.png",

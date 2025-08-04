@@ -78,3 +78,11 @@ export function encodeHTML(str: string) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;")
 }
+export function decodeHTML(str: string) {
+  return str
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+}
