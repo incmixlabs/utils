@@ -10,13 +10,15 @@ export const DbPermissionSchema = z.object({
   role_id: z.number(),
   action: ActionSchema,
   subject: SubjectSchema,
-  conditions: z.optional(z.string()),
+  conditions: z.custom<MongoQuery>().nullish(),
+  name: z.string(),
+  description: z.string().nullish(),
 })
 
 export type DbPermission = z.infer<typeof DbPermissionSchema>
 
 export const PermissionSchema = z.object({
-  action: z.union([ActionSchema, z.array(ActionSchema)]),
+  action: ActionSchema,
   subject: SubjectSchema,
   conditions: z.custom<MongoQuery>().optional(),
 })

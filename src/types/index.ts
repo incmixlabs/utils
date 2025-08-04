@@ -1,7 +1,6 @@
 import { z } from "zod"
 
 import { config } from "../env"
-import { UserRoles, type UserType, UserTypes } from "./user"
 
 export enum Presence {
   online = "online",
@@ -110,13 +109,7 @@ export type Service = {
 
 export const AuthUserSchema = z.object({
   email: z.string().email(),
-  userType: z
-    .enum([
-      UserRoles.ROLE_USER,
-      UserRoles.ROLE_MEMBER,
-      UserRoles.ROLE_SUPER_ADMIN,
-    ])
-    .default(UserRoles.ROLE_MEMBER),
+  isSuperAdmin: z.boolean(),
   emailVerified: z.boolean(),
   id: z.string(),
 })
@@ -147,7 +140,7 @@ export type User<TUser> = TUser & {
   email: string
   emailVerified: boolean
   slug: string
-  userType: UserType
+  isSuperAdmin: boolean
   presence?: Presence
 }
 
