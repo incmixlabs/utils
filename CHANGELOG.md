@@ -1,3 +1,12 @@
+## [0.36.2](https://github.com/incmixlabs/utils/compare/v0.36.0...v0.36.2) (2025-08-04)
+
+
+### Bug Fixes
+
+* update version ([5ca392c](https://github.com/incmixlabs/utils/commit/5ca392c388cb656b04beb1c378c2c0fba6edc360))
+
+
+
 # [0.36.0](https://github.com/incmixlabs/utils/compare/v0.35.2...v0.36.0) (2025-07-27)
 
 
@@ -37,15 +46,6 @@
 ### Features
 
 * default flag ([d48cfc9](https://github.com/incmixlabs/utils/commit/d48cfc9101bcc6c5a9408ca1aaf817482546acf8))
-
-
-
-## [0.34.4](https://github.com/incmixlabs/utils/compare/v0.34.3...v0.34.4) (2025-07-17)
-
-
-### Bug Fixes
-
-* revert versions ([a53eb99](https://github.com/incmixlabs/utils/commit/a53eb999c97b3dab16fe1c6a211e3de726dd5e16))
 
 
 
