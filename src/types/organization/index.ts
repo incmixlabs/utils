@@ -1,7 +1,7 @@
 import { z } from "zod"
 import { PermissionSchema } from "../abilitiy/schemas"
 import type { GroupMembers } from "../groups"
-import { USER_ROLES, type UserRole, UserRoles } from "../user"
+import type { UserRole } from "../user"
 import type { Zone } from "../zones"
 export enum AccessType {
   public = "pb",
@@ -52,15 +52,7 @@ export const MemberDetailsSchema = z.object({
   email: z.string().email(),
   profileImage: z.string().nullable(),
   avatar: z.string().nullable(),
-  role: z
-    .enum([
-      UserRoles.ROLE_ADMIN,
-      UserRoles.ROLE_OWNER,
-      UserRoles.ROLE_VIEWER,
-      UserRoles.ROLE_EDITOR,
-      UserRoles.ROLE_COMMENTER,
-    ])
-    .default(UserRoles.ROLE_OWNER),
+  role: z.string(),
 })
 
 export const MembersResponseSchema = z.array(MemberDetailsSchema)

@@ -1,46 +1,102 @@
-import type {
-  AbilityTuple,
-  Subject as CaslSubject,
-  MongoAbility,
-  MongoQuery,
-  PureAbility,
+import {
+  type AbilityTuple,
+  type InferSubjects,
+  type MongoAbility,
+  subject,
 } from "@casl/ability"
 
 export const actions = ["manage", "create", "read", "update", "delete"] as const
+
+interface Organisation {
+  kind: "Organisation"
+  id: string
+  owner: string
+}
+
+interface Member {
+  kind: "Member"
+  id: string
+}
+
+interface Project {
+  kind: "Project"
+  id: string
+}
+
+interface Task {
+  kind: "Task"
+  id: string
+}
+
+interface Comment {
+  kind: "Comment"
+  id: string
+}
+
+interface Document {
+  kind: "Document"
+  id: string
+}
+
+interface Folder {
+  kind: "Folder"
+  id: string
+}
+
+interface File {
+  kind: "File"
+  id: string
+}
+
+interface ProjectMember {
+  kind: "ProjectMember"
+  id: string
+}
+
+interface Role {
+  kind: "Role"
+  id: string
+}
+
+interface Permission {
+  kind: "Permission"
+  id: string
+}
+
 export const subjects = [
   "all",
   "Organisation",
   "Member",
-  "Role",
-  "User",
   "Project",
   "Task",
   "Comment",
   "Document",
   "Folder",
   "File",
+  "ProjectMember",
+  "Role",
+  "Permission",
 ] as const
 
-type OrganisationSubject = CaslSubject & {
-  id: string
-  owner: string
-}
+export type SubjectTuple = InferSubjects<
+  | Organisation
+  | Member
+  | Project
+  | Task
+  | Comment
+  | Document
+  | Folder
+  | File
+  | ProjectMember
+  | Role
+  | Permission
+  | "all"
+>
 
-type UserSubject = CaslSubject & {
-  id: string
-}
+export type Subject = (typeof subjects)[number]
+export type Action = (typeof actions)[number]
 
-type Actions = (typeof actions)[number]
-type SubjectsTuple =
-  | OrganisationSubject
-  | UserSubject
-  | (typeof subjects)[number]
-
-export type Action = Actions
-export type Subject = SubjectsTuple
-
-export type AbilitiesTuple = AbilityTuple<Action, SubjectsTuple>
-export type Abilities = PureAbility<AbilitiesTuple, MongoQuery>
+export type AbilitiesTuple = AbilityTuple<Action, SubjectTuple>
 
 // MongoAbility is not related to MongoDB,
 // It's just a syntax to define permissions and conditions
