@@ -1,3 +1,12 @@
+## [0.36.3](https://github.com/incmixlabs/utils/compare/v0.36.2...v0.36.3) (2025-08-06)
+
+
+### Bug Fixes
+
+* add permissions api ([d41e341](https://github.com/incmixlabs/utils/commit/d41e34151340f0bcc92886ef963f0e4c02f6f64f))
+
+
+
 ## [0.36.2](https://github.com/incmixlabs/utils/compare/v0.36.0...v0.36.2) (2025-08-04)
 
 
@@ -32,20 +41,6 @@
 ### Bug Fixes
 
 * build failed issue ([ad17dec](https://github.com/incmixlabs/utils/commit/ad17decd02eabf2a067d3973b2df0d11bad16284))
-
-
-
-# [0.35.0](https://github.com/incmixlabs/utils/compare/v0.34.4...v0.35.0) (2025-07-24)
-
-
-### Bug Fixes
-
-* add org id to the project schema ([79f166c](https://github.com/incmixlabs/utils/commit/79f166c471a86563b16c14327aebc2b37c5abd45))
-
-
-### Features
-
-* default flag ([d48cfc9](https://github.com/incmixlabs/utils/commit/d48cfc9101bcc6c5a9408ca1aaf817482546acf8))
 
 
 
