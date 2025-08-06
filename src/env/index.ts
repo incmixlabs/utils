@@ -61,7 +61,7 @@ export const API = {
   EMAIL: "/api/email",
   FILES: "/api/files",
   LOCATION: "/api/location",
-  RATELIMITS: "/api/rate-limits",
+  PERMISSIONS: "/api/permissions",
   PROJECTS: "/api/projects",
   GENAI: "/api/genai",
   COMMENTS: "/api/comments",
