@@ -60,6 +60,10 @@
       "import": "./dist/date/index.js",
       "types": "./dist/date/index.d.ts"
     },
+    "./fetch": {
+      "import": "./dist/fetch/index.js",
+      "types": "./dist/fetch/index.d.ts"
+    },
     "./objects": {
       "import": "./dist/objects/index.js",
       "types": "./dist/objects/index.d.ts"
