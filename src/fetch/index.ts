@@ -12,6 +12,13 @@ export async function secureFetch<T>(
     body: json ? JSON.stringify(json) : undefined,
     ...opts,
   })
-  if (!res.ok) throw new Error(`${url} failed with ${res.status}`)
+  if (!res.ok) {
+    const errorText = await res.text()
+    throw new Error(`Request to ${url} failed with ${res.status}: ${errorText}`)
+  }
+  const contentType = res.headers.get("content-type")
+  if (!contentType?.includes("application/json")) {
+    throw new Error(`Expected JSON response from ${url}, got ${contentType}`)
+  }
   return res.json() as Promise<T>
 }
