@@ -4,8 +4,11 @@ export async function secureFetch<T>(
 ): Promise<T> {
   const { json, ...opts } = init
   const res = await fetch(url, {
-    credentials: "include",
-    headers: json ? { "content-type": "application/json" } : undefined,
+    credentials: opts.credentials ?? "same-origin",
+    headers: {
+      ...(json ? { "Content-Type": "application/json" } : {}),
+      ...opts.headers,
+    },
     body: json ? JSON.stringify(json) : undefined,
     ...opts,
   })

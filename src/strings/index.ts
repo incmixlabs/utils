@@ -38,9 +38,7 @@ export function strEnum<T extends string>(o: T[]): { [K in T]: K } {
   }, Object.create(null))
 }
 export function camelToCapitalize(str: string) {
-  return str
-    .replace(/([a-z])([A-Z])/g, "$1 $2")
-    .toUpperCase()
+  return str.replace(/([a-z])([A-Z])/g, "$1 $2").toUpperCase()
 }
 
 // console.log(camelToCapitalize('camelCaseString')); // Output: CAMEL CASE STRING
