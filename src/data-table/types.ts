@@ -73,8 +73,8 @@ export const kyselyQuerySchema = z.object({
   filters: filterSchema.array().default([]),
   joinOperator: z.enum(["and", "or"]).default("and"),
   pagination: z.object({
-    page: z.number({ coerce: true }).default(1),
-    pageSize: z.number({ coerce: true }).default(10),
+    page: z.coerce.number().default(1),
+    pageSize: z.coerce.number().default(10),
   }),
 })
 
@@ -104,8 +104,8 @@ export type KyselyQuery<Column extends string> = Omit<
 
 export const searchParamsSchema = z.object({
   filters: filterSchema.array().optional(),
-  page: z.number().optional(),
-  pageSize: z.number({ coerce: true }).optional(),
+  page: z.coerce.number().optional(),
+  pageSize: z.coerce.number().optional(),
   sort: sortingItemSchema.array().optional(),
   joinOperator: z.enum(["and", "or"]).optional(),
 })
