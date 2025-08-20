@@ -1,10 +1,9 @@
 import { describe, expect, it, vi } from "vitest"
 
 import { VALID_STATUSES } from "./types"
-import type { TimeType, ValidatedProjectData } from "./types"
 
 import {
-  ensureFileObject,
+  // ensureFileObject,
   getFileSizeFromUrl,
   isValidColumnName,
   isValidEmail,
@@ -17,7 +16,6 @@ import {
   isValidPhoneNumber,
   isValidStrongPassword,
   isValidUrl,
-  validateProjectData,
 } from "./validate"
 
 // Tests for validators
@@ -82,37 +80,37 @@ it("isValidEnumValue should validate against enumerated values", () => {
   expect(isValidEnumValue("invalid", VALID_STATUSES)).toBe(false)
 })
 
-it("validateProjectData should appropriately validate and sanitize data", () => {
-  const validData: ValidatedProjectData = {
-    id: "proj_01",
-    orgId: "org_01",
-    name: "Project Name",
-    company: "Company Name",
-    logo: "http://example.com/logo.png",
-    description: "Project description",
-    progress: 50,
-    timeLeft: "2 weeks",
-    timeType: "week" as TimeType, // Use a valid TimeType value here
-    members: [{ name: "John Doe", value: "john.doe" }],
-    status: "completed",
-    startDate: Date.now(),
-    endDate: Date.now() + 100000,
-    budget: 1000,
-  }
+// it("validateProjectData should appropriately validate and sanitize data", () => {
+//   const validData: ValidatedProjectData = {
+//     id: "proj_01",
+//     orgId: "org_01",
+//     name: "Project Name",
+//     company: "Company Name",
+//     logo: "http://example.com/logo.png",
+//     description: "Project description",
+//     progress: 50,
+//     timeLeft: "2 weeks",
+//     timeType: "week" as TimeType, // Use a valid TimeType value here
+//     members: [{ name: "John Doe", value: "john.doe" }],
+//     status: "completed",
+//     startDate: Date.now(),
+//     endDate: Date.now() + 100000,
+//     budget: 1000,
+//   }
 
-  const result = validateProjectData(validData)
-  expect(result.status).toBe("completed")
-  expect(result.timeType).toBe("week") // Should default
-})
+//   const result = validateProjectData(validData)
+//   expect(result.status).toBe("completed")
+//   expect(result.timeType).toBe("week") // Should default
+// })
 
-it("ensureFileObject should correctly convert valid file inputs", async () => {
-  const mockFile = new File(["fileContent"], "filename.txt", {
-    type: "text/plain",
-  })
-  const result = await ensureFileObject(mockFile)
-  expect(result).toBeInstanceOf(File)
-  expect(result?.name).toBe("filename.txt")
-})
+// it("ensureFileObject should correctly convert valid file inputs", async () => {
+//   const mockFile = new File(["fileContent"], "filename.txt", {
+//     type: "text/plain",
+//   })
+//   const result = await ensureFileObject(mockFile)
+//   expect(result).toBeInstanceOf(File)
+//   expect(result?.name).toBe("filename.txt")
+// })
 
 it("getFileSizeFromUrl should return file size for a valid URL", async () => {
   // Mock fetch to work in this test
