@@ -604,7 +604,11 @@ export type TaskDataSchema = {
     image?: string
   }[]
 
-  subTasks: {
+  /**
+   * Computed/UI-only field derived from parentTaskId/isSubtask.
+   * This field is not persisted with the main Task row.
+   */
+  subTasks?: {
     id: string
     name: string
     completed: boolean
@@ -669,7 +673,7 @@ export type UpdateLabelData = Partial<
 export type TaskLabel = TaskDataSchema["labelsTags"][0]
 export type TaskAttachment = TaskDataSchema["attachments"][0]
 export type TaskAssignee = TaskDataSchema["assignedTo"][0]
-export type TaskSubTask = TaskDataSchema["subTasks"][0]
+export type TaskSubTask = NonNullable<TaskDataSchema["subTasks"]>[0]
 export type TaskComment = {
   id: string
   content: string
