@@ -2,15 +2,6 @@ import isEmail from "validator/lib/isEmail"
 import isMobilePhone from "validator/lib/isMobilePhone"
 import isStrongPassword from "validator/lib/isStrongPassword"
 import isURL from "validator/lib/isURL"
-import type {
-  FileInput,
-  FileLikeObject,
-  ProjectFormData,
-  ProjectStatus,
-  TimeType,
-  ValidatedProjectData,
-} from "./types"
-import { VALID_STATUSES, VALID_TIME_TYPES } from "./types"
 
 export const defaultURLOptions = {
   protocols: ["http", "https", "ftp"],
@@ -239,59 +230,59 @@ export const isValidFacebookProfile = (value: string): boolean => {
   return regex.test(value)
 }
 
-export const validateProjectData = (
-  data: ProjectFormData
-): ValidatedProjectData => {
-  // Validate status
-  let validStatus: ProjectStatus
-  if (VALID_STATUSES.includes(data.status as ProjectStatus)) {
-    validStatus = data.status as ProjectStatus
-  } else {
-    console.warn(
-      `Invalid status "${data.status}" provided, defaulting to "started"`
-    )
-    validStatus = "started"
-  }
+// export const validateProjectData = (
+//   data: ProjectFormData
+// ): ValidatedProjectData => {
+//   // Validate status
+//   let validStatus: ProjectStatus
+//   if (VALID_STATUSES.includes(data.status as ProjectStatus)) {
+//     validStatus = data.status as ProjectStatus
+//   } else {
+//     console.warn(
+//       `Invalid status "${data.status}" provided, defaulting to "started"`
+//     )
+//     validStatus = "started"
+//   }
 
-  // Validate timeType
-  let validTimeType: TimeType
-  if (VALID_TIME_TYPES.includes(data.timeType as TimeType)) {
-    // Map "days" to "day" if needed
-    validTimeType =
-      data.timeType === "days"
-        ? ("day" as TimeType)
-        : (data.timeType as TimeType)
-  } else {
-    console.warn(
-      `Invalid timeType "${data.timeType}" provided, defaulting to "week"`
-    )
-    validTimeType = "week"
-  }
+//   // Validate timeType
+//   let validTimeType: TimeType
+//   if (VALID_TIME_TYPES.includes(data.timeType as TimeType)) {
+//     // Map "days" to "day" if needed
+//     validTimeType =
+//       data.timeType === "days"
+//         ? ("day" as TimeType)
+//         : (data.timeType as TimeType)
+//   } else {
+//     console.warn(
+//       `Invalid timeType "${data.timeType}" provided, defaulting to "week"`
+//     )
+//     validTimeType = "week"
+//   }
 
-  // Handle required fields that might be missing
-  const startDate: number = data.startDate ?? Date.now()
-  const endDate: number = data.endDate ?? Date.now() + 7 * 24 * 60 * 60 * 1000 // Default to 1 week from now
-  const budget: number = data.budget ?? 0
+//   // Handle required fields that might be missing
+//   const startDate: number = data.startDate ?? Date.now()
+//   const endDate: number = data.endDate ?? Date.now() + 7 * 24 * 60 * 60 * 1000 // Default to 1 week from now
+//   const budget: number = data.budget ?? 0
 
-  // Return a sanitized object with all fields properly typed
-  return {
-    id: data.id,
-    orgId: data.orgId,
-    name: data.name,
-    company: data.company,
-    logo: data.logo,
-    description: data.description,
-    progress: data.progress,
-    timeLeft: data.timeLeft,
-    timeType: validTimeType,
-    members: data.members,
-    status: validStatus,
-    startDate: startDate,
-    endDate: endDate,
-    budget: budget,
-    // We'll handle fileInfo separately
-  }
-}
+//   // Return a sanitized object with all fields properly typed
+//   return {
+//     id: data.id,
+//     orgId: data.orgId,
+//     name: data.name,
+//     company: data.company,
+//     logo: data.logo,
+//     description: data.description,
+//     progress: data.progress,
+//     timeLeft: data.timeLeft,
+//     timeType: validTimeType,
+//     members: data.members,
+//     status: validStatus,
+//     startDate: startDate,
+//     endDate: endDate,
+//     budget: budget,
+//     // We'll handle fileInfo separately
+//   }
+// }
 
 /**
  * Creates a proper File object from various possible input formats
@@ -299,87 +290,87 @@ export const validateProjectData = (
  * @returns A proper File object or null if invalid
  */
 
-export const ensureFileObject = async (
-  fileData: File | Blob | FileLikeObject | FileInput | null | undefined
-): Promise<File | null> => {
-  // Early return for null/undefined
-  if (!fileData) {
-    return null
-  }
-  // Case 1: Already a File object
-  if (fileData instanceof File) {
-    // Validate file size and type
-    if (fileData.size === 0) {
-      console.warn("File is empty")
-      return null
-    }
-    return fileData
-  }
+// export const ensureFileObject = async (
+//   fileData: File | Blob | FileLikeObject | FileInput | null | undefined
+// ): Promise<File | null> => {
+//   // Early return for null/undefined
+//   if (!fileData) {
+//     return null
+//   }
+//   // Case 1: Already a File object
+//   if (fileData instanceof File) {
+//     // Validate file size and type
+//     if (fileData.size === 0) {
+//       console.warn("File is empty")
+//       return null
+//     }
+//     return fileData
+//   }
 
-  // Case 2: It's a Blob
-  if (fileData instanceof Blob) {
-    // Blobs don't have a name property, so we need to provide a default name
-    return new File([fileData], "blob_file", { type: fileData.type })
-  }
+//   // Case 2: It's a Blob
+//   if (fileData instanceof Blob) {
+//     // Blobs don't have a name property, so we need to provide a default name
+//     return new File([fileData], "blob_file", { type: fileData.type })
+//   }
 
-  // Case 3: It's a serialized file-like object with necessary properties
-  if (
-    fileData &&
-    typeof fileData === "object" &&
-    "name" in fileData &&
-    "type" in fileData &&
-    "size" in fileData
-  ) {
-    try {
-      // If we have base64 data
-      if ("data" in fileData && typeof fileData.data === "string") {
-        const dataUrlPattern =
-          /^data:([a-zA-Z][a-zA-Z0-9]*[\/][a-zA-Z0-9][a-zA-Z0-9\-\+]*);base64,([A-Za-z0-9+/=]+)$/
-        if (dataUrlPattern.test(fileData.data)) {
-          const [, mimeType] = fileData.data.match(dataUrlPattern) || []
-          // Validate MIME type matches expected type
-          if (fileData.type && mimeType !== fileData.type) {
-            console.warn(
-              "MIME type mismatch between data URL and declared type"
-            )
-            return null
-          }
-          // Check if the data is a valid Base64 string
-          // Explicitly validate the data URL format
-          try {
-            const res = await fetch(fileData.data)
-            const blob = await res.blob()
-            return new File([blob], fileData.name, { type: fileData.type })
-          } catch (error) {
-            console.error("Error processing data URL:", error)
-            return null
-          }
-        } else {
-          console.warn("Invalid or unsupported data URL format")
-          return null
-        }
-      }
+//   // Case 3: It's a serialized file-like object with necessary properties
+//   if (
+//     fileData &&
+//     typeof fileData === "object" &&
+//     "name" in fileData &&
+//     "type" in fileData &&
+//     "size" in fileData
+//   ) {
+//     try {
+//       // If we have base64 data
+//       if ("data" in fileData && typeof fileData.data === "string") {
+//         const dataUrlPattern =
+//           /^data:([a-zA-Z][a-zA-Z0-9]*[\/][a-zA-Z0-9][a-zA-Z0-9\-\+]*);base64,([A-Za-z0-9+/=]+)$/
+//         if (dataUrlPattern.test(fileData.data)) {
+//           const [, mimeType] = fileData.data.match(dataUrlPattern) || []
+//           // Validate MIME type matches expected type
+//           if (fileData.type && mimeType !== fileData.type) {
+//             console.warn(
+//               "MIME type mismatch between data URL and declared type"
+//             )
+//             return null
+//           }
+//           // Check if the data is a valid Base64 string
+//           // Explicitly validate the data URL format
+//           try {
+//             const res = await fetch(fileData.data)
+//             const blob = await res.blob()
+//             return new File([blob], fileData.name, { type: fileData.type })
+//           } catch (error) {
+//             console.error("Error processing data URL:", error)
+//             return null
+//           }
+//         } else {
+//           console.warn("Invalid or unsupported data URL format")
+//           return null
+//         }
+//       }
 
-      // If we have ArrayBuffer or similar
-      if ("arrayBuffer" in fileData || "buffer" in fileData) {
-        const buffer = fileData.arrayBuffer || fileData.buffer
-        if (buffer !== undefined) {
-          return new File([buffer], fileData.name, { type: fileData.type })
-        }
-        console.warn("File-like object provided but buffer is undefined")
-        return null
-      }
+//       // If we have ArrayBuffer or similar
+//       if ("arrayBuffer" in fileData || "buffer" in fileData) {
+//         const buffer = fileData.arrayBuffer || fileData.buffer
+//         if (buffer !== undefined) {
+//           return new File([buffer], fileData.name, { type: fileData.type })
+//         }
+//         console.warn("File-like object provided but buffer is undefined")
+//         return null
+//       }
 
-      console.warn("File-like object provided but missing data content")
-      return null
-    } catch (error) {
-      console.error("Error converting to File object:", error)
-      return null
-    }
-  }
-  console.warn("Unable to process file data:", fileData)
-  return null
-}
+//       console.warn("File-like object provided but missing data content")
+//       return null
+//     } catch (error) {
+//       console.error("Error converting to File object:", error)
+//       return null
+//     }
+//   }
+//   console.warn("Unable to process file data:", fileData)
+//   return null
+// }
 
 export async function getFileSizeFromUrl(url: string): Promise<number | null> {
   try {
