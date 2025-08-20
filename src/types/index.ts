@@ -127,10 +127,10 @@ export const AuthUserSessionSchema = AuthUserSchema.extend({
 export const UserProfileSchema = z.object({
   id: z.string(),
   name: z.string(),
-  email: z.string().email(),
+  email: z.email(),
   profileImage: z.string().nullish().default(null),
   avatar: z.string().nullish().default(null),
-  localeId: z.number({ coerce: true }).int().gt(0),
+  localeId: z.coerce.number().int().gt(0),
 })
 
 export type UserProfile = z.infer<typeof UserProfileSchema>
@@ -304,5 +304,5 @@ export * from "./organization"
 export * from "./user"
 export * from "./abilitiy"
 export * from "./sql"
-export * from "./projects"
+// export * from "./projects"
 export * from "./settings"
