@@ -32,6 +32,7 @@ const statusKeys = [
   "uploadProfilePicture",
   "addProfilePicture",
   "updateUser",
+  "deleteProfilePicture",
   "changePassword",
 ]
 const profileTranslationKeys = [
@@ -44,16 +45,34 @@ const profileTranslationKeys = [
   "changePassword",
 ]
 export type ProfileTranslations = {
-  [K in (typeof profileTranslationKeys)[number]]: string & {
-    error: Status
-    success: Status
-  }
+  profileInformation: string
+  logout: string
+  uploadProfilePicture: string
+  addProfilePicture: string
+  updateUser: string
+  deleteProfilePicture: string
+  changePassword: string
+  error: Status
+  success: Status
 }
-export type Status = {
-  [K in (typeof statusKeys)[number]]: string
+export type Status = Record<(typeof statusKeys)[number], string>
+export const defaultProfileTranslations: ProfileTranslations = {
+  ...(arrayToCapitalObject(profileTranslationKeys) as any),
+  error: {
+    uploadProfilePicture: "Upload Profile Picture",
+    addProfilePicture: "Add Profile Picture",
+    updateUser: "Update User",
+    deleteProfilePicture: "Delete Profile Picture",
+    changePassword: "Change Password",
+  },
+  success: {
+    uploadProfilePicture: "Upload Profile Picture",
+    addProfilePicture: "Add Profile Picture",
+    updateUser: "Update User",
+    deleteProfilePicture: "Delete Profile Picture",
+    changePassword: "Change Password",
+  },
 }
-export const defaultProfileTranslations: ProfileTranslations =
-  arrayToCapitalObject(profileTranslationKeys) as ProfileTranslations
 
 export type I18nTranslations = {
   settings: SettingsTranslations
