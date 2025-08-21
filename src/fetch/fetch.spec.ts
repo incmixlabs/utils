@@ -6,6 +6,23 @@ const mockFetch = vi.fn()
 vi.stubGlobal("fetch", mockFetch)
 
 describe("FetchError class", () => {
+  // … existing tests …
+})
+
+describe("secureFetch function", () => {
+  afterEach(() => {
+    vi.clearAllTimers()
+    mockFetch.mockReset()
+    vi.useRealTimers()
+  })
+
+  afterAll(() => {
+    vi.unstubAllGlobals()
+  })
+
+  // … existing tests …
+})
+describe("FetchError class", () => {
   it("should create FetchError with correct properties", () => {
     const error = new FetchError(
       "Test error",
