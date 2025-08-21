@@ -29,8 +29,8 @@ export function isObject(obj: unknown): obj is Record<string, unknown> {
   return typeof obj === "object" && obj !== null && !Array.isArray(obj)
 }
 
-export function mergeDeep(...objects: any[]): any {
-  if (objects.length === 0) return {}
+export function mergeDeep<T extends Record<string, any>>(...objects: T[]): T {
+  if (objects.length === 0) return {} as T
 
   return objects.reduce((prev, obj) => {
     if (!obj) return prev
@@ -40,16 +40,16 @@ export function mergeDeep(...objects: any[]): any {
       const oVal = obj[key]
 
       if (Array.isArray(pVal) && Array.isArray(oVal)) {
-        prev[key] = [...pVal, ...oVal]
+        ;(prev as any)[key] = [...pVal, ...oVal]
       } else if (isObject(pVal) && isObject(oVal)) {
-        prev[key] = mergeDeep(pVal, oVal)
+        ;(prev as any)[key] = mergeDeep(pVal, oVal)
       } else {
-        prev[key] = oVal
+        ;(prev as any)[key] = oVal
       }
     })
 
     return prev
-  }, {})
+  }, {} as T)
 }
 
 export function isShallowEqual(

@@ -65,9 +65,10 @@ export function getDate(
     const time = timeWithZone.split(".")[0]
 
     return { time, date }
-  } catch (_error) {
+  } catch (error) {
     console.warn(
-      `Invalid timezone: ${timezone}, falling back to ${DEFAULT_TIMEZONE}`
+      `Invalid timezone: ${timezone}, falling back to ${DEFAULT_TIMEZONE}`,
+      error
     )
     if (timezone !== DEFAULT_TIMEZONE) {
       return getDate(DEFAULT_TIMEZONE)
@@ -81,10 +82,7 @@ export function getDate(
   }
 }
 
-export function getWeekDay(
-  dateTime: string | Date | number,
-  _locale = "en-US"
-): string | null {
+export function getWeekDay(dateTime: string | Date | number): string | null {
   try {
     const dt = parseDateTime(dateTime)
     if (!isValid(dt)) {

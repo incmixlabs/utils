@@ -19,7 +19,7 @@ const profile: ProfileTranslations = mergeDeep(defaults.profile, {
     deleteProfilePicture: "Foto de perfil deletada com sucesso",
     changePassword: "Senha alterada com sucesso",
   },
-})
+} as Partial<ProfileTranslations>) as ProfileTranslations
 export const ptTranslations: I18nTranslations = {
   settings: {
     settings: "Configurações",

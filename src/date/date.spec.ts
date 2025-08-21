@@ -111,7 +111,8 @@ describe("getDate function", () => {
     const consoleSpy = vi.spyOn(console, "warn").mockImplementation(() => {})
     const result = getDate("Invalid/Timezone")
     expect(consoleSpy).toHaveBeenCalledWith(
-      "Invalid timezone: Invalid/Timezone, falling back to America/New_York"
+      "Invalid timezone: Invalid/Timezone, falling back to America/New_York",
+      expect.any(Error)
     )
     expect(result).toHaveProperty("date")
     expect(result).toHaveProperty("time")

@@ -60,7 +60,11 @@ export async function secureFetch<T = unknown>(
     }
     // Some runtimes throw DOMException or TypeError for network/abort
     const errorWithName = error as { name?: string }
-    return errorWithName.name === "AbortError" || error instanceof TypeError || error instanceof Error
+    return (
+      errorWithName.name === "AbortError" ||
+      error instanceof TypeError ||
+      error instanceof Error
+    )
   }
 
   const isRetriableError = options.shouldRetry ?? shouldRetryDefault

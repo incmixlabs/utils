@@ -44,8 +44,17 @@ const organizationDetailsTranslationKeys = [
   "deleteConfirmation",
 ]
 export type OrganizationDetailsTranslations = {
-  [K in (typeof organizationDetailsTranslationKeys)[number]]: string
-} & {
+  notFound: string
+  deleteOrganization: string
+  role: string
+  actions: string
+  newMemberEmail: string
+  addMember: string
+  cannotRemoveSelf: string
+  deleteConfirmation: string
+  editRole: string
+  editName: string
+  environmentVariables: string
   success: OrganizationDetailsTranslationMessage
   error: OrganizationDetailsTranslationMessage
 }
