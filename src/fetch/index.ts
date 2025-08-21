@@ -1,3 +1,6 @@
+/**
+ * Custom error class for fetch operations
+ */
 export class FetchError extends Error {
   constructor(
     message: string,
@@ -10,14 +13,30 @@ export class FetchError extends Error {
   }
 }
 
+/**
+ * Configuration options for secure fetch operations
+ */
 export interface SecureFetchOptions extends RequestInit {
+  /** JSON payload to send in request body */
   json?: unknown
+  /** Request timeout in milliseconds (default: 30000) */
   timeout?: number
+  /** Number of retry attempts (default: 0) */
   retries?: number
+  /** Delay between retries in milliseconds (default: 1000) */
   retryDelay?: number
+  /** Custom retry logic function */
+  shouldRetry?: (error: unknown) => boolean
 }
 
-export async function secureFetch<T>(
+/**
+ * Secure fetch function with timeout, retries, and error handling
+ * @param url - The URL to fetch
+ * @param options - Fetch options including custom retry and timeout settings
+ * @returns Promise resolving to the parsed response
+ * @template T - The expected response type
+ */
+export async function secureFetch<T = unknown>(
   url: string,
   options: SecureFetchOptions = {}
 ): Promise<T> {
@@ -29,12 +48,29 @@ export async function secureFetch<T>(
     ...fetchOptions
   } = options
 
-  const controller = new AbortController()
-  const timeoutId = timeout
-    ? setTimeout(() => controller.abort(), timeout)
-    : null
+  const shouldRetryDefault = (error: unknown): boolean => {
+    if (error instanceof FetchError) {
+      // Retry timeouts, 429, 5xx, and status 0 (network)
+      return (
+        error.status === 408 ||
+        error.status === 429 ||
+        error.status >= 500 ||
+        error.status === 0
+      )
+    }
+    // Some runtimes throw DOMException or TypeError for network/abort
+    const errorWithName = error as { name?: string }
+    return errorWithName.name === "AbortError" || error instanceof TypeError || error instanceof Error
+  }
+
+  const isRetriableError = options.shouldRetry ?? shouldRetryDefault
 
   const attemptFetch = async (attempt: number): Promise<T> => {
+    const controller = new AbortController()
+    const timeoutId = timeout
+      ? setTimeout(() => controller.abort(), timeout)
+      : null
+
     try {
       const response = await fetch(url, {
         ...fetchOptions,
@@ -58,17 +94,26 @@ export async function secureFetch<T>(
       }
 
       const contentType = response.headers.get("content-type")
-      if (contentType?.includes("application/json")) {
-        return response.json() as Promise<T>
-      }
+      try {
+        if (contentType?.includes("application/json")) {
+          return (await response.json()) as T
+        }
 
-      if (!contentType || contentType.includes("text/")) {
-        return response.text() as unknown as T
-      }
+        if (!contentType || contentType.includes("text/")) {
+          return (await response.text()) as unknown as T
+        }
 
-      return response.blob() as unknown as T
+        return (await response.blob()) as unknown as T
+      } catch (parseError) {
+        throw new FetchError(
+          `Failed to parse response: ${parseError instanceof Error ? parseError.message : "Unknown parsing error"}`,
+          response.status,
+          url,
+          await response.text().catch(() => "Unable to read response text")
+        )
+      }
     } catch (error) {
-      if (attempt < retries) {
+      if (attempt < retries && isRetriableError(error)) {
         await new Promise((resolve) =>
           setTimeout(resolve, retryDelay * (attempt + 1))
         )
