@@ -1,3 +1,23 @@
+# [0.45.0](https://github.com/incmixlabs/utils/compare/v0.44.0...v0.45.0) (2025-08-21)
+
+
+### Bug Fixes
+
+* based on coderabbit ([3a54218](https://github.com/incmixlabs/utils/commit/3a5421889352d4773b1bc1ef8fdeef41a9e3dc65))
+* based on coderabbit ([9453b82](https://github.com/incmixlabs/utils/commit/9453b827b008a6f8a10a6702558d503d6c3f05f4))
+* remove tsx and upgrade vitest ([4c7db78](https://github.com/incmixlabs/utils/commit/4c7db7898bd01e8a97156b2a870c64a6d9b42da2))
+
+
+### Features
+
+* add data-table tests ([9657cda](https://github.com/incmixlabs/utils/commit/9657cda0f0062a7f8b185d9fab0f802c75cef64f))
+* fix code rabbit comments ([df944b4](https://github.com/incmixlabs/utils/commit/df944b4f040b84dfabfe5efdd9b2776a05f0f395))
+* refactor ([1dc5d82](https://github.com/incmixlabs/utils/commit/1dc5d82c5223ac19f28a5fe4aa8a35938533be37))
+* refactor ([cbece2e](https://github.com/incmixlabs/utils/commit/cbece2e7ed774d3235ad873574ec0064b1926965))
+* refactor ([309d01b](https://github.com/incmixlabs/utils/commit/309d01b2ee9b275e9d77675246487d32eefa535a))
+
+
+
 # [0.44.0](https://github.com/incmixlabs/utils/compare/v0.43.0...v0.44.0) (2025-08-21)
 
 
@@ -32,15 +52,6 @@
 
 * fix types ([501db89](https://github.com/incmixlabs/utils/commit/501db89573d0cecd26213ffb537cb2c0cbf9d6e8))
 * fix types ([0fd9a96](https://github.com/incmixlabs/utils/commit/0fd9a96a3a84460ee9444e9940a5b51b584dbf92))
-
-
-
-# [0.40.0](https://github.com/incmixlabs/utils/compare/v0.39.0...v0.40.0) (2025-08-21)
-
-
-### Features
-
-* fix release ([be22bd5](https://github.com/incmixlabs/utils/commit/be22bd5a976ac22ed5635dddd1dd5e8ce63a3fd1))
 
 
 
