@@ -110,6 +110,8 @@ export function truncate(
   suffix = "..."
 ): string {
   if (!str || str.length <= maxLength) return str
+  if (maxLength <= 0) return ""
+  if (suffix.length >= maxLength) return str.slice(0, maxLength)
   return str.slice(0, maxLength - suffix.length) + suffix
 }
 
