@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-import { config } from "../env"
+import { config } from "../fetch/env"
 
 export enum Presence {
   online = "online",
