@@ -94,28 +94,56 @@ export function isEmpty(obj: unknown): boolean {
 }
 
 export function deepClone<T>(obj: T): T {
-  if (obj === null || typeof obj !== "object") return obj
-  if (obj instanceof Date) return new Date(obj.getTime()) as T
-  if (Array.isArray(obj)) return obj.map((item) => deepClone(item)) as T
-  if (obj instanceof Set)
-    return new Set(Array.from(obj).map((item) => deepClone(item))) as T
-  if (obj instanceof Map) {
-    return new Map(
-      Array.from(obj.entries()).map(([key, value]) => [
-        deepClone(key),
-        deepClone(value),
-      ])
-    ) as T
-  }
-
-  const cloned = {} as T
-  for (const key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      cloned[key] = deepClone(obj[key])
+  // Fast path where available
+  if (typeof (globalThis as any).structuredClone === "function") {
+    try {
+      return (globalThis as any).structuredClone(obj)
+    } catch {
+      // fall through to manual clone
     }
   }
 
-  return cloned
+  const seen = new WeakMap<object, any>()
+
+  const clone = <U>(value: U): U => {
+    if (value === null || typeof value !== "object") return value
+
+    // Handle known built-ins
+    if (value instanceof Date) return new Date(value.getTime()) as unknown as U
+    if (value instanceof RegExp) return new RegExp(value.source, value.flags) as unknown as U
+    if (Array.isArray(value)) return (value as unknown as unknown[]).map((v) => clone(v)) as unknown as U
+    if (value instanceof Set) return new Set(Array.from(value, (v) => clone(v))) as unknown as U
+    if (value instanceof Map)
+      return new Map(
+        Array.from(value.entries(), ([k, v]) => [clone(k), clone(v)])
+      ) as unknown as U
+
+    // Cycle handling
+    if (seen.has(value as unknown as object)) {
+      return seen.get(value as unknown as object)
+    }
+
+    // Preserve prototype and property descriptors
+    const proto = Object.getPrototypeOf(value as object)
+    const result = Object.create(proto)
+    seen.set(value as unknown as object, result)
+
+    for (const key of Reflect.ownKeys(value as object)) {
+      const desc = Object.getOwnPropertyDescriptor(
+        value as object,
+        key as PropertyKey
+      )
+      if (!desc) continue
+      if ("value" in desc) {
+        // @ts-expect-error indexer assignment through descriptor
+        desc.value = clone((value as any)[key as any])
+      }
+      Object.defineProperty(result, key, desc)
+    }
+    return result
+  }
+
+  return clone(obj)
 }
 
 export function groupBy<T, K extends string | number | symbol>(
