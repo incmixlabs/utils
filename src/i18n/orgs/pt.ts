@@ -29,8 +29,8 @@ const organizationDetails: OrganizationDetailsTranslations = mergeDeep(
       deleteOrganization: "Erro ao excluir organização",
       updateOrganizationName: "Erro ao atualizar nome da organização",
     },
-  }
-)
+  } as Partial<OrganizationDetailsTranslations>
+) as OrganizationDetailsTranslations
 export const ptTranslations: I18nTranslations = {
   organizations: {
     title: "Organizações",

@@ -3,6 +3,14 @@ import isMobilePhone from "validator/lib/isMobilePhone"
 import isStrongPassword from "validator/lib/isStrongPassword"
 import isURL from "validator/lib/isURL"
 
+export interface ValidationResult {
+  isValid: boolean
+  error?: string
+}
+
+export type Validator<T = string> = (value: T) => boolean
+export type ValidatorWithOptions<T, O> = (value: T, options?: O) => boolean
+
 export const defaultURLOptions = {
   protocols: ["http", "https", "ftp"],
   require_tld: true,
@@ -26,7 +34,7 @@ export const defaultPasswordOptions = {
   minUppercase: 1,
   minNumbers: 1,
   minSymbols: 1,
-  returnScore: false,
+  returnScore: false as const,
   pointsPerUnique: 1,
   pointsPerRepeat: 0.5,
   pointsForContainingLower: 10,
@@ -40,12 +48,13 @@ export const isValidEmail = (value: string): boolean => isEmail(value)
 export const isValidPassword = (value: string): boolean =>
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/.test(value)
 
-// @ts-ignore
-export const isValidStrongPassword = (
-  value: string,
-  options: DefaultPasswordOptions = defaultPasswordOptions
-  // @ts-ignore
-): boolean => isStrongPassword(value, options)
+export const isValidStrongPassword: ValidatorWithOptions<
+  string,
+  Partial<DefaultPasswordOptions>
+> = (value, options = {}): boolean => {
+  const mergedOptions = { ...defaultPasswordOptions, ...options }
+  return isStrongPassword(value, mergedOptions)
+}
 
 export const isValidColumnName = (value: string): boolean =>
   /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(value)
@@ -62,8 +71,10 @@ export const isValidPhoneNumber = (value: string): boolean => {
   }
   return isMobilePhone(phoneValue)
 }
-export const isValidDate = (value: string): boolean =>
-  !Number.isNaN(Date.parse(value)) // Check if the date can be parsed
+export const isValidDate = (value: string): boolean => {
+  const parsed = Date.parse(value)
+  return !Number.isNaN(parsed) && parsed > 0
+}
 export const isValidJson = (value: string): boolean => {
   try {
     JSON.parse(value)
@@ -100,36 +111,44 @@ export function isValidIPAddress(ip: string): boolean {
 export const isValidMacAddress = (value: string): boolean =>
   /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/.test(value)
 export const isValidTime = (value: string): boolean =>
-  /^([01]\d|2[0-3]):([0-5]\d)$/.test(value) // HH:mm format
-export const isValidLatitude = (value: string): boolean =>
-  /^-?(90(\.0+)?|([1-8]?\d(\.\d+)?))$/.test(value)
-export const isValidLongitude = (value: string): boolean =>
-  /^-?(180(\.0+)?|((1[0-7]\d|[1-9]?\d)(\.\d+)?))$/.test(value)
+  /^([01]\d|2[0-3]):([0-5]\d)$/.test(value)
+export const isValidLatitude = (value: string): boolean => {
+  const num = Number.parseFloat(value)
+  return !Number.isNaN(num) && num >= -90 && num <= 90
+}
+export const isValidLongitude = (value: string): boolean => {
+  const num = Number.parseFloat(value)
+  return !Number.isNaN(num) && num >= -180 && num <= 180
+}
 export const isValidUSPostalCode = (value: string): boolean =>
-  /^[0-9]{5}(?:-[0-9]{4})?$/.test(value) // US ZIP code format
+  /^[0-9]{5}(?:-[0-9]{4})?$/.test(value)
+export const POSTAL_CODE_PATTERNS: Record<string, RegExp> = {
+  US: /^[0-9]{5}(?:-[0-9]{4})?$/,
+  CA: /^[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d$/,
+  UK: /^[A-Za-z]{1,2}\d[A-Za-z\d]? ?\d[A-Za-z]{2}$/,
+  DE: /^\d{5}$/,
+  FR: /^\d{5}$/,
+  JP: /^\d{3}-?\d{4}$/,
+  AU: /^\d{4}$/,
+  BR: /^\d{5}-?\d{3}$/,
+  DEFAULT: /^[\w\s-]{3,10}$/,
+}
+
 export const isValidPostalCode = (value: string, country = "US"): boolean => {
-  // Add country-specific validation logic
-  switch (country.toUpperCase()) {
-    case "US":
-      return isValidUSPostalCode(value)
-    case "CA":
-      return /^[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d$/.test(value) // Canada
-    case "UK":
-      return /^[A-Za-z]{1,2}\d[A-Za-z\d]? ?\d[A-Za-z]{2}$/.test(value) // UK
-    default:
-      return /^[\w\s-]{3,10}$/.test(value) // Generic fallback
-  }
+  const pattern =
+    POSTAL_CODE_PATTERNS[country.toUpperCase()] || POSTAL_CODE_PATTERNS.DEFAULT
+  return pattern.test(value)
 }
 export const isValidCountryCode = (value: string): boolean =>
-  /^[A-Z]{2}$/.test(value) // ISO 3166-1 alpha-2 format
+  /^[A-Z]{2}$/.test(value)
 export const isValidCurrencyCode = (value: string): boolean =>
-  /^[A-Z]{3}$/.test(value) // ISO 4217 format
-export const isValidEnumValue = (
+  /^[A-Z]{3}$/.test(value)
+export const isValidEnumValue = <T extends string>(
   value: string,
-  enumValues: string[]
-): boolean => enumValues.includes(value)
+  enumValues: readonly T[]
+): value is T => enumValues.includes(value as T)
 export const isValidFileName = (value: string): boolean =>
-  /^[^<>:"/\\|?*]+$/.test(value) // Basic validation for file names
+  /^[^<>:"/\\|?*]+$/.test(value)
 export const isValidJsonSchema = (value: string): boolean => {
   try {
     const schema = JSON.parse(value)
@@ -140,6 +159,9 @@ export const isValidJsonSchema = (value: string): boolean => {
   }
 }
 export const isValidXml = (value: string): boolean => {
+  if (typeof DOMParser === "undefined") {
+    return false
+  }
   try {
     const parser = new DOMParser()
     const xmlDoc = parser.parseFromString(value, "application/xml")
@@ -172,12 +194,19 @@ export const isValidBase64 = (value: string): boolean => {
   }
 }
 export const isValidHtml = (value: string): boolean => {
-  const parser = new DOMParser()
-  const doc = parser.parseFromString(value, "text/html")
-  return !doc.querySelector("parsererror") // Check if there are any parsing errors
+  if (typeof DOMParser === "undefined") {
+    return false
+  }
+  try {
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(value, "text/html")
+    return !doc.querySelector("parsererror")
+  } catch {
+    return false
+  }
 }
 export const isValidSlug = (value: string): boolean =>
-  /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) // Slug format: lowercase letters, numbers, and hyphens
+  /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value)
 export const isValidTimeZone = (value: string): boolean => {
   try {
     Intl.DateTimeFormat(undefined, { timeZone: value })
@@ -188,45 +217,45 @@ export const isValidTimeZone = (value: string): boolean => {
 }
 
 export const isValidIBAN = (value: string): boolean => {
-  const regex = /^[A-Z]{2}\d{2}[A-Z0-9]{1,30}$/ // Basic IBAN format
+  const regex = /^[A-Z]{2}\d{2}[A-Z0-9]{1,30}$/
   if (!regex.test(value)) return false
 
   // Rearrange the IBAN for validation
   const rearranged = value.slice(4) + value.slice(0, 4)
   const numericIBAN = rearranged.replace(/[A-Z]/g, (char) =>
     (char.charCodeAt(0) - 55).toString()
-  ) // Convert letters to numbers
+  )
 
   // Check if the numeric IBAN is divisible by 97
   return BigInt(numericIBAN) % BigInt(97) === BigInt(1)
 }
 export const isValidSwiftCode = (value: string): boolean => {
-  const regex = /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/ // Basic SWIFT/BIC format
+  const regex = /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/
   return regex.test(value)
 }
 export const isValidGitHubUsername = (value: string): boolean => {
-  const regex = /^(?!-)[a-zA-Z0-9-]{1,39}(?<!-)$/ // GitHub username rules
+  const regex = /^(?!-)[a-zA-Z0-9-]{1,39}(?<!-)$/
   return regex.test(value)
 }
 export const isValidTwitterHandle = (value: string): boolean => {
-  const regex = /^@?([A-Za-z0-9_]{1,15})$/ // Twitter handle rules
+  const regex = /^@?([A-Za-z0-9_]{1,15})$/
   return regex.test(value)
 }
 export const isValidInstagramHandle = (value: string): boolean => {
-  const regex = /^@?([A-Za-z0-9._]{1,30})$/ // Instagram handle rules
+  const regex = /^@?([A-Za-z0-9._]{1,30})$/
   return regex.test(value)
 }
 export const isValidLinkedInProfile = (value: string): boolean => {
-  const regex = /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[A-Za-z0-9_-]+\/?$/ // LinkedIn profile URL format
+  const regex = /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[A-Za-z0-9_-]+\/?$/
   return regex.test(value)
 }
 export const isValidYouTubeChannel = (value: string): boolean => {
   const regex =
-    /^(https?:\/\/)?(www\.)?youtube\.com\/(channel|user)\/[A-Za-z0-9_-]+\/?$/ // YouTube channel URL format
+    /^(https?:\/\/)?(www\.)?youtube\.com\/(channel|user)\/[A-Za-z0-9_-]+\/?$/
   return regex.test(value)
 }
 export const isValidFacebookProfile = (value: string): boolean => {
-  const regex = /^(https?:\/\/)?(www\.)?facebook\.com\/[A-Za-z0-9._-]+\/?$/ // Facebook profile URL format
+  const regex = /^(https?:\/\/)?(www\.)?facebook\.com\/[A-Za-z0-9._-]+\/?$/
   return regex.test(value)
 }
 

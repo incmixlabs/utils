@@ -1,5 +1,3 @@
-import type { DateTime } from "luxon"
-
 export type ProjectStatus = "all" | "started" | "on-hold" | "completed"
 export type TimeType = "day" | "days" | "week" | "month" | "year"
 import { z } from "zod"
@@ -773,8 +771,8 @@ export type TableSchema = {
 export interface Project {
   id: string
   name: string
-  startDate: DateTime
-  endDate: DateTime
+  startDate: Date
+  endDate: Date
   progress: number
   color: string
   subProjects?: Project[]
