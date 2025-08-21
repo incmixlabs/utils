@@ -24,7 +24,7 @@ export const methods = {
   PATCH: "PATCH",
 }
 const method = Object.keys(methods)
-export type Method = (typeof method)[number]
+export type HttpMethod = (typeof method)[number]
 
 const persistence = {
   "local-first": "local-first",
@@ -44,7 +44,7 @@ export type Ops = (typeof ops)[keyof typeof ops]
 export type OpPersistence = {
   op: Ops
   persistence: Persistence
-  method?: Method
+  method?: HttpMethod
   updateFreq?: UpdateFreq
   streaming?: boolean
   dataSize?: DataSize
