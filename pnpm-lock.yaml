@@ -14,9 +14,6 @@ importers:
       '@date-fns/tz':
         specifier: ^1.2.0
         version: 1.2.0
-      '@incmix/utils':
-        specifier: 'link:'
-        version: 'link:'
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
