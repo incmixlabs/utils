@@ -110,9 +110,14 @@ export function deepClone<T>(obj: T): T {
 
     // Handle known built-ins
     if (value instanceof Date) return new Date(value.getTime()) as unknown as U
-    if (value instanceof RegExp) return new RegExp(value.source, value.flags) as unknown as U
-    if (Array.isArray(value)) return (value as unknown as unknown[]).map((v) => clone(v)) as unknown as U
-    if (value instanceof Set) return new Set(Array.from(value, (v) => clone(v))) as unknown as U
+    if (value instanceof RegExp)
+      return new RegExp(value.source, value.flags) as unknown as U
+    if (Array.isArray(value))
+      return (value as unknown as unknown[]).map((v) =>
+        clone(v)
+      ) as unknown as U
+    if (value instanceof Set)
+      return new Set(Array.from(value, (v) => clone(v))) as unknown as U
     if (value instanceof Map)
       return new Map(
         Array.from(value.entries(), ([k, v]) => [clone(k), clone(v)])
@@ -135,7 +140,6 @@ export function deepClone<T>(obj: T): T {
       )
       if (!desc) continue
       if ("value" in desc) {
-        // @ts-expect-error indexer assignment through descriptor
         desc.value = clone((value as any)[key as any])
       }
       Object.defineProperty(result, key, desc)
