@@ -1,3 +1,12 @@
+# [0.43.0](https://github.com/incmixlabs/utils/compare/v0.42.0...v0.43.0) (2025-08-21)
+
+
+### Features
+
+* fix vulnerabilities ([f632402](https://github.com/incmixlabs/utils/commit/f6324026cd48e493ae49c4426f21a64f8a49a7a1))
+
+
+
 # [0.42.0](https://github.com/incmixlabs/utils/compare/v0.41.0...v0.42.0) (2025-08-21)
 
 
@@ -44,20 +53,6 @@
 * remove fe query params ([5fca6f1](https://github.com/incmixlabs/utils/commit/5fca6f1732a3832ca04f90cb846d8ce8b61f7db2))
 * remove fe queryParams ([0406cad](https://github.com/incmixlabs/utils/commit/0406cadcc0d3ad272a91ca6ec27cd0b7a14bd391))
 * update project schema ([8006cf0](https://github.com/incmixlabs/utils/commit/8006cf04c7f93c5513a3530122c575819c5cd645))
-
-
-
-# [0.38.0](https://github.com/incmixlabs/utils/compare/v0.37.0...v0.38.0) (2025-08-20)
-
-
-### Bug Fixes
-
-* task types ([5cfe4ff](https://github.com/incmixlabs/utils/commit/5cfe4ff2f2e49cd3f6bb9f5ceeee4e14989b1b17))
-
-
-### Features
-
-* update project schema ([79d829f](https://github.com/incmixlabs/utils/commit/79d829f54b8511496a10a71682fcf3ac9083b761))
 
 
 
