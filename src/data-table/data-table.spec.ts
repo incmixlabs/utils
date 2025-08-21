@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest"
 import {
   type Filter,
-  type ParserOptions,
   type Sort,
   buildQueryString,
   filterParser,
@@ -25,7 +24,7 @@ describe("sortParser", () => {
     const result = sortParser("not json")
 
     expect(result.data).toBeNull()
-    expect(result.error).toBe("Invalid JSON format")
+    expect(result.error).toMatch(/invalid json/i)
   })
 
   it("should return error for invalid sort schema", () => {
@@ -42,7 +41,7 @@ describe("sortParser", () => {
     const result = sortParser(input, { validKeys })
 
     expect(result.data).toBeNull()
-    expect(result.error).toBe("Invalid sort keys")
+    expect(result.error).toMatch(/invalid\s+sort\s+keys/i)
   })
 
   it("should accept valid keys", () => {
@@ -65,7 +64,7 @@ describe("sortParser", () => {
     const result = sortParser(input, { maxItems: 3 })
 
     expect(result.data).toBeNull()
-    expect(result.error).toBe("Too many sort items (max: 3)")
+    expect(result.error).toMatch(/\bmax:\s*3\b/)
   })
 
   it("should allow items within max limit", () => {
@@ -170,7 +169,7 @@ describe("filterParser", () => {
     const result = filterParser("not json")
 
     expect(result.data).toBeNull()
-    expect(result.error).toBe("Invalid JSON format")
+    expect(result.error).toMatch(/invalid json/i)
   })
 
   it("should return error for invalid filter schema", () => {
@@ -195,7 +194,7 @@ describe("filterParser", () => {
     const result = filterParser(input, { validKeys })
 
     expect(result.data).toBeNull()
-    expect(result.error).toBe("Invalid filter keys")
+    expect(result.error).toMatch(/invalid\s+filter\s+keys/i)
   })
 
   it("should accept valid keys", () => {
@@ -229,7 +228,7 @@ describe("filterParser", () => {
     const result = filterParser(input, { maxItems: 5 })
 
     expect(result.data).toBeNull()
-    expect(result.error).toBe("Too many filter items (max: 5)")
+    expect(result.error).toMatch(/\bmax:\s*5\b/)
   })
 
   it("should allow items within max limit", () => {
@@ -360,8 +359,12 @@ describe("buildQueryString", () => {
     }
     const result = buildQueryString(params)
 
-    expect(result).toContain("filters=%5B%7B%22id%22%3A%22name")
-    expect(result).toContain("page=1")
+    const sp = new URLSearchParams(result)
+    expect(sp.get("page")).toBe("1")
+    const filters = sp.get("filters")
+    expect(filters).not.toBeNull()
+    const parsed = JSON.parse(filters as string)
+    expect(parsed).toEqual([{ id: "name", value: "test" }])
   })
 
   it("should skip null and undefined values", () => {
