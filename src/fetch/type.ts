@@ -21,6 +21,7 @@ export const methods = {
   POST: "POST",
   PUT: "PUT",
   DELETE: "DELETE",
+  PATCH: "PATCH",
 }
 const method = Object.keys(methods)
 export type Method = (typeof method)[number]
@@ -54,15 +55,4 @@ export type endPointDef = {
   discoverable?: boolean
   opPersistence?: OpPersistence[]
   localPersist?: LocalPersistType
-}
-export type Query = {
-  queryKey: string
-  queryUrl?: string
-  queryPath: string
-  queryParams?: Record<string, any>
-  method?: Method
-  streaming?: boolean
-  persistTypes?: LocalPersistType[]
-  dataSize?: DataSize
-  updateFreq?: UpdateFreq
 }
