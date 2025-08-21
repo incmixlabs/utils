@@ -53,8 +53,8 @@
       "types": "./dist/data-table/index.d.s"
     },
     "./env": {
-      "import": "./dist/env/index.js",
-      "types": "./dist/env/index.d.ts"
+      "import": "./dist/fetch/env/index.js",
+      "types": "./dist/fetch/env/index.d.ts"
     },
     "./date": {
       "import": "./dist/date/index.js",
