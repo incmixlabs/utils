@@ -1,3 +1,12 @@
+# [0.42.0](https://github.com/incmixlabs/utils/compare/v0.41.0...v0.42.0) (2025-08-21)
+
+
+### Features
+
+* fix env exports ([ff1a456](https://github.com/incmixlabs/utils/commit/ff1a456e8e339ab502f79b7b0ffc09d8ef6a2fed))
+
+
+
 # [0.41.0](https://github.com/incmixlabs/utils/compare/v0.40.0...v0.41.0) (2025-08-21)
 
 
@@ -49,23 +58,6 @@
 ### Features
 
 * update project schema ([79d829f](https://github.com/incmixlabs/utils/commit/79d829f54b8511496a10a71682fcf3ac9083b761))
-
-
-
-# [0.37.0](https://github.com/incmixlabs/utils/compare/v0.36.3...v0.37.0) (2025-08-08)
-
-
-### Bug Fixes
-
-* updated permissions types ([7fd86a4](https://github.com/incmixlabs/utils/commit/7fd86a4086ded1a9401d971824cfb8f86320981c))
-
-
-### Features
-
-* utils and fetch ([c8ae85a](https://github.com/incmixlabs/utils/commit/c8ae85a5c7c90a1088563c6cedd8ac8251e712b9))
-* utils and fetch ([603f68e](https://github.com/incmixlabs/utils/commit/603f68e7ab4f33d0089d9d6fbb1eab5eeda78a5b))
-* utils and fetch ([5e832c3](https://github.com/incmixlabs/utils/commit/5e832c398c7ab185f1579b6aab2e3caa1424da42))
-* utils and fetch ([beabbd1](https://github.com/incmixlabs/utils/commit/beabbd18adc8d9a29d98353a6ac5c0881a8f3a95))
 
 
 
