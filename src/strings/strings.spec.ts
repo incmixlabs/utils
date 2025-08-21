@@ -1,6 +1,21 @@
 import { describe, expect, it } from "vitest"
-import { capitalizedToCamel, isJSONString as isJSON } from "./index"
-// adjust the path as needed
+import {
+  camelToCapitalize,
+  camelToCapitalized,
+  camelize,
+  capitalize,
+  capitalizedToCamel,
+  decodeHTML,
+  encodeHTML,
+  getInitials,
+  isJSONString as isJSON,
+  isNumeric,
+  kebabCase,
+  pascalCase,
+  snakeCase,
+  strEnum,
+  truncate,
+} from "./index"
 
 describe("isJSON", () => {
   it("should return true for valid JSON objects", () => {
@@ -41,6 +56,13 @@ describe("isJSON", () => {
     expect(isJSON(' { "key": "value" } ')).toBe(true)
     expect(isJSON(' {\n"key": "value"\n} ')).toBe(true)
     expect(isJSON('[\n  {"key": "value"}\n]')).toBe(true)
+  })
+
+  it("should return false for non-string input", () => {
+    expect(isJSON(123)).toBe(false)
+    expect(isJSON(null)).toBe(false)
+    expect(isJSON(undefined)).toBe(false)
+    expect(isJSON({})).toBe(false)
   })
 })
 
@@ -104,5 +126,252 @@ describe("capitalizedToCamel", () => {
     const input = "Hello World 123"
     const expectedOutput = "helloWorld123"
     expect(capitalizedToCamel(input)).to.equal(expectedOutput)
+  })
+})
+
+describe("camelize function", () => {
+  it("should convert kebab-case to camelCase", () => {
+    expect(camelize("hello-world")).toBe("helloWorld")
+    expect(camelize("first-name-last-name")).toBe("firstNameLastName")
+  })
+
+  it("should convert snake_case to camelCase", () => {
+    expect(camelize("hello_world")).toBe("helloWorld")
+    expect(camelize("first_name_last_name")).toBe("firstNameLastName")
+  })
+
+  it("should handle mixed separators", () => {
+    expect(camelize("hello-world_test")).toBe("helloWorldTest")
+  })
+
+  it("should handle empty string", () => {
+    expect(camelize("")).toBe("")
+  })
+
+  it("should handle single word", () => {
+    expect(camelize("hello")).toBe("hello")
+  })
+
+  it("should lowercase first character if uppercase", () => {
+    expect(camelize("Hello-World")).toBe("helloWorld")
+  })
+})
+
+describe("isNumeric function", () => {
+  it("should return true for valid numbers", () => {
+    expect(isNumeric("123")).toBe(true)
+    expect(isNumeric("123.45")).toBe(true)
+    expect(isNumeric("-123")).toBe(true)
+    expect(isNumeric("0")).toBe(true)
+    expect(isNumeric("0.0")).toBe(true)
+  })
+
+  it("should return false for non-numeric strings", () => {
+    expect(isNumeric("abc")).toBe(false)
+    expect(isNumeric("123abc")).toBe(false)
+    expect(isNumeric("")).toBe(false)
+    expect(isNumeric("   ")).toBe(false)
+  })
+
+  it("should return false for non-string input", () => {
+    expect(isNumeric(null as any)).toBe(false)
+    expect(isNumeric(undefined as any)).toBe(false)
+    expect(isNumeric(123 as any)).toBe(false)
+  })
+
+  it("should handle strings with whitespace", () => {
+    expect(isNumeric(" 123 ")).toBe(true)
+    expect(isNumeric(" 123.45 ")).toBe(true)
+  })
+})
+
+describe("capitalize function", () => {
+  it("should capitalize first letter", () => {
+    expect(capitalize("hello")).toBe("Hello")
+    expect(capitalize("HELLO")).toBe("Hello")
+    expect(capitalize("hELLO")).toBe("Hello")
+  })
+
+  it("should handle empty string", () => {
+    expect(capitalize("")).toBe("")
+  })
+
+  it("should handle single character", () => {
+    expect(capitalize("a")).toBe("A")
+    expect(capitalize("A")).toBe("A")
+  })
+})
+
+describe("strEnum function", () => {
+  it("should create enum object from array", () => {
+    const colors = ["red", "green", "blue"] as const
+    const result = strEnum(colors)
+    expect(result).toEqual({
+      red: "red",
+      green: "green",
+      blue: "blue",
+    })
+  })
+
+  it("should handle empty array", () => {
+    const result = strEnum([])
+    expect(result).toEqual({})
+  })
+})
+
+describe("camelToCapitalize function", () => {
+  it("should convert camelCase to CAPITALIZED", () => {
+    expect(camelToCapitalize("helloWorld")).toBe("HELLO WORLD")
+    expect(camelToCapitalize("firstName")).toBe("FIRST NAME")
+  })
+
+  it("should handle empty string", () => {
+    expect(camelToCapitalize("")).toBe("")
+  })
+
+  it("should handle single word", () => {
+    expect(camelToCapitalize("hello")).toBe("HELLO")
+  })
+})
+
+describe("camelToCapitalized function", () => {
+  it("should convert camelCase to Capitalized", () => {
+    expect(camelToCapitalized("helloWorld")).toBe("Hello World")
+    expect(camelToCapitalized("firstName")).toBe("First Name")
+  })
+
+  it("should handle empty string", () => {
+    expect(camelToCapitalized("")).toBe("")
+  })
+
+  it("should handle single word", () => {
+    expect(camelToCapitalized("hello")).toBe("Hello")
+  })
+})
+
+describe("getInitials function", () => {
+  it("should get initials from full name", () => {
+    expect(getInitials("John Doe")).toBe("JD")
+    expect(getInitials("Alice Bob Charlie")).toBe("AB")
+  })
+
+  it("should handle single name", () => {
+    expect(getInitials("John")).toBe("JO")
+  })
+
+  it("should handle empty string", () => {
+    expect(getInitials("")).toBe("")
+  })
+
+  it("should handle extra whitespace", () => {
+    expect(getInitials("  John   Doe  ")).toBe("JD")
+  })
+})
+
+describe("encodeHTML function", () => {
+  it("should encode HTML entities", () => {
+    expect(encodeHTML("<div>")).toBe("&lt;div&gt;")
+    expect(encodeHTML("Tom & Jerry")).toBe("Tom &amp; Jerry")
+    expect(encodeHTML('"Hello"')).toBe("&quot;Hello&quot;")
+    expect(encodeHTML("'Hello'")).toBe("&#039;Hello&#039;")
+  })
+
+  it("should handle empty string", () => {
+    expect(encodeHTML("")).toBe("")
+  })
+
+  it("should handle string without HTML entities", () => {
+    expect(encodeHTML("Hello World")).toBe("Hello World")
+  })
+})
+
+describe("decodeHTML function", () => {
+  it("should decode HTML entities", () => {
+    expect(decodeHTML("&lt;div&gt;")).toBe("<div>")
+    expect(decodeHTML("Tom &amp; Jerry")).toBe("Tom & Jerry")
+    expect(decodeHTML("&quot;Hello&quot;")).toBe('"Hello"')
+    expect(decodeHTML("&#039;Hello&#039;")).toBe("'Hello'")
+  })
+
+  it("should handle empty string", () => {
+    expect(decodeHTML("")).toBe("")
+  })
+
+  it("should handle string without HTML entities", () => {
+    expect(decodeHTML("Hello World")).toBe("Hello World")
+  })
+})
+
+describe("truncate function", () => {
+  it("should truncate long strings", () => {
+    expect(truncate("Hello World", 5)).toBe("He...")
+    expect(truncate("Hello World", 8)).toBe("Hello...")
+  })
+
+  it("should not truncate short strings", () => {
+    expect(truncate("Hello", 10)).toBe("Hello")
+    expect(truncate("Hello", 5)).toBe("Hello")
+  })
+
+  it("should handle custom suffix", () => {
+    expect(truncate("Hello World", 5, ">>")).toBe("Hel>>")
+  })
+
+  it("should handle empty string", () => {
+    expect(truncate("", 5)).toBe("")
+  })
+})
+
+describe("kebabCase function", () => {
+  it("should convert camelCase to kebab-case", () => {
+    expect(kebabCase("helloWorld")).toBe("hello-world")
+    expect(kebabCase("firstName")).toBe("first-name")
+  })
+
+  it("should convert spaces to hyphens", () => {
+    expect(kebabCase("hello world")).toBe("hello-world")
+  })
+
+  it("should convert underscores to hyphens", () => {
+    expect(kebabCase("hello_world")).toBe("hello-world")
+  })
+
+  it("should handle empty string", () => {
+    expect(kebabCase("")).toBe("")
+  })
+})
+
+describe("snakeCase function", () => {
+  it("should convert camelCase to snake_case", () => {
+    expect(snakeCase("helloWorld")).toBe("hello_world")
+    expect(snakeCase("firstName")).toBe("first_name")
+  })
+
+  it("should convert spaces to underscores", () => {
+    expect(snakeCase("hello world")).toBe("hello_world")
+  })
+
+  it("should convert hyphens to underscores", () => {
+    expect(snakeCase("hello-world")).toBe("hello_world")
+  })
+
+  it("should handle empty string", () => {
+    expect(snakeCase("")).toBe("")
+  })
+})
+
+describe("pascalCase function", () => {
+  it("should convert to PascalCase", () => {
+    expect(pascalCase("hello-world")).toBe("HelloWorld")
+    expect(pascalCase("hello_world")).toBe("HelloWorld")
+    expect(pascalCase("hello world")).toBe("HelloWorld")
+  })
+
+  it("should handle empty string", () => {
+    expect(pascalCase("")).toBe("")
+  })
+
+  it("should handle single word", () => {
+    expect(pascalCase("hello")).toBe("Hello")
   })
 })

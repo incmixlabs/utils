@@ -1,5 +1,17 @@
-import { DateTime, type DateTimeOptions } from "luxon"
-
+import {
+  addDays as addDaysDateFns,
+  endOfDay as endOfDayDateFns,
+  format,
+  formatDistanceToNow,
+  formatRelative,
+  isSameDay as isSameDayDateFns,
+  isValid,
+  parse,
+  parseISO,
+  startOfDay as startOfDayDateFns,
+  subDays,
+} from "date-fns"
+import { format as formatTz } from "date-fns-tz"
 export interface DateTimeComponents {
   time: string
   date: string
@@ -11,82 +23,105 @@ export interface FormatOptions extends Intl.DateTimeFormatOptions {
 
 export interface RelativeTimeOptions {
   format?: string
-  base?: DateTime
+  base?: Date
   locale?: string
 }
 
 export const DEFAULT_TIMEZONE = "America/New_York"
 export const DEFAULT_DATE_FORMAT = "MM/dd/yyyy, hh:mm a, ZZZ"
 
-function parseDateTime(input: string | Date | number): DateTime {
+export function shortFormatDistanceToNow(date: Date): string {
+  const full = formatDistanceToNow(date, { addSuffix: false })
+
+  return full
+    .replace(/minutes?/, "min")
+    .replace(/hours?/, "hrs")
+    .replace(/seconds?/, "sec")
+    .replace(/days?/, "d")
+    .replace(/months?/, "mo")
+    .replace(/years?/, "y")
+}
+function parseDateTime(input: string | Date | number): Date {
   if (typeof input === "string") {
-    const dt = DateTime.fromISO(input)
-    return dt.isValid ? dt : DateTime.fromRFC2822(input)
+    const dt = parseISO(input)
+    return isValid(dt) ? dt : new Date(input)
   }
   if (input instanceof Date) {
-    return DateTime.fromJSDate(input)
+    return input
   }
-  return DateTime.fromMillis(Number(input))
+  return new Date(Number(input))
 }
 
 export function getDate(
   timezone: string = DEFAULT_TIMEZONE
 ): DateTimeComponents {
-  const dt = DateTime.now().setZone(timezone)
+  try {
+    const now = new Date()
+    const isoString = formatTz(now, "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", {
+      timeZone: timezone,
+    })
 
-  if (!dt.isValid) {
+    const [date, timeWithZone] = isoString.split("T")
+    const time = timeWithZone.split(".")[0]
+
+    return { time, date }
+  } catch (_error) {
     console.warn(
       `Invalid timezone: ${timezone}, falling back to ${DEFAULT_TIMEZONE}`
     )
-    return getDate(DEFAULT_TIMEZONE)
+    if (timezone !== DEFAULT_TIMEZONE) {
+      return getDate(DEFAULT_TIMEZONE)
+    }
+    // Fallback to UTC if default timezone also fails
+    const now = new Date()
+    const isoString = now.toISOString()
+    const [date, timeWithZone] = isoString.split("T")
+    const time = timeWithZone.split(".")[0]
+    return { time, date }
   }
-
-  const isoString = dt.toISO()
-  if (!isoString) {
-    return { time: "", date: "" }
-  }
-
-  const [date, timeWithZone] = isoString.split("T")
-  const time = timeWithZone.split(".")[0]
-
-  return { time, date }
 }
 
 export function getWeekDay(
   dateTime: string | Date | number,
-  locale = "en-US"
+  _locale = "en-US"
 ): string | null {
-  const dt = parseDateTime(dateTime)
-  return dt.isValid ? (dt.setLocale(locale).weekdayShort ?? null) : null
+  try {
+    const dt = parseDateTime(dateTime)
+    if (!isValid(dt)) {
+      return null
+    }
+    return format(dt, "EEE")
+  } catch {
+    return null
+  }
 }
 
 export function getRelativeTime(
   dateTime: string | Date | number,
   options: RelativeTimeOptions = {}
 ): string | null {
-  const {
-    format = DEFAULT_DATE_FORMAT,
-    base = DateTime.now(),
-    locale = "en-US",
-  } = options
+  const { format: dateFormat = DEFAULT_DATE_FORMAT, base = new Date() } =
+    options
 
-  let dt: DateTime
+  let dt: Date
 
-  if (typeof dateTime === "string" && format !== DEFAULT_DATE_FORMAT) {
-    dt = DateTime.fromFormat(dateTime.replace(" UTC", ""), format, {
-      zone: "utc",
-      locale,
-    })
-  } else {
-    dt = parseDateTime(dateTime)
-  }
+  try {
+    if (typeof dateTime === "string" && dateFormat !== DEFAULT_DATE_FORMAT) {
+      dt = parse(dateTime.replace(" UTC", ""), dateFormat, new Date())
+    } else {
+      dt = parseDateTime(dateTime)
+    }
 
-  if (!dt.isValid) {
+    if (!isValid(dt)) {
+      console.warn("Invalid date provided to getRelativeTime")
+      return null
+    }
+
+    return formatRelative(dt, base)
+  } catch {
     console.warn("Invalid date provided to getRelativeTime")
     return null
   }
-
-  return dt.toRelative({ base, locale })
 }
 
 export function formatDate(
@@ -124,7 +159,7 @@ export function isValidDate(date: unknown): boolean {
 
   if (typeof date === "string" || typeof date === "number") {
     const dt = parseDateTime(date)
-    return dt.isValid
+    return isValid(dt)
   }
 
   return false
@@ -132,12 +167,12 @@ export function isValidDate(date: unknown): boolean {
 
 export function addDays(date: Date | string | number, days: number): Date {
   const dt = parseDateTime(date)
-  return dt.plus({ days }).toJSDate()
+  return addDaysDateFns(dt, days)
 }
 
 export function subtractDays(date: Date | string | number, days: number): Date {
   const dt = parseDateTime(date)
-  return dt.minus({ days }).toJSDate()
+  return subDays(dt, days)
 }
 
 export function isSameDay(
@@ -146,13 +181,13 @@ export function isSameDay(
 ): boolean {
   const dt1 = parseDateTime(date1)
   const dt2 = parseDateTime(date2)
-  return dt1.hasSame(dt2, "day")
+  return isSameDayDateFns(dt1, dt2)
 }
 
 export function startOfDay(date: Date | string | number): Date {
-  return parseDateTime(date).startOf("day").toJSDate()
+  return startOfDayDateFns(parseDateTime(date))
 }
 
 export function endOfDay(date: Date | string | number): Date {
-  return parseDateTime(date).endOf("day").toJSDate()
+  return endOfDayDateFns(parseDateTime(date))
 }
