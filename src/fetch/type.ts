@@ -4,6 +4,7 @@ export const localPersistTypes = {
   local: "local",
   rxdb: "rxdb",
   session: "session",
+  cookie: "cookie",
 }
 const localPersistType = Object.keys(localPersistTypes)
 export type LocalPersistType = (typeof localPersistType)[number]
