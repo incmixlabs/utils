@@ -1,3 +1,12 @@
+# [0.40.0](https://github.com/incmixlabs/utils/compare/v0.39.0...v0.40.0) (2025-08-21)
+
+
+### Features
+
+* fix release ([be22bd5](https://github.com/incmixlabs/utils/commit/be22bd5a976ac22ed5635dddd1dd5e8ce63a3fd1))
+
+
+
 # [0.39.0](https://github.com/incmixlabs/utils/compare/v0.38.0...v0.39.0) (2025-08-21)
 
 
@@ -56,15 +65,6 @@
 ### Bug Fixes
 
 * add permissions api ([d41e341](https://github.com/incmixlabs/utils/commit/d41e34151340f0bcc92886ef963f0e4c02f6f64f))
-
-
-
-## [0.36.2](https://github.com/incmixlabs/utils/compare/v0.36.0...v0.36.2) (2025-08-04)
-
-
-### Bug Fixes
-
-* update version ([5ca392c](https://github.com/incmixlabs/utils/commit/5ca392c388cb656b04beb1c378c2c0fba6edc360))
 
 
 
