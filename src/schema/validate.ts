@@ -3,6 +3,14 @@ import isMobilePhone from "validator/lib/isMobilePhone"
 import isStrongPassword from "validator/lib/isStrongPassword"
 import isURL from "validator/lib/isURL"
 
+export interface ValidationResult {
+  isValid: boolean
+  error?: string
+}
+
+export type Validator<T = string> = (value: T) => boolean
+export type ValidatorWithOptions<T, O> = (value: T, options?: O) => boolean
+
 export const defaultURLOptions = {
   protocols: ["http", "https", "ftp"],
   require_tld: true,
@@ -40,12 +48,13 @@ export const isValidEmail = (value: string): boolean => isEmail(value)
 export const isValidPassword = (value: string): boolean =>
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/.test(value)
 
-// @ts-ignore
-export const isValidStrongPassword = (
-  value: string,
-  options: DefaultPasswordOptions = defaultPasswordOptions
-  // @ts-ignore
-): boolean => isStrongPassword(value, options)
+export const isValidStrongPassword: ValidatorWithOptions<
+  string,
+  Partial<DefaultPasswordOptions>
+> = (value, options = {}): boolean => {
+  const mergedOptions = { ...defaultPasswordOptions, ...options }
+  return isStrongPassword(value, mergedOptions as any)
+}
 
 export const isValidColumnName = (value: string): boolean =>
   /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(value)
@@ -107,27 +116,31 @@ export const isValidLongitude = (value: string): boolean =>
   /^-?(180(\.0+)?|((1[0-7]\d|[1-9]?\d)(\.\d+)?))$/.test(value)
 export const isValidUSPostalCode = (value: string): boolean =>
   /^[0-9]{5}(?:-[0-9]{4})?$/.test(value) // US ZIP code format
+export const POSTAL_CODE_PATTERNS: Record<string, RegExp> = {
+  US: /^[0-9]{5}(?:-[0-9]{4})?$/,
+  CA: /^[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d$/,
+  UK: /^[A-Za-z]{1,2}\d[A-Za-z\d]? ?\d[A-Za-z]{2}$/,
+  DE: /^\d{5}$/,
+  FR: /^\d{5}$/,
+  JP: /^\d{3}-?\d{4}$/,
+  AU: /^\d{4}$/,
+  BR: /^\d{5}-?\d{3}$/,
+  DEFAULT: /^[\w\s-]{3,10}$/,
+}
+
 export const isValidPostalCode = (value: string, country = "US"): boolean => {
-  // Add country-specific validation logic
-  switch (country.toUpperCase()) {
-    case "US":
-      return isValidUSPostalCode(value)
-    case "CA":
-      return /^[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d$/.test(value) // Canada
-    case "UK":
-      return /^[A-Za-z]{1,2}\d[A-Za-z\d]? ?\d[A-Za-z]{2}$/.test(value) // UK
-    default:
-      return /^[\w\s-]{3,10}$/.test(value) // Generic fallback
-  }
+  const pattern =
+    POSTAL_CODE_PATTERNS[country.toUpperCase()] || POSTAL_CODE_PATTERNS.DEFAULT
+  return pattern.test(value)
 }
 export const isValidCountryCode = (value: string): boolean =>
   /^[A-Z]{2}$/.test(value) // ISO 3166-1 alpha-2 format
 export const isValidCurrencyCode = (value: string): boolean =>
   /^[A-Z]{3}$/.test(value) // ISO 4217 format
-export const isValidEnumValue = (
+export const isValidEnumValue = <T extends string>(
   value: string,
-  enumValues: string[]
-): boolean => enumValues.includes(value)
+  enumValues: readonly T[]
+): value is T => enumValues.includes(value as T)
 export const isValidFileName = (value: string): boolean =>
   /^[^<>:"/\\|?*]+$/.test(value) // Basic validation for file names
 export const isValidJsonSchema = (value: string): boolean => {
@@ -140,6 +153,9 @@ export const isValidJsonSchema = (value: string): boolean => {
   }
 }
 export const isValidXml = (value: string): boolean => {
+  if (typeof DOMParser === "undefined") {
+    return false
+  }
   try {
     const parser = new DOMParser()
     const xmlDoc = parser.parseFromString(value, "application/xml")
@@ -172,9 +188,16 @@ export const isValidBase64 = (value: string): boolean => {
   }
 }
 export const isValidHtml = (value: string): boolean => {
-  const parser = new DOMParser()
-  const doc = parser.parseFromString(value, "text/html")
-  return !doc.querySelector("parsererror") // Check if there are any parsing errors
+  if (typeof DOMParser === "undefined") {
+    return false
+  }
+  try {
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(value, "text/html")
+    return !doc.querySelector("parsererror")
+  } catch {
+    return false
+  }
 }
 export const isValidSlug = (value: string): boolean =>
   /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) // Slug format: lowercase letters, numbers, and hyphens

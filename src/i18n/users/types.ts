@@ -44,16 +44,29 @@ const profileTranslationKeys = [
   "changePassword",
 ]
 export type ProfileTranslations = {
-  [K in (typeof profileTranslationKeys)[number]]: string & {
-    error: Status
-    success: Status
-  }
+  [K in (typeof profileTranslationKeys)[number]]: string
+} & {
+  error: Status
+  success: Status
 }
 export type Status = {
   [K in (typeof statusKeys)[number]]: string
 }
-export const defaultProfileTranslations: ProfileTranslations =
-  arrayToCapitalObject(profileTranslationKeys) as ProfileTranslations
+export const defaultProfileTranslations: ProfileTranslations = {
+  ...(arrayToCapitalObject(profileTranslationKeys) as any),
+  error: {
+    uploadProfilePicture: "Upload Profile Picture",
+    addProfilePicture: "Add Profile Picture",
+    updateUser: "Update User",
+    changePassword: "Change Password",
+  },
+  success: {
+    uploadProfilePicture: "Upload Profile Picture",
+    addProfilePicture: "Add Profile Picture",
+    updateUser: "Update User",
+    changePassword: "Change Password",
+  },
+}
 
 export type I18nTranslations = {
   settings: SettingsTranslations

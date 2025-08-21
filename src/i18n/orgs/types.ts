@@ -51,11 +51,20 @@ export type OrganizationDetailsTranslations = {
 }
 const defaultOrganizationDetailsTranslations: OrganizationDetailsTranslations =
   {
-    ...(arrayToCapitalObject(
-      organizationDetailsTranslationKeys
-    ) as OrganizationDetailsTranslations),
+    ...(arrayToCapitalObject(organizationDetailsTranslationKeys) as any),
+    success: {
+      addMember: "Add Member",
+      updateMemberRole: "Update Member Role",
+      deleteOrganization: "Delete Organization",
+      updateOrganizationName: "Update Organization Name",
+    },
+    error: {
+      addMember: "Add Member",
+      updateMemberRole: "Update Member Role",
+      deleteOrganization: "Delete Organization",
+      updateOrganizationName: "Update Organization Name",
+    },
   }
-console.log("default org ", defaultOrganizationDetailsTranslations)
 const rolesTranslationKeys = ["owner", "admin", "editor", "commenter", "viewer"]
 type RolesTranslations = {
   [K in (typeof rolesTranslationKeys)[number]]: string
