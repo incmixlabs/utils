@@ -23,5 +23,5 @@ export async function secureFetch<T>(
   return res.json() as Promise<T>
 }
 export * from "./env"
-export * from "./query-params";
-export * from "./type";
+export * from "./query-params"
+export * from "./type"
