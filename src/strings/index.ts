@@ -49,18 +49,17 @@ export function camelToCapitalized(str: string): string {
 
 export function getInitials(name: string): string {
   if (!name) return ""
-
   const words = name.trim().split(/\s+/)
   if (words.length === 1) {
     return words[0].substring(0, 2).toUpperCase()
   }
-
   return words
     .slice(0, 2)
     .map((word) => word[0])
     .join("")
     .toUpperCase()
 }
+
 export function capitalizedToCamel(str: string): string {
   if (!str) return ""
 
@@ -134,4 +133,13 @@ export function snakeCase(str: string): string {
 export function pascalCase(str: string): string {
   const camelized = camelize(str)
   return camelized.charAt(0).toUpperCase() + camelized.slice(1)
+}
+
+export function substituteVariables(
+  template: string,
+  data: Record<string, any>
+): string {
+  return template.replace(/\[(\w+)\]/g, (match, key) => {
+    return data[key] !== undefined ? data[key] : match // Return original placeholder if variable not found
+  })
 }

@@ -44,6 +44,7 @@ const ops = {
 export type Ops = (typeof ops)[keyof typeof ops]
 export type OpPersistence = {
   op: Ops
+  path: string
   persistence: Persistence
   method?: HttpMethod
   updateFreq?: UpdateFreq
