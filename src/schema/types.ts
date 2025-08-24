@@ -149,7 +149,7 @@ export const taskSchemaLiteral = {
       type: "number",
     },
     endDate: {
-      type: "number",
+      type: ["number", "null"], // ✅ FIXED: Allow null values
     },
     description: {
       type: "string",
@@ -244,42 +244,6 @@ export const taskSchemaLiteral = {
         required: ["id", "name"],
       },
     },
-    // subTasks: {
-    //   type: "array",
-    //   default: [],
-    //   items: {
-    //     type: "object",
-    //     properties: {
-    //       id: { type: "string", maxLength: 100 },
-    //       name: { type: "string", maxLength: 300 },
-    //       completed: { type: "boolean", default: false },
-    //       order: { type: "number", default: 0, minimum: 0 },
-    //     },
-    //     required: ["id", "name", "completed", "order"],
-    //   },
-    // },
-    // comments: {
-    //   type: "array",
-    //   default: [],
-    //   items: {
-    //     type: "object",
-    //     properties: {
-    //       id: { type: "string", maxLength: 100 },
-    //       content: { type: "string", maxLength: 2000 },
-    //       createdAt: { type: "number" },
-    //       createdBy: {
-    //         type: "object",
-    //         properties: {
-    //           id: { type: "string", maxLength: 100 },
-    //           name: { type: "string", maxLength: 200 },
-    //           image: { type: "string", maxLength: 500 },
-    //         },
-    //         required: ["id", "name"],
-    //       },
-    //     },
-    //     required: ["id", "content", "createdAt", "createdBy"],
-    //   },
-    // },
     createdAt: {
       type: "number",
     },
@@ -480,15 +444,14 @@ export const projectSchemaLiteral = {
     orgId: {
       type: "string",
     },
-
     company: {
       type: "string",
     },
     startDate: {
-      type: "integer", // Using integer for timestamp
+      type: ["integer", "null"],
     },
     endDate: {
-      type: "integer", // Using integer for timestamp
+      type: ["integer", "null"],
     },
     budget: {
       type: "integer",
@@ -512,8 +475,6 @@ export const projectSchemaLiteral = {
     "orgId",
     "company",
     "status",
-    "startDate",
-    "endDate",
     "description",
     "createdAt",
     "updatedAt",
