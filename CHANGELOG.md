@@ -1,3 +1,12 @@
+## [0.45.1](https://github.com/incmixlabs/utils/compare/v0.45.0...v0.45.1) (2025-08-24)
+
+
+### Bug Fixes
+
+* make dates nullable ([e6bd652](https://github.com/incmixlabs/utils/commit/e6bd652021920650aea81a997d9794e9abc677d9))
+
+
+
 # [0.45.0](https://github.com/incmixlabs/utils/compare/v0.44.0...v0.45.0) (2025-08-21)
 
 
@@ -42,16 +51,6 @@
 ### Features
 
 * fix env exports ([ff1a456](https://github.com/incmixlabs/utils/commit/ff1a456e8e339ab502f79b7b0ffc09d8ef6a2fed))
-
-
-
-# [0.41.0](https://github.com/incmixlabs/utils/compare/v0.40.0...v0.41.0) (2025-08-21)
-
-
-### Features
-
-* fix types ([501db89](https://github.com/incmixlabs/utils/commit/501db89573d0cecd26213ffb537cb2c0cbf9d6e8))
-* fix types ([0fd9a96](https://github.com/incmixlabs/utils/commit/0fd9a96a3a84460ee9444e9940a5b51b584dbf92))
 
 
 
