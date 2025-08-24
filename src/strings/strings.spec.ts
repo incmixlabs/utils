@@ -14,6 +14,7 @@ import {
   pascalCase,
   snakeCase,
   strEnum,
+  substituteVariables,
   truncate,
 } from "./index"
 
@@ -373,5 +374,93 @@ describe("pascalCase function", () => {
 
   it("should handle single word", () => {
     expect(pascalCase("hello")).toBe("Hello")
+  })
+})
+
+describe("substituteVariables function", () => {
+  it("should replace single variable", () => {
+    const template = "Hello [name]!"
+    const data = { name: "World" }
+    expect(substituteVariables(template, data)).toBe("Hello World!")
+  })
+
+  it("should replace multiple variables", () => {
+    const template = "Hello [firstName] [lastName], you are [age] years old"
+    const data = { firstName: "John", lastName: "Doe", age: 30 }
+    expect(substituteVariables(template, data)).toBe(
+      "Hello John Doe, you are 30 years old"
+    )
+  })
+
+  it("should handle multiple occurrences of same variable", () => {
+    const template = "[name] is awesome! [name] rocks!"
+    const data = { name: "TypeScript" }
+    expect(substituteVariables(template, data)).toBe(
+      "TypeScript is awesome! TypeScript rocks!"
+    )
+  })
+
+  it("should preserve placeholders for missing variables", () => {
+    const template = "Hello [name], welcome to [place]"
+    const data = { name: "Alice" }
+    expect(substituteVariables(template, data)).toBe(
+      "Hello Alice, welcome to [place]"
+    )
+  })
+
+  it("should handle empty template", () => {
+    const template = ""
+    const data = { name: "World" }
+    expect(substituteVariables(template, data)).toBe("")
+  })
+
+  it("should handle empty data object", () => {
+    const template = "Hello [name]!"
+    const data = {}
+    expect(substituteVariables(template, data)).toBe("Hello [name]!")
+  })
+
+  it("should handle template with no variables", () => {
+    const template = "Hello World!"
+    const data = { name: "Test" }
+    expect(substituteVariables(template, data)).toBe("Hello World!")
+  })
+
+  it("should handle different data types", () => {
+    const template = "[string] [number] [boolean] [null] [undefined]"
+    const data = {
+      string: "text",
+      number: 42,
+      boolean: true,
+      null: null,
+      undefined: undefined,
+    }
+    expect(substituteVariables(template, data)).toBe(
+      "text 42 true null [undefined]"
+    )
+  })
+
+  it("should handle variables with numeric characters", () => {
+    const template = "[var1] and [var2]"
+    const data = { var1: "first", var2: "second" }
+    expect(substituteVariables(template, data)).toBe("first and second")
+  })
+
+  it("should handle nested brackets in non-variable context", () => {
+    const template = "Array[0] is [value]"
+    const data = { value: "test" }
+    expect(substituteVariables(template, data)).toBe("Array[0] is test")
+  })
+
+  it("should handle variables at start and end of template", () => {
+    const template = "[start] middle [end]"
+    const data = { start: "BEGIN", end: "END" }
+    expect(substituteVariables(template, data)).toBe("BEGIN middle END")
+  })
+
+  it("should handle adjacent variables", () => {
+    const template = "[first][second]"
+    const data = { first: "Hello", second: "World" }
+    expect(substituteVariables(template, data)).toBe("HelloWorld")
   })
 })
