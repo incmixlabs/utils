@@ -463,4 +463,10 @@ describe("substituteVariables function", () => {
     const data = { first: "Hello", second: "World" }
     expect(substituteVariables(template, data)).toBe("HelloWorld")
   })
+
+  it("should replace falsy but defined values (0, empty string, false)", () => {
+    const template = "[zero]-[empty]-[bool]"
+    const data = { zero: 0, empty: "", bool: false }
+    expect(substituteVariables(template, data)).toBe("0--false")
+  })
 })

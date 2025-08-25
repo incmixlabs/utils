@@ -135,11 +135,18 @@ export function pascalCase(str: string): string {
   return camelized.charAt(0).toUpperCase() + camelized.slice(1)
 }
 
+/**
+ * Replaces [key] placeholders with values from `data`.
+ * - Leaves the placeholder intact when `data[key]` is `undefined`.
+ * - Coerces defined values to string via String(...).
+ */
 export function substituteVariables(
   template: string,
-  data: Record<string, any>
+  data: Record<string, string | number | boolean | null | undefined>
 ): string {
   return template.replace(/\[(\w+)\]/g, (match, key) => {
-    return data[key] !== undefined ? data[key] : match // Return original placeholder if variable not found
+    const val = data[key]
+    return val === undefined ? match : String(val)
   })
 }
+

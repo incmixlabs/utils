@@ -41,20 +41,43 @@ const ops = {
   list: "list",
   details: "details",
 }
+export type Queue = {
+  queue?: boolean
+  sla?: number // in seconds
+}
+export type Pagination = {
+  page: number
+  pageSize: number
+  total: number
+}
+export type Response = {
+  status: number
+  data?: any
+  error?: string
+  message?: string
+  pagination?: Pagination
+}
+export type Header = {
+  [key: string]: string
+}
 export type Ops = (typeof ops)[keyof typeof ops]
 export type OpPersistence = {
   op: Ops
   path: string
+  queue?: Queue
   persistence: Persistence
   method?: HttpMethod
   updateFreq?: UpdateFreq
   streaming?: boolean
-  dataSize?: DataSize
-  localPersist?: LocalPersistType
 }
 export type endPointDef = {
   endpoint: string
-  discoverable?: boolean
   opPersistence?: OpPersistence[]
   localPersist?: LocalPersistType
+}
+export type endPointBackendDef = {
+  sampleResponse?: any
+  sampleRequest?: any
+  requestSchema: any
+  responseSchema: any
 }
