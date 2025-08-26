@@ -47,6 +47,7 @@ describe("mneumonic", () => {
       expect(result.mns).toHaveProperty("clients")
       expect(result.mns).toHaveProperty("notes")
       expect(result.mns).toHaveProperty("agreements")
+      console.log("Mnemonics", result)
     })
 
     it("should populate both mnemonics and reverseMnemonics", () => {
