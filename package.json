@@ -68,13 +68,13 @@
       "import": "./dist/objects/index.js",
       "types": "./dist/objects/index.d.ts"
     },
-    "./mock": {
-      "import": "./dist/mock/index.js",
-      "types": "./dist/mock/index.d.ts"
-    },
     "./strings": {
       "import": "./dist/strings/index.js",
       "types": "./dist/strings/index.d.ts"
+    },
+    "./mock": {
+      "import": "./dist/schema/mock-data.js",
+      "types": "./dist/schema/mock-data.d.ts"
     },
     "./helper": {
       "import": "./dist/schema/helper.js",
