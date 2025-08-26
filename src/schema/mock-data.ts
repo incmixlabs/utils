@@ -1,6 +1,7 @@
-import type { TaskData } from "../schemas/task"
 import { nanoid } from "nanoid"
+import type { TaskData } from "./tasks"
 
+const now = Date.now()
 export const mockTasks: TaskData[] = [
   {
     id: "mock-task-1",
@@ -10,8 +11,8 @@ export const mockTasks: TaskData[] = [
     projectId: "mock-project-1",
     status: "Todo",
     priority: "high",
-    tags: ["backend","security","auth"],
-    refs: [
+    tags: ["backend", "security", "auth"],
+    links: [
       {
         id: "ref-1",
         name: "Auth Implementation",
@@ -52,12 +53,12 @@ export const mockTasks: TaskData[] = [
         order: 4,
       },
     ],
-    startDate: +(new Date("2025-01-15")),
-    endDate: +(new Date("2025-01-25")),
+    startDate: +new Date("2025-01-15"),
+    endDate: +new Date("2025-01-25"),
     createdBy: "user-1",
     updatedBy: "user-1",
-    createdAt: +(new Date("2025-01-10")),
-    updatedAt: +(new Date("2025-01-10")),
+    createdAt: +new Date("2025-01-10"),
+    updatedAt: +new Date("2025-01-10"),
     completed: false,
     checkList: [
       {
@@ -85,12 +86,12 @@ export const mockTasks: TaskData[] = [
     id: "mock-task-2",
     name: "Design dashboard UI",
     description: "Create responsive dashboard with analytics widgets",
-    taskOrder: 2,
+    order: 2,
     projectId: "mock-project-1",
     status: "in-progress",
     priority: "priority-medium",
     tags: ["frontend", "ui", "design"],
-    refs: [
+    links: [
       {
         id: "ref-3",
         type: "figma",
@@ -103,14 +104,14 @@ export const mockTasks: TaskData[] = [
         id: "att-1",
         name: "dashboard-mockup.png",
         url: "/uploads/dashboard-mockup.png",
-        size: "2.5MB",
+        size: 25000,
         type: "image/png",
       },
       {
         id: "att-2",
         name: "widget-components.sketch",
         url: "/uploads/widget-components.sketch",
-        size: "1.8MB",
+        size: 25000,
         type: "application/sketch",
       },
     ],
@@ -142,12 +143,12 @@ export const mockTasks: TaskData[] = [
     createdAt: +new Date("2025-01-12"),
     updatedAt: +new Date("2025-01-18"),
     completed: false,
-    checklist: [
-      { id: "check-5", text: "Create wireframes", checked: true, order: 1 },
-      { id: "check-6", text: "Design components", checked: true, order: 2 },
+    checkList: [
+      { id: "check-5", name: "Create wireframes", checked: true, order: 1 },
+      { id: "check-6", name: "Design components", checked: true, order: 2 },
       {
         id: "check-7",
-        text: "Implement responsive layout",
+        name: "Implement responsive layout",
         checked: false,
         order: 3,
       },
@@ -157,45 +158,41 @@ export const mockTasks: TaskData[] = [
     id: "mock-task-3",
     name: "API rate limiting",
     description: "Implement rate limiting for all API endpoints",
-    taskOrder: 3,
+    order: 3,
     projectId: "mock-project-2",
-    statusId: "status-done",
-    priorityId: "priority-low",
-    labelsTags: [
-      { value: "backend", label: "Backend", color: "#0066CC" },
-      { value: "performance", label: "Performance", color: "#26DE81" },
-      { value: "security", label: "Security", color: "#FF6B6B" },
-    ],
-    refUrls: [],
+    status: "done",
+    priority: "low",
+    tags: ["backend", "performance", "security"],
+    links: [],
     attachments: [],
     acceptanceCriteria: [
       {
         id: "ac-9",
-        text: "Rate limits are configurable per endpoint",
+        name: "Rate limits are configurable per endpoint",
         checked: true,
         order: 1,
       },
       {
         id: "ac-10",
-        text: "Redis is used for distributed rate limiting",
+        name: "Redis is used for distributed rate limiting",
         checked: true,
         order: 2,
       },
       {
         id: "ac-11",
-        text: "Clear error messages for rate limit exceeded",
+        name: "Clear error messages for rate limit exceeded",
         checked: true,
         order: 3,
       },
     ],
-    startDate: new Date("2025-01-05"),
-    endDate: new Date("2025-01-10"),
+    startDate: +new Date("2025-05-01"),
+    endDate: +new Date("2025-05-01"),
     createdBy: "user-1",
     updatedBy: "user-3",
-    createdAt: new Date("2025-01-04"),
-    updatedAt: new Date("2025-01-10"),
+    createdAt: +new Date("2025-04-01"),
+    updatedAt: +new Date("2025-04-01"),
     completed: true,
-    checklist: [],
+    checkList: [],
   },
 ]
 
@@ -220,10 +217,10 @@ export const mockLabels = [
     type: "status",
     color: "#0066CC",
   },
-  { id: "status-done", name: "Done", type: "status", color: "#00AA00" },
-  { id: "priority-low", name: "Low", type: "priority", color: "#00AA00" },
-  { id: "priority-medium", name: "Medium", type: "priority", color: "#FFA500" },
-  { id: "priority-high", name: "High", type: "priority", color: "#FF0000" },
+  { id: "done", name: "Done", type: "status", color: "#00AA00" },
+  { id: "low", name: "Low", type: "priority", color: "#00AA00" },
+  { id: "medium", name: "Medium", type: "priority", color: "#FFA500" },
+  { id: "high", name: "High", type: "priority", color: "#FF0000" },
 ]
 
 export const mockTaskAssignments = [
@@ -238,57 +235,56 @@ export const mockUsers = [
     id: "user-1",
     name: "Alice Johnson",
     email: "alice@example.com",
-    avatar: "https://i.pravatar.cc/150?img=1",
+    src: "https://i.pravatar.cc/150?img=1",
+    color: "pink",
   },
   {
     id: "user-2",
     name: "Bob Smith",
     email: "bob@example.com",
-    avatar: "https://i.pravatar.cc/150?img=2",
+    src: "https://i.pravatar.cc/150?img=2",
+    color: "blue",
   },
   {
     id: "user-3",
     name: "Charlie Brown",
     email: "charlie@example.com",
-    avatar: "https://i.pravatar.cc/150?img=3",
+    src: "https://i.pravatar.cc/150?img=3",
+    color: "green",
   },
 ]
 
-export function generateMockTask(data?: Partial<Task>): Task {
+export function generateMockTask(data?: Partial<TaskData>): TaskData {
   const id = data?.id || `mock-${nanoid(7)}`
-  const now = new Date()
 
   return {
     id,
     name: data?.name || "Mock Task",
     description: data?.description || "This is a mock task for testing",
-    taskOrder: data?.taskOrder || 1,
+    order: data?.order || 1,
     projectId: data?.projectId || "mock-project-1",
-    statusId: data?.statusId || "status-todo",
-    priorityId: data?.priorityId || "priority-medium",
-    parentTaskId: data?.parentTaskId || null,
-    labelsTags: data?.labelsTags || [
-      { value: "mock", label: "Mock", color: "#A3A3A3" },
-      { value: "test", label: "Test", color: "#6C5CE7" },
-    ],
-    refUrls: data?.refUrls || [],
+    status: data?.status || "todo",
+    priority: data?.priority || "medium",
+    parentTaskId: data?.parentTaskId,
+    tags: data?.tags || ["mock", "tag"],
+    links: data?.links || [],
     attachments: data?.attachments || [],
     acceptanceCriteria: data?.acceptanceCriteria || [
       {
         id: "ac-mock",
-        text: "Mock acceptance criteria",
+        name: "Mock acceptance criteria",
         checked: false,
         order: 1,
       },
     ],
-    startDate: data?.startDate || now,
-    endDate: data?.endDate || new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    startDate: data?.startDate ?? now,
+    endDate: data?.endDate ?? now,
     createdBy: data?.createdBy || "user-1",
     updatedBy: data?.updatedBy || "user-1",
-    createdAt: data?.createdAt || now,
-    updatedAt: data?.updatedAt || now,
+    createdAt: data?.createdAt ?? now,
+    updatedAt: data?.updatedAt ?? now,
     completed: data?.completed || false,
-    checklist: data?.checklist || [],
+    checkList: data?.checkList || [],
   }
 }
 

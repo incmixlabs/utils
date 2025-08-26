@@ -1,50 +1,63 @@
 export const baseDefTypes = {
-  "string": "string",
-  "array": "array",
-  "number": "number",
-  "null" : "null",
-  "object": "object",
-  "date": "date",
-  "boolean": "boolean"
+  string: "string",
+  array: "array",
+  number: "number",
+  null: "null",
+  object: "object",
+  date: "date",
+  boolean: "boolean",
 }
 export type BASEDEFTYPES = typeof baseDefTypes
 export type ID = string
 export type DATE = number
 export type MARKDOWN = string
-export type REF_URL =  { id: ID; name?: string; type?: string; url?: string }
+export type REF_URL = { id: ID; name?: string; type?: string; url?: string }
 export type ATTACHMENT = REF_URL & { size?: number }
-export type BASEDEFTYPE = typeof baseDefTypes[keyof typeof baseDefTypes]
-export type MEMBER = {id: ID, name?: string, email?: string; src?: string}
+export type BASEDEFTYPE = (typeof baseDefTypes)[keyof typeof baseDefTypes]
+export type MEMBER = {
+  id: ID
+  name?: string
+  email?: string
+  src?: string
+  slug?: string
+  color?: string
+}
 export const idDef = {
   type: baseDefTypes.string,
-  maxLength: 50
+  maxLength: 50,
 } as const
 export type IDDef = typeof idDef
 export const nameDef = {
   type: baseDefTypes.string,
   title: "Name",
-  maxLength: 50
+  maxLength: 50,
 } as const
 export const emailDef = {
   type: baseDefTypes.string,
   title: "Email",
-  maxLength: 100
+  maxLength: 100,
 } as const
 export const luvDef = {
   maxLength: 50,
   ref: "" as string,
   luv: true,
-  enums: [] as string[]
+  enums: [] as string[],
 } as const
 export const oneOfDef = {
   type: baseDefTypes.string,
-  ...luvDef
+  ...luvDef,
 } as const
 export type OneOfDef = typeof oneOfDef & { ref?: string }
-export function setEnums(def: OneOfDef | ManyOfDef, enums: string[]): OneOfDef | ManyOfDef {
+export function setEnums(
+  def: OneOfDef | ManyOfDef,
+  enums: string[]
+): OneOfDef | ManyOfDef {
   return { ...def, enums: [...enums] }
 }
-export function setLabel(def: OneOfDef | ManyOfDef, ref: string): OneOfDef | ManyOfDef {
+export function setLabel(
+  def: OneOfDef | ManyOfDef,
+  ref: string
+): OneOfDef | ManyOfDef {
   return { ...def, ref }
 }
 export const manyOfDef = {
@@ -52,35 +65,35 @@ export const manyOfDef = {
   ...luvDef,
   items: {
     type: baseDefTypes.string,
-  }
+  },
 } as const
 export const namesDef = {
   type: baseDefTypes.array,
   items: {
     type: baseDefTypes.string,
-  }
+  },
 } as const
 export const numberDef = {
   type: baseDefTypes.number,
   minimum: 0,
-  default: 0
+  default: 0,
 } as const
 export type ManyOfDef = typeof manyOfDef
 export const dateDef = {
-  type: baseDefTypes.date
+  type: baseDefTypes.date,
 } as const
 export type DateDef = typeof dateDef
 export const nullableIdDef = {
   ...idDef,
-  type: [baseDefTypes.string, null]
+  type: [baseDefTypes.string, null],
 } as const
 export type NullableIdDef = typeof nullableIdDef
-export const  booleanDef = {
+export const booleanDef = {
   type: baseDefTypes.boolean,
-  default: false
+  default: false,
 } as const
 export type BooleanDef = typeof booleanDef
-export const descriptionDef =  {
+export const descriptionDef = {
   type: baseDefTypes.string,
   title: "Description",
   maxLength: 2000,
@@ -90,7 +103,7 @@ export type DescriptionDef = typeof descriptionDef
 export const listDef = {
   type: baseDefTypes.array,
   title: "list",
-  default: []
+  default: [],
 } as const
 export type ListDef = typeof listDef
 export const orderDef = {
@@ -99,7 +112,7 @@ export const orderDef = {
   default: 0,
   minimum: 0,
   multipleOf: 1,
-  hidden: true
+  hidden: true,
 } as const
 export type OrderDef = typeof orderDef
 export type CHECKLIST = {
@@ -109,10 +122,10 @@ export type CHECKLIST = {
   order: number
 }
 export type SCHEMA = {
-  title: string,
-  version: number,
-  primaryKey: string,
-  type: BASEDEFTYPE,
+  title: string
+  version: number
+  primaryKey: string
+  type: BASEDEFTYPE
 }
 export const schema: SCHEMA = {
   title: "",
@@ -121,25 +134,25 @@ export const schema: SCHEMA = {
   type: "object",
 }
 const checkListItemDef = {
-  id: {...idDef},
-  name: {...nameDef},
-  checked: {...booleanDef},
-  order: {...orderDef}
+  id: { ...idDef },
+  name: { ...nameDef },
+  checked: { ...booleanDef },
+  order: { ...orderDef },
 } as const
 export const checkListDef = {
   type: baseDefTypes.array,
   title: "Checklist",
-  properties: {...checkListItemDef},
+  properties: { ...checkListItemDef },
   required: Object.keys(checkListItemDef),
 } as const
 export type CheckListDef = typeof checkListDef
 export const urlDef = {
   type: baseDefTypes.string,
-  maxLength: 1000
+  maxLength: 1000,
 } as const
 export const TASK_URL_ENUMS = ["Figma", "Task", "Github", "Other"] as const
 export const urlItemDef = {
-  id: {...idDef},
+  id: { ...idDef },
   url: { ...urlDef },
   name: { ...nameDef },
   type: { ...oneOfDef },
@@ -147,15 +160,15 @@ export const urlItemDef = {
 export const urlsDef = {
   type: baseDefTypes.object,
   title: "Links",
-  properties: {...urlItemDef},
+  properties: { ...urlItemDef },
   required: ["id"],
 } as const
 export const attachmentsDef = {
   ...urlsDef,
   properties: {
     ...urlsDef.properties,
-    size: {...numberDef}
-  }
+    size: { ...numberDef },
+  },
 }
 export type AUDIT = {
   createdAt: DATE
@@ -189,10 +202,11 @@ export type UrlDefs = typeof urlsDef
 export const memberDef = {
   type: baseDefTypes.object,
   properties: {
-    id: {...idDef },
-    name: { ...nameDef},
-    src: { ...urlDef},
-    email: { ...emailDef }
+    id: { ...idDef },
+    name: { ...nameDef },
+    src: { ...urlDef },
+    email: { ...emailDef },
+    slug: { ...nameDef },
   },
   required: ["id"],
 } as const
@@ -200,18 +214,18 @@ export type MemberDef = typeof memberDef
 export const membersDef = {
   type: baseDefTypes.array,
   title: "Members",
-  items: {...memberDef},
+  items: { ...memberDef },
 } as const
 export type MembersDef = typeof membersDef
 export const idsDef = {
   type: baseDefTypes.array,
-  items: {...idDef}
+  items: { ...idDef },
 } as const
 export type IdsDef = typeof idsDef
 
 // no maxlength
 export const markdownDef = {
-  type: baseDefTypes.string
+  type: baseDefTypes.string,
 }
 export type MarkdownDef = typeof markdownDef
 export type COMMENT = INSERTAUDIT & {
@@ -230,9 +244,9 @@ export const commentsDef = {
     properties: {
       id: { ...idDef },
       content: { ...markdownDef },
-      author: {...memberDef },
+      author: { ...memberDef },
       refs: { ...idsDef },
-      ...insertAuditDef.properties
+      ...insertAuditDef.properties,
     },
     required: ["id"],
   },

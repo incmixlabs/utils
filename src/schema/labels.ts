@@ -1,6 +1,16 @@
 import { deepClone } from "@objects"
-import type { ID, AUDIT, SCHEMA} from "./base-types"
-import { schema, auditDef, booleanDef, namesDef, orderDef, descriptionDef,  idDef, nameDef, baseTypes } from "./base-types"
+import type { AUDIT, ID, SCHEMA } from "./base-types"
+import {
+  auditDef,
+  baseDefTypes,
+  booleanDef,
+  descriptionDef,
+  idDef,
+  nameDef,
+  namesDef,
+  orderDef,
+  schema,
+} from "./base-types"
 
 export type Label = {
   name: string
@@ -9,36 +19,36 @@ export type Label = {
   order?: number
 }
 export type LabelData = AUDIT & {
-  id: ID,
-  projectId: ID,
+  id: ID
+  projectId: ID
   color?: string // if color in header, then color in children are shades
-  name?: string, // example status, priority, etc.
-  description: string,
+  name?: string // example status, priority, etc.
+  description: string
   multi?: boolean
   values?: string[]
 }
 export type LabelsData = LabelData[]
 
 const labelDef = {
-  type: baseTypes.object,
+  type: baseDefTypes.object,
   properties: {
     name: { ...nameDef },
     value: { ...nameDef },
     color: { ...nameDef },
     order: { ...orderDef },
-    ...auditDef.properties
+    ...auditDef.properties,
   },
   required: ["name", ...auditDef.required],
 } as const
 const labelsDef = {
-  type: baseTypes.array,
+  type: baseDefTypes.array,
   items: { ...labelDef },
 } as const
 export type LabelDef = typeof labelDef
 
 type LabelSchema = SCHEMA & {
   properties: {
-    [k in keyof LabelData]-?: any  // -? makes all properties required, removing undefined
+    [k in keyof LabelData]-?: any // -? makes all properties required, removing undefined
   }
   required: (keyof LabelData)[]
 }
@@ -48,36 +58,27 @@ export const labelSchema: LabelSchema = {
   ...schema,
   title: "Label",
   properties: {
-    id: {...idDef},
-    projectId: {...idDef},
+    id: { ...idDef },
+    projectId: { ...idDef },
     // The core of the generic model: what kind of label is this?
     // like status, priority, etc.
-    name: {...nameDef},
-    color: {...nameDef},
-    multi: {...booleanDef},
-    description: {...descriptionDef},
+    name: { ...nameDef },
+    color: { ...nameDef },
+    multi: { ...booleanDef },
+    description: { ...descriptionDef },
     values: deepClone(labelsDef),
-    ...auditDef.properties
+    ...auditDef.properties,
   },
-  required: [
-    "id",
-    "projectId",
-    "name",
-    ...auditDef.required
-  ],
+  required: ["id", "projectId", "name", ...auditDef.required],
 } as const
 
 export const labelsSchema = {
   ...schema,
   title: "Labels",
   properties: {
-    id: {...idDef},
-    projectId: {...idDef},
-    names: {...namesDef},
+    id: { ...idDef },
+    projectId: { ...idDef },
+    names: { ...namesDef },
   },
-  required: [
-    "id",
-    "projectId",
-    "names"
-  ],
+  required: ["id", "projectId", "names"],
 }

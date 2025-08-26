@@ -150,3 +150,30 @@ export function substituteVariables(
   })
 }
 
+export function hasUppercase(word: string): boolean {
+  const uppercaseRegex = /[A-Z]/
+  return uppercaseRegex.test(word)
+}
+
+export function getFirstUpperChars(word: string, maxLength = 2): string {
+  const trimmedWord = word?.trim()
+  if (!trimmedWord) {
+    return "" // Handle empty or null input
+  }
+  let result = trimmedWord[0] // Get the first character and convert to lowercase
+
+  if (!hasUppercase(trimmedWord)) {
+    return result // Handle words without uppercase letters in rest  of word
+  }
+  for (let i = 1; i < trimmedWord.length; i++) {
+    const char = trimmedWord[i]
+    if (char === char.toUpperCase() && char !== char.toLowerCase()) {
+      // Check if the character is uppercase and not a number or symbol
+      result += char.toLowerCase() // Append the uppercase character (converted to lowercase)
+    }
+    if (result.length >= maxLength) {
+      break // Stop if we've reached the maximum length
+    }
+  }
+  return result
+}
