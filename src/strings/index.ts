@@ -135,11 +135,45 @@ export function pascalCase(str: string): string {
   return camelized.charAt(0).toUpperCase() + camelized.slice(1)
 }
 
+/**
++ * Replaces [key] placeholders with values from `data`.
++ * - Leaves the placeholder intact when `data[key]` is `undefined`.
++ * - Coerces defined values to string via String(...).
++ */
 export function substituteVariables(
   template: string,
-  data: Record<string, any>
+  data: Record<string, string | number | boolean | null | undefined>
 ): string {
   return template.replace(/\[(\w+)\]/g, (match, key) => {
-    return data[key] !== undefined ? data[key] : match // Return original placeholder if variable not found
+    const val = data[key]
+    return val === undefined ? match : String(val)
   })
+}
+
+export function hasUppercase(word: string): boolean {
+  const uppercaseRegex = /[A-Z]/
+  return uppercaseRegex.test(word)
+}
+
+export function getFirstUpperChars(word: string, maxLength = 2): string {
+  const trimmedWord = word?.trim()
+  if (!trimmedWord) {
+    return "" // Handle empty or null input
+  }
+  let result = trimmedWord[0] // Get the first character and convert to lowercase
+
+  if (!hasUppercase(trimmedWord)) {
+    return result // Handle words without uppercase letters in rest  of word
+  }
+  for (let i = 1; i < trimmedWord.length; i++) {
+    const char = trimmedWord[i]
+    if (char === char.toUpperCase() && char !== char.toLowerCase()) {
+      // Check if the character is uppercase and not a number or symbol
+      result += char.toLowerCase() // Append the uppercase character (converted to lowercase)
+    }
+    if (result.length >= maxLength) {
+      break // Stop if we've reached the maximum length
+    }
+  }
+  return result
 }
