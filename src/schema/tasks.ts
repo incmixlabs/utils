@@ -29,6 +29,7 @@ import type {
   REF_URL,
   SCHEMA,
 } from "./base-types"
+import type { Assert, IsEqual } from "./types"
 export type TaskData = AUDIT & {
   id: ID
   projectId: ID
@@ -104,3 +105,4 @@ export const taskSchema: TaskSchema = {
 }
 export type TaskFields = keyof typeof taskSchema.properties
 export type TaskDataKeys = keyof TaskData
+export type _TaskKeysEqual = Assert<IsEqual<TaskFields, TaskDataKeys>>
