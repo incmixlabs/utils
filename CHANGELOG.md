@@ -1,3 +1,12 @@
+# [0.47.0](https://github.com/incmixlabs/utils/compare/v0.46.0...v0.47.0) (2025-08-27)
+
+
+### Features
+
+* add feature flags api ([801e398](https://github.com/incmixlabs/utils/commit/801e39841894331a3b2d4bdef2967dad95e0ae2a))
+
+
+
 # [0.46.0](https://github.com/incmixlabs/utils/compare/v0.45.1...v0.46.0) (2025-08-27)
 
 
@@ -55,15 +64,6 @@
 ### Features
 
 * up-version ([1c8a262](https://github.com/incmixlabs/utils/commit/1c8a2625c2b438158f4d7446b1b81b4eef46bd0c))
-
-
-
-# [0.43.0](https://github.com/incmixlabs/utils/compare/v0.42.0...v0.43.0) (2025-08-21)
-
-
-### Features
-
-* fix vulnerabilities ([f632402](https://github.com/incmixlabs/utils/commit/f6324026cd48e493ae49c4426f21a64f8a49a7a1))
 
 
 
