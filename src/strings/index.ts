@@ -49,18 +49,17 @@ export function camelToCapitalized(str: string): string {
 
 export function getInitials(name: string): string {
   if (!name) return ""
-
   const words = name.trim().split(/\s+/)
   if (words.length === 1) {
     return words[0].substring(0, 2).toUpperCase()
   }
-
   return words
     .slice(0, 2)
     .map((word) => word[0])
     .join("")
     .toUpperCase()
 }
+
 export function capitalizedToCamel(str: string): string {
   if (!str) return ""
 
@@ -134,4 +133,45 @@ export function snakeCase(str: string): string {
 export function pascalCase(str: string): string {
   const camelized = camelize(str)
   return camelized.charAt(0).toUpperCase() + camelized.slice(1)
+}
+
+/**
++ * Replaces [key] placeholders with values from `data`.
++ * - Leaves the placeholder intact when `data[key]` is `undefined`.
++ * - Coerces defined values to string via String(...).
++ */
+export function substituteVariables(
+  template: string,
+  data: Record<string, string | number | boolean | null | undefined>
+): string {
+  return template.replace(/\[(\w+)\]/g, (match, key) => {
+    const val = data[key]
+    return val === undefined ? match : String(val)
+  })
+}
+
+export function hasUppercase(word: string): boolean {
+  const uppercaseRegex = /[A-Z]/
+  return uppercaseRegex.test(word)
+}
+
+export function getFirstUpperChars(word: string, maxLength = 2): string {
+  const trimmedWord = word?.trim()
+  if (!trimmedWord) {
+    return "" // Handle empty or null input
+  }
+  if (maxLength <= 0) return ""
+
+  // Always start with the first character lowercased
+  let result = trimmedWord[0].toLowerCase()
+  if (result.length >= maxLength) return result.slice(0, maxLength)
+
+  for (let i = 1; i < trimmedWord.length && result.length < maxLength; i++) {
+    const char = trimmedWord[i]
+    // Append only uppercase letters; ignore digits/symbols
+    if (char === char.toUpperCase() && char !== char.toLowerCase()) {
+      result += char.toLowerCase()
+    }
+  }
+  return result
 }

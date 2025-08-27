@@ -2,34 +2,77 @@ import { describe, expect, it, vi } from "vitest"
 import {
   generateNameBasedId,
   generateSlug,
-  generateUniqueId,
+  getBigID,
+  getBigUUID,
   getCurrentTimestamp,
   getCurrentUser,
   getDefaultUser,
-} from "./helper" // Replace with your actual module path
+  getTransactionTime,
+  parseBUUID,
+} from "./helper"
 
-describe("generateUniqueId", () => {
-  it("should generate a unique id with default length", () => {
-    const id = generateUniqueId()
-    expect(id).toHaveLength(10)
+describe("getBigID", () => {
+  it("should generate a BigInt ID", () => {
+    const id = getBigID()
+    expect(typeof id).toBe("bigint")
+    expect(id).toBeGreaterThan(0n)
   })
 
-  it("should generate a unique id with specified length", () => {
-    const length = 15
-    const id = generateUniqueId(undefined, length)
-    expect(id).toHaveLength(length)
-  })
-
-  it("should generate a unique id with a prefix", () => {
-    const prefix = "test"
-    const id = generateUniqueId(prefix)
-    expect(id.startsWith(`${prefix}-`)).toBe(true)
-  })
-
-  it("should generate unique ids at each call", () => {
-    const id1 = generateUniqueId()
-    const id2 = generateUniqueId()
+  it("should generate different IDs when called multiple times", async () => {
+    const id1 = getBigID()
+    // Small delay to ensure different timestamp
+    await new Promise((resolve) => setTimeout(resolve, 1))
+    const id2 = getBigID()
     expect(id1).not.toBe(id2)
+  })
+
+  it("should use custom offset", () => {
+    const offset = BigInt(1000)
+    const id1 = getBigID(offset)
+    const id2 = getBigID(BigInt(0))
+    expect(id2).toBeGreaterThan(id1)
+  })
+})
+
+describe("getBigUUID", () => {
+  it("should generate a formatted UUID string", () => {
+    const uuid = getBigUUID({ id: BigInt(Date.now()) * 1000000n, mn: "test" })
+    expect(typeof uuid).toBe("string")
+    expect(uuid).toContain("test_")
+    expect(uuid.split("_").length).toBe(3)
+  })
+})
+
+describe("parseBUUID", () => {
+  it("should parse a valid UUID", () => {
+    const bigId = BigInt(Date.now()) * 1000000n
+    const uuid = getBigUUID({ id: bigId, mn: "test" })
+    const parsed = parseBUUID(uuid)
+
+    expect(parsed).not.toBeNull()
+    expect(parsed?.mn).toBe("test")
+    expect(typeof parsed?.timestamp).toBe("number")
+  })
+
+  it("should return null for invalid UUID", () => {
+    const parsed = parseBUUID("invalid-uuid")
+    expect(parsed).toBeNull()
+  })
+})
+
+describe("getTransactionTime", () => {
+  it("should extract Temporal.Instant from UUID", () => {
+    const bigId = BigInt(Date.now()) * 1000000n
+    const uuid = getBigUUID({ id: bigId, mn: "test" })
+    const instant = getTransactionTime(uuid)
+
+    expect(instant).not.toBeNull()
+    expect(instant?.epochNanoseconds).toBe(bigId)
+  })
+
+  it("should return null for invalid UUID", () => {
+    const instant = getTransactionTime("invalid")
+    expect(instant).toBeNull()
   })
 })
 
@@ -68,7 +111,7 @@ describe("generateNameBasedId", () => {
     const name = "Sample Name"
     const checkExists = vi.fn().mockResolvedValue(false)
     const id = await generateNameBasedId(name, checkExists)
-    expect(id).toBe("sample-name")
+    expect(id).toBe("sample-nam") // MAX_SLUG_LENGTH = 10
   })
 
   it("should append counter when id already exists", async () => {
@@ -78,21 +121,23 @@ describe("generateNameBasedId", () => {
       .mockResolvedValueOnce(true)
       .mockResolvedValue(false)
     const id = await generateNameBasedId(name, checkExists)
-    expect(id).toBe("duplicate-name-1")
+    expect(id).toBe("duplicate-name_1") // Uses JOIN_CHAR = '_' for counter
   })
 
-  it("should fallback to random id with name prefix after max attempts", async () => {
+  it("should fallback to random id after max attempts", async () => {
     const name = "Unlucky Name"
     const checkExists = vi.fn().mockResolvedValue(true)
     const id = await generateNameBasedId(name, checkExists, 2)
-    expect(id.startsWith("unlucky-name-")).toBe(true)
-    expect(id).toHaveLength(23)
+    expect(id).toHaveLength(10) // MAX_SLUG_LENGTH
+    expect(typeof id).toBe("string")
   })
 
-  it("should use random id when name is empty", async () => {
+  it("should use timestamp hash when name is empty", async () => {
     const checkExists = vi.fn().mockResolvedValue(false)
     const id = await generateNameBasedId("", checkExists)
-    expect(id).toHaveLength(10)
+    expect(typeof id).toBe("string")
+    expect(id.length).toBeGreaterThan(0)
+    expect(id.length).toBeLessThanOrEqual(10)
   })
 })
 
@@ -109,7 +154,7 @@ describe("getDefaultUser", () => {
     expect(user).toEqual({
       id: "system-default",
       name: "System",
-      image: "/placeholder-avatar.png",
+      src: "/placeholder-avatar.png",
     })
   })
 })
@@ -120,7 +165,7 @@ describe("getCurrentUser", () => {
     expect(user).toEqual({
       id: "user-id",
       name: "Current User",
-      image: "/placeholder.svg",
+      src: "/placeholder.svg",
     })
   })
 })

@@ -72,13 +72,17 @@
       "import": "./dist/strings/index.js",
       "types": "./dist/strings/index.d.ts"
     },
+    "./mock": {
+      "import": "./dist/schema/mock-data.js",
+      "types": "./dist/schema/mock-data.d.ts"
+    },
     "./helper": {
       "import": "./dist/schema/helper.js",
       "types": "./dist/schema/helper.d.ts"
     },
     "./schema": {
-      "import": "./dist/schema/types.js",
-      "types": "./dist/schema/types.d.ts"
+      "import": "./dist/schema/index.js",
+      "types": "./dist/schema/index.d.ts"
     },
     "./settings": {
       "import": "./dist/types/settings/index.js",
@@ -113,11 +117,12 @@
   "dependencies": {
     "@casl/ability": "^6.7.2",
     "@date-fns/tz": "^1.2.0",
+    "@js-temporal/polyfill": "^0.5.1",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
     "superstruct": "^2.0.2",
-    "ulidx": "^2.4.1",
-    "validator": "^13.15.0"
+    "ulidx": "2.4.1",
+    "validator": "13.15.0"
   },
   "engines": {
     "node": ">=22.13.0"

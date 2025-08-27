@@ -127,7 +127,7 @@ export const AuthUserSessionSchema = AuthUserSchema.extend({
 export const UserProfileSchema = z.object({
   id: z.string(),
   name: z.string(),
-  email: z.email(),
+  email: z.string().email(),
   profileImage: z.string().nullish().default(null),
   avatar: z.string().nullish().default(null),
   localeId: z.coerce.number().int().gt(0),
@@ -303,6 +303,5 @@ export type GenericResponse = z.infer<typeof GenericResponseSchema>
 export * from "./organization"
 export * from "./user"
 export * from "./abilitiy"
-export * from "./sql"
 // export * from "./projects"
 export * from "./settings"

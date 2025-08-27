@@ -41,19 +41,41 @@ const ops = {
   list: "list",
   details: "details",
 }
+export type QueueOptions = {
+  enabled?: boolean
+  slaSeconds?: number
+}
+export type ApiPagination = {
+  page: number
+  pageSize: number
+  total: number
+}
+export type ApiResponse<T = unknown, P = ApiPagination> = {
+  status: number
+  data?: T
+  error?: string
+  message?: string
+  pagination?: P
+}
+export type HeadersMap = Record<string, string>
 export type Ops = (typeof ops)[keyof typeof ops]
 export type OpPersistence = {
   op: Ops
+  path: string
+  queue?: boolean
   persistence: Persistence
   method?: HttpMethod
   updateFreq?: UpdateFreq
   streaming?: boolean
-  dataSize?: DataSize
-  localPersist?: LocalPersistType
 }
 export type endPointDef = {
   endpoint: string
-  discoverable?: boolean
   opPersistence?: OpPersistence[]
   localPersist?: LocalPersistType
+}
+export type EndpointBackendDef<Req = unknown, Res = unknown> = {
+  requestSchema: import("zod").ZodType<Req>
+  responseSchema: import("zod").ZodType<Res>
+  sampleRequest?: Req
+  sampleResponse?: Res
 }
