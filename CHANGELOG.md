@@ -1,3 +1,25 @@
+# [0.46.0](https://github.com/incmixlabs/utils/compare/v0.45.1...v0.46.0) (2025-08-27)
+
+
+### Bug Fixes
+
+* conflicts ([ad99522](https://github.com/incmixlabs/utils/commit/ad99522ad386ea1b5ba78a2ed448c4e051c1bd0b))
+* cr commit ([06d52ba](https://github.com/incmixlabs/utils/commit/06d52ba3464a0086d9df1fe831034b730bbd3d66))
+* string first two ([ecbe64f](https://github.com/incmixlabs/utils/commit/ecbe64fba00f37dbe2249206b05afd79367b8b3c))
+
+
+### Features
+
+* add types ([d6ce5aa](https://github.com/incmixlabs/utils/commit/d6ce5aa72dd9b8f1c30433fda828c887023dbed2))
+* add types ([e4cf052](https://github.com/incmixlabs/utils/commit/e4cf052f327879510a6b085f0b1780f12ce9edf7))
+* clean-and-string-sub ([cb9cedf](https://github.com/incmixlabs/utils/commit/cb9cedfb024a6c91ab3f144e93551d1fb58181b4))
+* mock-data ([542c85b](https://github.com/incmixlabs/utils/commit/542c85be78097981d3d35c16b5105976982cfaec))
+* schema wip ([80fd8bc](https://github.com/incmixlabs/utils/commit/80fd8bc6de026ed45bc534116c2e9394d3aa50a2))
+* schemas ([b20553f](https://github.com/incmixlabs/utils/commit/b20553fc48aac15e14da89e152d025a1b5a29eca))
+* wip ([a5fdd1d](https://github.com/incmixlabs/utils/commit/a5fdd1d048edf4e57f8bff09d3241a88b2300732))
+
+
+
 ## [0.45.1](https://github.com/incmixlabs/utils/compare/v0.45.0...v0.45.1) (2025-08-24)
 
 
@@ -42,15 +64,6 @@
 ### Features
 
 * fix vulnerabilities ([f632402](https://github.com/incmixlabs/utils/commit/f6324026cd48e493ae49c4426f21a64f8a49a7a1))
-
-
-
-# [0.42.0](https://github.com/incmixlabs/utils/compare/v0.41.0...v0.42.0) (2025-08-21)
-
-
-### Features
-
-* fix env exports ([ff1a456](https://github.com/incmixlabs/utils/commit/ff1a456e8e339ab502f79b7b0ffc09d8ef6a2fed))
 
 
 
