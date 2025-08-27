@@ -1,3 +1,13 @@
+# [0.49.0](https://github.com/incmixlabs/utils/compare/v0.48.0...v0.49.0) (2025-08-27)
+
+
+### Features
+
+* task-data-keys ([bfd9658](https://github.com/incmixlabs/utils/commit/bfd9658ecbc11e563eead585dbbdf28d0efa96fa))
+* type ([5f3e737](https://github.com/incmixlabs/utils/commit/5f3e73728babc2512e4ced03e1822e4cfafb3096))
+
+
+
 # [0.48.0](https://github.com/incmixlabs/utils/compare/v0.47.1...v0.48.0) (2025-08-27)
 
 
@@ -44,15 +54,6 @@
 * schema wip ([80fd8bc](https://github.com/incmixlabs/utils/commit/80fd8bc6de026ed45bc534116c2e9394d3aa50a2))
 * schemas ([b20553f](https://github.com/incmixlabs/utils/commit/b20553fc48aac15e14da89e152d025a1b5a29eca))
 * wip ([a5fdd1d](https://github.com/incmixlabs/utils/commit/a5fdd1d048edf4e57f8bff09d3241a88b2300732))
-
-
-
-## [0.45.1](https://github.com/incmixlabs/utils/compare/v0.45.0...v0.45.1) (2025-08-24)
-
-
-### Bug Fixes
-
-* make dates nullable ([e6bd652](https://github.com/incmixlabs/utils/commit/e6bd652021920650aea81a997d9794e9abc677d9))
 
 
 
