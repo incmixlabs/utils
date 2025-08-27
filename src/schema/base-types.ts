@@ -232,7 +232,12 @@ export type COMMENT = INSERTAUDIT & {
   id: ID
   content?: MARKDOWN
   author?: MEMBER
-  refs?: any[]
+ export type COMMENT = INSERTAUDIT & {
+   id: ID
+   content?: MARKDOWN
+   author?: MEMBER
+   refs?: ID[]
+ }
 }
 export const commentsDef = {
   ...schema,
