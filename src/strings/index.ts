@@ -136,10 +136,10 @@ export function pascalCase(str: string): string {
 }
 
 /**
- * Replaces [key] placeholders with values from `data`.
- * - Leaves the placeholder intact when `data[key]` is `undefined`.
- * - Coerces defined values to string via String(...).
- */
++ * Replaces [key] placeholders with values from `data`.
++ * - Leaves the placeholder intact when `data[key]` is `undefined`.
++ * - Coerces defined values to string via String(...).
++ */
 export function substituteVariables(
   template: string,
   data: Record<string, string | number | boolean | null | undefined>
