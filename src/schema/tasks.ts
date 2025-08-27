@@ -1,3 +1,4 @@
+import { title } from "process"
 import { deepClone } from "../objects"
 import {
   attachmentsDef,
@@ -78,10 +79,10 @@ export const taskSchema: TaskSchema = {
     startDate: { ...dateDef },
     endDate: { ...dateDef },
     description: { ...descriptionDef },
-    acceptanceCriteria: deepClone({
-      checkListDef,
+     acceptanceCriteria: {
+      ...deepClone(checkListDef),
       title: "Acceptance Criteria",
-    }),
+    },
     checkList: deepClone(checkListDef),
     completed: { ...booleanDef },
     links: deepClone(urlsDef),
