@@ -1007,12 +1007,6 @@ export interface UseTableViewReturn {
   }
 }
 
-export const getCurrentUser = () => ({
-  id: "user-id",
-  name: "Current User",
-  image: "/placeholder.svg",
-})
-
 export const DEFAULT_LABELS = [
   // Status labels
   {
