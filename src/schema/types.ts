@@ -15,7 +15,6 @@ export const VALID_TIME_TYPES: TimeType[] = [
   "month",
   "year",
 ]
-<<<<<<< HEAD
 export const labelSchemaLiteral = {
   title: "label",
   version: 0,
@@ -283,8 +282,6 @@ export const taskSchemaLiteral = {
     "updatedBy",
   ],
 } as const
-=======
->>>>>>> 40651ee (feat: add types)
 
 const layoutItemSchema = {
   type: "object",

@@ -50,19 +50,19 @@ export type ApiPagination = {
   pageSize: number
   total: number
 }
-export type ApiResponse = {
+export type ApiResponse<T = unknown, P = ApiPagination> = {
   status: number
-  data?: any
+  data?: T
   error?: string
   message?: string
-  pagination?: ApiPagination
+  pagination?: P
 }
 export type HeadersMap = Record<string, string>
 export type Ops = (typeof ops)[keyof typeof ops]
 export type OpPersistence = {
   op: Ops
   path: string
-  queue?: Queue
+  queue?: boolean
   persistence: Persistence
   method?: HttpMethod
   updateFreq?: UpdateFreq
