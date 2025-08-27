@@ -85,10 +85,7 @@ export const dateDef = {
 export type DateDef = typeof dateDef
 export const nullableIdDef = {
   ...idDef,
-export const nullableIdDef = {
-  ...idDef,
   type: [baseDefTypes.string, baseDefTypes.null],
-} as const
 } as const
 export type NullableIdDef = typeof nullableIdDef
 export const booleanDef = {
