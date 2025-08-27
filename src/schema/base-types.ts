@@ -2,7 +2,7 @@ export const baseDefTypes = {
   string: "string",
   array: "array",
   number: "number",
-  null: "null",
+  null: null,
   object: "object",
   date: "date",
   boolean: "boolean",

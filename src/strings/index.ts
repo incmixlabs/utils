@@ -160,19 +160,17 @@ export function getFirstUpperChars(word: string, maxLength = 2): string {
   if (!trimmedWord) {
     return "" // Handle empty or null input
   }
-  let result = trimmedWord[0] // Get the first character and convert to lowercase
+  if (maxLength <= 0) return ""
 
-  if (!hasUppercase(trimmedWord)) {
-    return result // Handle words without uppercase letters in rest  of word
-  }
-  for (let i = 1; i < trimmedWord.length; i++) {
+  // Always start with the first character lowercased
+  let result = trimmedWord[0].toLowerCase()
+  if (result.length >= maxLength) return result.slice(0, maxLength)
+
+  for (let i = 1; i < trimmedWord.length && result.length < maxLength; i++) {
     const char = trimmedWord[i]
+    // Append only uppercase letters; ignore digits/symbols
     if (char === char.toUpperCase() && char !== char.toLowerCase()) {
-      // Check if the character is uppercase and not a number or symbol
-      result += char.toLowerCase() // Append the uppercase character (converted to lowercase)
-    }
-    if (result.length >= maxLength) {
-      break // Stop if we've reached the maximum length
+      result += char.toLowerCase()
     }
   }
   return result
