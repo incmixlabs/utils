@@ -41,25 +41,23 @@ const ops = {
   list: "list",
   details: "details",
 }
-export type Queue = {
-  queue?: boolean
-  sla?: number // in seconds
+export type QueueOptions = {
+  enabled?: boolean
+  slaSeconds?: number
 }
-export type Pagination = {
+export type ApiPagination = {
   page: number
   pageSize: number
   total: number
 }
-export type Response = {
+export type ApiResponse = {
   status: number
   data?: any
   error?: string
   message?: string
-  pagination?: Pagination
+  pagination?: ApiPagination
 }
-export type Header = {
-  [key: string]: string
-}
+export type HeadersMap = Record<string, string>
 export type Ops = (typeof ops)[keyof typeof ops]
 export type OpPersistence = {
   op: Ops
