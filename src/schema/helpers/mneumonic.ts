@@ -5,7 +5,16 @@ type MnemonicMap = Record<string, string>
 export const mnemonics: MnemonicMap = {}
 export const reverseMnemonics: MnemonicMap = {}
 import { DEFAULT_TABLES } from "./constants"
+/**
+ * Creates a unique mnemonic for a table name by using initials from underscored names,
+ * uppercase letters, or first characters. Ensures uniqueness by appending characters or numbers.
+ * @param table_name The table name to create a mnemonic for
+ */
 function createUniqueMnemonic(table_name: string) {
+  if (!table_name || table_name.trim().length === 0) {
+    throw new Error("Table name cannot be empty")
+  }
+
   let tbl = table_name.substring(0, 2)
   if (table_name.includes("_")) {
     const splits = table_name.split("_")
