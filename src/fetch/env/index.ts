@@ -48,18 +48,19 @@ export const config = (() => {
 })()
 
 export const API = {
-  AUTH: "/api/auth",
-  USERS: "/api/users",
-  ORG: "/api/org",
-  INTL: "/api/intl",
-  TASKS: "/api/tasks",
-  EMAIL: "/api/email",
-  FILES: "/api/files",
-  LOCATION: "/api/location",
-  PERMISSIONS: "/api/permissions",
-  PROJECTS: "/api/projects",
-  GENAI: "/api/genai",
-  COMMENTS: "/api/comments",
-  RXDB_SYNC: "/api/rxdb-sync",
-  FEATURE_FLAGS: "/api/feature-flags",
+  auth: "/api/auth",
+  users: "/api/users",
+  org: "/api/org",
+  intl: "/api/intl",
+  tasks: "/api/tasks",
+  email: "/api/email",
+  files: "/api/files",
+  location: "/api/location",
+  permissions: "/api/permissions",
+  projects: "/api/projects",
+  genai: "/api/genai",
+  comments: "/api/comments",
+  rxdb: "/api/rxdb-sync",
 }
+export type APIEndPoints = keyof typeof API
+export default config
