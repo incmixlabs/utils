@@ -1,3 +1,12 @@
+## [0.47.1](https://github.com/incmixlabs/utils/compare/v0.47.0...v0.47.1) (2025-08-27)
+
+
+### Bug Fixes
+
+* type issues ([1769a18](https://github.com/incmixlabs/utils/commit/1769a184050fe03f2268be74ac4091dbd64d40f8))
+
+
+
 # [0.47.0](https://github.com/incmixlabs/utils/compare/v0.46.0...v0.47.0) (2025-08-27)
 
 
@@ -55,15 +64,6 @@
 * refactor ([1dc5d82](https://github.com/incmixlabs/utils/commit/1dc5d82c5223ac19f28a5fe4aa8a35938533be37))
 * refactor ([cbece2e](https://github.com/incmixlabs/utils/commit/cbece2e7ed774d3235ad873574ec0064b1926965))
 * refactor ([309d01b](https://github.com/incmixlabs/utils/commit/309d01b2ee9b275e9d77675246487d32eefa535a))
-
-
-
-# [0.44.0](https://github.com/incmixlabs/utils/compare/v0.43.0...v0.44.0) (2025-08-21)
-
-
-### Features
-
-* up-version ([1c8a262](https://github.com/incmixlabs/utils/commit/1c8a2625c2b438158f4d7446b1b81b4eef46bd0c))
 
 
 
