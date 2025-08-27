@@ -73,9 +73,9 @@ export type endPointDef = {
   opPersistence?: OpPersistence[]
   localPersist?: LocalPersistType
 }
-export type endPointBackendDef = {
-  sampleResponse?: any
-  sampleRequest?: any
-  requestSchema: any
-  responseSchema: any
+export type EndpointBackendDef<Req = unknown, Res = unknown> = {
+  requestSchema: import("zod").ZodType<Req>
+  responseSchema: import("zod").ZodType<Res>
+  sampleRequest?: Req
+  sampleResponse?: Res
 }
