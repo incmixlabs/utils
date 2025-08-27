@@ -1,45 +1,70 @@
-## [0.29.2](https://github.com/incmixlabs/utils/compare/v0.29.1...v0.29.2) (2025-07-08)
-
-
-### Bug Fixes
-
-* update project zod schema ([45606c7](https://github.com/incmixlabs/utils/commit/45606c73ffd2ab656d9268b9fd7ce9c06d82ae55))
-
-
-
-## [0.29.1](https://github.com/incmixlabs/utils/compare/v0.29.0...v0.29.1) (2025-07-07)
-
-
-### Bug Fixes
-
-* project schema ([a67cdd1](https://github.com/incmixlabs/utils/commit/a67cdd16ccda13572fbbf39c92c29c284b33b4f5))
-
-
-
-# [0.29.0](https://github.com/incmixlabs/utils/compare/v0.28.2...v0.29.0) (2025-07-07)
+# [0.40.0](https://github.com/incmixlabs/utils/compare/v0.39.0...v0.40.0) (2025-08-21)
 
 
 ### Features
 
-* upgrade zod ([edf3215](https://github.com/incmixlabs/utils/commit/edf3215a33cf77c2df13cef1449a349aa609de7c))
+* fix release ([be22bd5](https://github.com/incmixlabs/utils/commit/be22bd5a976ac22ed5635dddd1dd5e8ce63a3fd1))
 
 
 
-## [0.28.2](https://github.com/incmixlabs/utils/compare/v0.28.1...v0.28.2) (2025-07-06)
-
-
-### Bug Fixes
-
-* remove unused api ([9958930](https://github.com/incmixlabs/utils/commit/9958930aea322cc75bb8a7e572e3afe89017417f))
-
-
-
-## [0.28.1](https://github.com/incmixlabs/utils/compare/v0.28.0...v0.28.1) (2025-07-04)
+# [0.39.0](https://github.com/incmixlabs/utils/compare/v0.38.0...v0.39.0) (2025-08-21)
 
 
 ### Bug Fixes
 
-* build error ([5a07ee6](https://github.com/incmixlabs/utils/commit/5a07ee6557b0ff0afb280be5076f10db43178416))
+* task types ([02125ac](https://github.com/incmixlabs/utils/commit/02125ac90a50ba990af153064fdc0571c0c8e4db))
+
+
+### Features
+
+* fetch and date types ([f501493](https://github.com/incmixlabs/utils/commit/f5014935ab40ebda890843679e76e8e0c6cd74eb))
+* fetch types ([e788610](https://github.com/incmixlabs/utils/commit/e788610da8ad3b3898139da86cfde48c0e3c4821))
+* fetch types ([8d8aecb](https://github.com/incmixlabs/utils/commit/8d8aecb38073d549c309bcf3ed72be85b0c789db))
+* remove fe query params ([c54d232](https://github.com/incmixlabs/utils/commit/c54d2324b4aaa81be825e01d6c667322ce112fac))
+* remove fe query params ([154abb0](https://github.com/incmixlabs/utils/commit/154abb02f368732ee47d7bd170dde7a21b2f8cbe))
+* remove fe query params ([5fca6f1](https://github.com/incmixlabs/utils/commit/5fca6f1732a3832ca04f90cb846d8ce8b61f7db2))
+* remove fe queryParams ([0406cad](https://github.com/incmixlabs/utils/commit/0406cadcc0d3ad272a91ca6ec27cd0b7a14bd391))
+* update project schema ([8006cf0](https://github.com/incmixlabs/utils/commit/8006cf04c7f93c5513a3530122c575819c5cd645))
+
+
+
+# [0.38.0](https://github.com/incmixlabs/utils/compare/v0.37.0...v0.38.0) (2025-08-20)
+
+
+### Bug Fixes
+
+* task types ([5cfe4ff](https://github.com/incmixlabs/utils/commit/5cfe4ff2f2e49cd3f6bb9f5ceeee4e14989b1b17))
+
+
+### Features
+
+* update project schema ([79d829f](https://github.com/incmixlabs/utils/commit/79d829f54b8511496a10a71682fcf3ac9083b761))
+
+
+
+# [0.37.0](https://github.com/incmixlabs/utils/compare/v0.36.3...v0.37.0) (2025-08-08)
+
+
+### Bug Fixes
+
+* updated permissions types ([7fd86a4](https://github.com/incmixlabs/utils/commit/7fd86a4086ded1a9401d971824cfb8f86320981c))
+
+
+### Features
+
+* utils and fetch ([c8ae85a](https://github.com/incmixlabs/utils/commit/c8ae85a5c7c90a1088563c6cedd8ac8251e712b9))
+* utils and fetch ([603f68e](https://github.com/incmixlabs/utils/commit/603f68e7ab4f33d0089d9d6fbb1eab5eeda78a5b))
+* utils and fetch ([5e832c3](https://github.com/incmixlabs/utils/commit/5e832c398c7ab185f1579b6aab2e3caa1424da42))
+* utils and fetch ([beabbd1](https://github.com/incmixlabs/utils/commit/beabbd18adc8d9a29d98353a6ac5c0881a8f3a95))
+
+
+
+## [0.36.3](https://github.com/incmixlabs/utils/compare/v0.36.2...v0.36.3) (2025-08-06)
+
+
+### Bug Fixes
+
+* add permissions api ([d41e341](https://github.com/incmixlabs/utils/commit/d41e34151340f0bcc92886ef963f0e4c02f6f64f))
 
 
 

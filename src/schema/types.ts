@@ -1,5 +1,3 @@
-import type { DateTime } from "luxon"
-
 export type ProjectStatus = "all" | "started" | "on-hold" | "completed"
 export type TimeType = "day" | "days" | "week" | "month" | "year"
 import { z } from "zod"
@@ -151,7 +149,7 @@ export const taskSchemaLiteral = {
       type: "number",
     },
     endDate: {
-      type: "number",
+      type: ["number", "null"], // ✅ FIXED: Allow null values
     },
     description: {
       type: "string",
@@ -244,42 +242,6 @@ export const taskSchemaLiteral = {
           image: { type: "string", maxLength: 500 },
         },
         required: ["id", "name"],
-      },
-    },
-    subTasks: {
-      type: "array",
-      default: [],
-      items: {
-        type: "object",
-        properties: {
-          id: { type: "string", maxLength: 100 },
-          name: { type: "string", maxLength: 300 },
-          completed: { type: "boolean", default: false },
-          order: { type: "number", default: 0, minimum: 0 },
-        },
-        required: ["id", "name", "completed", "order"],
-      },
-    },
-    comments: {
-      type: "array",
-      default: [],
-      items: {
-        type: "object",
-        properties: {
-          id: { type: "string", maxLength: 100 },
-          content: { type: "string", maxLength: 2000 },
-          createdAt: { type: "number" },
-          createdBy: {
-            type: "object",
-            properties: {
-              id: { type: "string", maxLength: 100 },
-              name: { type: "string", maxLength: 200 },
-              image: { type: "string", maxLength: 500 },
-            },
-            required: ["id", "name"],
-          },
-        },
-        required: ["id", "content", "createdAt", "createdBy"],
       },
     },
     createdAt: {
@@ -469,14 +431,36 @@ export const projectSchemaLiteral = {
     name: {
       type: "string",
     },
+    logo: {
+      type: "string",
+    },
+    status: {
+      type: "string",
+      enum: ["all", "started", "on-hold", "completed"],
+    },
+    description: {
+      type: "string",
+    },
     orgId: {
       type: "string",
     },
-    createdAt: {
+    company: {
       type: "string",
     },
+    startDate: {
+      type: ["integer", "null"],
+    },
+    endDate: {
+      type: ["integer", "null"],
+    },
+    budget: {
+      type: "integer",
+    },
+    createdAt: {
+      type: "number",
+    },
     updatedAt: {
-      type: "string",
+      type: "number",
     },
     createdBy: {
       type: "string",
@@ -489,6 +473,9 @@ export const projectSchemaLiteral = {
     "id",
     "name",
     "orgId",
+    "company",
+    "status",
+    "description",
     "createdAt",
     "updatedAt",
     "createdBy",
@@ -496,169 +483,12 @@ export const projectSchemaLiteral = {
   ],
 } as const
 
-export const formProjectSchemaLiteral = {
-  title: "form projects schema",
-  version: 1,
-  primaryKey: "id",
-  type: "object",
-  properties: {
-    id: {
-      maxLength: 30,
-      type: "string",
-    },
-    orgId: {
-      type: "string",
-      maxLength: 50,
-    },
-    name: {
-      type: "string",
-    },
-    company: {
-      type: "string",
-    },
-    logo: {
-      type: "string",
-    },
-    description: {
-      type: "string",
-    },
-    progress: {
-      type: "integer",
-    },
-    timeLeft: {
-      type: "string",
-    },
-    timeType: {
-      type: "string",
-      enum: ["day", "days", "week", "month", "year"],
-    },
-    members: {
-      type: "array",
-      items: {
-        type: "object",
-        properties: {
-          label: { type: "string" },
-          value: { type: "string" },
-        },
-      },
-    },
-    status: {
-      type: "string",
-      enum: ["all", "started", "on-hold", "completed"],
-    },
-    startDate: {
-      type: "integer", // Using integer for timestamp
-    },
-    endDate: {
-      type: "integer", // Using integer for timestamp
-    },
-    budget: {
-      type: "integer",
-    },
-    fileInfo: {
-      type: "object",
-      properties: {
-        name: { type: "string" },
-        type: { type: "string" },
-        size: { type: "integer" },
-        attachmentId: { type: "string" },
-      },
-    },
-    createdAt: {
-      type: "integer", // Using integer for timestamp
-    },
-    updatedAt: {
-      type: "integer", // Using integer for timestamp
-    },
-  },
-  required: [
-    "id",
-    "orgId",
-    "name",
-    "company",
-    "description",
-    "status",
-    "startDate",
-    "endDate",
-  ],
-  attachments: {
-    encrypted: false,
-  },
-} as const
-/**
- * Validates and sanitizes project data to match the RxDB schema
- */
-export interface ValidatedProjectData {
-  id: string
-  orgId: string
-  name: string
-  company?: string
-  logo?: string
-  description: string
-  progress?: number
-  timeLeft?: string
-  timeType?: TimeType
-  members?: Array<{ name: string; value: string }>
-  status?: ProjectStatus
-  startDate?: number
-  endDate?: number
-  budget?: number
-}
-export type FileLikeObject = {
-  name: string
-  type: string
-  size: number
-  data?: string
-  arrayBuffer?: ArrayBuffer
-  buffer?: ArrayBuffer
-}
-export interface FileInput {
-  data: File | Blob | ArrayBuffer | string
-  name: string
-  type: string
-  size: number
-}
-// Update the type to match the actual form data structure with optional fields
-export type ProjectFormData = ValidatedProjectData & {
-  fileData?: FileInput // Accept various possible file input formats
-}
-
 export const projectStatusSchema = z.union([
   z.literal("all"),
   z.literal("started"),
   z.literal("on-hold"),
   z.literal("completed"),
 ])
-
-export const timeTypeSchema = z.union([
-  z.literal("day"),
-  z.literal("days"),
-  z.literal("week"),
-  z.literal("month"),
-  z.literal("year"),
-])
-
-export const validatedProjectDataSchema = z.object({
-  id: z.string(),
-  orgId: z.string(),
-  name: z.string(),
-  company: z.string(),
-  logo: z.string(),
-  description: z.string(),
-  progress: z.number(),
-  timeLeft: z.string(),
-  timeType: timeTypeSchema,
-  members: z.array(
-    z.object({
-      name: z.string(),
-      value: z.string(),
-    })
-  ),
-  status: projectStatusSchema,
-  startDate: z.number(),
-  endDate: z.number(),
-  budget: z.number(),
-})
 
 export type LabelSchema = {
   id: string
@@ -733,7 +563,11 @@ export type TaskDataSchema = {
     image?: string
   }[]
 
-  subTasks: {
+  /**
+   * Computed/UI-only field derived from parentTaskId/isSubtask.
+   * This field is not persisted with the main Task row.
+   */
+  subTasks?: {
     id: string
     name: string
     completed: boolean
@@ -748,16 +582,16 @@ export type TaskDataSchema = {
   }[]
 
   // Comments with proper structure
-  comments: {
-    id: string
-    content: string
-    createdAt: number
-    createdBy: {
-      id: string
-      name: string
-      image?: string
-    }
-  }[]
+  // comments: {
+  //   id: string
+  //   content: string
+  //   createdAt: number
+  //   createdBy: {
+  //     id: string
+  //     name: string
+  //     image?: string
+  //   }
+  // }[]
 
   // Audit fields
   createdAt: number
@@ -798,8 +632,17 @@ export type UpdateLabelData = Partial<
 export type TaskLabel = TaskDataSchema["labelsTags"][0]
 export type TaskAttachment = TaskDataSchema["attachments"][0]
 export type TaskAssignee = TaskDataSchema["assignedTo"][0]
-export type TaskSubTask = TaskDataSchema["subTasks"][0]
-export type TaskComment = TaskDataSchema["comments"][0]
+export type TaskSubTask = NonNullable<TaskDataSchema["subTasks"]>[0]
+export type TaskComment = {
+  id: string
+  content: string
+  createdAt: number
+  createdBy: {
+    id: string
+    name: string
+    image?: string
+  }
+}
 
 export interface DefaultDataOptions {
   projectId?: string
@@ -889,8 +732,8 @@ export type TableSchema = {
 export interface Project {
   id: string
   name: string
-  startDate: DateTime
-  endDate: DateTime
+  startDate: Date
+  endDate: Date
   progress: number
   color: string
   subProjects?: Project[]

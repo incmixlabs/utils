@@ -1,7 +1,9 @@
 import * as glob from "glob"
 import { defineConfig } from "tsup"
 
-const entries = glob.sync("./src/**/*.ts")
+const entries = glob.sync("./src/**/*.ts", {
+  ignore: ["**/*.spec.ts", "**/*.test.ts"],
+})
 export default defineConfig((opts) => ({
   entry: entries,
   format: ["esm"],

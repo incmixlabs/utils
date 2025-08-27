@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-import { config } from "../env"
+import { config } from "../fetch/env"
 
 export enum Presence {
   online = "online",
@@ -130,7 +130,7 @@ export const UserProfileSchema = z.object({
   email: z.string().email(),
   profileImage: z.string().nullish().default(null),
   avatar: z.string().nullish().default(null),
-  localeId: z.number({ coerce: true }).int().gt(0),
+  localeId: z.coerce.number().int().gt(0),
 })
 
 export type UserProfile = z.infer<typeof UserProfileSchema>
@@ -303,6 +303,5 @@ export type GenericResponse = z.infer<typeof GenericResponseSchema>
 export * from "./organization"
 export * from "./user"
 export * from "./abilitiy"
-export * from "./sql"
-export * from "./projects"
+// export * from "./projects"
 export * from "./settings"

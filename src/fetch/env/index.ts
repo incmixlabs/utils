@@ -24,7 +24,6 @@ function mergeDeep<T extends {}, U extends DeepPartial<T>>(
       }
     }
   }
-
   return mergeDeep(target, ...sources)
 }
 
@@ -39,16 +38,12 @@ type Version = keyof typeof configVersions
 export const config = (() => {
   let version: Version = "development"
 
-  // @ts-ignore
   if (typeof process !== "undefined" && process?.env) {
-    // @ts-ignore
     version = process.env["NODE_ENV"] as Version
   }
-  // @ts-ignore
   if (typeof import.meta !== "undefined" && Object.hasOwn(import.meta, "env")) {
     version = import.meta.env["MODE"] as Version
   }
-
   return mergeDeep(_default, configVersions[version])
 })()
 
@@ -61,7 +56,7 @@ export const API = {
   EMAIL: "/api/email",
   FILES: "/api/files",
   LOCATION: "/api/location",
-  RATELIMITS: "/api/rate-limits",
+  PERMISSIONS: "/api/permissions",
   PROJECTS: "/api/projects",
   GENAI: "/api/genai",
   COMMENTS: "/api/comments",

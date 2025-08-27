@@ -1,15 +1,15 @@
 export const omit =
-  <T extends object, K extends string>(keys: readonly K[]) =>
+  <T extends object, K extends keyof T>(keys: readonly K[]) =>
   (obj: T): Omit<T, K> => {
     const result = {} as Omit<T, K>
 
     for (const key in obj) {
-      // @ts-expect-error - bypass
-      if (keys.includes(key)) {
-        continue
+      if (
+        Object.prototype.hasOwnProperty.call(obj, key) &&
+        !keys.includes(key as unknown as K)
+      ) {
+        ;(result as any)[key] = obj[key]
       }
-      // @ts-expect-error - bypass
-      result[key] = obj[key]
     }
 
     return result
