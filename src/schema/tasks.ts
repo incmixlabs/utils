@@ -1,4 +1,3 @@
-import { title } from "node:process"
 import { deepClone } from "../objects"
 import {
   attachmentsDef,
@@ -104,3 +103,4 @@ export const taskSchema: TaskSchema = {
   ],
 }
 export type TaskFields = keyof typeof taskSchema.properties
+export type TaskDataKeys = keyof TaskData
