@@ -94,14 +94,7 @@ export const taskSchema: TaskSchema = {
     comments: deepClone(commentsDef),
     ...auditDef.properties,
   },
-  required: [
-    "id",
-    "name",
-    "status",
-    "priority",
-    "order",
-    ...auditDef.required,
-  ],
+  required: ["id", "name", "status", "priority", "order", ...auditDef.required],
 }
 export type TaskFields = keyof typeof taskSchema.properties
 export type TaskDataKeys = keyof TaskData
