@@ -28,11 +28,12 @@ import type {
   MEMBER,
   REF_URL,
   SCHEMA,
+  TAG,
 } from "./base-types"
 import type { Assert, IsEqual } from "./types"
 export type TaskData = AUDIT & {
   id: ID
-  projectId: ID
+  projectId?: ID
   name: string
   description?: MARKDOWN
   status: string
@@ -44,7 +45,7 @@ export type TaskData = AUDIT & {
   subTasks?: ID[]
   completed?: boolean
   links?: REF_URL[]
-  tags?: string[]
+  tags?: TAG[]
   attachments?: ATTACHMENT[]
   assignedTo?: MEMBER[]
   watching?: MEMBER[]
@@ -93,15 +94,7 @@ export const taskSchema: TaskSchema = {
     comments: deepClone(commentsDef),
     ...auditDef.properties,
   },
-  required: [
-    "id",
-    "projectId",
-    "name",
-    "status",
-    "priority",
-    "order",
-    ...auditDef.required,
-  ],
+  required: ["id", "name", "status", "priority", "order", ...auditDef.required],
 }
 export type TaskFields = keyof typeof taskSchema.properties
 export type TaskDataKeys = keyof TaskData

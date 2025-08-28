@@ -12,12 +12,12 @@ import {
   schema,
 } from "./base-types"
 
-export type Label = {
+export type LABEL = {
   name: string
   value?: string
   color?: string // if no color, then if color in header, apply or default
   order?: number
-}
+} & AUDIT
 export type LabelData = AUDIT & {
   id: ID
   projectId: ID
