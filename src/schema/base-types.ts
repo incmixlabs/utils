@@ -253,10 +253,3 @@ export const commentsDef = {
     required: ["id"],
   },
 }
-
-export type HasSameKeysAs<
-  T,
-  U extends {
-    [P in keyof T | keyof U]: P extends keyof T ? any : never
-  },
-> = U

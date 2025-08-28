@@ -1069,3 +1069,10 @@ export type TaskStatusDocType = LabelSchema & {
   type: "status"
   isDefault?: boolean
 }
+
+export type HasSameKeysAs<
+  T,
+  U extends {
+    [P in keyof T | keyof U]: P extends keyof T ? any : never
+  },
+> = U
