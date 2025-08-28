@@ -1,4 +1,3 @@
-import { title } from "node:process"
 import { deepClone } from "../objects"
 import {
   attachmentsDef,
@@ -30,9 +29,10 @@ import type {
   REF_URL,
   SCHEMA,
 } from "./base-types"
+import type { Assert, IsEqual } from "./types"
 export type TaskData = AUDIT & {
   id: ID
-  projectId: ID
+  projectId?: ID
   name: string
   description?: MARKDOWN
   status: string
@@ -104,3 +104,5 @@ export const taskSchema: TaskSchema = {
   ],
 }
 export type TaskFields = keyof typeof taskSchema.properties
+export type TaskDataKeys = keyof TaskData
+export type _TaskKeysEqual = Assert<IsEqual<TaskFields, TaskDataKeys>>

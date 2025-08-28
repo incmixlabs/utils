@@ -22,6 +22,7 @@ export type MEMBER = {
   slug?: string
   color?: string
 }
+export type TAGS = string[]
 export const idDef = {
   type: baseDefTypes.string,
   maxLength: 50,
@@ -252,3 +253,10 @@ export const commentsDef = {
     required: ["id"],
   },
 }
+
+export type HasSameKeysAs<
+  T,
+  U extends {
+    [P in keyof T | keyof U]: P extends keyof T ? any : never
+  },
+> = U
