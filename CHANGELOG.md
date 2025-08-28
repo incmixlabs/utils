@@ -1,3 +1,18 @@
+# [0.50.0](https://github.com/incmixlabs/utils/compare/v0.49.0...v0.50.0) (2025-08-28)
+
+
+### Features
+
+* add valleys ([236b750](https://github.com/incmixlabs/utils/commit/236b75072fba8aa39491e668a504e474e7a9e696))
+* projectId as optional ([cc6c81d](https://github.com/incmixlabs/utils/commit/cc6c81d616eae4bf6f50b12692464ddf91663a7c))
+* projectId as optional ([7ce0b57](https://github.com/incmixlabs/utils/commit/7ce0b579ef0499bfac1e6e8e084d4d76851d7c78))
+* schema has-same-key ([619a6b5](https://github.com/incmixlabs/utils/commit/619a6b51661b8a4d17f962cd663661c1c1268a0d))
+* schema-has-same-key ([6d378f5](https://github.com/incmixlabs/utils/commit/6d378f542fe69ce680acb0da751222fc811500d0))
+* tag type ([421925e](https://github.com/incmixlabs/utils/commit/421925ecebc36d59d1376e74881597df91ae2081))
+* tag type ([e64e876](https://github.com/incmixlabs/utils/commit/e64e8761190d388d67b02cb67da34111779108e9))
+
+
+
 # [0.49.0](https://github.com/incmixlabs/utils/compare/v0.48.0...v0.49.0) (2025-08-27)
 
 
@@ -32,28 +47,6 @@
 ### Features
 
 * add feature flags api ([801e398](https://github.com/incmixlabs/utils/commit/801e39841894331a3b2d4bdef2967dad95e0ae2a))
-
-
-
-# [0.46.0](https://github.com/incmixlabs/utils/compare/v0.45.1...v0.46.0) (2025-08-27)
-
-
-### Bug Fixes
-
-* conflicts ([ad99522](https://github.com/incmixlabs/utils/commit/ad99522ad386ea1b5ba78a2ed448c4e051c1bd0b))
-* cr commit ([06d52ba](https://github.com/incmixlabs/utils/commit/06d52ba3464a0086d9df1fe831034b730bbd3d66))
-* string first two ([ecbe64f](https://github.com/incmixlabs/utils/commit/ecbe64fba00f37dbe2249206b05afd79367b8b3c))
-
-
-### Features
-
-* add types ([d6ce5aa](https://github.com/incmixlabs/utils/commit/d6ce5aa72dd9b8f1c30433fda828c887023dbed2))
-* add types ([e4cf052](https://github.com/incmixlabs/utils/commit/e4cf052f327879510a6b085f0b1780f12ce9edf7))
-* clean-and-string-sub ([cb9cedf](https://github.com/incmixlabs/utils/commit/cb9cedfb024a6c91ab3f144e93551d1fb58181b4))
-* mock-data ([542c85b](https://github.com/incmixlabs/utils/commit/542c85be78097981d3d35c16b5105976982cfaec))
-* schema wip ([80fd8bc](https://github.com/incmixlabs/utils/commit/80fd8bc6de026ed45bc534116c2e9394d3aa50a2))
-* schemas ([b20553f](https://github.com/incmixlabs/utils/commit/b20553fc48aac15e14da89e152d025a1b5a29eca))
-* wip ([a5fdd1d](https://github.com/incmixlabs/utils/commit/a5fdd1d048edf4e57f8bff09d3241a88b2300732))
 
 
 
