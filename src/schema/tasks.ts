@@ -28,6 +28,7 @@ import type {
   MEMBER,
   REF_URL,
   SCHEMA,
+  TAG
 } from "./base-types"
 import type { Assert, IsEqual } from "./types"
 export type TaskData = AUDIT & {
@@ -44,7 +45,7 @@ export type TaskData = AUDIT & {
   subTasks?: ID[]
   completed?: boolean
   links?: REF_URL[]
-  tags?: string[]
+  tags?: TAG[]
   attachments?: ATTACHMENT[]
   assignedTo?: MEMBER[]
   watching?: MEMBER[]
