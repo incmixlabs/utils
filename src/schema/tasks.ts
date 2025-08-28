@@ -96,7 +96,6 @@ export const taskSchema: TaskSchema = {
   },
   required: [
     "id",
-    "projectId",
     "name",
     "status",
     "priority",
