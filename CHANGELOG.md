@@ -1,3 +1,12 @@
+# [0.51.0](https://github.com/incmixlabs/utils/compare/v0.50.0...v0.51.0) (2025-09-05)
+
+
+### Features
+
+* remove unwanted services ([8003aa0](https://github.com/incmixlabs/utils/commit/8003aa00b16e2be0efa6ee3d4971bab5c7217dd1))
+
+
+
 # [0.50.0](https://github.com/incmixlabs/utils/compare/v0.49.0...v0.50.0) (2025-08-28)
 
 
@@ -38,15 +47,6 @@
 ### Bug Fixes
 
 * type issues ([1769a18](https://github.com/incmixlabs/utils/commit/1769a184050fe03f2268be74ac4091dbd64d40f8))
-
-
-
-# [0.47.0](https://github.com/incmixlabs/utils/compare/v0.46.0...v0.47.0) (2025-08-27)
-
-
-### Features
-
-* add feature flags api ([801e398](https://github.com/incmixlabs/utils/commit/801e39841894331a3b2d4bdef2967dad95e0ae2a))
 
 
 
