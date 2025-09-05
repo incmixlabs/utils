@@ -22,6 +22,7 @@ export type MEMBER = {
   slug?: string
   color?: string
 }
+export type TAG = string
 export const idDef = {
   type: baseDefTypes.string,
   maxLength: 50,
