@@ -49,17 +49,13 @@ export const config = (() => {
 
 export const API = {
   AUTH: "/api/auth",
-  USERS: "/api/users",
   ORG: "/api/org",
   INTL: "/api/intl",
-  TASKS: "/api/tasks",
   EMAIL: "/api/email",
   FILES: "/api/files",
   LOCATION: "/api/location",
-  PERMISSIONS: "/api/permissions",
   PROJECTS: "/api/projects",
   GENAI: "/api/genai",
   COMMENTS: "/api/comments",
   RXDB_SYNC: "/api/rxdb-sync",
-  FEATURE_FLAGS: "/api/feature-flags",
 }
