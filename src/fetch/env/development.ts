@@ -1,7 +1,7 @@
 import type { Config } from "./default"
 
 export default {
-  mode: "development",
+  mode: "dev",
   name: "incmix DEVELOPMENT",
   debug: false,
 

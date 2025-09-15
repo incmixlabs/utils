@@ -84,6 +84,10 @@
       "import": "./dist/schema/index.js",
       "types": "./dist/schema/index.d.ts"
     },
+    "./ajv-schema": {
+      "import": "./dist/ajv-schema/index.js",
+      "types": "./dist/ajv-schema/index.d.ts"
+    },
     "./settings": {
       "import": "./dist/types/settings/index.js",
       "types": "./dist/settings/index.d.ts"
@@ -138,6 +142,8 @@
     "@commitlint/config-conventional": "19.6.0",
     "@types/node": "22.12.0",
     "@types/validator": "^13.15.1",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "lefthook": "1.10.4",
     "pkg-types": "1.1.0",
     "tsup": "8.4.0",

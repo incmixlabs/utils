@@ -1,5 +1,5 @@
 export const config = {
-  mode: "development" as "production" | "development" | "tunnel",
+  mode: "dev" as "prod" | "dev" | "tunnel",
   name: "incmix",
   slug: "incmix",
 
@@ -86,8 +86,8 @@ export const config = {
   defaultLanguage: "en" as const,
 
   // App specific entity types
-  entityTypes: ["USER", "ORGANIZATION", "WORKSPACE", "PROJECT"] as const,
-  contextEntityTypes: ["ORGANIZATION", "WORKSPACE", "PROJECT"] as const,
+  entityTypes: ["USER", "org", "WORKSPACE", "PROJECT"] as const,
+  contextEntityTypes: ["org", "WORKSPACE", "PROJECT"] as const,
 
   rolesByType: {
     systemRoles: ["USER", "ADMIN"] as const,
